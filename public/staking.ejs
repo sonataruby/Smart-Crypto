@@ -1,0 +1,55 @@
+<div class="container">
+	<h3>Smart Staking</h3>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-6">Wallet</div>
+		<div class="col-6">Balance : <%= token.name %></div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-6">ROL</div>
+		<div class="col-6">Next Payment <%= token.name %></div>
+	</div>
+</div>
+
+<section class="section bg-white">
+    <div class="container">
+        <div class="nk-block">
+            <div class="row gutter-vr-30px">
+                <div class="col-lg-4">
+                    <h4 class="title title-sm text-center">Donghnut Chart Without Info</h4>
+                    <div><canvas class="chart-canvas" id="donghnut-chart"></canvas></div>
+                    <ul class="chart-data d-none" data-canvas="donghnut-chart" data-canvas-type="doughnut">
+                        <li data-color="#223fa8" data-title="Token Sale Program" data-amount="60"></li>
+                        <li data-color="#8fa0df" data-title="Reserve Fund" data-amount="8"></li>
+                        <li data-color="#4aa0f6" data-title="Team and Founders" data-amount="15"></li>
+                        <li data-color="#6ad9ac" data-title="Board Advisors" data-amount="4"></li>
+                        <li data-color="#4d6fe9" data-title="Ecosystem Development" data-amount="7"></li>
+                        <li data-color="#15216d" data-title="Marketing and Bounty" data-amount="6"></li>
+                    </ul>
+                </div>
+                <div class="col-lg-8">
+                    <h4 class="title title-sm text-center">Donghnut Chart With info</h4>
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <canvas class="chart-canvas" id="donghnut-chart-2"></canvas>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="chart-data" data-canvas="donghnut-chart-2" data-canvas-type="doughnut">
+                                <li data-color="#223fa8" data-title="Token Sale Program" data-amount="40"></li>
+                                <li data-color="#8fa0df" data-title="Reserve Fund" data-amount="13"></li>
+                                <li data-color="#4aa0f6" data-title="Team and Founders" data-amount="15"></li>
+                                <li data-color="#6ad9ac" data-title="Board Advisors" data-amount="14"></li>
+                                <li data-color="#4d6fe9" data-title="Ecosystem Development" data-amount="10"></li>
+                                <li data-color="#15216d" data-title="Marketing and Bounty" data-amount="8"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>

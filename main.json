@@ -1,0 +1,60 @@
+{
+	"title" : "Smart Blockchain",
+	"keywork" : "Smart Blockchain",
+	"description" : "Smart Blockchain",
+	"banner" : "",
+	"icoin" : "",
+	"token" : {
+		"name" : "SMFX",
+		"supply" : "10.000.000",
+		"price" : "0.02",
+		"presell_date" : "2021/09/31",
+		"presell_amount" : "50.0000",
+		"presell_out" : "12.000",
+		"contract" : "0x9A58f7F8726492824bfE9E86092811CEeBA5dA48",
+		"airdrop" : "500000",
+		"airdrop_link" : "",
+		"airdrop_amount" : "",
+		"whitepaper" : "",
+		"youtube" : "https://www.youtube.com/watch?v=SSo_EIwHSd4",
+		"sell_link" : "",
+		"buy_link" : ""
+	},
+	"roadmap":{
+		"s1" : {
+			"title" : "",
+			"time" : "",
+			"description" : ""
+		},
+		"s2" : {
+			"title" : "",
+			"time" : "",
+			"description": ""
+		},
+		"s3" : {
+			"title" : "",
+			"time" : "",
+			"description": ""
+		},
+		"s4" : {
+			"title" : "",
+			"time" : "",
+			"description": ""
+		}
+	},
+	"tearm" : "",
+	"staking" : {
+		"title" : "Staking Program",
+		"description" : ""
+	},
+	"contact" : "",
+	"footer" : "",
+	"social" : {
+		"facebook" : "",
+		"twitter" : "",
+		"github" : "",
+		"youtube" : "",
+		"bitcoin" : "",
+		"medium" : ""
+	}
+}

@@ -1,0 +1,19 @@
+/*!
+Template :	ICOCrypto @by Softnio
+Theme	 :  Default
+Version   :  1.9.3
+Updated   :  05/05/2021 
+*/
+/*! WRITE YOUR CUSTOM STYLE **/
+.bg-theme-grad-alt{
+	background: blue;
+}
+
+.walletLimit {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 1; /* number of lines to show */
+   -webkit-box-orient: vertical;
+   max-width: 150px;
+}
