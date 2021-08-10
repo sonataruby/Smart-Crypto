@@ -114,7 +114,7 @@ SmartApps = (function (SmartApps, $, window) {
     		const accounts = await wseb3.eth.getAccounts();
     		const vamount =  wseb3.utils.toWei(amount);
     		//contract.methods.addMinter(accounts[0]);
-    		contract.methods.buyToken(accounts[0])
+    		contract.methods.buyToken()
 		      .send({ from: accounts[0], value: vamount, gas : 300000})
 		      .then(function (res) {
 		        console.log(res, "MINTED");
