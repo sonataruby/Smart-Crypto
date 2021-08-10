@@ -16,7 +16,11 @@
 <link rel="stylesheet" href="assets/css/theme.css?ver=1930">
 
 
-
+<style type="text/css">
+    header .header-main{
+        background-color: red;
+    }
+</style>
 
 </head>
     
@@ -55,9 +59,9 @@
                             <nav class="header-menu justify-content-between" id="header-menu">
                                 <ul class="menu animated remove-animation" data-animate="fadeInDown" data-delay=".75">
                                     <li class="menu-item"><a class="menu-link nav-link" href="/#about">About</a></li>
-                                    <li class="menu-item"><a class="menu-link nav-link" href="/staking">Staking</a></li>
-                                    <li class="menu-item"><a class="menu-link nav-link" href="/farm">Farm</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/ido">IDO</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link" href="/farm">Farm</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link" href="/gallery">Gallery</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/#roadmap">Roadmap</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/#team">Team</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/game">Game</a></li>
@@ -81,8 +85,8 @@
                                             <li><a href="#">Hindi</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#<%- token.sell_link %>" class="btn btn-md btn-round btn-outline btn-auto btn-primary get"><span>Join Pre-sale</span></a></li>
-                                    <li><a href="<%- token.buy_link %>" class="btn btn-md btn-round btn-outline btn-auto btn-primary"><span>Buy Token</span></a></li>
+                                     <li><a class="btn btn-md btn-round btn-outline btn-auto btn-primary walletLimit"  data-toggle="modal" data-target="#ModalWallet"><span id="walletAddress">Join Pre-sale</span></a></li>
+                                    <li><a  class="btn btn-md btn-round btn-outline btn-auto btn-primary" id="btnBuyToken"><span>Buy Token</span></a></li>
                                 </ul>
                             </nav>
                         </div><!-- .header-navbar @e -->
@@ -90,56 +94,7 @@
                 </div>
             </div><!-- .header-main @e -->
             <!-- Banner @s -->
-            <div class="header-banner bg-theme-grad-alt">
-                <div class="nk-banner">
-                    <div class="banner banner-fs banner-single banner-with-token-box-s1">
-                        <div class="ui-shape ui-shape-header ui-shape-light"></div>
-                        <div class="banner-wrap">
-                            <div class="container">
-                                <div class="row align-items-center justify-content-center">
-                                    <div class="col-sm-10 col-md-10 col-xl-9">
-                                        <div class="banner-caption tc-light text-center">
-                                            <div class="cpn-title animated" data-animate="fadeInUp" data-delay="1.25">
-                                                <h1 class="title title-xl-s2 title-semibold"><%= pages.name %></h1>
-                                            </div>
-                                            <div class="cpn-text cpn-text-center">
-                                                <p class="lead animated" data-animate="fadeInUp" data-delay="1.35"><%= pages.description %></p>
-                                            </div>
-                                            <div class="cpn-btns">
-                                                <ul class="btn-grp justify-content-center animated" data-animate="fadeInUp" data-delay="1.45">
-                                                    <li><a href="#" class="btn btn-md btn-round btn-with-icon btn-light">
-                                                        <span>Wallet</span> 
-                                                        <em class="icon fas fa-angle-double-right"></em>
-                                                    </a></li>
-                                                    <li><a href="<%- token.whitepaper %>" class="btn btn-md btn-round btn-with-icon btn-light">
-                                                        <span>Balance</span> 
-                                                        <em class="icon fas fa-angle-double-right"></em>
-                                                    </a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div><!-- .col -->
-                                </div><!-- .row -->
-                            </div>
-                            <div class="banner-social-wrap text-center animated" data-animate="fadeIn" data-delay="1.55">
-                                <ul class="banner-social banner-social-vertical">
-                                    <li><a href="<%- social.facebook %>"><em class="fab fa-facebook-f"></em></a></li>
-                                    <li><a href="<%- social.twitter %>"><em class="fab fa-twitter"></em></a></li>
-                                    <li><a href="<%- social.youtube %>"><em class="fab fa-youtube"></em></a></li>
-                                    <li><a href="<%- social.github %>"><em class="fab fa-github"></em></a></li>
-                                    <li><a href="<%- social.bitcoin %>"><em class="fab fa-bitcoin"></em></a></li>
-                                    <li><a href="<%- social.medium %>"><em class="fab fa-medium-m"></em></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nk-ovm mask-b mask-contain-bottom"></div>
-                </div><!-- .nk-banner -->
-                
-                
-                <!-- Place Particle Js -->
-                <div id="particles-bg" class="particles-container particles-bg"></div>
-            </div>
+            
             <div class="gap-5x"></div>
             <div class="gap-10x d-md-none"></div>
             <div class="gap-5x d-sm-none"></div>
@@ -247,7 +202,14 @@
 	<script src="assets/js/jquery.bundle.js?ver=1930"></script>
 	<script src="assets/js/scripts.js?ver=1930"></script>
 	<script src="assets/js/charts.js?ver=1930"></script>
-    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.js" integrity="sha512-JjYSgzqo9K0IeYGEslMRYE8aO9tq7Ky3EQNmEVkAe6Cp14AwlJMLMnb0fpgEkr3YxJ8ghQiriOvZwIdRZieGIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="https://unpkg.com/web3@1.2.11/dist/web3.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.0/dist/index.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
+    <script src="/assets/js/web3setup.js?ver=1930"></script>
+
     <script src="assets/js/apps.js?ver=1930"></script>
 </body>
 

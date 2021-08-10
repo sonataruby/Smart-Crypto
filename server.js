@@ -33,20 +33,26 @@ app.get("/", (req, res) => {
  res.render("index",dataMain);
 });
 
-app.get("/staking", (req, res) => {
- app.set('layout', './pages');
- const dataMain = readJSONFile('main.json');
- dataMain.pages = { name : dataMain.staking.title, description : dataMain.staking.description};
- 
-
- res.render("staking",dataMain);
-});
-
 app.get("/farm", (req, res) => {
  const dataMain = readJSONFile('main.json');
  app.set('layout', './pages');
  res.render("farm",dataMain);
 });
+
+app.get("/gallery", (req, res) => {
+ app.set('layout', './pages');
+ const dataMain = readJSONFile('main.json');
+ dataMain.pages = { name : dataMain.staking.title, description : dataMain.staking.description};
+ res.render("gallery",dataMain);
+});
+
+
+app.get("/ido", (req, res) => {
+ const dataMain = readJSONFile('main.json');
+ app.set('layout', './pages');
+ res.render("ido",dataMain);
+});
+
 
 app.get("/game", (req, res) => {
  const dataMain = readJSONFile('main.json');
@@ -65,7 +71,6 @@ app.get("/token", (req, res) => {
 app.get('/auth/:MetaAddress', metaAuth, (req, res) => {
   // Request a message from the server
   if (req.metaAuth && req.metaAuth.challenge) {
-    console.log(req.metaAuth.challenge[1]);
     res.send(req.metaAuth.challenge[1])
   }
 });
@@ -74,6 +79,7 @@ app.get('/auth/:MetaMessage/:MetaSignature', metaAuth, (req, res) => {
   if (req.metaAuth && req.metaAuth.recovered) {
     // Signature matches the cache address/challenge
     // Authentication is valid, assign JWT, etc.
+    console.log(req.metaAuth.recovered);
     res.send(req.metaAuth.recovered);
   } else {
     // Sig did not match, invalid authentication
