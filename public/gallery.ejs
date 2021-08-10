@@ -1,9 +1,19 @@
-<div class="container">
-	<h3>Gallery</h3>
-</div>
 
 
-<section class="section bg-white">
+<section class="bg-white">
     <div class="container">
+    	<h3>Gallery</h3>
+    	<div class="card-columns">
+    	  <% for(var i = 0; i < gallery.length; i++) {%>
+		  <div class="card">
+		    <img src="<%= gallery[i].url %>" class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title"><%= gallery[i].name %></h5>
+		      <p class="card-text"><%= gallery[i].description %>.</p>
+		    </div>
+		  </div>
+		  <% } %>
+		</div>
+    	
     </div>
 </section>

@@ -42,9 +42,14 @@
 			"description": ""
 		}
 	},
-	"gallery" : {
-
-	},
+	"gallery" : [{
+		"name" : "Test",
+		"url" : "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+	}, {
+		"name" : "Test 2",
+		"description" : "Image Supper Best",
+		"url" : "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+	}],
 	"tearm" : "",
 	"staking" : {
 		"title" : "Staking Program",

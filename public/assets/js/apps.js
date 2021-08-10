@@ -112,7 +112,7 @@ SmartApps = (function (SmartApps, $, window) {
     		var wseb3 = new Web3(provider);
     		var contract = new wseb3.eth.Contract(abi,caddress);
     		const accounts = await wseb3.eth.getAccounts();
-    		const vamount =  wseb3.utils.toWei(amount);
+    		const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
     		contract.methods.buyToken()
 		      .send({ from: accounts[0], value: vamount, gas : 300000})
@@ -139,11 +139,32 @@ SmartApps = (function (SmartApps, $, window) {
 		      });
     	}
 
+
+    	var airdrop = async function(){
+    		init();
+    		provider = await web3Spf.connect();
+    		var wseb3 = new Web3(provider);
+    		var contract = new wseb3.eth.Contract(abi,caddress);
+    		const accounts = await wseb3.eth.getAccounts();
+    		//const vamount =  wseb3.utils.toWei(amount.toString());
+    		//contract.methods.addMinter(accounts[0]);
+    		contract.methods.claim(accounts[0])
+		      .send({ from: accounts[0], gas : 300000})
+		      .then(function (res) {
+		        console.log(res, "MINTED");
+		        
+		      });
+    		
+    		
+    	}
+
+
     	$("#btnWalletConnect").on("click", function(){
     		connect();
     		//console.log($web3.default);
     		
     	});
+
     	$("#btnBuyToken").on("click", function(){
     		//if(provider == null) connect();
     		buy("0.01");
@@ -151,6 +172,25 @@ SmartApps = (function (SmartApps, $, window) {
     		
     	});
     	
+    	$("[data-web3=ido]").on("click", function(){
+    		var value = $("#getAmountBNB").val();
+    		if(value < 0.01){
+    			$(".htmlerror").html("Min Value 0.01 BNB");
+    			$("#getAmountBNB").focus();
+    		}else{
+    			buy(value);
+    		}
+    		
+    	});
+
+    	$("[data-web3=airdrop]").on("click", function(){
+    		//if(provider == null) connect();
+    		
+    		airdrop();
+    		//console.log($web3.default);
+    		
+    	});
+
     };
     SmartApps.components.docReady.push(SmartApps.Web3.Pool);
 	return SmartApps;

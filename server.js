@@ -33,11 +33,24 @@ app.get("/", (req, res) => {
  res.render("index",dataMain);
 });
 
+app.get("/ido", (req, res) => {
+ const dataMain = readJSONFile('main.json');
+ app.set('layout', './pages');
+ res.render("ido",dataMain);
+});
+
 app.get("/farm", (req, res) => {
  const dataMain = readJSONFile('main.json');
  app.set('layout', './pages');
  res.render("farm",dataMain);
 });
+
+app.get("/stacking", (req, res) => {
+ const dataMain = readJSONFile('main.json');
+ app.set('layout', './pages');
+ res.render("stacking",dataMain);
+});
+
 
 app.get("/gallery", (req, res) => {
  app.set('layout', './pages');
@@ -47,11 +60,7 @@ app.get("/gallery", (req, res) => {
 });
 
 
-app.get("/ido", (req, res) => {
- const dataMain = readJSONFile('main.json');
- app.set('layout', './pages');
- res.render("ido",dataMain);
-});
+
 
 
 app.get("/game", (req, res) => {

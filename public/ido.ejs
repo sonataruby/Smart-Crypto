@@ -5,18 +5,19 @@
 		<div class="card border">
 			<h4>IDO</h4>
 			<div class="card-body">
+				<div class="htmlerror"></div>
 				<div class="form-group">
 				    <label for="exampleInputEmail1">Presenter's address</label>
-				    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+				    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 				    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 				</div>
 
 				  <div class="form-group">
 				    <label for="exampleInputPassword1">Amount Min amount: 0.01 | Max amount: 5</label>
-				    <input type="password" class="form-control" id="exampleInputPassword1">
+				    <input type="text" value="0.01" class="form-control" id="getAmountBNB">
 				  </div>
 				  
-				  <button type="submit" class="btn btn-primary">Buy Token</button>
+				  <button type="button" data-web3="ido" class="btn btn-primary">Buy Token</button>
 			  
 				<hr>
 			  <p>
@@ -38,8 +39,13 @@
 		<div class="col-6">
 			<div class="card border">
 				<h4>Airdrop</h4>
-				<button type="submit" class="btn btn-primary">Get Free Coin</button>
+				<button class="btn btn-primary" data-web3="airdrop">Get Free Coin</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+	var price = 78777;
+
+</script>
