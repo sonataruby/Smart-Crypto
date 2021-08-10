@@ -42,6 +42,12 @@
 			"description": ""
 		}
 	},
+	"home" : {
+		"banner" : {
+			"title" : "CryptoCars is the world's <sup>first platform</sup> to offer rewards to sports game players worldwide",
+			"description" : "ICO aims to become the leading digital ICO <br class=\"d-none d-md-block\">base template in worldwide"
+		}
+	},
 	"tearm" : "",
 	"staking" : {
 		"title" : "Staking Program",

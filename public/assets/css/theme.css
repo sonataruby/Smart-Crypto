@@ -5,9 +5,7 @@ Version   :  1.9.3
 Updated   :  05/05/2021 
 */
 /*! WRITE YOUR CUSTOM STYLE **/
-.bg-theme-grad-alt{
-	background: blue;
-}
+
 
 .walletLimit {
    overflow: hidden;
@@ -16,4 +14,11 @@ Updated   :  05/05/2021
    -webkit-line-clamp: 1; /* number of lines to show */
    -webkit-box-orient: vertical;
    max-width: 150px;
+}
+.bg-theme-grad-alt{
+   background-image: url(https://i.guim.co.uk/img/media/216fb2c3fcb654a1f8a54f02ccff52c7d2a182f0/51_0_3600_2160/master/3600.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=5a17ae1b1ac79eb0f0b6275ae56461bb) !important; 
+   background-color: blueviolet;
+   background-repeat: no-repeat;
+   background-size: container;
+   background-position: bottom center;
 }
