@@ -1,12 +1,10 @@
 
-
-<section class="bg-white">
     <div class="container">
     	<h3>Gallery</h3>
     	<div class="card-columns">
     	  <% for(var i = 0; i < gallery.length; i++) {%>
 		  <div class="card">
-		    <img src="<%= gallery[i].url %>" class="card-img-top" alt="...">
+		    <img src="<%= gallery[i].url %>" class="card-img-top" alt="<%= gallery[i].name %>">
 		    <div class="card-body">
 		      <h5 class="card-title"><%= gallery[i].name %></h5>
 		      <p class="card-text"><%= gallery[i].description %>.</p>
@@ -16,4 +14,4 @@
 		</div>
     	
     </div>
-</section>
+
