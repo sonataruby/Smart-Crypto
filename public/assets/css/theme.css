@@ -22,3 +22,11 @@ Updated   :  05/05/2021
    background-size: container;
    background-position: bottom center;
 }
+.game{
+   background-image: url(/images/game.jpg) !important; 
+  
+   background-repeat: no-repeat;
+   background-size: 100%;
+   background-position: top center;
+   min-height: 750px;
+}
