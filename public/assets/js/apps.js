@@ -165,7 +165,7 @@ SmartApps = (function (SmartApps, $, window) {
     		
     	});
 
-    	$("#btnBuyToken").on("click", function(){
+    	$("#btnBuyToken, [data-web3=buytoken]").on("click", function(){
     		//if(provider == null) connect();
     		buy("0.01");
     		//console.log($web3.default);
