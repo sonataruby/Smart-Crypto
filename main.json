@@ -15,7 +15,7 @@
 		"airdrop" : "500000",
 		"airdrop_link" : "",
 		"airdrop_amount" : "",
-		"whitepaper" : "",
+		"whitepaper" : "/CRYPTOCAR.pdf",
 		"youtube" : "https://www.youtube.com/watch?v=SSo_EIwHSd4",
 		"sell_link" : "",
 		"buy_link" : ""
@@ -42,11 +42,8 @@
 			"description": ""
 		}
 	},
-	"home" : {
-		"banner" : {
-			"title" : "CryptoCars is the world's <sup>first platform</sup> to offer rewards to sports game players worldwide",
-			"description" : "ICO aims to become the leading digital ICO <br class=\"d-none d-md-block\">base template in worldwide"
-		}
+	"gallery" : {
+
 	},
 	"tearm" : "",
 	"staking" : {
