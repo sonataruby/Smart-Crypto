@@ -45,10 +45,10 @@ app.get("/farm", (req, res) => {
  res.render("farm",dataMain);
 });
 
-app.get("/stacking", (req, res) => {
+app.get("/staking", (req, res) => {
  const dataMain = readJSONFile('main.json');
  app.set('layout', './pages');
- res.render("stacking",dataMain);
+ res.render("staking",dataMain);
 });
 
 
