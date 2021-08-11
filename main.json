@@ -1,9 +1,10 @@
 {
-	"title" : "CAR Blockchain NFT",
-	"keywork" : "CAR Blockchain NFT",
-	"description" : "CAR Blockchain NFT",
-	"banner" : "",
-	"icoin" : "",
+	"title" : "CryptoCar - NFT Game Play to earn on the BSC",
+	"keywork" : "CryptoCar - NFT Game Play to earn on the BSC",
+	"description" : "CryptoCar - NFT Game Play to earn on the BSC",
+	"banner" : "assets/car/banner.png",
+	"icoin" : "assets/car/icon.png",
+	"base"  : "http://localhost:5000",
 	"token" : {
 		"name" : "CAR",
 		"supply" : "10.000.000",
@@ -18,7 +19,8 @@
 		"whitepaper" : "/CRYPTOCAR.pdf",
 		"youtube" : "https://www.youtube.com/watch?v=i0wXxBynPAY",
 		"sell_link" : "",
-		"buy_link" : ""
+		"buy_link" : "",
+		"youtube" : "i0wXxBynPAY"
 	},
 	"roadmap":{
 		"s1" : {
@@ -41,6 +43,9 @@
 			"time" : "",
 			"description": ""
 		}
+	},
+	"main" : {
+		"videoimage" : "/assets/car/video.png"
 	},
 	"gallery" : [{
 		"name" : "NTF CAR 1",

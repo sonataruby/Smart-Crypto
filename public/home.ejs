@@ -2,9 +2,10 @@
 <html lang="zxx" class="js">
 <head>
 	<meta charset="utf-8">
-<meta name="author" content="Softnio">
+<meta name="author" content="Smart Blockchain">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
+<meta name="description" content="<%- description %>">
+<base href="<%- base %>">
 <!-- Fav Icon  -->
 <link rel="shortcut icon" href="images/favicon.png">
 <!-- Site Title  -->
@@ -25,7 +26,7 @@
     <body class="nk-body body-wider mode-onepage">
 
 	<div class="nk-wrap">
-		<header class="nk-header page-header is-sticky is-shrink" id="header">
+		<header class="nk-header page-header is-transparent is-sticky is-shrink" id="header">
 		    <!-- Header @s -->
             <div class="header-main">
                 <div class="header-container header-container-s1">
@@ -91,82 +92,53 @@
                 </div>
             </div><!-- .header-main @e -->
 
-			<!-- Banner @s -->
-            <div class="header-banner bg-theme-grad-alt">
-                <div class="nk-banner">
-                    <div class="banner banner-fs banner-single banner-with-token-box-s1">
-                        <div class="ui-shape ui-shape-header ui-shape-light"></div>
-                        <div class="banner-wrap">
-                            <div class="container">
-                                <div class="row align-items-center justify-content-center">
-                                    <div class="col-sm-10 col-md-10 col-xl-9">
-                                        <div class="banner-caption tc-light text-center">
-                                            <div class="cpn-title animated" data-animate="fadeInUp" data-delay="1.25">
-                                                <h1 class="title title-xl-s2 title-semibold">CryptoCars is the world's <sup>first platform</sup> to offer rewards to sports game players worldwide. </h1>
-                                            </div>
-                                            <div class="cpn-text cpn-text-center">
-                                                <p class="lead animated" data-animate="fadeInUp" data-delay="1.35">CryptoCars is a Play to earn platform on <br class="d-none d-md-block">the Binance Smart Chain. </p>
-                                            </div>
-                                            <div class="cpn-btns">
-                                                <ul class="btn-grp justify-content-center animated" data-animate="fadeInUp" data-delay="1.45">
-                                                    <li><a data-web3="buytoken" class="btn btn-md btn-round btn-with-icon btn-light">
-                                                        <span>Join Pre-Sale</span> 
-                                                        <em class="icon fas fa-angle-double-right"></em>
-                                                    </a></li>
-                                                    <li><a href="<%- token.whitepaper %>" class="btn btn-md btn-round btn-with-icon btn-light">
-                                                        <span>White Paper</span> 
-                                                        <em class="icon fas fa-angle-double-right"></em>
-                                                    </a></li>
-                                                </ul>
-                                            </div>
+            <!-- Banner @s -->
+            <div class="header-banner bg-theme-grad">
+                            <div class="nk-banner">
+                                <div class="banner banner-fs banner-single">
+                                    <div class="banner-wrap">
+                                        <div class="container">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col-sm-10 col-md-10 col-xl-9">
+                                                    <div class="banner-caption tc-light text-center">
+                                                        <div class="cpn-title">
+                                                            <h1 class="title title-xl-s3 title-semibold">CryptoCars is the world's <sup>first platform</sup> to offer rewards to sports game players worldwide. </h1>
+                                                        </div>
+                                                        <div class="cpn-text cpn-text-center">
+                                                            <p class="lead">CryptoCars is a Play to earn platform on <br class="d-none d-md-block">the Binance Smart Chain.</p>
+                                                        </div>
+                                                        <div class="cpn-btns">
+                                                            <ul class="btn-grp d-flex justify-content-center">
+                                                                <li><a data-web3="buytoken" class="btn btn-md btn-round btn-with-icon btn-light">
+                                                                    <span>Join Pre-Sale</span> 
+                                                                    <em class="icon fas fa-angle-double-right"></em>
+                                                                </a></li>
+                                                                <li><a href="<%- token.whitepaper %>" class="btn btn-md btn-round btn-with-icon btn-light">
+                                                                    <span>White Paper</span> 
+                                                                    <em class="icon fas fa-angle-double-right"></em>
+                                                                </a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- .col -->
+                                            </div><!-- .row -->
                                         </div>
-                                    </div><!-- .col -->
-                                </div><!-- .row -->
-                            </div>
-                            <div class="banner-social-wrap text-center animated" data-animate="fadeIn" data-delay="1.55">
-                                <ul class="banner-social banner-social-vertical">
-                                    <li><a href="<%- social.facebook %>"><em class="fab fa-facebook-f"></em></a></li>
-                                    <li><a href="<%- social.twitter %>"><em class="fab fa-twitter"></em></a></li>
-                                    <li><a href="<%- social.youtube %>"><em class="fab fa-youtube"></em></a></li>
-                                    <li><a href="<%- social.github %>"><em class="fab fa-github"></em></a></li>
-                                    <li><a href="<%- social.bitcoin %>"><em class="fab fa-bitcoin"></em></a></li>
-                                    <li><a href="<%- social.medium %>"><em class="fab fa-medium-m"></em></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nk-ovm mask-b mask-contain-bottom"></div>
-                </div><!-- .nk-banner -->
-                <div class="token-box token-box-s1 animated" data-animate="fadeInUp" data-delay="1.65">
-                    <div class="container">
-                        <div class="row no-gutters justify-content-center">
-                            <div class="col-xl-4 col-md-5">
-                                <div class="token-countdown-wrapper split split-left split-md-left">
-                                    <h5 class="title-sm">Pre-sale is Live Now</h5>
-                                    <h6>Pre-Sale ends in</h6>
-                                    <div class="countdown-small countdown-s3 countdown" data-date="<%- token.presell_date %>" data-day-text="D" data-hour-text="H" data-min-text="M" data-sec-text="S"></div>
-                                </div>
-                            </div><!-- .col  -->
-                            <div class="col-xl-6 col-md-7">
-                                <div class="token-status token-status-s1 bg-theme tc-light text-left split split-right split-md-right">
-                                    <h5 class="title-sm">Pre Sale</h5>
-                                    <div class="progress-bar progress-bar-s1">
-                                        <div class="progress-percent progress-percent-s1 bg-theme-grad-alt" data-percent="30"></div>
+                                        <div class="banner-social-wrap text-center">
+                                            <ul class="banner-social banner-social-vertical">
+                                                <li><a href="<%- social.facebook %>"><em class="fab fa-facebook-f"></em></a></li>
+                                                <li><a href="<%- social.twitter %>"><em class="fab fa-twitter"></em></a></li>
+                                                <li><a href="<%- social.youtube %>"><em class="fab fa-youtube"></em></a></li>
+                                                <li><a href="<%- social.github %>"><em class="fab fa-github"></em></a></li>
+                                                <li><a href="<%- social.bitcoin %>"><em class="fab fa-bitcoin"></em></a></li>
+                                                <li><a href="<%- social.medium %>"><em class="fab fa-medium-m"></em></a></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="progress-points"><span><%- token.presell_out %> <%- token.name %></span> <span><%- token.presell_amount %> <%- token.name %></span></div>
                                 </div>
-                            </div><!-- .col  -->
-                        </div><!-- .row  -->
-                    </div><!-- .container  -->
-                </div>
-                
-                <!-- Place Particle Js -->
-				<div id="particles-bg" class="particles-container particles-bg"></div>
+                            </div><!-- .nk-banner -->
+                            <div class="bg-video bg-video-youtube" data-video="<%- token.youtube %>" data-overlay="theme" data-opacity="80" data-cover="images/bg/bg-a.jpg"></div>
             </div>
-            <div class="gap-5x"></div>
-            <div class="gap-10x d-md-none"></div>
-            <div class="gap-5x d-sm-none"></div>
-			<!-- .header-banner @e -->            
+
 		</header>
         <main class="nk-pages">
     		<%- body %>
