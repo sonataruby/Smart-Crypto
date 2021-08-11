@@ -3,10 +3,11 @@
 	"keywork" : "CryptoCar - NFT Game Play to earn on the BSC",
 	"description" : "CryptoCar - NFT Game Play to earn on the BSC",
 	"banner" : "assets/car/banner.png",
-	"icoin" : "assets/car/icon.png",
+	"icoin" : "assets/ico",
 	"base"  : "http://localhost:5000",
 	"logo" : "assets/car/logo.png",
 	"logo2" : "assets/car/logo2.png",
+	"creator" : "Smart Blockchain",
 	"token" : {
 		"name" : "CAR",
 		"supply" : "10.000.000",

@@ -1,14 +1,42 @@
 <!DOCTYPE html>
-<html lang="zxx" class="js">
+<html lang="en" class="js">
 <head>
-	<meta charset="utf-8">
-<meta name="author" content="Softnio">
+<meta charset="utf-8">
+<meta name="author" content="<%- creator %>">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
+<meta name="description" content="<%- description %>">
+<meta name="keyword" content="<%- keywork %>">
+<base href="<%- base %>">
 <!-- Fav Icon  -->
-<link rel="shortcut icon" href="images/favicon.png">
+<link rel="apple-touch-icon" href="<%- icoin %>/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="<%- icoin %>/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="<%- icoin %>/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="<%- icoin %>/safari-pinned-tab.svg" color="#7952b3">
+<link rel="icon" href="<%- icoin %>/favicon.ico">
+<link rel="shortcut icon" href="<%- icoin %>/favicon-32x32.png">
+<meta name="theme-color" content="#7952b3">
+
+
 <!-- Site Title  -->
 <title><%- title %></title>
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="<%- title %>">
+<meta name="twitter:creator" content="<%- creator %>">
+<meta name="twitter:title" content="<%- title %>">
+<meta name="twitter:description" content="<%- description %>">
+<meta name="twitter:image" content="<%- banner %>">
+
+<meta property="og:url" content="<%- base %>">
+<meta property="og:title" content="<%- title %>">
+<meta property="og:description" content="<%- description %>">
+<meta property="og:type" content="article">
+<meta property="og:image" content="<%- banner %>">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="500">
+
 <!-- Bundle and Base CSS -->
 <link rel="stylesheet" href="/assets/css/vendor.bundle.css?ver=1930">
 <link rel="stylesheet" href="/assets/css/style-zinnia.css?ver=1930" id="changeTheme">
@@ -37,8 +65,8 @@
                         <!-- Logo @s -->
                         <div class="header-logo logo animated" data-animate="fadeInDown" data-delay=".65">
                             <a href="./" class="logo-link">
-                                <img class="logo-dark" src="/images/logo.png" srcset="images/logo2x.png 2x" alt="logo">
-                                <img class="logo-light" src="/images/logo-full-white.png" srcset="images/logo-full-white2x.png 2x" alt="logo">
+                                <img class="logo-dark" src="<%- logo2 %>" srcset="<%- logo2 %> 2x" alt="logo">
+                                <img class="logo-light" src="<%- logo %>" srcset="<%- logo %> 2x" alt="logo">
                             </a>
                         </div>
 
@@ -181,12 +209,12 @@
                             <div class="row justify-content-between align-items-center">
                                 <div class="col-6">
                                     <a href="./" class="wgs-logo-s2">
-                                        <img src="/images/logo-full-white.png" srcset="images/logo-full-white2x.png 2x" alt="logo">
+                                        <img src="<%- logo %>" srcset="<%- logo %> 2x" alt="logo">
                                     </a>
                                 </div><!-- .col -->
                                 <div class="col-6">
                                     <div class="copyright-text text-right">
-                                        <p>© ICO Crypto, 2019</p>
+                                        <p>© Crypto Car, 2021</p>
                                     </div>
                                 </div><!-- .col -->
                             </div>
