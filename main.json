@@ -1,11 +1,11 @@
 {
-	"title" : "Smart Blockchain",
-	"keywork" : "Smart Blockchain",
-	"description" : "Smart Blockchain",
+	"title" : "CAR Blockchain NFT",
+	"keywork" : "CAR Blockchain NFT",
+	"description" : "CAR Blockchain NFT",
 	"banner" : "",
 	"icoin" : "",
 	"token" : {
-		"name" : "SMFX",
+		"name" : "CAR",
 		"supply" : "10.000.000",
 		"price" : "0.02",
 		"presell_date" : "2021/09/31",
@@ -16,7 +16,7 @@
 		"airdrop_link" : "",
 		"airdrop_amount" : "",
 		"whitepaper" : "/CRYPTOCAR.pdf",
-		"youtube" : "https://www.youtube.com/watch?v=SSo_EIwHSd4",
+		"youtube" : "https://www.youtube.com/watch?v=i0wXxBynPAY",
 		"sell_link" : "",
 		"buy_link" : ""
 	},
