@@ -5,6 +5,8 @@
 	"banner" : "assets/car/banner.png",
 	"icoin" : "assets/car/icon.png",
 	"base"  : "http://localhost:5000",
+	"logo" : "assets/car/logo.png",
+	"logo2" : "assets/car/logo2.png",
 	"token" : {
 		"name" : "CAR",
 		"supply" : "10.000.000",
