@@ -8,6 +8,13 @@
 	"logo" : "assets/car/logo.png",
 	"logo2" : "assets/car/logo2.png",
 	"creator" : "Smart Blockchain",
+	"public" : {
+		"farm" :  false,
+		"staking" : false,
+		"game" : false,
+		"ido" : true,
+		"gallery" : true
+	},
 	"token" : {
 		"name" : "CAR",
 		"supply" : "10.000.000",
@@ -15,6 +22,7 @@
 		"presell_date" : "2021/09/31",
 		"presell_amount" : "50.0000",
 		"presell_out" : "12.000",
+		"presell_rate" : "5%",
 		"contract" : "0x9A58f7F8726492824bfE9E86092811CEeBA5dA48",
 		"airdrop" : "500000",
 		"airdrop_link" : "",
@@ -23,7 +31,8 @@
 		"youtube" : "https://www.youtube.com/watch?v=i0wXxBynPAY",
 		"sell_link" : "",
 		"buy_link" : "",
-		"youtube" : "i0wXxBynPAY"
+		"youtube" : "i0wXxBynPAY",
+
 	},
 	"roadmap":{
 		"s1" : {

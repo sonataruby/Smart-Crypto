@@ -36,19 +36,19 @@ app.get("/", (req, res) => {
 app.get("/ido", (req, res) => {
  const dataMain = readJSONFile('main.json');
  app.set('layout', './pages');
- res.render("ido",dataMain);
+ res.render(dataMain.public.ido == true ? "ido" : "coming",dataMain);
 });
 
 app.get("/farm", (req, res) => {
  const dataMain = readJSONFile('main.json');
  app.set('layout', './pages');
- res.render("farm",dataMain);
+ res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
 });
 
 app.get("/staking", (req, res) => {
  const dataMain = readJSONFile('main.json');
  app.set('layout', './pages');
- res.render("staking",dataMain);
+ res.render(dataMain.public.staking == true ? "staking" : "coming",dataMain);
 });
 
 
@@ -66,7 +66,7 @@ app.get("/gallery", (req, res) => {
 app.get("/game", (req, res) => {
  const dataMain = readJSONFile('main.json');
  app.set('layout', './pages');
- res.render("game",dataMain);
+ res.render(dataMain.public.game == true ? "game" : "coming",dataMain);
 });
 
 app.get("/token", (req, res) => {

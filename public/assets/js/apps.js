@@ -53,10 +53,11 @@ SmartApps = (function (SmartApps, $, window) {
 			     refreshAccountData();
 			});
 			await refreshAccountData();
+
     	}
     	var setConnect = async function(address, chain){
     		$.get('/auth/' + address, (res) =>   {
-    			
+    			setCookie("wallet",address);
     		});
     		$("#walletAddress").html(address);
     		
@@ -85,6 +86,7 @@ SmartApps = (function (SmartApps, $, window) {
 
 			  	const accounts = await contract.eth.getAccounts();
 			  	if(chainName == "BSC"){
+			  		$("#walletAddress").html(accounts[0]);
 			  		return setConnect(accounts[0],chainData);
 			  	}else{
 			  		return disconnect();
@@ -114,14 +116,57 @@ SmartApps = (function (SmartApps, $, window) {
     		const accounts = await wseb3.eth.getAccounts();
     		const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
-    		contract.methods.buyToken()
+    		var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
+    		contract.methods.buyToken(refWallet)
 		      .send({ from: accounts[0], value: vamount, gas : 300000})
 		      .then(function (res) {
 		        console.log(res, "MINTED");
 		        
 		      });
+    	}
+
+    	var timeConverter = function(UNIX_timestamp){
+		  var a = new Date(UNIX_timestamp * 1000);
+		  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+		  var year = a.getFullYear();
+		  var month = months[a.getMonth()];
+		  var date = a.getDate();
+		  var hour = a.getHours();
+		  var min = a.getMinutes();
+		  var sec = a.getSeconds();
+		  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+		  return time;
+		}
+    	var tokenInfo = async function(){
+    		init();
+    		provider = await web3Spf.connect();
+    		var wseb3 = new Web3(provider);
+    		var contract = new wseb3.eth.Contract(abi,caddress);
+
+    		contract.methods.getPrice().call().then(function(res){
+    			$(".price").html(res);
+    			$(".pricebnb").html(Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    		});
+
+    		contract.methods.getSubply().call().then(function(res){
+    			$(".totalSub").html(Number(res).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+    		});
     		
+    		contract.methods.getTimeStart().call().then(function(res){
+    			$(".timestart").html(timeConverter(res));
+    		});
+    		contract.methods.getTimeEnd().call().then(function(res){
+    			$(".timeend").html(timeConverter(res));
+    		});
+
+    		contract.methods.getMinPay().call().then(function(res){
+    			$(".minpay").html((res/100) + " BNB");
+    		});
     		
+    		contract.methods.getReward().call().then(function(res){
+    			$(".reward").html(res);
+    		});
     	}
 
     	var sell = async function(amount){
@@ -159,6 +204,7 @@ SmartApps = (function (SmartApps, $, window) {
     	}
 
 
+
     	$("#btnWalletConnect").on("click", function(){
     		connect();
     		//console.log($web3.default);
@@ -174,6 +220,9 @@ SmartApps = (function (SmartApps, $, window) {
     	
     	$("[data-web3=ido]").on("click", function(){
     		var value = $("#getAmountBNB").val();
+    		var dataV = $(this).attr("data-value");
+    		if(dataV > 0) value = dataV;
+    		
     		if(value < 0.01){
     			$(".htmlerror").html("Min Value 0.01 BNB");
     			$("#getAmountBNB").focus();
@@ -190,6 +239,11 @@ SmartApps = (function (SmartApps, $, window) {
     		//console.log($web3.default);
     		
     	});
+    	connect();
+    	tokenInfo();
+    	if(getCookie("wallet") != null){
+    		$("#LinkRef").val(window.location.protocol+"//"+window.location.hostname+"/ido?ref="+getCookie("wallet"));
+    	}
 
     };
     SmartApps.components.docReady.push(SmartApps.Web3.Pool);
