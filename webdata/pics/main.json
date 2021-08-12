@@ -1,0 +1,142 @@
+{
+	"title" : "PICS Network - NFT Game Play to earn on the BSC",
+	"keywork" : "PICS Network - NFT Game Play to earn on the BSC",
+	"description" : "PICS Network - NFT Game Play to earn on the BSC",
+	"banner" : "assets/car/banner.png",
+	"icoin" : "assets/ico",
+	"base"  : "http://localhost:5000",
+	"logo" : "assets/car/logo.png",
+	"logo2" : "assets/car/logo2.png",
+	"logo3" : "assets/car/logo3.png",
+	"creator" : "Smart Blockchain",
+	"copyright" : "PICS Network - NFT Game Play 2021",
+	"public" : {
+		"farm" :  false,
+		"staking" : false,
+		"game" : false,
+		"ido" : true,
+		"gallery" : false,
+		"airdrop" : true,
+		"ntfmarket" : false
+	},
+	"token" : {
+		"name" : "PICS",
+		"supply" : "10.000.000",
+		"price" : "0.02",
+		"presell_date" : "2021/09/31",
+		"presell_amount" : "50.0000",
+		"presell_out" : "12.000",
+		"presell_rate" : "5%",
+		"contract" : "0x9A58f7F8726492824bfE9E86092811CEeBA5dA48",
+		"airdrop" : "500000",
+		"airdrop_link" : "",
+		"airdrop_amount" : "",
+		"whitepaper" : "/WhitePaper.pdf",
+		"youtube" : "https://www.youtube.com/watch?v=i0wXxBynPAY",
+		"sell_link" : "",
+		"buy_link" : "",
+		"youtube" : "i0wXxBynPAY"
+
+	},
+	"roadmap":{
+		"s1" : {
+			"title" : "",
+			"time" : "",
+			"description" : ""
+		},
+		"s2" : {
+			"title" : "",
+			"time" : "",
+			"description": ""
+		},
+		"s3" : {
+			"title" : "",
+			"time" : "",
+			"description": ""
+		},
+		"s4" : {
+			"title" : "",
+			"time" : "",
+			"description": ""
+		}
+	},
+	"main" : {
+		"videoimage" : "/assets/car/video.png"
+	},
+	"gallery" : [{
+		"name" : "NTF CAR 1",
+		"description" : "NTF CAR 1 MINT",
+		"url" : "/images/gallery/CAR 1.jpg"
+	}, {
+		"name" : "NTF CAR 2",
+		"description" : "NTF CAR 2 MINT",
+		"url" : "/images/gallery/CAR 2.jpg"
+	}, {
+		"name" : "NTF CAR 3",
+		"description" : "NTF CAR 3 MINT",
+		"url" : "/images/gallery/CAR 3.jpg"
+	}, {
+		"name" : "NTF CAR 4",
+		"description" : "NTF CAR 4 MINT",
+		"url" : "/images/gallery/CAR 4.jpg"
+	}, {
+		"name" : "NTF CAR 5",
+		"description" : "NTF CAR 5 MINT",
+		"url" : "/images/gallery/CAR 5.jpg"
+	}, {
+		"name" : "NTF CAR 6",
+		"description" : "NTF CAR 6 MINT",
+		"url" : "/images/gallery/CAR 6.jpg"
+	}, {
+		"name" : "NTF CAR 7",
+		"description" : "NTF CAR 7 MINT",
+		"url" : "/images/gallery/CAR 7.jpg"
+	}, {
+		"name" : "NTF CAR 8",
+		"description" : "NTF CAR 8 MINT",
+		"url" : "/images/gallery/CAR 8.jpg"
+	}, {
+		"name" : "NTF CAR 9",
+		"description" : "NTF CAR 9 MINT",
+		"url" : "/images/gallery/CAR 9.jpg"
+	}, {
+		"name" : "NTF CAR 10",
+		"description" : "NTF CAR 10 MINT",
+		"url" : "/images/gallery/CAR 10.jpg"
+	}, {
+		"name" : "NTF CAR 11",
+		"description" : "NTF CAR 11 MINT",
+		"url" : "/images/gallery/CAR 11.jpg"
+	}, {
+		"name" : "NTF CAR 12",
+		"description" : "NTF CAR 12 MINT",
+		"url" : "/images/gallery/CAR 12.jpg"
+	}, {
+		"name" : "NTF CAR 13",
+		"description" : "NTF CAR 13 MINT",
+		"url" : "/images/gallery/CAR 13.jpg"
+	}, {
+		"name" : "NTF CAR 14",
+		"description" : "NTF CAR 14 MINT",
+		"url" : "/images/gallery/CAR 14.jpg"
+	}, {
+		"name" : "NTF CAR 15",
+		"description" : "NTF CAR 15 MINT",
+		"url" : "/images/gallery/CAR 15.jpg"
+	}],
+	"tearm" : "",
+	"staking" : {
+		"title" : "Staking Program",
+		"description" : ""
+	},
+	"contact" : "",
+	"footer" : "",
+	"social" : {
+		"facebook" : "",
+		"twitter" : "",
+		"github" : "",
+		"youtube" : "",
+		"bitcoin" : "",
+		"medium" : ""
+	}
+}

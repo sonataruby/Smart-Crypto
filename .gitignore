@@ -109,3 +109,4 @@ data/ipfs
 #truffle-config.js
 vps.txt
 public/layout/*
+abi/*

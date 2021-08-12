@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="<%- creator %>">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="<%- description %>">
+<meta name="keyword" content="<%- keywork %>">
+<base href="<%- base %>">
+<!-- Fav Icon  -->
+<link rel="apple-touch-icon" href="<%- icoin %>/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="<%- icoin %>/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="<%- icoin %>/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="<%- icoin %>/safari-pinned-tab.svg" color="#7952b3">
+<link rel="icon" href="<%- icoin %>/favicon.ico">
+<link rel="shortcut icon" href="<%- icoin %>/favicon-32x32.png">
+<meta name="theme-color" content="#7952b3">
+<!-- Site Title  -->
+<title><%- title %></title>
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="<%- title %>">
+<meta name="twitter:creator" content="<%- creator %>">
+<meta name="twitter:title" content="<%- title %>">
+<meta name="twitter:description" content="<%- description %>">
+<meta name="twitter:image" content="<%- banner %>">
+
+<meta property="og:url" content="<%- base %>">
+<meta property="og:title" content="<%- title %>">
+<meta property="og:description" content="<%- description %>">
+<meta property="og:type" content="article">
+<meta property="og:image" content="<%- banner %>">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="500">
+<!-- Bundle and Base CSS -->
+<link rel="stylesheet" href="assets/css/vendor.bundle.css?ver=1930">
+<link rel="stylesheet" href="assets/css/style-salvia.css?ver=1930" id="changeTheme">
+<!-- Extra CSS -->
+<link rel="stylesheet" href="assets/css/theme.css?ver=1930">
+<script src="/assets/js/jquery.js?ver=1930"></script>
+
+
+
+</head>
+<body class="nk-body body-wider theme-dark mode-onepage">
+	<div class="nk-wrap">
+		<header class="nk-header page-header is-transparent is-sticky is-shrink" id="header">
+		    <!-- Header @s -->
+            <div class="header-main">
+                <div class="container">
+                    <div class="header-wrap">
+                        <!-- Logo @s -->
+                        <div class="header-logo logo animated" data-animate="fadeInDown" data-delay=".65">
+                            <a href="./" class="logo-link">
+                                <img class="logo-dark" src="images/logo.png" srcset="images/logo2x.png 2x" alt="logo">
+                                <img class="logo-light" src="images/logo-full-white.png" srcset="images/logo-full-white2x.png 2x" alt="logo">
+                            </a>
+                        </div>
+
+                        <!-- Menu Toogle @s -->
+                        <div class="header-nav-toggle">
+                            <a href="#" class="navbar-toggle" data-menu-toggle="header-menu">
+                                <div class="toggle-line">
+                                    <span></span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Menu @s -->
+                        <div class="header-navbar header-navbar-s2">
+                            <nav class="header-menu justify-content-between" id="header-menu">
+                                <ul class="menu animated remove-animation" data-animate="fadeInDown" data-delay=".75">
+                                    <li class="menu-item"><a class="menu-link nav-link" href="#about">About</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link" href="#overview">Overview</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link" href="#token">PICS Token</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link" href="#roadmap">Roadmap</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link" href="#team">Team</a></li>
+                                    <li class="menu-item has-sub">
+                                       <a class="menu-link nav-link menu-toggle" href="#">More</a>
+                                        <ul class="menu-sub menu-drop">
+                                            <li class="menu-item"><a class="menu-link nav-link" href="#faq">Faq</a></li>
+                                            <li class="menu-item"><a class="menu-link nav-link" href="#document">Document</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul class="menu-btns align-items-center animated remove-animation" data-animate="fadeInDown" data-delay=".85">
+                                    <li class="language-switcher language-switcher-s2 toggle-wrap">
+                                        <a class="btn btn-rg toggle-tigger btn-outline btn-auto no-change btn-primary" href="#"><span>EN</span><em class="icon ti ti-angle-down"></em></a>
+                                        <ul class="toggle-class toggle-drop drop-list drop-list-mb">
+                                            <li><a href="#">Fr</a></li>
+                                            <li><a href="#">Ch</a></li>
+                                            <li><a href="#">Br</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a id="btnBuyToken" class="btn btn-rg btn-secondary no-change"><span>Buy Token</span></a></li>
+                                </ul>
+                            </nav>
+                        </div><!-- .header-navbar @e -->
+                    </div>                                                
+                </div>
+            </div><!-- .header-main @e -->
+			<!-- Banner @s -->
+            <div class="header-banner bg-theme-grad-s2">
+                <div class="nk-banner">
+                    <div class="banner banner-fs banner-single banner-s1 banner-s1-overlay">
+                        <div class="banner-wrap">
+                            <div class="container">
+                                <div class="row align-items-center justify-content-center justify-content-lg-between gutter-vr-60px">
+                                    <div class="col-lg-6 col-xl-6 text-center text-lg-left">
+                                        <div class="banner-caption tc-light">
+                                            <div class="cpn-head mt-0">
+                                                <img src="images/pics.png" alt="Pics Network" width="45" height="45"> <h1 class="title title-thin title-xl-2 animated" data-animate="fadeInUp" data-delay="1.25">What is PICS Network?</h1>
+                                            </div>
+                                            <div class="cpn-text cpn-text-s2">
+                                                <p class="lead-s2 lead-light animated" data-animate="fadeInUp" data-delay="1.35">PICS Network is one of the first charity tokens on the BSC.</p>
+                                            </div>
+                                            <div class="cpn-btns">
+                                                <ul class="btn-grp animated" data-animate="fadeInUp" data-delay="1.45">
+                                                    <li><a class="btn btn-md btn-primary btn-outline" href="https://bscscan.com/token/0xc59227f8e3b0f6578ba0d89109f4dee3fe0f7692" target="_blank">Contract address</a></li>
+                                                    <!-- <li><a class="btn btn-md btn-primary btn-outline" href="#">One Pager</a></li> -->
+                                                </ul>											
+											
+                                            </div>
+                                            <div class="cpn-social">
+                                                <h4 class="title-xs animated" data-animate="fadeInUp" data-delay="1.55">JOIN OUR COMMUNITY</h4>
+                                                <ul class="social">
+                                                    <li class="animated" data-animate="fadeInUp" data-delay="1.65"><a href="https://t.me/joinchat/Dsc9CLgb5JxkMjM1" target="_blank"><em class="social-icon fas fa-paper-plane"></em></a></li>
+                                                    <li class="animated" data-animate="fadeInUp" data-delay="1.7"><a href="#"><em class="social-icon fab fa-facebook-f"></em></a></li>
+                                                    <li class="animated" data-animate="fadeInUp" data-delay="1.75"><a href="https://twitter.com/pics_network" target="_blank"><em class="social-icon fab fa-twitter"></em></a></li>
+                                                  <li class="animated" data-animate="fadeInUp" data-delay="1.8"><a href="https://www.youtube.com/channel/UCVYXHHAyyRetzXhH2CYn0cw" target="_blank"><em class="social-icon fab fa-github"></em></a></li>
+                                                    <!--  <li class="animated" data-animate="fadeInUp" data-delay="1.85"><a href="#"><em class="social-icon fab fa-bitcoin"></em></a></li>
+                                                    <li class="animated" data-animate="fadeInUp" data-delay="1.9"><a href="#"><em class="social-icon fab fa-medium-m"></em></a></li> -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div><!-- .col -->
+                                    <div class="col-lg-6 col-xl-5 col-md-8 col-sm-9">
+                                        <div class="token-status token-status-s3 round bg-theme tc-light animated" data-animate="fadeInUp" data-delay="2">
+                                            <h4 class="title-md title-thin">Pre-Sale Ends In</h4>
+                                            <div class="countdown-s2 countdown" data-date="2021/10/10 20:00:00"></div>
+                                            <div class="token-info token-info-s1">
+                                                <div class="token-info-item token-info-item-s1">
+                                                    <div class="token-info-item-list">
+                                                        <span>Token Price:</span>
+                                                        <h4>1 PICS=$0.0025</h4>
+                                                    </div>
+                                                    <div class="token-info-item-list">
+                                                        <span>We Accept:</span>
+                                                        <h4><em class="fab fa-ethereum"></em> BNB</h4>
+                                                    </div>
+                                                </div>
+                                                <div class="token-info-item token-info-item-s1">
+                                                    <span>Tokens Availablen <br class="d-none d-md-block"> on Pre-Sale:</span>
+                                                    <h4>2,000,000,000 PICS</h4>
+                                                </div>
+                                            </div>
+                                            <div class="token-action token-action-s2 flex-wrap flex-sm-nowrap">
+                                                <a data-web3="buytoken" target="_blank" class="btn btn-md btn-secondary">Buy Tokens Now</a>
+                                                <div class="token-min-s2">
+                                                    <span>Minimum Purchase:</span> 
+                                                    <span>10,000 PICS</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- .col -->
+                                </div><!-- .row -->
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- .nk-banner -->
+                <div class="nk-ovm shape-q"></div>
+                
+                <!-- Place Particle Js -->
+				<div id="particles-bg" class="particles-container particles-bg" data-pt-base="#00c0fa" data-pt-base-op=".3" data-pt-line="#2b56f5" data-pt-line-op=".5" data-pt-shape="#00c0fa" data-pt-shape-op=".2"></div>
+            </div>
+			<!-- .header-banner @e -->
+		</header>
+    
+        <main class="nk-pages">
+            <section class="section bg-light" id="about">
+                <div class="container">
+                    <!-- Block @s -->
+                    <div class="nk-block nk-block-features-s2">
+                        <div class="row align-items-center flex-row-reverse gutter-vr-30px">
+                            <div class="col-lg-5">
+                                <div class="gfx py-4 mx-auto mx-lg-0 animated" data-animate="fadeInUp" data-delay=".1">
+                                    <img src="images/salvia/gfx-i.png" alt="gfx">
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-7">
+                                <!-- Section Head @s -->
+                                <div class="nk-block-text pdb-r">
+                                    <h2 class="title title-thin animated" data-animate="fadeInUp" data-delay=".1">About PICS Network</h2>
+                                    <p class="animated" data-animate="fadeInUp" data-delay=".2">PICS Network is a DeFi token on the BCS issued on a blockchain platform with basic features such as smart contracts, sending and receiving, mining… PICS Network was created to solve payment problems, security, finance, application development… Transaction has a 5% automatic liquidity protocol and a 5% redistribution protocol to protect holders. This protocol pairing increases the value of each holder’s investment over time.</p>
+                                    <p class="animated" data-animate="fadeInUp" data-delay=".3">Features of the coin is its use as a method for financial investment.</p>
+                                </div><!-- .section-head @e -->
+                                <div class="row gutter-vr-20px flex-wrap">
+                                    <div class="col-sm-6">
+                                        <div class="feature feature-s1 animated" data-animate="fadeInUp" data-delay=".4">
+                                            <div class="feature-icon feature-icon-s5 feature-icon-s5-1">
+                                                <em class="icon fas fa-check"></em>
+                                            </div>
+                                            <div class="feature-text feature-text-s1">
+                                                <p>High security and safety</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- .col -->
+                                    <div class="col-sm-6">
+                                        <div class="feature feature-s1 animated" data-animate="fadeInUp" data-delay=".4">
+                                            <div class="feature-icon feature-icon-s5 feature-icon-s5-2">
+                                                <em class="icon fas fa-check"></em>
+                                            </div>
+                                            <div class="feature-text feature-text-s1">
+                                                <p>Easy to payout</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- .col -->
+                                    <div class="col-sm-6">
+                                        <div class="feature feature-s1 animated" data-animate="fadeInUp" data-delay=".5">
+                                            <div class="feature-icon feature-icon-s5 feature-icon-s5-3">
+                                                <em class="icon fas fa-check"></em>
+                                            </div>
+                                            <div class="feature-text feature-text-s1">
+                                                <p>Increase profitability</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- .col -->
+                                    <div class="col-sm-6">
+                                        <div class="feature feature-s1 animated" data-animate="fadeInUp" data-delay=".6">
+                                            <div class="feature-icon feature-icon-s5 feature-icon-s5-4">
+                                                <em class="icon fas fa-check"></em>
+                                            </div>
+                                            <div class="feature-text feature-text-s1">
+                                                <p>Low transaction costs</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- .col -->
+                                </div><!-- .row -->
+                            </div><!-- .col -->
+                        </div><!-- .row -->
+                    </div><!-- .block @e -->
+                </div>
+            </section>
+
+            <!-- // -->
+            <section class="section bg-theme ov-h text-center tc-light overlay-x">
+                <div class="container">
+                    <!-- Block @s -->
+                    <div class="nk-block nk-block-text-wrap">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col">
+                                <div class="nk-block-text">
+                                    <h3 class="fw-3 pb-2"><span class="h1 fw-3 pb-3 d-block animated" data-animate="fadeInUp" data-delay=".1">The main issue</span> <span class="d-block animated" data-animate="fadeInUp" data-delay=".2">of decentralizing decision-making  and transparency and reliability</span></h3>
+                                    
+							</div><!-- .nk-block @e -->
+                            </div><!-- .col -->
+                        </div><!-- .row -->
+                    </div><!-- .block @e -->
+                </div>
+            </section>
+            <!-- // -->
+            <section class="section bg-light">
+                <div class="container">
+                    <!-- Block @s -->
+                    <div class="nk-block nk-block-features-s2">
+                        <div class="row align-items-center flex-row-reverse justify-content-between gutter-vr-30px">
+                            <div class="col-lg-7">
+                                <div class="gfx gfx-auto mb-lg-3 animated" data-animate="fadeInUp" data-delay=".1">
+                                    <img src="images/app-screens/sc-large-k.png" alt="gfx">
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-4">
+                                <!-- Section Head @s -->
+                                <div class="section-head pb-lg-0">
+                                    <h2 class="title title-thin animated" data-animate="fadeInUp" data-delay=".2">Introducing PICS Usercenter</h2>
+                                    <p class=" animated" data-animate="fadeInUp" data-delay=".3">First of we release our major update with usercenter design which is most important part of PICS Token Sales management. It allows to manage whole process of tokens sales.</p>
+                                </div><!-- .section-head @e -->
+                            </div><!-- .col -->
+                        </div><!-- .row -->
+                        <div class="row features-list flex-wrap gutter-vr-30px">
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="feature feature-s1 feature-s1-1 boxed boxed-xs bg-white bordered animated" data-animate="fadeInUp" data-delay=".4">
+                                    <div class="feature-icon feature-icon-s5 feature-icon-s5-1">
+                                        <em class="icon fas fa-check"></em>
+                                    </div>
+                                    <div class="feature-text feature-text-s1">
+                                        <span class="title-xs-alt title-mid">Safe &amp; Secure Transactions</span>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="feature feature-s1 feature-s1-2 boxed boxed-xs bg-white bordered animated" data-animate="fadeInUp" data-delay=".5">
+                                    <div class="feature-icon feature-icon-s5 feature-icon-s5-2">
+                                        <em class="icon fas fa-check"></em>
+                                    </div>
+                                    <div class="feature-text feature-text-s1">
+                                        <span class="title-xs-alt title-mid">Encrypted and Kept Private</span>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="feature feature-s1 feature-s1-3 boxed boxed-xs bg-white bordered animated" data-animate="fadeInUp" data-delay=".6">
+                                    <div class="feature-icon feature-icon-s5 feature-icon-s5-3">
+                                        <em class="icon fas fa-check"></em>
+                                    </div>
+                                    <div class="feature-text feature-text-s1">
+                                        <span class="title-xs-alt title-mid">Multiple Payment Gateway</span>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="feature feature-s1 feature-s1-4 boxed boxed-xs bg-white bordered animated" data-animate="fadeInUp" data-delay=".7">
+                                    <div class="feature-icon feature-icon-s5 feature-icon-s5-4">
+                                        <em class="icon fas fa-check"></em>
+                                    </div>
+                                    <div class="feature-text feature-text-s1">
+                                        <span class="title-xs-alt title-mid">KYC Verification</span>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                        </div><!-- .row -->
+                    </div><!-- .block @e -->
+                </div>
+            </section>
+            <!-- // -->
+            <section class="bg-theme" id="token">
+                 <div class="section section-tokendes tc-light">
+                    <div class="container">
+                        <div class="section-head section-head-s7 text-center wide-auto-sm">
+                            <h2 class="title title-thin animated" data-animate="fadeInUp" data-delay=".1">PICS Network<br></h2>
+                            <p class="lead animated" data-animate="fadeInUp" data-delay=".2">Token and tax allocation.</p>
+                        </div><!-- .section-head @e -->
+						<!-- .block @s -->
+                        <div class="nk-block">
+                            <div class="token-box-top">
+                            <div class="row gutter-vr-30px">
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="token-sale-box animated" data-animate="fadeInUp" data-delay=".3">
+                                        <span class="token-sale-info">10,000,000,000</span>
+                                        <span class="token-sale-title">TOTAL TOKEN SUPPLY</span>
+                                    </div>
+                                </div><!-- .col -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="token-sale-box animated" data-animate="fadeInUp" data-delay=".4">
+                                        <span class="token-sale-info">4,000,000,000</span>
+                                        <span class="token-sale-title">BURN (PICS)</span>
+                                    </div>
+                                </div><!-- .col -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="token-sale-box animated" data-animate="fadeInUp" data-delay=".5">
+                                        <span class="token-sale-info">2,000,000,000</span>
+                                        <span class="token-sale-title">SOFTCAP (PICS)</span>
+                                    </div>
+                                </div><!-- .col -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="token-sale-box animated" data-animate="fadeInUp" data-delay=".6">
+                                        <span class="token-sale-info">2,000,000,000</span>
+                                        <span class="token-sale-title">TOKENS FOR PUBLIC</span>
+                                    </div>
+                                </div><!-- .col -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="token-sale-box animated" data-animate="fadeInUp" data-delay=".7">
+                                        <span class="token-sale-info">$0.0025 USD</span>
+                                        <span class="token-sale-title">PICS TOKEN PRICE</span>
+                                    </div>
+                                </div><!-- .col -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="token-sale-box animated" data-animate="fadeInUp" data-delay=".8">
+                                        <span class="token-sale-info">BNB, BTC, ETH</span>
+                                        <span class="token-sale-title">ACCEPTED CURRENCY</span>
+                                    </div>
+                                </div><!-- .col -->
+                            </div><!-- .row -->
+                        </div>
+                        </div><!-- .block @e -->
+					
+                    </div>
+                 </div>
+                <div class="section-tokendes">
+                    <div class="container">
+                        <!-- Block @s -->
+                        <div class="nk-block nk-block-alocation mgb-m30">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="token-alocate-item animated" data-animate="fadeInUp" data-delay=".6">
+                                        <div class="token-alocate-graph">
+                                            <img src="images/icon.png" alt="icon">
+                                            <span>Token <br> Allocation</span>
+                                            <canvas class="chart-canvas" id="token-alocate-salvia2"></canvas>
+                                        </div>
+                                        <ul class="chart-data" data-canvas="token-alocate-salvia2" data-canvas-type="doughnut" data-canvas-cutout="77">
+                                            <li data-color="#6d6af6" data-title="Token Sale Program" data-amount="60"></li>
+                                            <li data-color="#f0a561" data-title="Reserve Fund" data-amount="8"></li>
+                                            <li data-color="#7dbef9" data-title="Team and Founders" data-amount="15"></li>
+                                            <li data-color="#7adac9" data-title="Board Advisors" data-amount="4"></li>
+                                            <li data-color="#7654e1" data-title="Ecosystem Development" data-amount="7"></li>
+                                            <li data-color="#371e8d" data-title="Marketing and Bounty" data-amount="6"></li>
+                                        </ul>
+                                    </div>
+                                </div><!-- .col -->
+                                <div class="col-lg-6">
+                                    <div class="token-alocate-item animated" data-animate="fadeInUp" data-delay=".7">
+                                        <div class="token-alocate-graph">
+                                            <img src="images/icon.png" alt="icon">
+                                            <span>Funds <br> Allocation</span>
+                                            <canvas class="chart-canvas" id="fund-alocate-salvia2"></canvas>
+                                        </div>
+                                        <ul class="chart-data" data-canvas="fund-alocate-salvia2" data-canvas-type="doughnut" data-canvas-cutout="77">
+                                            <li data-color="#371e8d" data-title="Engineering and Development" data-amount="40"></li>
+                                            <li data-color="#7654e1" data-title="Business Development" data-amount="12"></li>
+                                            <li data-color="#7adac9" data-title="Marketing &amp; Promotion" data-amount="20"></li>
+                                            <li data-color="#72a3f4" data-title="Legal &amp; Regulation" data-amount="10"></li>
+                                            <li data-color="#f0a561" data-title="Operational &amp; Administration" data-amount="8"></li>
+                                            <li data-color="#da6bc1" data-title="Contingency" data-amount="4"></li>
+                                            <li data-color="#371e8d" data-title="Partners" data-amount="6"></li>
+                                        </ul>
+                                    </div>
+                                </div><!-- .col -->
+                            </div><!-- .row -->
+                        </div><!-- .block @e -->
+                    </div>
+                    <div class="nk-ovm ovm-bottom ovm-h-40 bg-light"></div>
+                </div><!-- .section-tokendes -->
+                <div class="nk-ovm nk-ovm-fixed shape-q"></div>
+            </section>
+            <!-- // -->
+            <section class="section bg-light" id="document">
+                <div class="container">
+                    <!-- Block @s -->
+                    <div class="section-head section-head-s7 text-center wide-auto-sm">
+                        <h2 class="title title-thin animated" data-animate="fadeInUp" data-delay=".1">Documentation</h2>
+                        <p class="lead animated" data-animate="fadeInUp" data-delay=".2">Download the whitepaper and learn about PICS Token, the unique PICS Crypto approach and the team/advisors.</p>
+                    </div><!-- .section-head @e -->
+                    <div class="nk-block nk-block-features">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="feature feature-document animated" data-animate="fadeInUp" data-delay=".3">
+                                    <div class="feature-document-img">
+                                        <img src="images/salvia/docs-sm-a.jpg" alt="">
+                                    </div>
+                                    <div class="feature-document-text">
+                                        <span class="feature-document-info">White Paper<span>(PDF)</span></span>
+                                        <a href="https://pics.trade/WhitePaper-PICs-Network.pdf" class="feature-document-link"><em class="ti ti-import"></em></a>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="feature feature-document animated" data-animate="fadeInUp" data-delay=".4">
+                                    <div class="feature-document-img">
+                                        <img src="images/salvia/docs-sm-b.jpg" alt="">
+                                    </div>
+                                    <div class="feature-document-text">
+                                        <span class="feature-document-info">One Pager<span>(PDF)</span></span>
+                                        <a href="#" class="feature-document-link"><em class="ti ti-import"></em></a>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="feature feature-document animated" data-animate="fadeInUp" data-delay=".5">
+                                    <div class="feature-document-img">
+                                        <img src="images/salvia/docs-sm-c.jpg" alt="">
+                                    </div>
+                                    <div class="feature-document-text">
+                                        <span class="feature-document-info">Terms of Sales<span>(PDF)</span></span>
+                                        <a href="#" class="feature-document-link"><em class="ti ti-import"></em></a>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="feature feature-document animated" data-animate="fadeInUp" data-delay=".6">
+                                    <div class="feature-document-img">
+                                        <img src="images/salvia/docs-sm-d.jpg" alt="">
+                                    </div>
+                                    <div class="feature-document-text">
+                                        <span class="feature-document-info">Privacy &amp; Policy<span>(PDF)</span></span>
+                                        <a href="#" class="feature-document-link"><em class="ti ti-import"></em></a>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                        </div><!-- .row -->
+                    </div><!-- .block @s -->
+                </div>
+            </section>
+            <!-- // -->
+            <section class="section bg-light-alt" id="roadmap">
+                <div class="container">
+                    <div class="row justify-content-between gutter-vr-30px">
+                        <div class="col-lg-4">
+                            <div class="section-head section-head-s7 wide-auto-sm text-lg-left text-center">
+                                <h2 class="title title-thin animated" data-animate="fadeInUp" data-delay=".1">Roadmap</h2>
+                                <p class="lead animated" data-animate="fadeInUp" data-delay=".2">Our roadmap is a planned where we take on the most complex problems and turn them into great solutions</p>
+                            </div>
+                        </div><!-- .col -->
+                        <div class="col-lg-7">
+                            <div class="accordion animated" data-animate="fadeInUp" data-delay=".3" id="faq-36">
+                                <div class="accordion-item accordion-item-s3">
+                                    <h5 class="accordion-title accordion-title-sm" data-toggle="collapse" data-target="#faq-36-1">Phase 1 (May-June) - Marketing & Operations <span class="accordion-icon accordion-icon-s1"></span></h5>
+                                    <div id="faq-36-1" class="collapse show" data-parent="#faq-36">
+                                        <div class="accordion-content">
+                                            <p> Presale & Initial Marketing<br>
+												PICS release (30th of May)<br>
+												Coin Market Cap & Coin Gecko listings<br>
+												Promotions with influencers<br>
+												Whitepaper & Audit<br>
+												Token Airdrops</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item accordion-item-s3">
+                                    <h5 class="accordion-title accordion-title-sm collapsed" data-toggle="collapse" data-target="#faq-36-2">Phase 2 (June-July) - Listings & Additional Releases<span class="accordion-icon accordion-icon-s1"></span></h5>
+                                    <div id="faq-36-2" class="collapse" data-parent="#faq-36">
+                                        <div class="accordion-content">
+                                            <p>
+												Centralized Exchange listings<br>
+												Website Redesign<br>
+												Additional Token releases<br>
+												Ecosystem development<br>
+												Official Pics Merch Store</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item accordion-item-s3">
+                                    <h5 class="accordion-title accordion-title-sm collapsed" data-toggle="collapse" data-target="#faq-36-3">Phase 3 (July-August) - Charity & Endgame<span class="accordion-icon accordion-icon-s1"></span></h5>
+                                    <div id="faq-36-3" class="collapse" data-parent="#faq-36">
+                                        <div class="accordion-content">
+                                            <p> Charity donations (Community chosen & Dev funded)<br>
+												Token Airdrops<br>
+												Marketing and Social Campaigns<br>
+												NFT Marketplace</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div><!-- .col -->
+                    </div><!-- .row -->
+                </div><!-- .container -->
+            </section>
+            <!-- // -->
+            <section class="section bg-theme ov-h text-center tc-light overlay-x">
+                <div class="container">
+                    <div class="section-head section-head-s7 wide-auto-sm">
+                        <h2 class="title title-thin animated" data-animate="fadeInUp" data-delay=".1">Beta Products</h2>
+                        <p class="lead animated" data-animate="fadeInUp" data-delay=".2">PICS Backend is the PICS token sales management software,which helps you to lunch and mange your PICS.</p>
+                    </div>
+                    <!-- Block @s -->
+                    <div class="nk-block nk-block-text-wrap">
+                        <div class="row justify-content-center gutter-vr-30px">
+                            <div class="col-lg-5 animated" data-animate="fadeInUp" data-delay=".3">
+                                <a href="#" class="product-box">
+                                    <h5 class="product-name">USER DASHDOARD</h5>
+                                    <div class="product-image"><img src="images/products/c.jpg" alt="prdouct"></div>
+                                </a>
+                            </div>
+                            <div class="col-lg-5 animated" data-animate="fadeInUp" data-delay=".4">
+                                <a href="#" class="product-box">
+                                    <h5 class="product-name">Admin DASHDOARD</h5>
+                                    <div class="product-image"><img src="images/products/d.jpg" alt="prdouct"></div>
+                                </a>
+                            </div>
+                        </div><!-- .row -->
+                    </div><!-- .block @e -->
+                </div>
+            </section>
+        
+            <!-- // -->
+            <section class="section bg-light-alt" id="faq">
+                <div class="container">
+                    <div class="row justify-content-between gutter-vr-30px">
+                        <div class="col-lg-4">
+                            <div class="section-head section-head-s7 wide-auto-sm text-lg-left text-center">
+                                <h2 class="title title-thin animated" data-animate="fadeInUp" data-delay=".1">FAQs</h2>
+                                <p class="lead animated" data-animate="fadeInUp" data-delay=".2">Below we’ve provided a bit of PICS, PICS Token, cryptocurrencies, and few others common question answers. If you have any other questions, please get in touch via email.</p>
+                            </div>
+                        </div><!-- .col -->
+                        <div class="col-lg-7">
+                            <div class="accordion animated" data-animate="fadeInUp" data-delay=".3" id="faq-36">
+                                <div class="accordion-item accordion-item-s3">
+                                    <h5 class="accordion-title accordion-title-sm" data-toggle="collapse" data-target="#faq-36-1">What is PICS Crypto? <span class="accordion-icon accordion-icon-s1"></span></h5>
+                                    <div id="faq-36-1" class="collapse show" data-parent="#faq-36">
+                                        <div class="accordion-content">
+                                            <p>PICS Network is a DeFi token on the BCS issued on a blockchain platform with basic features such as smart contracts, sending and receiving, mining</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item accordion-item-s3">
+                                    <h5 class="accordion-title accordion-title-sm collapsed" data-toggle="collapse" data-target="#faq-36-2">What cryptocurrencies can I use to purchase? <span class="accordion-icon accordion-icon-s1"></span></h5>
+                                    <div id="faq-36-2" class="collapse" data-parent="#faq-36">
+                                        <div class="accordion-content">
+                                            <p>You can buy on Pancake swap, on platform trading (coming soon)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item accordion-item-s3">
+                                    <h5 class="accordion-title accordion-title-sm collapsed" data-toggle="collapse" data-target="#faq-36-3">How can I participate in the PICS Token sale? <span class="accordion-icon accordion-icon-s1"></span></h5>
+                                    <div id="faq-36-3" class="collapse" data-parent="#faq-36">
+                                        <div class="accordion-content">
+                                            <p>You can join Airdop, buy on system Pancake swap.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item accordion-item-s3">
+                                    <h5 class="accordion-title accordion-title-sm collapsed" data-toggle="collapse" data-target="#faq-36-4">How do I benefit from the PICS Token? <span class="accordion-icon accordion-icon-s1"></span></h5>
+                                    <div id="faq-36-4" class="collapse" data-parent="#faq-36">
+                                        <div class="accordion-content">
+                                            <p>Hold PICs Token and take a profit.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .col -->
+                    </div><!-- .row -->
+                </div><!-- .container -->
+            </section>
+            <!-- // -->
+            <section class="section section-contact bg-white" id="contact">
+                <div class="container">
+                    <!-- Block @s -->
+                    <div class="nk-block block-contact">
+                        <div class="row justify-content-between gutter-vr-30px">
+                            <div class="col-lg-4">
+                                <div class="section-head section-head-sm section-head-s7 wide-auto-sm text-lg-left text-center">
+                                    <h2 class="title title-thin animated" data-animate="fadeInUp" data-delay=".1">Get In Touch</h2>
+                                    <p class="lead animated" data-animate="fadeInUp" data-delay=".2">Any question? Reach out to us and we’ll get back to you shortly</p>
+                                </div>
+                                <ul class="contact-list contact-list-s2 gutter-30px">
+                                    <!-- <li class="animated" data-animate="fadeInUp" data-delay=".3">
+                                        <em class="contact-icon fas fa-phone"></em>
+                                        <div class="contact-text">
+                                            <span>+44 0123 xxxx</span>
+                                        </div>
+                                    </li> -->
+                                    <li class="animated" data-animate="fadeInUp" data-delay=".4">
+                                        <em class="contact-icon fas fa-envelope"></em>
+                                        <div class="contact-text">
+                                            <a href="mailto:pics@pic.trade"><span>pics@pic.trade</span></a>
+                                        </div>
+                                    </li>
+                                    <li class="animated" data-animate="fadeInUp" data-delay=".5">
+                                        <em class="contact-icon fas fa-paper-plane"></em>
+                                        <div class="contact-text">
+                                            <a href="https://t.me/joinchat/Dsc9CLgb5JxkMjM1"><span>Join us on Telegram</span></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div><!-- .col -->
+                            <div class="col-lg-7">
+                                <div class="bg-light round animated" data-animate="fadeInUp" data-delay=".6">
+                                    <form id="contact-form" class="contact-form contact-form-s2 boxed boxed-md nk-form-submit" action="form/contact.php" method="post">
+                                        <div class="field-item field-item-s2">
+                                            <input name="contact-name" type="text" class="input-bordered input-bordered-lg input-bordered-light required" placeholder="Your Name">
+                                        </div>
+                                        <div class="field-item field-item-s2">
+                                            <input name="contact-email" type="email" class="input-bordered input-bordered-lg  input-bordered-light required email" placeholder="Your Email">
+                                        </div>
+                                        <div class="field-item field-item-s2">
+                                            <textarea name="contact-message" class="input-bordered input-bordered-lg input-bordered-light input-textarea required" placeholder="Your Message"></textarea>
+                                        </div>
+                                        <input type="text" class="d-none" name="form-anti-honeypot" value="">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <button type="submit" class="btn btn-md btn-primary">Submit</button>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-results"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div><!-- .col -->
+                        </div><!-- .row -->
+                    </div><!-- .block @e -->
+                </div>
+            </section>
+            <!-- // -->
+            <section class="section section-s bg-light">
+                <div class="container">
+                    <!-- Block @s -->
+                    <div class="nk-block block-partners">
+                        <div class="section-head section-head-sm">
+                            <h6 class="title-md title-thin text-center animated" data-animate="fadeInUp" data-delay=".1">Our Partners</h6>
+                        </div>
+                        <ul class="partner-list flex-lg-nowrap mgb-m30">
+                            <li class="partner-logo-s3 animated" data-animate="fadeInUp" data-delay=".15"><img src="images/partners/a-xs.png" alt="partner"></li>
+                            <li class="partner-logo-s3 animated" data-animate="fadeInUp" data-delay=".2"><img src="images/partners/b-xs.png" alt="partner"></li>
+                            <li class="partner-logo-s3 animated" data-animate="fadeInUp" data-delay=".25"><img src="images/partners/c-xs.png" alt="partner"></li>
+                            <li class="partner-logo-s3 animated" data-animate="fadeInUp" data-delay=".3"><img src="images/partners/d-xs.png" alt="partner"></li>
+                            <li class="partner-logo-s3 animated" data-animate="fadeInUp" data-delay=".35"><img src="images/partners/e-xs.png" alt="partner"></li>
+                            <li class="partner-logo-s3 animated" data-animate="fadeInUp" data-delay=".4"><img src="images/partners/f-xs.png" alt="partner"></li>
+                        </ul>
+                    </div>
+                    <!-- Block @e -->
+                </div>
+            </section>
+        </main>
+        <footer class="nk-footer bg-theme ov-h overlay-x fw-4">
+            <section class="section section-m  tc-light tc-light-alt bg-transparent">
+                <div class="container">
+                    <!-- Block @s -->
+                    <div class="nk-block nk-block-footer">
+                        <div class="row justify-content-between text-center text-sm-left">
+                            <div class="col-lg-3 col-md-4 col-sm-5">
+                                <div class="wgs wgs-menu">
+                                    <h6 class="wgs-title text-white animated" data-animate="fadeInUp" data-delay=".1">Information</h6>
+                                    <div class="wgs-body">
+                                        <ul class="wgs-list mt-3 animated" data-animate="fadeInUp" data-delay=".2">
+                                            <li>PICS Crypto Token</li>
+                                           <!-- <li>2237 Gnatty Creek Road <br> Huntington, NY 11743</li>-->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-2 col-md-4 col-sm-3">
+                                <div class="wgs wgs-menu">
+                                    <h6 class="wgs-title text-white animated" data-animate="fadeInUp" data-delay=".3">Resorces</h6>
+                                    <div class="wgs-body">
+                                        <ul class="wgs-links wgs-links-s3 animated" data-animate="fadeInUp" data-delay=".4">
+                                            <li><a href="#">Whitepaper</a></li>
+                                            <li><a href="#">One Pager</a></li>
+                                            <li><a href="#">Market Research</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-2 col-md-4 col-sm-3">
+                                <div class="wgs wgs-menu">
+                                    <h6 class="wgs-title text-white animated" data-animate="fadeInUp" data-delay=".5">Company</h6>
+                                    <div class="wgs-body">
+                                        <ul class="wgs-links wgs-links-s3 animated" data-animate="fadeInUp" data-delay=".6">
+                                            <li><a href="#">Home</a></li>
+                                            <li><a href="#">Tokens</a></li>
+                                            <li><a href="#">Team</a></li>
+                                            <li><a href="#">Roadmap</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-4 col-md-8 offset-lg-1">
+                                <div class="wgs wgs-text">
+                                    <div class="wgs-logo animated" data-animate="fadeInUp" data-delay=".7">
+                                        <a href="./">
+                                            <img src="images/logo-white.png" srcset="images/logo-white.png" alt="logo">
+                                        </a>
+                                    </div>
+                                    <div class="wgs-body">
+                                        <div class="wgs-subscribe wgs-subscribe-s2">
+                                            <p class="animated" data-animate="fadeInUp" data-delay=".8">PICS Crypto 2021</p>
+                                            <ul class="social pt-2">
+                                                <li class="animated" data-animate="fadeInUp" data-delay="1.65"><a href="https://t.me/joinchat/Dsc9CLgb5JxkMjM1" target="_blank"><em class="social-icon fas fa-paper-plane"></em></a></li>
+                                                    <li class="animated" data-animate="fadeInUp" data-delay="1.7"><a href="#"><em class="social-icon fab fa-facebook-f"></em></a></li>
+                                                    <li class="animated" data-animate="fadeInUp" data-delay="1.75"><a href="https://twitter.com/pics_network" target="_blank"><em class="social-icon fab fa-twitter"></em></a></li>
+                                                  <li class="animated" data-animate="fadeInUp" data-delay="1.8"><a href="https://www.youtube.com/channel/UCVYXHHAyyRetzXhH2CYn0cw" target="_blank"><em class="social-icon fab fa-github"></em></a></li>
+                                                <!-- <li class="animated" data-animate="fadeInUp" data-delay="1.1"><a href="#"><em class="social-icon fab fa-bitcoin"></em></a></li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                        </div><!-- .row -->
+                        <div class="footer-bottom pdt-r">
+                            <div class="copyright-text copyright-text-s1 text-center text-sm-left text-lg-center">
+                                <p>&copy; 2020 PICS Crypto Template. Template Made by <a href="./">PICS</a>  <a class="ml-4" href="./">Privacy policy</a></p>
+                            </div>
+                        </div>
+                    </div><!-- .block @e -->
+                </div>
+            </section>
+        </footer>
+	</div>
+	
+	<div class="preloader"><span class="spinner spinner-round"></span></div>
+	
+	<!-- Modal -->
+<div class="modal fade" id="ModalWallet" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+            <div id="btnWalletConnect"><img src="https://miro.medium.com/max/797/0*maYCNWMWVjyEJU7r" style="width: 100%;"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+ <script type="text/javascript" src="/assets/js/scripts.js?ver=1930"></script>
+    <script type="text/javascript" src="/assets/js/charts.js?ver=1930"></script>
+    <script type="text/javascript" src="/assets/js/web3.js?ver=1930"></script>
+    <script type="text/javascript" src="/assets/js/web3modal.js?ver=1930"></script>
+    <script type="text/javascript" src="/assets/js/evm-chains.js?ver=1930"></script>
+    <script type="text/javascript" src="/assets/js/web3-provider.js"></script>
+    <script type="text/javascript" src="/assets/js/web3setup.js?ver=1930"></script>
+    <script type="text/javascript"  src="/assets/js/apps.js?ver=1930"></script>
+</body>
+
+</html>
