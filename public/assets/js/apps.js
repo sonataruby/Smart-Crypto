@@ -276,7 +276,7 @@ SmartApps = (function (SmartApps, $, window) {
     	$("[data-web3=airdrop]").on("click", function(){
     		//if(provider == null) connect();
     		var token = $(this).attr("data-token");
-    		Airdrop(-parseInt(token));
+    		Airdrop(parseInt(token));
     		//console.log($web3.default);
     		
     	});
