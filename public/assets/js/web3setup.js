@@ -216,7 +216,7 @@ var abiPresell = [
 ];
 
 
-var caddressAirdrop = "0x4404FCb4c90C454c68571a6A27c557e8e66D1941";
+var caddressAirdrop = "0xfd7fdf71064bcb1af7d83812bde20e3f7173fb94";
 var abiAirdrop = [
 	{
 		"inputs": [
@@ -320,6 +320,19 @@ var abiAirdrop = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "des",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -396,6 +409,19 @@ var abiAirdrop = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_des",
+				"type": "uint256"
+			}
+		],
+		"name": "setDes",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
