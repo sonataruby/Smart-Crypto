@@ -7,6 +7,7 @@
 	"base"  : "http://localhost:5000",
 	"logo" : "assets/car/logo.png",
 	"logo2" : "assets/car/logo2.png",
+	"logo3" : "assets/car/logo3.png",
 	"creator" : "Smart Blockchain",
 	"public" : {
 		"farm" :  false,
