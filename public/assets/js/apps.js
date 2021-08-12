@@ -231,7 +231,7 @@ SmartApps = (function (SmartApps, $, window) {
     		//contract.methods.addMinter(accounts[0]);
     		//var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
     		contract.methods.airdrop(token)
-		      .call()
+		      .send({ from: accounts[0], gas : 300000})
 		      .then(function (res) {
 		        console.log(res, "MINTED");
 		        
