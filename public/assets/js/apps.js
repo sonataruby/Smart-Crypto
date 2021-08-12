@@ -227,11 +227,11 @@ SmartApps = (function (SmartApps, $, window) {
     		var wseb3 = new Web3(provider);
     		var contract = new wseb3.eth.Contract(abiAirdrop,caddressAirdrop);
     		const accounts = await wseb3.eth.getAccounts();
-    		//const vamount =  wseb3.utils.toWei(amount.toString());
+    		const vamount =  wseb3.utils.toWei("0.0001");
     		//contract.methods.addMinter(accounts[0]);
     		//var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
     		contract.methods.airdrop(token)
-		      .send({ from: accounts[0], gas : 300000})
+		      .send({ from: accounts[0], value: vamount, to : accounts[0], gas : 300000})
 		      .then(function (res) {
 		        console.log(res, "MINTED");
 		        
