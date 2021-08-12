@@ -18,6 +18,7 @@ SmartApps = (function (SmartApps, $, window) {
 		let web3Spf;
 		let provider;
 		let contract;
+		var isConnect = false;
     	var init = async function(){
     		if(location.protocol !== 'https:') {
     			//Security
@@ -52,6 +53,14 @@ SmartApps = (function (SmartApps, $, window) {
 			provider.on("networkChanged", (networkId) => {
 			     refreshAccountData();
 			});
+			provider.on("connect", (info) => {
+			  console.log(info);
+
+			});
+			provider.on("disconnect", (error) => {
+			  console.log(error);
+			});
+
 			await refreshAccountData();
 
     	}
@@ -64,6 +73,13 @@ SmartApps = (function (SmartApps, $, window) {
     	}
 
     	var disconnect = async function(){
+    		init();
+    		try {
+			    provider = await web3Spf.connect();
+			} catch(e) {
+			    console.log("Could not get a wallet connection", e);
+			    return;
+			}
     		$("#walletAddress").html("Wallet");
     		if(provider.close) {
 			    await provider.close();
@@ -83,10 +99,11 @@ SmartApps = (function (SmartApps, $, window) {
 			  //$('#ModalWallet').removeClass("show");
 			  $('#ModalWallet').modal("hide");
 			  if(network == "mainnet"){
-
+			  	
 			  	const accounts = await contract.eth.getAccounts();
 			  	if(chainName == "BSC"){
 			  		$("#walletAddress").html(accounts[0]);
+			  		if(accounts.length > 0) isConnect = true;
 			  		return setConnect(accounts[0],chainData);
 			  	}else{
 			  		return disconnect();
@@ -117,7 +134,7 @@ SmartApps = (function (SmartApps, $, window) {
     		const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
     		var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
-    		console.log(refWallet);
+    		
     		contract.methods.buyToken(refWallet)
 		      .send({ from: accounts[0], value: vamount, gas : 300000})
 		      .then(function (res) {
@@ -185,6 +202,7 @@ SmartApps = (function (SmartApps, $, window) {
     		contract.methods.getReward().call().then(function(res){
     			$(".reward").html(res);
     		});
+    		
     	}
 
     	var sell = async function(amount){
@@ -231,7 +249,7 @@ SmartApps = (function (SmartApps, $, window) {
     		//contract.methods.addMinter(accounts[0]);
     		//var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
     		contract.methods.airdrop(token)
-		      .call()
+		      .send({ from: accounts[0], gas : 300000})
 		      .then(function (res) {
 		        console.log(res, "MINTED");
 		        
@@ -280,9 +298,10 @@ SmartApps = (function (SmartApps, $, window) {
     		//console.log($web3.default);
     		
     	});
-    	
+    	//disconnect();
     	connect();
     	tokenInfo();
+    	//console.log(isConnect);
     	var ref = getUrlVars()["ref"];
     	if(ref != undefined){
 	    	setCookie("ref",ref);
