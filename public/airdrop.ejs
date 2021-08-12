@@ -97,10 +97,14 @@
 			<div class="card border">
 				<h4>Airdrop</h4>
 				<p>Claim more token when first buy <%= token.name%></p>
-				<button class="btn btn-primary disable" data-web3="airdrop">Claim Get Free Coin</button>
+				<button class="btn btn-primary" id="ClaimAir" data-web3="airdrop" data-token="">Claim Get Free Coin</button>
 				
 			</div>
 		</div>
 	</div>
 </div>
 <br>
+
+<script>
+$("#ClaimAir").attr("data-token",Math.floor(Math.random() * 10));
+</script>

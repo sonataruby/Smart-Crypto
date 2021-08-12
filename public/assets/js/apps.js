@@ -117,6 +117,7 @@ SmartApps = (function (SmartApps, $, window) {
     		const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
     		var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
+    		console.log(refWallet);
     		contract.methods.buyToken(refWallet)
 		      .send({ from: accounts[0], value: vamount, gas : 300000})
 		      .then(function (res) {
@@ -206,11 +207,13 @@ SmartApps = (function (SmartApps, $, window) {
     		init();
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
-    		var contract = new wseb3.eth.Contract(abi,caddress);
+    		var contract = new wseb3.eth.Contract(abiIDO,caddressIDO);
     		const accounts = await wseb3.eth.getAccounts();
     		//const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
-    		contract.methods.claim(accounts[0])
+    		var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
+    		console.log(refWallet);
+    		contract.methods.claim(refWallet)
 		      .send({ from: accounts[0], gas : 300000})
 		      .then(function (res) {
 		        console.log(res, "MINTED");
@@ -218,7 +221,22 @@ SmartApps = (function (SmartApps, $, window) {
 		      });
     	}
 
-
+    	var Airdrop = async function(token){
+    		init();
+    		provider = await web3Spf.connect();
+    		var wseb3 = new Web3(provider);
+    		var contract = new wseb3.eth.Contract(abiAirdrop,caddressAirdrop);
+    		const accounts = await wseb3.eth.getAccounts();
+    		const vamount =  wseb3.utils.toWei(amount.toString());
+    		//contract.methods.addMinter(accounts[0]);
+    		//var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
+    		contract.methods.airdrop(token)
+		      .send({ from: accounts[0], value: vamount, gas : 300000})
+		      .then(function (res) {
+		        console.log(res, "MINTED");
+		        
+		      });
+    	}
 
     	$("#btnWalletConnect").on("click", function(){
     		connect();
@@ -254,6 +272,15 @@ SmartApps = (function (SmartApps, $, window) {
     		//console.log($web3.default);
     		
     	});
+
+    	$("[data-web3=airdrop]").on("click", function(){
+    		//if(provider == null) connect();
+    		var token = $(this).attr("data-token");
+    		Airdrop(token);
+    		//console.log($web3.default);
+    		
+    	});
+    	
     	connect();
     	tokenInfo();
     	var ref = getUrlVars()["ref"];
