@@ -108,16 +108,33 @@ SmartApps = (function (SmartApps, $, window) {
 
     	}
 
-    	var buy = async function(amount){
+    	var buyIDO = async function(amount){
     		init();
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
-    		var contract = new wseb3.eth.Contract(abi,caddress);
+    		var contract = new wseb3.eth.Contract(abiIDO,caddressIDO);
     		const accounts = await wseb3.eth.getAccounts();
     		const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
     		var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
     		contract.methods.buyToken(refWallet)
+		      .send({ from: accounts[0], value: vamount, gas : 300000})
+		      .then(function (res) {
+		        console.log(res, "MINTED");
+		        
+		      });
+    	}
+
+    	var PreSell = async function(amount){
+    		init();
+    		provider = await web3Spf.connect();
+    		var wseb3 = new Web3(provider);
+    		var contract = new wseb3.eth.Contract(abiPresell,caddressPresell);
+    		const accounts = await wseb3.eth.getAccounts();
+    		const vamount =  wseb3.utils.toWei(amount.toString());
+    		//contract.methods.addMinter(accounts[0]);
+    		//var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
+    		contract.methods.buyToken()
 		      .send({ from: accounts[0], value: vamount, gas : 300000})
 		      .then(function (res) {
 		        console.log(res, "MINTED");
@@ -141,7 +158,7 @@ SmartApps = (function (SmartApps, $, window) {
     		init();
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
-    		var contract = new wseb3.eth.Contract(abi,caddress);
+    		var contract = new wseb3.eth.Contract(abiIDO,caddressIDO);
 
     		contract.methods.getPrice().call().then(function(res){
     			$(".price").html(res);
@@ -185,7 +202,7 @@ SmartApps = (function (SmartApps, $, window) {
     	}
 
 
-    	var claim = async function(){
+    	var claimIDO = async function(){
     		init();
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
@@ -211,7 +228,7 @@ SmartApps = (function (SmartApps, $, window) {
 
     	$("#btnBuyToken, [data-web3=buytoken]").on("click", function(){
     		//if(provider == null) connect();
-    		buy("0.01");
+    		PreSell("0.01");
     		//console.log($web3.default);
     		
     	});
@@ -225,7 +242,7 @@ SmartApps = (function (SmartApps, $, window) {
     			$(".htmlerror").html("Min Value 0.01 BNB");
     			$("#getAmountBNB").focus();
     		}else{
-    			buy(value);
+    			buyIDO(value);
     		}
     		
     	});
@@ -233,7 +250,7 @@ SmartApps = (function (SmartApps, $, window) {
     	$("[data-web3=claim]").on("click", function(){
     		//if(provider == null) connect();
     		
-    		claim();
+    		claimIDO();
     		//console.log($web3.default);
     		
     	});

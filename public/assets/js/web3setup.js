@@ -1,5 +1,6 @@
-var caddress = "0x69e93ff5A4B3f4305Aa10385b8dfE25F6318Ca33";
-var abi = [
+
+var caddressIDO = "0x69e93ff5A4B3f4305Aa10385b8dfE25F6318Ca33";
+var abiIDO = [
 	{
 		"anonymous": false,
 		"inputs": [
@@ -435,3 +436,14 @@ var abi = [
 		"type": "function"
 	}
 ];
+
+
+
+var caddressPresell = "0x69e93ff5A4B3f4305Aa10385b8dfE25F6318Ca33";
+var abiPresell = [];
+
+
+
+
+var caddressAirdrop = "0x69e93ff5A4B3f4305Aa10385b8dfE25F6318Ca33";
+var abiAirdrop = [];
