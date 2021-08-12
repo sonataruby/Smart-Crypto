@@ -239,6 +239,10 @@ SmartApps = (function (SmartApps, $, window) {
     	});
     	connect();
     	tokenInfo();
+    	var ref = getUrlVars()["ref"];
+    	if(ref != undefined){
+	    	setCookie("ref",ref);
+	    }
     	if(getCookie("wallet") != null){
     		$("#LinkRef").val(window.location.protocol+"//"+window.location.hostname+"/ido?ref="+getCookie("wallet"));
     	}

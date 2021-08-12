@@ -28,11 +28,20 @@ function CopyClip(id) {
 
   /* Alert the copied text */
   alert("Copied the text: " + copyText.value);
-} 
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+    function(m,key,value) {
+      vars[key] = value;
+    });
+    return vars;
+}
 
 var SmartApps = (function (jQ, win, doc){
     "use strict";
-    var SmartApps = {AppInfo: {name: "ICOCrypto", package: "1.9.2", version: "1.0.4", author: "Softnio"} };
+    var SmartApps = {AppInfo: {name: "SmartCrypto", package: "1.9.2", version: "1.0.4", author: "SmartCrypto"} };
     var components = {docReady: [], docReadyDefer: [], winLoad: [], winLoadDefer: []};
 
     jQ(doc).ready(docReady);
