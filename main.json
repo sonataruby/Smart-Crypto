@@ -5,9 +5,9 @@
 	"banner" : "assets/car/banner.png",
 	"icoin" : "assets/ico",
 	"base"  : "http://localhost:5000",
-	"logo" : "assets/car/logo.png",
-	"logo2" : "assets/car/logo2.png",
-	"logo3" : "assets/car/logo3.png",
+	"logo" : "assets/vgame/logo.png",
+	"logo2" : "assets/vgame/logo2.png",
+	"logo3" : "assets/vgame/logo3.png",
 	"creator" : "Smart Blockchain",
 	"copyright" : "CryptoCar - NFT Game Play 2021",
 	"public" : {
@@ -20,7 +20,7 @@
 		"ntfmarket" : false
 	},
 	"token" : {
-		"name" : "CAR",
+		"name" : "iGAME",
 		"supply" : "10.000.000",
 		"price" : "0.02",
 		"presell_date" : "2021/09/31",
