@@ -27,7 +27,7 @@ app.set('view engine', 'ejs');
 app.use(EJSLayout);
 
 app.get("/", (req, res) => {
- app.set('layout', './home')
+ app.set('layout', './layout/home')
  const dataMain = readJSONFile('main.json');
  
  res.render("index",dataMain);
@@ -35,44 +35,55 @@ app.get("/", (req, res) => {
 
 app.get("/ido", (req, res) => {
  const dataMain = readJSONFile('main.json');
- app.set('layout', './pages');
+ app.set('layout', './layout/pages');
  res.render(dataMain.public.ido == true ? "ido" : "coming",dataMain);
 });
 
 app.get("/farm", (req, res) => {
  const dataMain = readJSONFile('main.json');
- app.set('layout', './pages');
+ app.set('layout', './layout/pages');
  res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
 });
 
 app.get("/staking", (req, res) => {
  const dataMain = readJSONFile('main.json');
- app.set('layout', './pages');
+ app.set('layout', './layout/pages');
  res.render(dataMain.public.staking == true ? "staking" : "coming",dataMain);
 });
 
 
 app.get("/gallery", (req, res) => {
- app.set('layout', './pages');
+ app.set('layout', './layout/pages');
  const dataMain = readJSONFile('main.json');
  dataMain.pages = { name : dataMain.staking.title, description : dataMain.staking.description};
  res.render("gallery",dataMain);
 });
 
 
+app.get("/airdrop", (req, res) => {
+ const dataMain = readJSONFile('main.json');
+ app.set('layout', './layout/pages');
+ res.render(dataMain.public.airdrop == true ? "airdrop" : "coming",dataMain);
+});
+
+app.get("/ntfmarket", (req, res) => {
+ const dataMain = readJSONFile('main.json');
+ app.set('layout', './layout/pages');
+ res.render(dataMain.public.ntfmarket == true ? "ntfmarket" : "coming",dataMain);
+});
 
 
 
 app.get("/game", (req, res) => {
  const dataMain = readJSONFile('main.json');
- app.set('layout', './pages');
+ app.set('layout', './layout/pages');
  res.render(dataMain.public.game == true ? "game" : "coming",dataMain);
 });
 
 app.get("/token", (req, res) => {
  const dataMain = readJSONFile('main.json');
 
- app.set('layout', './pages');
+ app.set('layout', './layout/pages');
  res.render("token",dataMain);
 });
 

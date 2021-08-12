@@ -108,3 +108,4 @@ data/postgres
 data/ipfs
 #truffle-config.js
 vps.txt
+public/layout/*

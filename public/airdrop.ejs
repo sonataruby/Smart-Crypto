@@ -1,0 +1,106 @@
+<section class="bg-white border-bottom" style="margin-bottom:30px; padding-top:15px; padding-bottom:15px;">
+    <div class="container">
+    	<h4><%= token.name %> IDO Infomation</h4>
+        <div class="nk-block nk-block-token">
+            <div class="row align-items-center justify-content-between gutter-vr-30px">
+                <div class="col-lg-6">
+                    <div class="row gutter-vr-30px">
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class="title title-s6 title-xs-s2">Start</h6>
+                                <p class="timestart">Feb 8, 2018 (9:00AM GMT)</p>
+                            </div>
+                        </div><!-- .col  -->
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class="title title-s6 title-xs-s2">Number of tokens for sale</h6>
+                                <p><span class="totalSub"></span> <%- token.name%> (<%= token.presell_rate%>)</p>
+                            </div>
+                        </div><!-- .col  -->
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class="title title-s6 title-xs-s2">End</h6>
+                                <p class="timeend">Feb 20, 2018 (11:00AM GMT)</p>
+                            </div>
+                        </div><!-- .col  -->
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class="title title-s6 title-xs-s2">Tokens exchange rate</h6>
+                                <p>1 BNB = <span class="price"></span> <%- token.name%></p>
+                            </div>
+                        </div><!-- .col  -->
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class="title title-s6 title-xs-s2">Acceptable currencies</h6>
+                                <p>BNB</p>
+                            </div>
+                        </div><!-- .col  -->
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class="title title-s6 title-xs-s2">Minimal transaction</h6>
+                                <p class="minpay">0.01 BNB</p>
+                            </div>
+                        </div><!-- .col  -->
+                    </div><!-- .row  -->
+                </div>
+                <div class="col-lg-5">
+                    <div class="token-status token-status-s5 bg-light-alt round no-bd">
+                        <div class="token-box token-box-s3">
+                            <div class="countdown-s3 countdown-s4 countdown" data-date="2021/08/10"></div>
+                        </div>
+                        <div class="token-action">
+                            <a class="btn btn-md btn-round btn-grad" href="<%= token.contract %>">Token Contracts</a>
+                        </div>
+                        <ul class="icon-list">
+                            <li><em class="fab fa-bitcoin"></em></li>
+                            <li><em class="fas fa-won-sign"></em></li>
+                            <li><em class="fab fa-cc-visa"></em></li>
+                            <li><em class="fab fa-cc-mastercard"></em></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .block @e -->
+    </div>
+</section>
+<br>
+<div class="container">
+	<div class="border p-4">
+	<div class="input-group mb-3">
+	  <input type="text" class="form-control" id="LinkRef" placeholder="Link Ref" aria-label="Recipient's username" aria-describedby="basic-addon2">
+	  <div class="input-group-append">
+	    <span class="input-group-text" id="basic-addon2" onClick="CopyClip('LinkRef')">Copy Link</span>
+	  </div>
+	</div>
+
+	Send link ref get free 10% <%= token.name %>
+	<div>1 <%= token.name %> = <span class="pricebnb"></span> BNB</div>
+	</div>
+</div>
+<br>
+<div class="container">
+	
+	<div class="row">
+		<div class="col-6">
+		<div class="card border">
+			<h4><%= token.name %> Airdrop Ruler </h4>
+			
+			1. Share Tiwter (Check)<br>
+			2. Share Facebook  (Check)<br>
+			3. Sub Youtube  (Check)<br>
+			4. Join Telegram Group  (Check)<br>
+			5. Join Telegram Channel <br>
+		</div>
+		</div>
+
+		<div class="col-6">
+			<div class="card border">
+				<h4>Airdrop</h4>
+				<p>Claim more token when first buy <%= token.name%></p>
+				<button class="btn btn-primary disable" data-web3="airdrop">Claim Get Free Coin</button>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<br>

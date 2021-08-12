@@ -185,7 +185,7 @@ SmartApps = (function (SmartApps, $, window) {
     	}
 
 
-    	var airdrop = async function(){
+    	var claim = async function(){
     		init();
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
@@ -199,8 +199,6 @@ SmartApps = (function (SmartApps, $, window) {
 		        console.log(res, "MINTED");
 		        
 		      });
-    		
-    		
     	}
 
 
@@ -232,10 +230,10 @@ SmartApps = (function (SmartApps, $, window) {
     		
     	});
 
-    	$("[data-web3=airdrop]").on("click", function(){
+    	$("[data-web3=claim]").on("click", function(){
     		//if(provider == null) connect();
     		
-    		airdrop();
+    		claim();
     		//console.log($web3.default);
     		
     	});

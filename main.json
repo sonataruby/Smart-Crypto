@@ -13,7 +13,9 @@
 		"staking" : false,
 		"game" : false,
 		"ido" : true,
-		"gallery" : true
+		"gallery" : true,
+		"airdrop" : true,
+		"ntfmarket" : false
 	},
 	"token" : {
 		"name" : "CAR",
@@ -31,7 +33,7 @@
 		"youtube" : "https://www.youtube.com/watch?v=i0wXxBynPAY",
 		"sell_link" : "",
 		"buy_link" : "",
-		"youtube" : "i0wXxBynPAY",
+		"youtube" : "i0wXxBynPAY"
 
 	},
 	"roadmap":{
