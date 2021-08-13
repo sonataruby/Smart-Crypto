@@ -35,31 +35,64 @@
 		"youtube" : "https://www.youtube.com/watch?v=i0wXxBynPAY",
 		"sell_link" : "",
 		"buy_link" : "",
-		"youtube" : "i0wXxBynPAY"
+		"youtube" : "i0wXxBynPAY",
+		"detail_header" : [{
+			"span" : "Tokens Offered",
+			"h5" : "20M"
+		},{
+			"span" : "Soft Cap (Public ICO)",
+			"h5" : "$4M"
+		},{
+			"span" : "Hard Cap",
+			"h5" : "20 million"
+		},{
+			"span" : "Tokens Distributed",
+			"h5" : "30 days after token sale ends"
+		}],
+		"detail_content" : [{
+			"title" : "Token Sale I",
+			"time" : "January 15- February 15",
+			"bonus" : "67% Bonus",
+			"price" : "0.02$"
+		},{
+			"title" : "Token Sale II",
+			"time" : "March 01 - March 15",
+			"bonus" : "40% Bonus",
+			"price" : "0.02$"
+		},{
+			"title" : "Token Sale III",
+			"time" : "March 25- April 15",
+			"bonus" : "20% Bonus",
+			"price" : "0.02$"
+		},{
+			"title" : "Token Sale IV",
+			"time" : "April 20- May 20",
+			"bonus" : "50% Bonus",
+			"price" : "0.02$"
+		}]
 
 	},
-	"roadmap":{
-		"s1" : {
-			"title" : "",
-			"time" : "",
-			"description" : ""
-		},
-		"s2" : {
-			"title" : "",
-			"time" : "",
-			"description": ""
-		},
-		"s3" : {
-			"title" : "",
-			"time" : "",
-			"description": ""
-		},
-		"s4" : {
-			"title" : "",
-			"time" : "",
-			"description": ""
-		}
-	},
+	"roadmap":[{
+		"time" : "Q1 2021",
+		"title" : "Concept",
+		"concept" : "Concept Generation",
+		"team" : "Team Assemble"
+	},{
+		"time" : "Q2 2021",
+		"title" : "Concept",
+		"concept" : "Concept Generation",
+		"team" : "Team Assemble"
+	},{
+		"time" : "Q3 2021",
+		"title" : "Concept",
+		"concept" : "Concept Generation",
+		"team" : "Team Assemble"
+	},{
+		"time" : "Q4 2021",
+		"title" : "Concept",
+		"concept" : "Concept Generation",
+		"team" : "Team Assemble"
+	}],
 	"main" : {
 		"videoimage" : "/assets/car/video.png"
 	},
@@ -124,7 +157,43 @@
 		"description" : "NTF CAR 15 MINT",
 		"url" : "/images/gallery/CAR 15.jpg"
 	}],
-	"tearm" : "",
+	"tearm" : [{
+		"avatar" : "images/team/sq-a.jpg",
+		"name" : "Waylon Dalton",
+		"title" : "CEO &amp; Lead Blockchain",
+		"description" : "He is a great man to work Lorem ipsum dolor sit amet, consec tetur adipis icing elit. Simi lique, autem.\nTenetur quos facere magnam volupt ates quas esse Sedrep ell endus mole stiae tates quas esse Sed repell endus molesti aela uda ntium quis quam iusto minima thanks.",
+		"facebook" : "",
+		"tiwter" : "",
+		"youtube" : ""
+
+	},{
+		"avatar" : "images/team/sq-a.jpg",
+		"name" : "Waylon Dalton",
+		"title" : "CEO &amp; Lead Blockchain",
+		"description" : "He is a great man to work Lorem ipsum dolor sit amet, consec tetur adipis icing elit. Simi lique, autem.\nTenetur quos facere magnam volupt ates quas esse Sedrep ell endus mole stiae tates quas esse Sed repell endus molesti aela uda ntium quis quam iusto minima thanks.",
+		"facebook" : "",
+		"tiwter" : "",
+		"youtube" : ""
+
+	},{
+		"avatar" : "images/team/sq-a.jpg",
+		"name" : "Waylon Dalton",
+		"title" : "CEO &amp; Lead Blockchain",
+		"description" : "He is a great man to work Lorem ipsum dolor sit amet, consec tetur adipis icing elit. Simi lique, autem.\nTenetur quos facere magnam volupt ates quas esse Sedrep ell endus mole stiae tates quas esse Sed repell endus molesti aela uda ntium quis quam iusto minima thanks.",
+		"facebook" : "",
+		"tiwter" : "",
+		"youtube" : ""
+
+	},{
+		"avatar" : "images/team/sq-a.jpg",
+		"name" : "Waylon Dalton",
+		"title" : "CEO &amp; Lead Blockchain",
+		"description" : "He is a great man to work Lorem ipsum dolor sit amet, consec tetur adipis icing elit. Simi lique, autem.\nTenetur quos facere magnam volupt ates quas esse Sedrep ell endus mole stiae tates quas esse Sed repell endus molesti aela uda ntium quis quam iusto minima thanks.",
+		"facebook" : "",
+		"tiwter" : "",
+		"youtube" : ""
+
+	}],
 	"staking" : {
 		"title" : "Staking Program",
 		"description" : ""
