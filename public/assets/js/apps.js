@@ -117,6 +117,7 @@ SmartApps = (function (SmartApps, $, window) {
 
     	var refreshAccountData = async function(){
     		contract = new Web3(provider);
+
   			const chainId = await contract.eth.getChainId();
 			  // Load chain information over an HTTP API
 			  const chainData = evmChains.getChain(chainId);
@@ -139,6 +140,7 @@ SmartApps = (function (SmartApps, $, window) {
 			  }else{
 			  	const accounts = await contract.eth.getAccounts();
 			  	if(chainName == "BSC"){
+			  		
 			  		return setConnect(accounts[0],chainData);
 			  	}else{
 			  		return disconnect();
@@ -146,6 +148,22 @@ SmartApps = (function (SmartApps, $, window) {
 			  }
 			  
 			 
+    	}
+
+    	var addToWallet = async function(TokenAddress, tokenSymbol, tokenDecimals, tokenImage){
+    		// wasAdded is a boolean. Like any RPC method, an error may be thrown.
+			  const wasAdded = await ethereum.request({
+			    method: 'wallet_watchAsset',
+			    params: {
+			      type: 'ERC20', // Initially only supports ERC20, but eventually more!
+			      options: {
+			        address: TokenAddress, // The address that the token is at.
+			        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+			        decimals: tokenDecimals, // The number of decimals in the token
+			        image: tokenImage, // A string url of the token logo
+			      },
+			    },
+			  });
     	}
 
     	var mint = async function(){
@@ -380,6 +398,15 @@ SmartApps = (function (SmartApps, $, window) {
     		Airdrop(parseInt(token));
     		//console.log($web3.default);
     		
+    	});
+
+    	$("[data-web3=addwatch]").on("click", function(){
+    		var TokenAddress = $(this).attr("data-address");
+    		var tokenSymbol = $(this).attr("data-symbol");
+    		var tokenDecimals = $(this).attr("data-dec");
+    		var tokenImage = $(this).attr("data-logo");
+    		console.log(tokenImage);
+    		addToWallet(TokenAddress, tokenSymbol, tokenDecimals, tokenImage);
     	});
     	//disconnect();
     	connect();
