@@ -110,3 +110,4 @@ data/ipfs
 vps.txt
 public/layout/*
 abi/*
+public/assets/js/web3setup.js

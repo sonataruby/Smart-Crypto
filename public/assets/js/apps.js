@@ -161,9 +161,9 @@ SmartApps = (function (SmartApps, $, window) {
     		const accounts = await wseb3.eth.getAccounts();
     		const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
-    		var refWallet = getCookie("ref") == null || getCookie("ref") == undefined ? accounts[0] : getCookie("ref");
-    		if(refWallet == accounts[0]) refWallet = "0x845C91d87F662c1C3DdB2a2c5C10f583c63f5047";
-    		console.log(refWallet.length, " - "+refWallet);
+    		var refWallet = getCookie("ref") == null || getCookie("ref") == undefined ? MasterIDOWallet : getCookie("ref");
+    		if(refWallet == accounts[0] || refWallet.length < 40) refWallet = MasterIDOWallet;
+    		
     		contract.methods.buyToken(refWallet)
 		      .send({ from: accounts[0], value: vamount, gas : 300000})
 		      .then(function (res) {
@@ -261,8 +261,8 @@ SmartApps = (function (SmartApps, $, window) {
     		const accounts = await wseb3.eth.getAccounts();
     		//const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
-    		var refWallet = getCookie("ref") == null || getCookie("ref") == undefined ? accounts[0] : getCookie("ref");
-    		if(refWallet.length < 32) refWallet = accounts[0];
+    		var refWallet = getCookie("ref") == null || getCookie("ref") == undefined ? MasterIDOWallet : getCookie("ref");
+    		if(refWallet == accounts[0] || refWallet.length < 40) refWallet = MasterIDOWallet;
 
     		contract.methods.claim(refWallet)
 		      .send({ from: accounts[0], gas : 300000})
