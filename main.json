@@ -11,9 +11,9 @@
 	"creator" : "Smart Blockchain",
 	"copyright" : "CryptoCar - NFT Game Play 2021",
 	"public" : {
-		"farm" :  false,
-		"staking" : false,
-		"game" : false,
+		"farm" :  true,
+		"staking" : true,
+		"game" : true,
 		"ido" : true,
 		"gallery" : true,
 		"airdrop" : true,

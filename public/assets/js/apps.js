@@ -19,6 +19,28 @@ SmartApps = (function (SmartApps, $, window) {
 		let provider;
 		let contract;
 		var isConnect = false;
+		var isSwitchChain = false;
+
+		var loadJSON = function(filename) {   
+
+		    var xobj = new XMLHttpRequest();
+		        xobj.overrideMimeType("application/json");
+		    xobj.open('GET', "/abi/"+filename, true); // Replace 'my_data' with the path to your file
+		    xobj.onreadystatechange = function () {
+		          if (xobj.readyState == 4 && xobj.status == "200") {
+		            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+		            //callback(xobj.responseText);
+		             xobj.send(xobj.responseText);  
+		          }
+		    };
+		    xobj.send(null);  
+		}
+		var getabi = async function(filename) {
+		    // Parse JSON string into object
+		   return $.getJSON("/abi/"+filename);
+		   
+		}
+
     	var init = async function(){
     		if(location.protocol !== 'https:') {
     			//Security
@@ -34,8 +56,10 @@ SmartApps = (function (SmartApps, $, window) {
     	var connect = async function(){
     		init();
     		
+    		
 			try {
 			    provider = await web3Spf.connect();
+			    isConnect = true;
 			} catch(e) {
 			    console.log("Could not get a wallet connection", e);
 			    return;
@@ -54,11 +78,14 @@ SmartApps = (function (SmartApps, $, window) {
 			     refreshAccountData();
 			});
 			provider.on("connect", (info) => {
-			  console.log(info);
-
+			  if(info.chainId == 0x61){
+				  isSwitchChain = true;
+			  }
 			});
 			provider.on("disconnect", (error) => {
-			  console.log(error);
+			  if(error.code == 1013){
+			  	 isConnect = false;
+			  }
 			});
 
 			await refreshAccountData();
@@ -127,9 +154,10 @@ SmartApps = (function (SmartApps, $, window) {
 
     	var buyIDO = async function(amount){
     		init();
+    		var abi = await getabi("ido.json");
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
-    		var contract = new wseb3.eth.Contract(abiIDO,caddressIDO);
+    		var contract = new wseb3.eth.Contract(abiIDO,abi);
     		const accounts = await wseb3.eth.getAccounts();
     		const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
@@ -147,7 +175,8 @@ SmartApps = (function (SmartApps, $, window) {
     		init();
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
-    		var contract = new wseb3.eth.Contract(abiPresell,caddressPresell);
+    		var abi = await getabi("presell.json");
+    		var contract = new wseb3.eth.Contract(abi,caddressPresell);
     		const accounts = await wseb3.eth.getAccounts();
     		const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
@@ -176,7 +205,8 @@ SmartApps = (function (SmartApps, $, window) {
     		init();
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
-    		var contract = new wseb3.eth.Contract(abiIDO,caddressIDO);
+    		var abi = await getabi("ido.json");
+    		var contract = new wseb3.eth.Contract(abi,caddressIDO);
 
     		contract.methods.getPrice().call().then(function(res){
     			$(".price").html(res);
@@ -225,12 +255,13 @@ SmartApps = (function (SmartApps, $, window) {
     		init();
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
-    		var contract = new wseb3.eth.Contract(abiIDO,caddressIDO);
+    		var abi = await getabi("presell.json");
+    		var contract = new wseb3.eth.Contract(abi,caddressIDO);
     		const accounts = await wseb3.eth.getAccounts();
     		//const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
     		var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
-    		console.log(refWallet);
+    		
     		contract.methods.claim(refWallet)
 		      .send({ from: accounts[0], gas : 300000})
 		      .then(function (res) {
@@ -243,7 +274,8 @@ SmartApps = (function (SmartApps, $, window) {
     		init();
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
-    		var contract = new wseb3.eth.Contract(abiAirdrop,caddressAirdrop);
+    		var abi = await getabi("airdrop.json");
+    		var contract = new wseb3.eth.Contract(abi,caddressAirdrop);
     		const accounts = await wseb3.eth.getAccounts();
     		//const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
@@ -256,6 +288,55 @@ SmartApps = (function (SmartApps, $, window) {
 		      });
     	}
 
+    	var lpMining = async function(){
+    		init();
+    		provider = await web3Spf.connect();
+    		var wseb3 = new Web3(provider);
+    		var abi = await getabi("farm.json");
+    		var contract = new wseb3.eth.Contract(abi,caddressFarm);
+    		const accounts = await wseb3.eth.getAccounts();
+    	}
+
+    	var nftStaking = async function(){
+    		init();
+    		provider = await web3Spf.connect();
+    		var wseb3 = new Web3(provider);
+    		var abi = await getabi("staking.json");
+    		var contract = new wseb3.eth.Contract(abi,caddressFarm);
+    		const accounts = await wseb3.eth.getAccounts();
+    		var deposit = function(){
+
+    		}
+    		var claim = function(){
+
+    		}
+    	}
+
+    	var nftmarket = async function(){
+    		var buy = function(){
+
+    		}
+
+    		var sell = function(){
+
+    		}
+
+    		var item = function(){
+
+    		}
+    	} 
+
+    	var gamenft = function(){
+    		var mint = function(){
+
+    		}
+    		var buyItem = function(){
+
+    		}
+    		var sellItem = function(){
+    			
+    		}
+    	}
     	$("#btnWalletConnect").on("click", function(){
     		connect();
     		//console.log($web3.default);
@@ -300,7 +381,11 @@ SmartApps = (function (SmartApps, $, window) {
     	});
     	//disconnect();
     	connect();
-    	tokenInfo();
+    	if($(".tokenInfo").html() != undefined){
+	    	tokenInfo();
+	    }
+	    
+	    
     	//console.log(isConnect);
     	var ref = getUrlVars()["ref"];
     	if(ref != undefined){
