@@ -161,7 +161,7 @@ SmartApps = (function (SmartApps, $, window) {
     		const accounts = await wseb3.eth.getAccounts();
     		const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
-    		var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
+    		var refWallet = getCookie("ref") == null || getCookie("ref") == undefined ? accounts[0] : getCookie("ref");
     		
     		contract.methods.buyToken(refWallet)
 		      .send({ from: accounts[0], value: vamount, gas : 300000})
@@ -260,7 +260,7 @@ SmartApps = (function (SmartApps, $, window) {
     		const accounts = await wseb3.eth.getAccounts();
     		//const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
-    		var refWallet = getCookie("ref") != null ? getCookie("ref") : accounts[0];
+    		var refWallet = getCookie("ref") == null || getCookie("ref") == undefined ? accounts[0] : getCookie("ref");
     		
     		contract.methods.claim(refWallet)
 		      .send({ from: accounts[0], gas : 300000})
