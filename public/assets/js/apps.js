@@ -274,7 +274,7 @@ SmartApps = (function (SmartApps, $, window) {
     		init();
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
-    		var abi = await getabi("presell.json");
+    		var abi = await getabi("ido.json");
     		var contract = new wseb3.eth.Contract(abi,caddressIDO);
     		const accounts = await wseb3.eth.getAccounts();
     		//const vamount =  wseb3.utils.toWei(amount.toString());
