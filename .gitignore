@@ -109,6 +109,6 @@ data/ipfs
 #truffle-config.js
 vps.txt
 public/layout/*
-abi/*
+public/abi/*
 public/assets/js/web3setup.js
 public/index.*
