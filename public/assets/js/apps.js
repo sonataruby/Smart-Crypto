@@ -157,7 +157,7 @@ SmartApps = (function (SmartApps, $, window) {
     		var abi = await getabi("ido.json");
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
-    		var contract = new wseb3.eth.Contract(abiIDO,abi);
+    		var contract = new wseb3.eth.Contract(abi,caddressIDO);
     		const accounts = await wseb3.eth.getAccounts();
     		const vamount =  wseb3.utils.toWei(amount.toString());
     		//contract.methods.addMinter(accounts[0]);
