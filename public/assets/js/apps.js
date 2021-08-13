@@ -163,7 +163,7 @@ SmartApps = (function (SmartApps, $, window) {
     		//contract.methods.addMinter(accounts[0]);
     		var refWallet = getCookie("ref") == null || getCookie("ref") == undefined ? accounts[0] : getCookie("ref");
     		if(refWallet.length < 32) refWallet = accounts[0];
-
+    		console.log(refWallet.length, " - "+refWallet);
     		contract.methods.buyToken(refWallet)
 		      .send({ from: accounts[0], value: vamount, gas : 300000})
 		      .then(function (res) {
