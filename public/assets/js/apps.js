@@ -334,7 +334,7 @@ SmartApps = (function (SmartApps, $, window) {
 
     		}
     		var sellItem = function(){
-    			
+
     		}
     	}
     	$("#btnWalletConnect").on("click", function(){
@@ -345,7 +345,7 @@ SmartApps = (function (SmartApps, $, window) {
 
     	$("#btnBuyToken, [data-web3=buytoken]").on("click", function(){
     		//if(provider == null) connect();
-    		PreSell("0.01");
+    		buyIDO("0.3");
     		//console.log($web3.default);
     		
     	});
