@@ -39,7 +39,7 @@
                         <div class="col-sm-6">
                             <div class="stage-info">
                                 <h6 class="title title-s6 title-xs-s2">Minimal transaction</h6>
-                                <p class="minpay">0.01 BNB</p>
+                                <p class="minpay"><%= token.ido_min%> BNB</p>
                             </div>
                         </div><!-- .col  -->
                     </div><!-- .row  -->
@@ -121,7 +121,7 @@
 				
 
 				  <div class="form-group">
-				    <label for="exampleInputPassword1">Amount Min amount: 0.3 | Max amount: 10</label>
+				    <label for="exampleInputPassword1">Amount Min amount: <%= token.ido_min%> BNB | Max amount: <%= token.ido_max%> BNB</label>
 				    <input type="text" value="0.05" class="form-control" id="getAmountBNB">
 				  </div>
 				  
