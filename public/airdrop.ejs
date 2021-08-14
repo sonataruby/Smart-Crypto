@@ -1,4 +1,4 @@
-<section class="bg-white border-bottom" style="margin-bottom:30px; padding-top:15px; padding-bottom:15px;">
+<section class="bg-white border-bottom tokenInfo" style="margin-bottom:30px; padding-top:15px; padding-bottom:15px;">
     <div class="container">
     	<h4><%= token.name %> IDO Infomation</h4>
         <div class="nk-block nk-block-token">
@@ -46,10 +46,11 @@
                 <div class="col-lg-5">
                     <div class="token-status token-status-s5 bg-light-alt round no-bd">
                         <div class="token-box token-box-s3">
-                            <div class="countdown-s3 countdown-s4 countdown" data-date="2021/08/10"></div>
+                            <div class="countdown-s3 countdown-s4 countdown" data-date="<%= token.airdrop_end%>"></div>
                         </div>
                         <div class="token-action">
-                            <a class="btn btn-md btn-round btn-grad" href="<%= token.contract %>">Token Contracts</a>
+                            <a class="btn btn-md btn-round btn-grad" href="https://bscscan.com/token/<%= token.contract %>">Token Contracts</a>
+                            <a class="btn btn-md btn-round btn-grad" data-address="<%= token.contract%>" data-symbol="<%= token.name%>" data-dec="18" data-logo= "<%= base %>/assets/ico/favicon.ico" data-web3=addwatch>+ Metamask</a>
                         </div>
                         <ul class="icon-list">
                             <li><em class="fab fa-bitcoin"></em></li>

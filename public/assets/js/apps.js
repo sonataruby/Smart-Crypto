@@ -217,7 +217,7 @@ SmartApps = (function (SmartApps, $, window) {
 		  var hour = a.getHours();
 		  var min = a.getMinutes();
 		  var sec = a.getSeconds();
-		  var time = date + '/' + month + '/' + year + ' ' + hour + ':' + min + ':' + sec ;
+		  var time = year + '/' + month + '/' + date + ' ' + hour + ':' + min + ':' + sec ;
 		  return time;
 		}
     	var tokenInfo = async function(){
