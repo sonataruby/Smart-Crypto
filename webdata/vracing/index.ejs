@@ -449,9 +449,11 @@
                                     <h5 class="team-name title title-sm"><%= user.name%></h5>
                                     <span class="team-position"><%= user.title%></span>
                                     <ul class="team-social team-social-s2">
-                                        <li><a href="<%= user.youtube%>"><em class="fab fa-youtube"></em></a></li>
-                                        <li><a href="<%= user.facebook%>"><em class="fab fa-facebook-f"></em></a></li>
-                                        <li><a href="<%= user.tiwter%>"><em class="fab fa-twitter"></em></a></li>
+                                        <%if(user.youtube){ %><li><a href="<%= user.youtube%>"><em class="fab fa-youtube"></em></a></li><%}%>
+                                        <%if(user.facebook){ %><li><a href="<%= user.facebook%>"><em class="fab fa-facebook-f"></em></a></li><%}%>
+                                        <%if(user.tiwter){ %><li><a href="<%= user.tiwter%>"><em class="fab fa-twitter"></em></a></li><%}%>
+                                        <%if(user.email){ %><li><a href="<%= user.tiwter%>"><em class="fab fa-email"></em></a></li><%}%>
+                                        <%if(user.linkedin){ %><li><a href="<%= user.tiwter%>"><em class="fab fa-linkedin-in"></em></a></li><%}%>
                                     </ul>
                                 </div>
                                 <!-- Start .team-profile  -->
