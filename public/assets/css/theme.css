@@ -7,6 +7,9 @@ Updated   :  05/05/2021
 /*! WRITE YOUR CUSTOM STYLE **/
 
 
+.walletLimit{
+   display: inline-block;
+}
 .walletLimit span {
    overflow: hidden;
    text-overflow: ellipsis;
