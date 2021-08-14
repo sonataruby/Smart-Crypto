@@ -43,7 +43,20 @@
 <script type="text/javascript" src="/assets/js/jquery.js?ver=1930"></script>
 
 
-
+<style type="text/css">
+    .bg-theme-grad{
+        background-image: url(/assets/vgame/bg.jpg) !important;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: 100%;
+    }
+    .bg-theme-grad-alt{
+        background-image: url(/assets/vgame/bg.jpg) !important;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: 100%;
+    }
+</style>
 </head>
     
 
@@ -81,13 +94,13 @@
                             <nav class="header-menu justify-content-between" id="header-menu">
                                 <ul class="menu animated remove-animation" data-animate="fadeInDown" data-delay=".75">
                                     <li class="menu-item"><a class="menu-link nav-link" href="#about">About</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link" href="/airdrop">Airdrop</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/ido">IDO</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/farm">Farm</a></li>
                                     <li class="menu-item"><a class="menu-link nav-link" href="/staking">Staking</a></li>
-                                    <li class="menu-item"><a class="menu-link nav-link" href="/gallery">Gallery</a></li>
-                                    <li class="menu-item"><a class="menu-link nav-link" href="#roadmap">Roadmap</a></li>
-                                    <li class="menu-item"><a class="menu-link nav-link" href="#team">Team</a></li>
-                                    <li class="menu-item"><a class="menu-link nav-link" href="/game">Game</a></li>
+                                    <li class="menu-item"><a class="menu-link nav-link" href="/nftmarket">NFT Market</a></li>
+                                   
+                                    <li class="menu-item"><a class="menu-link nav-link" href="/game">Game Play</a></li>
 <!--                                    <li class="menu-item"><a class="menu-link nav-link" href="#contact">Contact</a></li>-->
                                     <li class="menu-item has-sub">
                                         <a class="menu-link nav-link menu-toggle" href="#">More</a>
@@ -108,7 +121,7 @@
                                             <li><a href="#">Hindi</a></li>
                                         </ul>
                                     </li>
-                                    <li><a class="btn btn-md btn-round btn-outline btn-auto btn-primary walletLimit"  data-toggle="modal" data-target="#ModalWallet"><span id="walletAddress">Join Pre-sale</span></a></li>
+                                    <li><a class="btn btn-md btn-round btn-outline btn-auto btn-primary btn-with-icon walletLimit"  data-toggle="modal" data-target="#ModalWallet"><span id="walletAddress">Join Pre-sale</span> </a></li>
                                     <li><a  class="btn btn-md btn-round btn-outline btn-auto btn-primary" id="btnBuyToken"><span>Buy Token</span></a></li>
                                 </ul>
                             </nav>
@@ -127,10 +140,10 @@
                                                 <div class="col-sm-10 col-md-10 col-xl-9">
                                                     <div class="banner-caption tc-light text-center">
                                                         <div class="cpn-title">
-                                                            <h1 class="title title-xl-s3 title-semibold">CryptoCar is the world's <sup>first platform</sup> to offer rewards to sports game players worldwide. </h1>
+                                                            <h1 class="title title-xl-s3 title-semibold"><%= token.name%> is the world's <sup>first platform</sup> to offer rewards to sports game players worldwide. </h1>
                                                         </div>
                                                         <div class="cpn-text cpn-text-center">
-                                                            <p class="lead">CryptoCars is a Play to earn platform on <br class="d-none d-md-block">the Binance Smart Chain.</p>
+                                                            <p class="lead"><%= token.name%> is a Play to earn platform on <br class="d-none d-md-block">the Binance Smart Chain and NFT.</p>
                                                         </div>
                                                         <div class="cpn-btns">
                                                             <ul class="btn-grp d-flex justify-content-center">
@@ -150,113 +163,58 @@
                                         </div>
                                         <div class="banner-social-wrap text-center">
                                             <ul class="banner-social banner-social-vertical">
-                                                <li><a href="<%- social.facebook %>"><em class="fab fa-facebook-f"></em></a></li>
-                                                <li><a href="<%- social.twitter %>"><em class="fab fa-twitter"></em></a></li>
-                                                <li><a href="<%- social.youtube %>"><em class="fab fa-youtube"></em></a></li>
-                                                <li><a href="<%- social.github %>"><em class="fab fa-github"></em></a></li>
-                                                <li><a href="<%- social.bitcoin %>"><em class="fab fa-bitcoin"></em></a></li>
-                                                <li><a href="<%- social.medium %>"><em class="fab fa-medium-m"></em></a></li>
+                                                <%if(social.facebook){ %><li><a href="<%- social.facebook %>"  target="_bank"><em class="fab fa-facebook-f"></em></a></li><%}%>
+                                                <%if(social.twitter){ %><li><a href="<%- social.twitter %>"  target="_bank"><em class="fab fa-twitter"></em></a></li><%}%>
+                                                <%if(social.youtube){ %><li><a href="<%- social.youtube %>"  target="_bank"><em class="fab fa-youtube"></em></a></li><%}%>
+                                                <%if(social.github){ %><li><a href="<%- social.github %>"  target="_bank"><em class="fab fa-github"></em></a></li><%}%>
+                                                <%if(social.bitcoin){ %><li><a href="<%- social.bitcoin %>"  target="_bank"><em class="fab fa-bitcoin"></em></a></li><%}%>
+                                                <%if(social.medium){ %><li><a href="<%- social.medium %>"  target="_bank"><em class="fab fa-medium-m"></em></a></li><%}%>
+                                                <%if(social.telegram){ %><li><a href="<%= social.telegram%>" target="_bank"><em class="social-icon fab fa-telegram"></em></a></li><%}%>
+                                            
+
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div><!-- .nk-banner -->
-                            <div class="bg-video bg-video-youtube" data-video="<%- token.youtube %>" data-overlay="theme" data-opacity="80" data-cover="images/bg/bg-a.jpg"></div>
+                            
             </div>
 
         </header>
         <main class="nk-pages">
             <%- body %>
         </main>
-         <footer class="nk-footer bg-theme-grad-alt">
-            <section class="section section-l section-footer pb-0 tc-light tc-light-alt bg-transparent ov-h">
-                <div class="ui-shape ui-shape-footer ui-shape-light"></div>
+         <footer class="nk-footer bg-light border-top">
+            <div class="section section-footer section-m ov-h has-ovm">
                 <div class="container">
                     <!-- Block @s -->
                     <div class="nk-block block-footer">
-                        <div class="row my-md-0 mb-n4">
-                            <div class="col-lg-3 col-sm-4">
-                                <div class="wgs wgs-menu">
-                                    <h6 class="wgs-title wgs-title-s2 text-white animated" data-animate="fadeInUp" data-delay=".1">FEATURES</h6>
-                                    <div class="wgs-body">
-                                        <ul class="wgs-links wgs-links-uline wgs-links-s2 animated" data-animate="fadeInUp" data-delay=".2">
-                                            <li><a href="#">Live Chat</a></li>
-                                            <li><a href="#">Email Marketing</a></li>
-                                            <li><a href="#">User Analytics</a></li>
-                                            <li><a href="#">User Analytics</a></li>
-                                            <li><a href="#">Crypto Exchange</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div><!-- .col -->
-                            <div class="col-lg-3 col-sm-4">
-                                <div class="wgs wgs-menu">
-                                    <h6 class="wgs-title wgs-title-s2 text-white animated" data-animate="fadeInUp" data-delay=".3">RESOURCES</h6>
-                                    <div class="wgs-body">
-                                        <ul class="wgs-links wgs-links-uline wgs-links-s2 animated" data-animate="fadeInUp" data-delay=".4">
-                                            <li><a href="#">Watch Demo</a></li>
-                                            <li><a href="#">Whitepaper</a></li>
-                                            <li><a href="#">Intigration &amp; API</a></li>
-                                            <li><a href="#">iOS &amp; Android Apps</a></li>
-                                            <li><a href="#">Privacy &amp; policy</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div><!-- .col -->
-                            <div class="col-lg-3 col-sm-4">
-                                <div class="wgs wgs-menu">
-                                    <h6 class="wgs-title wgs-title-s2 text-white animated" data-animate="fadeInUp" data-delay=".5">COMPANY</h6>
-                                    <div class="wgs-body">
-                                        <ul class="wgs-links wgs-links-uline wgs-links-s2 animated" data-animate="fadeInUp" data-delay=".6">
-                                            <li><a href="#">Home</a></li>
-                                            <li><a href="#">About</a></li>
-                                            <li><a href="#">Blog</a></li>
-                                            <li><a href="#">FAQ</a></li>
-                                            <li><a href="#">Contact Us</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div><!-- .col -->
-                            <div class="col-lg-3 col-md">
-                                <div class="wgs wgs-subscribe-form">
-                                    <h6 class="wgs-title wgs-title-s2 text-white animated" data-animate="fadeInUp" data-delay=".7">NewsLetter</h6>
-                                    <div class="wgs-body">
-                                        <div class="wgs-subscribe">
-                                            <p>Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed</p>
-                                            <form action="form/subscribe.php" class="nk-form-submit" method="post">
-                                                <div class="field-inline field-inline-s3 field-split animated" data-animate="fadeInUp" data-delay=".8">
-                                                    <div class="field-wrap">
-                                                        <input class="input-bordered required" type="text" placeholder="Enter your email">
-                                                        <input type="text" class="d-none" name="form-anti-honeypot" value="">
-                                                    </div>
-                                                    <div class="submit-wrap">
-                                                        <button class="btn btn-icon btn-light btn-auto"><i class="fas fa-paper-plane"></i></button>
-                                                    </div>
-                                                </div>
-                                                <div class="form-results"></div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- .col -->
-                        </div><!-- .row -->
-                        <div class="footer-bottom section-sm">
-                            <div class="row justify-content-between align-items-center">
-                                <div class="col-6">
-                                    <a href="./" class="wgs-logo-s2">
-                                        <img src="<%- logo %>" srcset="<%- logo %> 2x" alt="logo">
+                        <div class="row">
+                            <div class="col">
+                                <div class="wgs wgs-text text-center mb-3">
+                                    <ul class="social pdb-l justify-content-center">
+                                        <%if(social.facebook){ %><li><a href="<%= social.youtube%>" target="_bank"><em class="social-icon fab fa-facebook-f"></em></a></li><%}%>
+                                        <%if(social.twitter){ %><li><a href="<%= social.twitter%>" target="_bank"><em class="social-icon fab fa-twitter"></em></a></li><%}%>
+                                        <%if(social.youtube){ %><li><a href="<%= social.youtube%>" target="_bank"><em class="social-icon fab fa-youtube"></em></a></li><%}%>
+                                        <%if(social.github){ %><li><a href="<%= social.github%>" target="_bank"><em class="social-icon fab fa-github"></em></a></li><%}%>
+                                        <%if(social.bitcoin){ %><li><a href="<%= social.bitcoin%>" target="_bank"><em class="social-icon fab fa-bitcoin"></em></a></li><%}%>
+                                        <%if(social.medium){ %><li><a href="<%= social.medium%>" target="_bank"><em class="social-icon fab fa-medium-m"></em></a></li><%}%>
+                                        <%if(social.telegram){ %><li><a href="<%= social.telegram%>" target="_bank"><em class="social-icon fab fa-telegram"></em></a></li><%}%>
+
+                                    </ul>
+                                    <a href="/" class="footer-logo">
+                                        <img src="<%= logo2%>" srcset="<%= logo2%> 2x" alt="logo" style="max-width: 250px;">
                                     </a>
-                                </div><!-- .col -->
-                                <div class="col-6">
-                                    <div class="copyright-text text-right">
-                                        <p>© Crypto CAR, 2021</p>
+                                    <div class="copyright-text copyright-text-s3 pdt-m">
+                                        <p><span class="d-sm-block"><%= copyright%>. </span>All trademarks and copyrights belong to their respective owners.</p>
                                     </div>
-                                </div><!-- .col -->
+                                </div>
                             </div>
-                        </div><!-- .row -->
+                        </div>
                     </div><!-- .block @e -->
                 </div>
-            </section>
+                <div class="nk-ovm shape-s"></div>
+            </div>
         </footer>
     </div>
     
