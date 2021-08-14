@@ -7,13 +7,13 @@ Updated   :  05/05/2021
 /*! WRITE YOUR CUSTOM STYLE **/
 
 
-.walletLimit {
+.walletLimit span {
    overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
    -webkit-line-clamp: 1; /* number of lines to show */
    -webkit-box-orient: vertical;
-   max-width: 150px;
+   max-width: 100px;
 }
 .bg-theme-grad-alt{
    background-color: blueviolet;

@@ -95,7 +95,7 @@ SmartApps = (function (SmartApps, $, window) {
     		$.get('/auth/' + address, (res) =>   {
     			setCookie("wallet",address);
     		});
-    		$("#walletAddress").html(address);
+    		$("#walletAddress").parent().html('<span>'+address+ '</span>' + '<em class="icon bg- fas fa-angle-double-right"></em>');
     		
     	}
 
@@ -130,7 +130,7 @@ SmartApps = (function (SmartApps, $, window) {
 			  	
 			  	const accounts = await contract.eth.getAccounts();
 			  	if(chainName == "BSC"){
-			  		$("#walletAddress").html(accounts[0]);
+			  		
 			  		if(accounts.length > 0) isConnect = true;
 			  		return setConnect(accounts[0],chainData);
 			  	}else{
