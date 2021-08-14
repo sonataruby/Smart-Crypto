@@ -1,14 +1,5 @@
-/*!
-Template :	ICOCrypto @by Softnio
-Theme	 :  Default
-Version   :  1.9.3
-Updated   :  05/05/2021 
-*/
-/*! WRITE YOUR CUSTOM STYLE **/
-
-
 .walletLimit{
-   display: inline-block;
+   display: inline !important;
 }
 .walletLimit span {
    overflow: hidden;
