@@ -1,5 +1,5 @@
-.walletLimit{
-   display: inline !important;
+.btn.walletLimit{
+   display: inline-flex !important;
 }
 .walletLimit span {
    overflow: hidden;
@@ -8,6 +8,10 @@
    -webkit-line-clamp: 1; /* number of lines to show */
    -webkit-box-orient: vertical;
    max-width: 100px;
+}
+.has-fixed .walletLimit .icon{
+   background-color: var(--info);
+   color: #FFF;
 }
 .bg-theme-grad-alt{
    background-color: blueviolet;
