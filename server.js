@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require("path");
-const io   = require('socket.io')
+const io   = require('socket.io');
+const vhost = require('vhost');
 const express = require("express");
 const partials      = require('express-partials');
 const EJSLayout = require('express-ejs-layouts');
@@ -25,6 +26,7 @@ app.engine('ejs', ejs.renderFile);
 app.set('view engine', 'ejs');
 //app.use(partials());
 app.use(EJSLayout);
+
 
 app.get("/", (req, res) => {
  app.set('layout', './layout/home')
@@ -118,13 +120,22 @@ app.get('/api/:file', (req, res) => {
 
 });
 */
-app.get("/api/ntf/:id", (req, res) => {
-	res.header('Content-Type', 'application/json');
-	const data = readJSONFile('ntf.json');
-    
-    res.send(JSON.stringify(data[req.params.id]));
-    res.end( data );
 
+app.get("/api/nft/:id", (req, res) => {
+
+  	res.header('Content-Type', 'application/json');
+  	const data = readJSONFile('ntf.json');
+    var item = data[req.params.id];
+    if(item == undefined) item = '{"error": "404 page not found", "err_code": 404}';
+    res.send(item);
+    res.end( item);
+});
+
+app.get("/api/nft/", (req, res) => {
+  var data = '{"error": "404 page not found", "err_code": 404}';
+  res.header('Content-Type', 'application/json');
+  res.send(data);
+  res.end( data );
 });
 
 // start express server on port 5000

@@ -112,3 +112,4 @@ public/layout/*
 public/abi/*
 public/assets/js/web3setup.js
 public/index.ejs
+package-lock.json
