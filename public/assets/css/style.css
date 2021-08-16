@@ -2841,7 +2841,7 @@ ul.progress-info { display: flex; justify-content: space-between; }
 
 /** 03.09 Toastr */
 /* Toastr */
-#toast-container { position: fixed; z-index: 999999; margin-top: 22px; margin-bottom: 16px; }
+#toast-container { position: fixed; z-index: 999999; margin-top: 22px; margin-bottom: 16px;}
 
 #toast-container .toast { opacity: 1; }
 
@@ -2855,7 +2855,7 @@ ul.progress-info { display: flex; justify-content: space-between; }
 
 .toast-top-left { top: 0; left: 16px; }
 
-.toast-top-right { top: 0; right: 16px; }
+.toast-top-right { top: 16px; right: 16px; }
 
 .toast-bottom-right { right: 16px; bottom: 0; }
 

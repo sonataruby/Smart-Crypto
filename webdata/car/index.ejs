@@ -175,6 +175,47 @@
                                         </div><!-- .row -->
                                     </div>
                                     
+                                    <div class="roadmap-wrap roadmap-wrap-done roadmap-wrap-s1 mb-0">
+                                        <div class="row no-gutters">
+                                           <% roadmap2.forEach(function(user){ %>
+                                            <div class="col-lg">
+                                                <div class="roadmap roadmap-s1 roadmap-done text-lg-center">
+                                                    <div class="roadmap-step roadmap-step-s1">
+                                                        <div class="roadmap-head roadmap-head-s1">
+                                                            <span class="roadmap-time roadmap-time-s1"><%= user.time%></span>
+                                                            <span class="roadmap-title roadmap-title-s1"><%= user.title%></span>
+                                                        </div>
+                                                        <ul class="roadmap-step-list roadmap-step-list-s1">
+                                                            <li><%= user.concept%></li>
+                                                            <li><%= user.team%></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div><!-- .col -->
+                                            <% }); %>
+                                        </div><!-- .row -->
+                                    </div>
+
+                                    <div class="roadmap-wrap roadmap-wrap-done roadmap-wrap-s1 mb-0">
+                                        <div class="row no-gutters">
+                                           <% roadmap3.forEach(function(user){ %>
+                                            <div class="col-lg">
+                                                <div class="roadmap roadmap-s1 roadmap-done text-lg-center">
+                                                    <div class="roadmap-step roadmap-step-s1">
+                                                        <div class="roadmap-head roadmap-head-s1">
+                                                            <span class="roadmap-time roadmap-time-s1"><%= user.time%></span>
+                                                            <span class="roadmap-title roadmap-title-s1"><%= user.title%></span>
+                                                        </div>
+                                                        <ul class="roadmap-step-list roadmap-step-list-s1">
+                                                            <li><%= user.concept%></li>
+                                                            <li><%= user.team%></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div><!-- .col -->
+                                            <% }); %>
+                                        </div><!-- .row -->
+                                    </div>
                                    
                                 </div>
                             </div><!-- .col -->
@@ -284,7 +325,3 @@
                 </div>
             </section>
             <!-- // -->
-            
-           
-      
-       

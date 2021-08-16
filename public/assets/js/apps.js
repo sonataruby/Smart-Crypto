@@ -65,10 +65,16 @@ SmartApps = (function (SmartApps, $, window) {
 			    return;
 			}
 
-			provider.on("accountsChanged", (accounts) => {
-			    refreshAccountData();
+			provider.on("accountsChanged", (wallet) => {
+			    if(wallet.length > 40) {
+			    	refreshAccountData();
+			    }else{
+			    	disconnect();
+			    	return;
+			    }
 			});
 
+			
 			  // Subscribe to chainId change
 			provider.on("chainChanged", (chainId) => {
 			    refreshAccountData();
@@ -82,10 +88,13 @@ SmartApps = (function (SmartApps, $, window) {
 				  isSwitchChain = true;
 			  }
 			});
-			provider.on("disconnect", (error) => {
+			provider.on("disconnect", (code, error) => {
+				//	console.log("disconnect : "+code);
 			  if(error.code == 1013){
 			  	 isConnect = false;
 			  }
+			  disconnect();
+			  return;
 			});
 
 			await refreshAccountData();
@@ -95,7 +104,12 @@ SmartApps = (function (SmartApps, $, window) {
     		$.get('/auth/' + address, (res) =>   {
     			setCookie("wallet",address);
     		});
-    		$("#walletAddress").parent().html('<span>'+address+ '</span>' + '<em class="icon bg- fas fa-angle-double-right"></em>');
+    		if(address == null || address == ""){
+    			$("#walletAddress").parent().html('<span>Connect</span>' + '<em class="icon fas fa-angle-double-right"></em>');
+    		}else{
+    			$("#walletAddress").parent().html('<span>'+address+ '</span>' + '<em class="icon  fas fa-angle-double-right"></em>');
+    		}
+    		
     		
     	}
 
@@ -125,6 +139,7 @@ SmartApps = (function (SmartApps, $, window) {
 			  const network = chainData.network;
 			  //document.querySelector("#network-name").textContent = chainData.name;
 			  //$('#ModalWallet').removeClass("show");
+
 			  $('#ModalWallet').modal("hide");
 			  if(network == "mainnet"){
 			  	
@@ -139,6 +154,7 @@ SmartApps = (function (SmartApps, $, window) {
 
 			  }else{
 			  	const accounts = await contract.eth.getAccounts();
+
 			  	if(chainName == "BSC"){
 			  		
 			  		return setConnect(accounts[0],chainData);
@@ -146,6 +162,7 @@ SmartApps = (function (SmartApps, $, window) {
 			  		return disconnect();
 			  	}
 			  }
+			  console.log(accounts);
 			  
 			 
     	}
@@ -324,6 +341,7 @@ SmartApps = (function (SmartApps, $, window) {
     		var abi = await getabi("staking.json");
     		var contract = new wseb3.eth.Contract(abi,caddressFarm);
     		const accounts = await wseb3.eth.getAccounts();
+
     		var deposit = function(){
 
     		}
@@ -408,6 +426,24 @@ SmartApps = (function (SmartApps, $, window) {
     		console.log(tokenImage);
     		addToWallet(TokenAddress, tokenSymbol, tokenDecimals, tokenImage);
     	});
+
+    	// Staking
+    	$("[data-staking=join]").on("click", function(){
+    		var _period = window.period;
+    		var _value = window.stakvalue;
+    		
+    		$('.toast').find(".toast-body").html("Min Value 100 Token");
+    		$('.toast').addClass("toast-error");
+    		$('.toast').toast('show');
+    	});
+    	$("[data-staking=claim]").on("click", function(){
+
+    	});
+
+    	$("[data-staking=withdraw]").on("click", function(){
+
+    	});
+
     	//disconnect();
     	connect();
     	if($(".tokenInfo").html() != undefined){

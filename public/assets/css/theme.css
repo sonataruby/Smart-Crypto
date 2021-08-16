@@ -32,3 +32,9 @@
   /* background-image: linear-gradient(to right, #122272 0%, #1940b0 100%) !important;*/
     background: #000  !important;
 }
+.toast{
+   position: fixed;
+   background-color: #FFF;
+   color: #333;
+
+}
