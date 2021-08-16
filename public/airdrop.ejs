@@ -80,35 +80,108 @@
 	</div>
 </div>
 <br>
+
 <div class="container">
-	
-	<div class="row">
-		<div class="col-6">
-		<div class="card border">
-			<h4><%= token.name %> Airdrop Ruler </h4>
-			
-			1. Share Tiwter (Check)<br>
-			2. Share Facebook  (Check)<br>
-			3. Sub Youtube  (Check)<br>
-			4. Join Telegram Group  (Check)<br>
-			5. Join Telegram Channel <br>
-		</div>
-		</div>
-
-		<div class="col-6">
-			<div class="card border">
-				<h4>Airdrop</h4>
-				<p>Claim more token when first buy <%= token.name%></p>
-				<button class="btn btn-primary" id="ClaimAir" data-web3="airdrop" data-token="">Claim Get Free Coin</button>
-				
-			</div>
-		</div>
-	</div>
+    <div class="border rounded shadow-sm p-4 mb-4">
+    <h4><%= token.name %> Airdrop Ruler </h4>
+    1. Share Tiwter ( <a href="<%= social.twitter%>" target="_bank">Share </a> )<br>
+    2. Share Facebook  (<a href="<%= social.facebook%>" target="_bank"> Check</a> )<br>
+    3. Subscribe Youtube  (<a href="<%= social.youtube%>" target="_bank"> Subscribe</a> )<br>
+    4. Join Telegram Group  ( <a href="<%= social.telegram%>" target="_bank">Join </a> )<br>
+    5. Join Telegram Channel ( <a href="<%= social.telegram_channel%>" target="_bank">Join</a> )<br>
+    <div class="row">
+        <section class="col-12">
+            <ul class="nav nav-tabs flex-nowrap" role="tablist" style="display:none;">
+                <li role="presentation" class="nav-item">
+                    <a href="#step1" class="nav-link active" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1"></a>
+                </li>
+                <li role="presentation" class="nav-item">
+                    <a href="#step2" class="nav-link disabled" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2"></a>
+                </li>
+                <li role="presentation" class="nav-item">
+                    <a href="#step3" class="nav-link disabled" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3"></a>
+                </li>
+                <li role="presentation" class="nav-item">
+                    <a href="#complete" class="nav-link disabled" data-toggle="tab" aria-controls="complete" role="tab" title="Complete"></a>
+                </li>
+            </ul>
+            <form role="form">
+                <div class="tab-content py-2">
+                    <div class="tab-pane active" role="tabpanel" id="step1">
+                        <h3>Share Tiwter</h3>
+                        <p><input type="text" requierd class="form-control" placeholder="Share Tiwter URL" aria-describedby="basic-addon1"></p>
+                        <button type="button" class="btn btn-primary next-step btn-sm float-right">Next</button>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step2">
+                        <h3>Subscribe Youtube</h3>
+                        <p><input type="text" class="form-control" placeholder="You Youtube Profile URL" aria-describedby="basic-addon1"></p>
+                        <ul class="float-right">
+                            <li class="list-inline-item">
+                                <button type="button" class="btn btn-info btn-sm prev-step">Previous</button>
+                            </li>
+                            <li class="list-inline-item">
+                                <button type="button" class="btn btn-primary btn-sm next-step">Next</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step3">
+                        <h3>Join Telegram Group</h3>
+                        <p><input type="text" requierd class="form-control" placeholder="You Telegram Username" aria-describedby="basic-addon1"></p>
+                        <ul class="float-right">
+                            <li class="list-inline-item">
+                                <button type="button" class="btn btn-info btn-sm prev-step">Previous</button>
+                            </li>
+                            
+                            <li class="list-inline-item">
+                                <button type="button" class="btn btn-primary btn-sm btn-info-full next-step">Next</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="complete">
+                        <h3>Complete!</h3>
+                        <p>You have successfully completed all steps.</p>
+                        <button class="btn btn-primary" id="ClaimAir" data-web3="airdrop" data-token="">Claim Get Free Coin</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </section>
+    </div>
+    </div>
 </div>
 
-
-</div>
 
 <script>
+$(document).ready(function () {
+    //Initialize tooltips
+    $('.nav-tabs > li a[title]').tooltip();
+    
+    //Wizard
+    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+        var $target = $(e.target);
+        if ($target.parent().hasClass('disabled')) {
+            return false;
+        }
+    });
+
+    $(".next-step").click(function (e) {
+        var $active = $('.nav-tabs li>.active');
+        $active.parent().next().find('.nav-link').removeClass('disabled');
+        nextTab($active);
+    });
+    
+    $(".prev-step").click(function (e) {
+        var $active = $('.nav-tabs li>a.active');
+        prevTab($active);
+    });
+});
+
+function nextTab(elem) {
+    $(elem).parent().next().find('a[data-toggle="tab"]').click();
+}
+function prevTab(elem) {
+    $(elem).parent().prev().find('a[data-toggle="tab"]').click();
+}
+
 $("#ClaimAir").attr("data-token",Math.floor(Math.random() * 100000000));
 </script>
