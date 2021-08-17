@@ -84,7 +84,33 @@
 		   "time" : "Sec 01",
 		   "bonus" : "CAR Price",
 		   "price" : "1.0$"
-		  }]
+		  }],
+		  "token_allocation" : {
+			"description" : "CAR serves as the native game currency for CryptoCar. Players leverage CAR to mint Cars, Accessories and to buy/sell on the NFT Marketplace.The max supply of CAR ( 1.000.000 ) is designated as follows:",
+			"note" : "Note: Total BNB Presale + IDO will locked LP at Pancakeswap 1 year, 10% Dev Fund was locked at Unicrypt 1 year.",
+			"package" : [{
+				"percent" : 10,
+				"title" : "Airdrop"
+			},{
+				"percent" : 10,
+				"title" : "Presale"
+			},{
+				"percent" : 10,
+				"title" : "IDO"
+			},{
+				"percent" : 30,
+				"title" : "Gameplay Incentives"
+			},{
+				"percent" : 20,
+				"title" : "Farm"
+			},{
+				"percent" : 10,
+				"title" : "Marketing"
+			},{
+				"percent" : 10,
+				"title" : "Development"
+			}]
+		}
 
 		 
 
@@ -138,8 +164,6 @@
 	  "title" : " More Operational ",
 	"concept" : " Integration with Private Chains, More Coin in Wallet\nNew services offered by members or business",
 	  "team" : " Deveplopment "
-	 },{
-
 	 }],
 	"main" : {
 		"videoimage" : "/assets/car/video.png"
