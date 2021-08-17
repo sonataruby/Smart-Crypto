@@ -44,7 +44,7 @@
                                             <li><a href="<%= user.facebook%>"><em class="fab fa-facebook-f"></em></a></li>
                                             <li><a href="<%= user.tiwter%>"><em class="fab fa-twitter"></em></a></li>
                                         </ul>
-                                        <p><%= user.description.replace(/\r\n/g, '<br/>')%></p>
+                                        <p><%= String(user.description).replace(/\r\n/g, '<br/>')%></p>
                                         <div class="progress-list">
                                             <div class="progress-wrap">
                                                 <div class="progress-title">Blockchain <span class="progress-amount">85%</span></div>

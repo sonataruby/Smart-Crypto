@@ -23,7 +23,7 @@
                                                 <span class="roadmap-title roadmap-title-s1"><%= user.title%></span>
                                             </div>
                                             <ul class="roadmap-step-list roadmap-step-list-s1">
-                                                <li><%= user.concept.replace(/\r\n/g, '<br/>')%></li>
+                                                <li><%= String(user.concept).replace(/\r\n/g, '<br/>')%></li>
                                                 <li><%= user.team%></li>
                                             </ul>
                                         </div>
