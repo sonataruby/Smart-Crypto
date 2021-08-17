@@ -4,7 +4,7 @@
     "description" : "CryptoCar - NFT Game Play to earn on the BSC",
     "banner" : "assets/car/banner.png",
     "icoin" : "assets/ico",
-    "base"  : "http://localhost:5000/",
+    "base"  : "https://cryptocar.cc/",
     "logo" : "assets/car/logo.png",
     "logo2" : "assets/car/logo2.png",
     "logo3" : "assets/car/logo3.png",
@@ -92,70 +92,54 @@
 	"roadmap":[{
 	  "time" : "05 2021",
 	  "title" : "Concept",
-	  "concept" : "Concept Generation",
+	  "concept" : "Concept Generation\nTeam Assemble",
 	  "team" : "Team Assemble"
 	 },{
 	  "time" : "06 2021",
 	  "title" : "Research",
-	 "concept" : " Proving the concept can work",
-	"concept" : " Strategic Plan",
-	"concept" : " Whitepaper conpletion",
+	 "concept" : " Proving the concept can work\nStrategic Plan\nWhitepaper conpletion",
 	  "team" : "Research"
 	 },{
 	  "time" : "07 2021",
 	  "title" : " Design ",
-	"concept" : " Platform design and technical demonstration",
-	"concept" : " Building the MVP",
+	"concept" : " Platform design and technical demonstration\nBuilding the MVP",
 	  "team" : " Design "
 	 },{
 	  "time" : "08 2021",
 	  "title" : "Tokenomics",
-	 "concept" : "Create CAR Token",
-	"concept" : "Create NFT NCAR Token",
-	"concept" : " Token Pre-sale",
-	"concept" : " Token Aidrop",
-	"concept" : " Token IDO",
+	 "concept" : "Create CAR, NCAR NFT Token\nToken Pre-sale\nToken Aidrop\nToken IDO",
 	  "team" : "Token"
 	},{
 	  "time" : "09 2021",
 	  "title" : " Game ",
-	"concept" : " List Pancakeswap",
-	"concept" : " List Dextools, Poocoin",
-	"concept" : " Launching Game play to earn V1.0",
+	"concept" : " List Pancakeswap\nList Dextools, Poocoin\nLaunching Game play to earn V1.0",
 	  "team" : " Game "
 	 },{
 	  "time" : "10 2021",
 	  "title" : " Marketing ",
-	"concept" : " List Coinmarketcap",
-	"concept" : " List Coingecko",
-	"concept" : " List CEX",
-	"concept" : " Global marketing",
+	"concept" : " List Coinmarketcap, Coingecko\nGlobal marketing",
 	  "team" : " Marketing "
 	 },{
 	  "time" : "11 2021",
 	  "title" : "Update Game ",
-	"concept" : " Launching NFT Market",
-	"concept" : " Launching Race PvP",
-	"concept" : " Launching Race Tour",
+	"concept" : " Launching NFT Market\nLaunching Race PvP, Race Tour",
 	  "team" : " Game "
 	 },{
 	  "time" : "Q1 2022",
 	  "title" : " Game Verion 2.0 ",
-	"concept" : " Launching Game V2.0",
-	"concept" : " Update game 3D, action race",
+	"concept" : " Launching Game V2.0\nUpdate game 3D, action race",
 	  "team" : " Game "
 	 },{
 	  "time" : "Q2 2021",
-	  "title" : " CEX ",
-	"concept" : " List TOP 5 CEX",
-	"concept" : " More than 100.000 Players",
+	  "title" : " CEX\nMore than 100.000 Players",
 	  "team" : " Marketing "
 	 },{
 	  "time" : "Q4 2021",
 	  "title" : " More Operational ",
-	"concept" : " Integration with Private Chains, More Coin in Wallet",
-	"concept" : " New services offered by members or business",
+	"concept" : " Integration with Private Chains, More Coin in Wallet\nNew services offered by members or business",
 	  "team" : " Deveplopment "
+	 },{
+
 	 }],
 	"main" : {
 		"videoimage" : "/assets/car/video.png"
