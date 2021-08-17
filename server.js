@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require("path");
-const io   = require('socket.io');
+//const io   = require('socket.io');
+
 //const vhost = require('vhost');
 const express = require("express");
 var cookieParser = require('cookie-parser');
@@ -97,6 +98,13 @@ app.get("/token", (req, res) => {
 
  app.set('layout', './layout/pages');
  res.render("token",dataMain);
+});
+
+app.get("/telegram", (req, res) => {
+ const dataMain = readJSONFile('main.json');
+
+ app.set('layout', './layout/pages');
+ res.render("telegram",dataMain);
 });
 
 
