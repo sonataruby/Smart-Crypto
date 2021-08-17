@@ -11,9 +11,12 @@
     "server": "nodemon --experimental-modules server.js"
   },
   "dependencies": {
+    "@truffle/artifactor": "^4.0.118",
     "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "bootstrap": "^5.1.0",
     "concurrently": "^6.2.0",
+    "cookie-parser": "^1.4.5",
     "cookieparser": "^0.1.0",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
@@ -23,12 +26,13 @@
     "express-partials": "^0.3.0",
     "express-session": "^1.17.2",
     "http": "^0.0.1-security",
-    "js-cookie": "^3.0.0",
     "meta-auth": "^1.1.2",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.12",
     "phaser": "^3.55.2",
     "socket.io": "^4.1.3",
+    "truffle-contract": "^4.0.31",
+    "vhost": "^3.0.2",
     "web3": "^1.5.1",
     "web3modal": "^1.9.4"
   }

@@ -3,6 +3,10 @@ const path = require("path");
 const io   = require('socket.io');
 //const vhost = require('vhost');
 const express = require("express");
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+const axios = require('axios').default;
+
 const partials      = require('express-partials');
 const EJSLayout = require('express-ejs-layouts');
 const port = process.env.port;
@@ -11,7 +15,7 @@ const app = express(); // create express app
 const server = http.createServer(app);
 const ejs = require('ejs');
 const session = require('express-session')
-
+const contract = require('truffle-contract');
 const MetaAuth = require('meta-auth');
 const metaAuth = new MetaAuth();
 
@@ -26,6 +30,10 @@ app.engine('ejs', ejs.renderFile);
 app.set('view engine', 'ejs');
 //app.use(partials());
 app.use(EJSLayout);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 
 
 app.get("/", (req, res) => {
@@ -36,7 +44,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/ido", (req, res) => {
+ 
  const dataMain = readJSONFile('main.json');
+ 
  app.set('layout', './layout/pages');
  res.render(dataMain.public.ido == true ? "ido" : "coming",dataMain);
 });
@@ -138,6 +148,12 @@ app.get("/api/nft/", (req, res) => {
   res.end( data );
 });
 
+app.get("/token/", (req, res) => {
+   var data = '{"error": "404 page not found", "err_code": 404}';
+    res.header('Content-Type', 'application/json');
+    res.send(data);
+    res.end( data );
+});
 // start express server on port 5000
 app.listen(5000, () => {
   console.log("server started on  5000");
