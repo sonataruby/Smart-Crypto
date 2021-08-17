@@ -108,8 +108,10 @@ data/postgres
 data/ipfs
 #truffle-config.js
 vps.txt
+*.lock
+main.josn
 public/layout/*.ejs
-public/abi/*
+public/abi/*.json
 public/assets/js/web3setup.js
 public/index.ejs
 package-lock.json

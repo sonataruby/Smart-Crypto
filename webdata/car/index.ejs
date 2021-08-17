@@ -85,15 +85,13 @@
                     </div>
 
                     <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 col-12 text-right">
-                            Smartcontract: <b><%= token.contract %></b><br>
-                            Symbol: <b><%= token.name %></b>
-                            </div>
-                            <div class="col-md-6 col-12">
+                        <div class="text-center">
+                            Contract: <b><%= token.contract %></b><br>
+                            Symbol: <b><%= token.name %></b><br>
+                            
                             Decimal: <b><%= token.decimal %></b><br>
                             Network: <b>Binance Smart Chain</b>
-                            </div>
+                            
                         </div>
                     </div>
                     <br>
@@ -140,165 +138,9 @@
             
             
             
-            <!-- // -->
-            <section class="section bg-theme tc-light ov-h" id="roadmap">
-                <div class="container">
-                    <!-- Section Head @s -->
-                    <div class="section-head text-center wide-auto-sm">
-                        <h4 class="title title-semibold animated" data-animate="fadeInUp" data-delay=".1">Roadmap</h4>
-                        <p class="animated" data-animate="fadeInUp" data-delay=".2">Our team working hardly to make archive lorem ipsum dolor sit amet, consectetur  amet, consectetur adipiscing elit. </p>
-                    </div><!-- .section-head @e -->
-                    <!-- Block @s -->
-                    <div class="nk-block">
-                        <div class="row justify-content-center">
-                            <div class="col-xl-12">
-                                <div class="roadmap-all mgb-m50 animated" data-animate="fadeInUp" data-delay=".3">
-                                    
-                                    <div class="roadmap-wrap roadmap-wrap-done roadmap-wrap-s1 mb-0">
-                                        <div class="row no-gutters">
-                                           <% roadmap.forEach(function(user){ %>
-                                            <div class="col-lg">
-                                                <div class="roadmap roadmap-s1 roadmap-done text-lg-center">
-                                                    <div class="roadmap-step roadmap-step-s1">
-                                                        <div class="roadmap-head roadmap-head-s1">
-                                                            <span class="roadmap-time roadmap-time-s1"><%= user.time%></span>
-                                                            <span class="roadmap-title roadmap-title-s1"><%= user.title%></span>
-                                                        </div>
-                                                        <ul class="roadmap-step-list roadmap-step-list-s1">
-                                                            <li><%= user.concept%></li>
-                                                            <li><%= user.team%></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div><!-- .col -->
-                                            <% }); %>
-                                        </div><!-- .row -->
-                                    </div>
-                                    
-                                    <div class="roadmap-wrap roadmap-wrap-done roadmap-wrap-s1 mb-0">
-                                        <div class="row no-gutters">
-                                           <% roadmap2.forEach(function(user){ %>
-                                            <div class="col-lg">
-                                                <div class="roadmap roadmap-s1 roadmap-done text-lg-center">
-                                                    <div class="roadmap-step roadmap-step-s1">
-                                                        <div class="roadmap-head roadmap-head-s1">
-                                                            <span class="roadmap-time roadmap-time-s1"><%= user.time%></span>
-                                                            <span class="roadmap-title roadmap-title-s1"><%= user.title%></span>
-                                                        </div>
-                                                        <ul class="roadmap-step-list roadmap-step-list-s1">
-                                                            <li><%= user.concept%></li>
-                                                            <li><%= user.team%></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div><!-- .col -->
-                                            <% }); %>
-                                        </div><!-- .row -->
-                                    </div>
+            <%- include("components/roadmap.ejs") %>
 
-                                    <div class="roadmap-wrap roadmap-wrap-done roadmap-wrap-s1 mb-0">
-                                        <div class="row no-gutters">
-                                           <% roadmap3.forEach(function(user){ %>
-                                            <div class="col-lg">
-                                                <div class="roadmap roadmap-s1 roadmap-done text-lg-center">
-                                                    <div class="roadmap-step roadmap-step-s1">
-                                                        <div class="roadmap-head roadmap-head-s1">
-                                                            <span class="roadmap-time roadmap-time-s1"><%= user.time%></span>
-                                                            <span class="roadmap-title roadmap-title-s1"><%= user.title%></span>
-                                                        </div>
-                                                        <ul class="roadmap-step-list roadmap-step-list-s1">
-                                                            <li><%= user.concept%></li>
-                                                            <li><%= user.team%></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div><!-- .col -->
-                                            <% }); %>
-                                        </div><!-- .row -->
-                                    </div>
-                                   
-                                </div>
-                            </div><!-- .col -->
-                        </div><!-- .row -->
-                    </div><!-- .block @e -->
-                </div>
-                <div class="nk-ovm shape-n"></div>
-            </section>
-            <!-- // -->
-            <section class="section bg-white" id="team">
-                <div class="ui-shape ui-shape-s5"></div>
-                <div class="container">
-                    <!-- Section Head @s -->
-                    <div class="section-head text-center wide-auto-sm">
-                        <h4 class="title title-semibold animated" data-animate="fadeInUp" data-delay=".1">Executive team</h4>
-                        <p class="animated" data-animate="fadeInUp" data-delay=".2">The ICO Crypto Team combines a passion for esports, industry experise &amp; proven record in finance, development, marketing &amp; licensing.</p>
-                    </div><!-- .section-head @e -->
-                    <!-- Block @s -->
-                    <div class="nk-block nk-block-team-list team-list">
-                        <div class="row justify-content-center">
-                            <% tearm.forEach(function(user){ %>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="team team-s3 animated" data-animate="fadeInUp" data-delay=".3">
-                                    <div class="team-photo round-full team-photo-bg">
-                                        <a href="#team-popup-1" class="team-show content-popup" data-overlay="bg-theme-grad-alt"></a>
-                                        <img src="<%= user.avatar%>" alt="team" class="round-full">
-                                    </div>
-                                    <h5 class="team-name title title-sm"><%= user.name%></h5>
-                                    <span class="team-position"><%= user.title%></span>
-                                    <ul class="team-social team-social-s2">
-                                        <%if(user.youtube){ %><li><a href="<%= user.youtube%>"><em class="fab fa-youtube"></em></a></li><%}%>
-                                        <%if(user.facebook){ %><li><a href="<%= user.facebook%>"><em class="fab fa-facebook-f"></em></a></li><%}%>
-                                        <%if(user.tiwter){ %><li><a href="<%= user.tiwter%>"><em class="fab fa-twitter"></em></a></li><%}%>
-                                        <%if(user.email){ %><li><a href="<%= user.tiwter%>"><em class="fab fa-email"></em></a></li><%}%>
-                                        <%if(user.linkedin){ %><li><a href="<%= user.tiwter%>"><em class="fab fa-linkedin-in"></em></a></li><%}%>
-                                    </ul>
-                                </div>
-                                <!-- Start .team-profile  -->
-                                <div id="team-popup-1" class="team-popup mfp-hide">
-                                    <a title="Close" class="mfp-close">×</a>
-                                    <div class="row align-items-start">
-                                        <div class="col-md-6">
-                                            <div class="team-photo">
-                                                <img src="<%= user.avatar%>" alt="team">
-                                            </div>
-                                        </div><!-- .col  -->
-                                        <div class="col-md-6">
-                                            <div class="team-popup-info pl-md-3">
-                                                <h3 class="team-name title title-lg pt-4"><%= user.name%></h3>
-                                                <p class="team-position mb-1"><%= user.title%> </p>
-                                                <ul class="team-social team-social-s2 mb-4">
-                                                    <li><a href="<%= user.facebook%>"><em class="fab fa-facebook-f"></em></a></li>
-                                                    <li><a href="<%= user.tiwter%>"><em class="fab fa-twitter"></em></a></li>
-                                                </ul>
-                                                <p><%= user.description%></p>
-                                                <div class="progress-list">
-                                                    <div class="progress-wrap">
-                                                        <div class="progress-title">Blockchain <span class="progress-amount">85%</span></div>
-                                                        <div class="progress-bar progress-bar-xs bg-black-10">
-                                                            <div class="progress-percent bg-primary" data-percent="85"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="progress-wrap">
-                                                        <div class="progress-title">Decentralization <span class="progress-amount">68%</span></div>
-                                                        <div class="progress-bar progress-bar-xs bg-black-10">
-                                                            <div class="progress-percent bg-primary" data-percent="68"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- .col  -->
-                                    </div><!-- .row  -->
-                                </div><!-- .team-profile  -->
-                            </div><!-- .col -->
-                            <% }); %>
-                            
-                            
-                            
-                        </div><!-- .row -->
-                       
-                    </div>
-                </div>
-            </section>
+            <%- include("components/team.ejs") %>
             <!-- // -->
             <section class="section bg-theme tc-light" id="partners">
                 <div class="container">
@@ -325,3 +167,7 @@
                 </div>
             </section>
             <!-- // -->
+            
+           
+      
+       

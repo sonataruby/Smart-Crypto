@@ -225,6 +225,16 @@ SmartApps = (function (SmartApps, $, window) {
 		      });
     	}
 
+    	var getBNBUSD = async function(){
+    		var data_price = 0;
+    		await $.getJSON('https://min-api.cryptocompare.com/data/price?fsym=BNB&tsyms=USD&api_key=c0cc3568f034c2ab6eaf1e70a429b1aae1a6aa10187eabfd3849fa59eccc35e4',function( data ) {
+
+    			data_price = data.USD;
+    		});
+
+    		return data_price;
+    		
+    	}
     	var timeConverter = function(UNIX_timestamp){
 		  var a = new Date(UNIX_timestamp * 1000);
 		  var months = ['1','2','3','4','5','6','7','8','9','10','11','12'];
@@ -237,39 +247,51 @@ SmartApps = (function (SmartApps, $, window) {
 		  var time = year + '/' + month + '/' + date + ' ' + hour + ':' + min + ':' + sec ;
 		  return time;
 		}
-    	var tokenInfo = async function(){
+    	var tokenInfo = async function(type){
     		init();
     		provider = await web3Spf.connect();
     		var wseb3 = new Web3(provider);
     		var abi = await getabi("ido.json");
     		var contract = new wseb3.eth.Contract(abi,caddressIDO);
-
+    		var price_usd = await getBNBUSD();
     		contract.methods.getPrice().call().then(function(res){
-    			$(".price").html(res);
-    			$(".pricebnb").html(Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    			var price_token_bnb = Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    			
+    			if(price_usd > 0){
+    				
+    				price_token_bnb = (price_usd * price_token_bnb).toFixed(4) + " USD";
+    				
+    			}else{
+    				price_token_bnb = price_token_bnb + " BNB";
+    			}
+    			$(".price").html(price_token_bnb);
+    			$(".pricebnb").html(price_token_bnb);
+    			
     		});
+    		if(type == "ido"){
+	    		contract.methods.getSubply().call().then(function(res){
+	    			$(".totalSub").html(Number(res).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-    		contract.methods.getSubply().call().then(function(res){
-    			$(".totalSub").html(Number(res).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+	    		});
+	    		
+	    		contract.methods.getTimeStart().call().then(function(res){
+	    			$(".timestart").html(timeConverter(res));
+	    		});
+	    		contract.methods.getTimeEnd().call().then(function(res){
+	    			$(".timeend").html(timeConverter(res));
+	    		});
 
-    		});
-    		
-    		contract.methods.getTimeStart().call().then(function(res){
-    			$(".timestart").html(timeConverter(res));
-    		});
-    		contract.methods.getTimeEnd().call().then(function(res){
-    			$(".timeend").html(timeConverter(res));
-    		});
-
-    		contract.methods.getMinPay().call().then(function(res){
-    			$(".minpay").html((res/100) + " BNB");
-    		});
-    		
-    		contract.methods.getReward().call().then(function(res){
-    			$(".reward").html(res);
-    		});
-    		
+	    		contract.methods.getMinPay().call().then(function(res){
+	    			$(".minpay").html((res/100) + " BNB");
+	    		});
+	    		
+	    		contract.methods.getReward().call().then(function(res){
+	    			$(".reward").html(Number(res / 10**18).toFixed(8));
+	    		});
+    		}
     	}
+
+    	
 
     	var sell = async function(amount){
     		init();
@@ -447,8 +469,13 @@ SmartApps = (function (SmartApps, $, window) {
     	//disconnect();
     	connect();
     	if($(".tokenInfo").html() != undefined){
-	    	tokenInfo();
+	    	tokenInfo('ido');
 	    }
+
+	    if($(".airdropInfo").html() != undefined){
+	    	tokenInfo('airdrop');
+	    }
+	    
 	    
 	    
     	//console.log(isConnect);

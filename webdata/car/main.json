@@ -4,12 +4,12 @@
     "description" : "CryptoCar - NFT Game Play to earn on the BSC",
     "banner" : "assets/car/banner.png",
     "icoin" : "assets/ico",
-    "base"  : "https://cryptocar.cc/",
+    "base"  : "http://localhost:5000/",
     "logo" : "assets/car/logo.png",
     "logo2" : "assets/car/logo2.png",
     "logo3" : "assets/car/logo3.png",
     "creator" : "Smart Blockchain",
-    "copyright" : "CryptoCar - NFT Game Play 2021",
+    "copyright" : "CryptoCar - NFT Game Play to earn 2021",
 	"public" : {
 		"farm" :  true,
 		"staking" : true,
@@ -20,15 +20,19 @@
 		"ntfmarket" : false
 	},
 	"token" : {
-		"name" : "iGAME",
-		"supply" : "10.000.000",
+		"name" : "CAR",
+		"supply" : "1.000.000",
 		"price" : "0.02",
+		"airdrop_start" : "2021/09/31",
 		"airdrop_end" : "2021/09/31",
-		"presell_date" : "2021/09/31",
+		"presell_start" : "2021/09/31",
+		"presell_end" : "2021/09/31",
 		"presell_amount" : "50.0000",
 		"presell_out" : "12.000",
 		"presell_rate" : "14%",
 		"decimal" : 18,
+		"ido_start" : "2021/09/31",
+		"ido_end" : "2021/10/31",
 		"ido_min" : "0.01",
 		"ido_max" : "10",
 		"ido_plance" : [{
@@ -38,7 +42,9 @@
 		"contract" : "0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46",
 		"airdrop" : "500000",
 		"airdrop_link" : "",
-		"airdrop_amount" : "",
+		"airdrop_amount" : "500000",
+		"airdrop_rate" : "20%",
+		"airdrop_reward" : "1",
 		"whitepaper" : "/CRYPTOCAR.pdf",
         "youtube" : "https://www.youtube.com/watch?v=7E3UUj0pl1M",
         "sell_link" : "",
@@ -110,8 +116,7 @@
 	"concept" : " Token Aidrop",
 	"concept" : " Token IDO",
 	  "team" : "Token"
-	}],
-	"roadmap2":[{
+	},{
 	  "time" : "09 2021",
 	  "title" : " Game ",
 	"concept" : " List Pancakeswap",
@@ -139,8 +144,7 @@
 	"concept" : " Launching Game V2.0",
 	"concept" : " Update game 3D, action race",
 	  "team" : " Game "
-	 }],
-	"roadmap3":[{
+	 },{
 	  "time" : "Q2 2021",
 	  "title" : " CEX ",
 	"concept" : " List TOP 5 CEX",
@@ -280,6 +284,7 @@
 		"youtube" : "",
 		"bitcoin" : "",
 		"medium" : "",
-		"telegram" : "https://t.me/Cryptocar_cc"
+		"telegram" : "https://t.me/Cryptocar_cc",
+		"telegram_channel" : "https://t.me/Cryptocar_cc"
 	}
 }

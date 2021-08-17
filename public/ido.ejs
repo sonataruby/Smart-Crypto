@@ -9,7 +9,7 @@
                         <div class="col-sm-6">
                             <div class="stage-info">
                                 <h6 class="title title-s6 title-xs-s2">Start</h6>
-                                <p class="timestart">Feb 8, 2018 (9:00AM GMT)</p>
+                                <p class="timestart"><%= token.ido_start%> (9:00AM GMT)</p>
                             </div>
                         </div><!-- .col  -->
                         <div class="col-sm-6">
@@ -21,13 +21,13 @@
                         <div class="col-sm-6">
                             <div class="stage-info">
                                 <h6 class="title title-s6 title-xs-s2">End</h6>
-                                <p class="timeend">Feb 20, 2018 (11:00AM GMT)</p>
+                                <p class="timeend"><%= token.ido_end%> (11:00AM GMT)</p>
                             </div>
                         </div><!-- .col  -->
                         <div class="col-sm-6">
                             <div class="stage-info">
                                 <h6 class="title title-s6 title-xs-s2">Tokens exchange rate</h6>
-                                <p>1 BNB = <span class="price"></span> <%- token.name%></p>
+                                <p>1 <%- token.name%> = <span class="price"></span></p>
                             </div>
                         </div><!-- .col  -->
                         <div class="col-sm-6">
@@ -114,7 +114,7 @@
 		<div class="col-6">
 		<div class="card border">
 			<h4>IDO </h4>
-			<div>1 <%= token.name %> = <span class="pricebnb"></span> BNB</div>
+			<div>1 <%= token.name %> = <span class="pricebnb"></span></div>
 			<div class="">
 				<div class="htmlerror"></div>
 				
@@ -136,6 +136,7 @@
 			<div class="card border">
 				<h4>Claim</h4>
 				<p>Claim more token when first buy <%= token.name%></p>
+				
 				<button class="btn btn-primary" data-web3="claim">Claim Get Free Coin</button>
 				
 			</div>
@@ -173,9 +174,10 @@
 </div>
 <script>
 var price = 2000000;
+var price_bnb_usd = <%= price_token_usd%>
 function calcToken(){
 	var bnbValue = $("#getAmountBNB").val();
-	return bnbValue/price;
+	return bnbValue;
 }
 jQuery(document).ready(function(){
 	$("#1bnbPrice").html("1 BNB = "+price);
