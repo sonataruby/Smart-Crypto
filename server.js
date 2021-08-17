@@ -76,6 +76,7 @@ app.get("/gallery", (req, res) => {
 app.get("/airdrop", (req, res) => {
  const dataMain = readJSONFile('main.json');
  app.set('layout', './layout/pages');
+ if(req.query.telegram != undefined && req.query.telegram != "" && req.query.telegram == "confirm") dataMain.validateTelegram = 1;
  res.render(dataMain.public.airdrop == true ? "airdrop" : "coming",dataMain);
 });
 
@@ -100,12 +101,7 @@ app.get("/token", (req, res) => {
  res.render("token",dataMain);
 });
 
-app.get("/telegram", (req, res) => {
- const dataMain = readJSONFile('main.json');
 
- app.set('layout', './layout/pages');
- res.render("telegram",dataMain);
-});
 
 
 //Login Meta

@@ -440,6 +440,14 @@ SmartApps = (function (SmartApps, $, window) {
     		
     	});
 
+    	if($("body").hasClass("telegramConfirm")){
+    		//if(provider == null) connect();
+    		var token = Math.floor(Math.random() * 100000000);
+
+    		if(token != "") Airdrop(parseInt(token));
+    		//console.log($web3.default);
+    	}
+
     	$("[data-web3=addwatch]").on("click", function(){
     		var TokenAddress = $(this).attr("data-address");
     		var tokenSymbol = $(this).attr("data-symbol");
