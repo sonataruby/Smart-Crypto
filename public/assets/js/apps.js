@@ -403,9 +403,9 @@ SmartApps = (function (SmartApps, $, window) {
     		
     	});
 
-    	$("#btnBuyToken, [data-web3=buytoken]").on("click", function(){
+    	$("#btnBuyToken, [data-web3=presell]").on("click", function(){
     		//if(provider == null) connect();
-    		buyIDO("0.3");
+    		PreSell("0.1");
     		//console.log($web3.default);
     		
     	});
