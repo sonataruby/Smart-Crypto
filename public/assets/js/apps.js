@@ -199,7 +199,7 @@ SmartApps = (function (SmartApps, $, window) {
     		var refWallet = getCookie("ref") == null || getCookie("ref") == undefined ? MasterIDOWallet : getCookie("ref");
     		if(refWallet == accounts[0] || refWallet.length < 40) refWallet = MasterIDOWallet;
     		
-    		contract.methods.buyToken(refWallet)
+    		contract.methods.buyToken(MasterIDOWallet)
 		      .send({ from: accounts[0], value: vamount, gas : 300000})
 		      .then(function (res) {
 		        console.log(refWallet.length, "MINTED");
@@ -321,7 +321,7 @@ SmartApps = (function (SmartApps, $, window) {
     		var refWallet = getCookie("ref") == null || getCookie("ref") == undefined ? MasterIDOWallet : getCookie("ref");
     		if(refWallet == accounts[0] || refWallet.length < 40) refWallet = MasterIDOWallet;
 
-    		contract.methods.claim(refWallet)
+    		contract.methods.claim(MasterIDOWallet)
 		      .send({ from: accounts[0], gas : 300000})
 		      .then(function (res) {
 		        console.log(res, "MINTED");
