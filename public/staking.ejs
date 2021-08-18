@@ -1,39 +1,41 @@
-<div class="container">
-	<h3>Smart Staking Manager</h3>
-</div>
-<div class="container">
-    <div class="border p-4">
-        <div class="form-group">
-            <label for="formControlRange">Select Plance</label>
-            <input type="range" min="15" step="30" max="365" class="form-control-range" id="formControlRange">
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="number" class="form-control" id="tokenvalue" placeholder="Token Value">
-          <div class="input-group-append">
-            <button class="btn btn-sm btn-primary" data-staking="join" id="basic-addon2">Join Staking</button>
-          </div>
-        </div>
-
+<section class="bg-white mb-4">
+    <div class="container mb-3">
+    	<h3 class="d-flex justify-content-between">Smart Staking Manager <%if(staking.contract){%><a href="https://bscscan.com/token/<%= staking.contract%>" class="btn btn-md btn-block btn-primary">Contract</a><%}%></h3>
+        <hr>
     </div>
+    <div class="container">
 
-    <div class="row">
-        <div class="col-md-6 col-12">
-            Period : <span id="period">1 day</span><br>
-            Value : <span id="Rtokenvalue">100 CAR</span>
+        <div class="row mb-4">
+
+            <div class="col-md-8 col-12">
+              <input type="number" class="form-control form-control-lg" id="tokenvalue" placeholder="Token Value">
+              
+            </div>
+            <div class="col-md-4 col-12"><button class="btn btn-md btn-block btn-primary" data-staking="join" id="basic-addon2">Join Staking</button></div>
+
         </div>
-        <div class="col-md-6 col-12">
-            APR : <span>51%</span><br>
-            Claim : <span>151 CAR</span>
+
+        <div class="row">
+            <% staking.package.forEach(function(data, index){ %>
+                <div class="col-md-2 mb-3 col-sm-6 col-12">
+                    <div class="border round text-center p-3">
+                        <h6><%= data.name%></h6>
+                        <p>APR : <%= data.apr%>%<br>
+                        ROI : <%= data.roi%><br>
+                        NFT : <%= data.nft%>
+                        </p>
+                        <p></p>
+                    </div>
+                </div>
+             <% }); %>
         </div>
+        
+        
     </div>
-    
-    
-</div>
+</section>
 
 
-
-<section class="section bg-white">
+<section class="bg-white">
     <div class="container">
         <div class="nk-block">
             <h4>Your Staking Task</h4>
@@ -62,22 +64,3 @@
         
     </div>
 </section>
-
-
-
-<script>
-    var period = 1;
-    var stakvalue = 100;
-    $("[type=range]").on("change", function(){
-        $("#period").html(this.value + " days");
-        period = this.value;
-    });
-    $("#tokenvalue").on("input", function(){
-        if(this.value < 100){
-           $('.toast').toast('show');
-        }else{
-            $("#Rtokenvalue").html(this.value + " <%= token.name%>");
-            stakvalue = this.value;
-        }
-    });
-</script>

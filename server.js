@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require("path");
+const _ = require("lodash");
 //const io   = require('socket.io');
 
 //const vhost = require('vhost');
@@ -22,8 +23,11 @@ const metaAuth = new MetaAuth();
 
 //const socket = io.listen(server);
 function readJSONFile(filename) {
-	let jsonData = require(path.resolve(__dirname, filename));
-	return jsonData;
+	let jsonData = require(path.resolve(__dirname, "json/"+filename));
+  let jsonToken = require(path.resolve(__dirname, "json/main.json"));
+  let jsonMage = Object.assign({}, jsonToken, jsonData);
+  //console.log(_.mergeWith(jsonToken, jsonData, jsonMage));
+	return _.mergeWith(jsonToken, jsonData, jsonMage);
 }
 app.set('views', path.join(__dirname, '/public'))
 app.use(express.static(path.join(__dirname, '/public')));
@@ -81,10 +85,10 @@ app.get("/airdrop", (req, res) => {
  res.render(dataMain.public.airdrop == true ? "airdrop" : "coming",dataMain);
 });
 
-app.get("/ntfmarket", (req, res) => {
- const dataMain = readJSONFile('main.json');
+app.get("/market", (req, res) => {
+ const dataMain = readJSONFile('market.json');
  app.set('layout', './layout/pages');
- res.render(dataMain.public.ntfmarket == true ? "ntfmarket" : "coming",dataMain);
+ res.render(dataMain.public.market == true ? "market" : "coming",dataMain);
 });
 
 

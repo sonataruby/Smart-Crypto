@@ -1,0 +1,10 @@
+ <section class="bg-white">
+ 	<div class="container">
+ 		<h4>NFT Market</h4>
+ 		<div class="card-columns">
+ 		<% item.forEach(function(data, index){ %>
+ 			<%- include("components/shop.ejs",data) %>
+ 		<% }); %>
+ 		</div>
+ 	</div>
+ </section>
