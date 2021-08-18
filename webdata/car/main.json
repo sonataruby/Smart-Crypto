@@ -4,7 +4,7 @@
     "description" : "CryptoCar - NFT Game Play to earn on the BSC",
     "banner" : "assets/car/banner.png",
     "icoin" : "assets/ico",
-    "base"  : "https://cryptocar.cc/",
+    "base"  : "http://localhost:5000/",
     "logo" : "assets/car/logo.png",
     "logo2" : "assets/car/logo2.png",
     "logo3" : "assets/car/logo3.png",
@@ -17,7 +17,7 @@
 		"ido" : true,
 		"gallery" : true,
 		"airdrop" : true,
-		"ntfmarket" : false
+		"market" : true
 	},
 	"token" : {
 		"name" : "CAR",
@@ -85,7 +85,7 @@
 		   "bonus" : "CAR Price",
 		   "price" : "1.0$"
 		  }],
-		  "token_allocation" : {
+		"token_allocation" : {
 			"description" : "CAR serves as the native game currency for CryptoCar. Players leverage CAR to mint Cars, Accessories and to buy/sell on the NFT Marketplace.The max supply of CAR ( 1.000.000 ) is designated as follows:",
 			"note" : "Note: Total BNB Presale + IDO will locked LP at Pancakeswap 1 year, 10% Dev Fund was locked at Unicrypt 1 year.",
 			"package" : [{
@@ -281,7 +281,135 @@
 	}],
 	"staking" : {
 		"title" : "Staking Program",
-		"description" : ""
+		"description" : "",
+		"contract" : "",
+		"package" : [{
+		   "period" : 30,
+		   "name" : "1 Month",
+		   "apr" : 12,
+		   "roi" : 12
+		  },{
+		   "period" : 60,
+		   "name" : "2 Month",
+		   "apr" : 18,
+		   "roi" : 18
+		  },{
+		   "period" : 90,
+		   "name" : "3 Month",
+		   "apr" : 24,
+		   "roi" : 24
+		  },{
+		   "period" : 120,
+		   "name" : "4 Month",
+		   "apr" : 30,
+		   "roi" : 30
+		  },{
+		   "period" : 150,
+		   "name" : "5 Month",
+		   "apr" : 36,
+		   "roi" : 36
+		  },{
+		   "period" : 180,
+		   "name" : "6 Month",
+		   "apr" : 42,
+		   "roi" : 42
+		  },{
+		   "period" : 210,
+		   "name" : "7 Month",
+		   "apr" : 48,
+		   "roi" : 48
+		  },{
+		   "period" : 240,
+		   "name" : "8 Month",
+		   "apr" : 54,
+		   "roi" : 54
+		  },{
+		   "period" : 270,
+		   "name" : "9 Month",
+		   "apr" : 60,
+		   "roi" : 60
+		  },{
+		   "period" : 300,
+		   "name" : "10 Month",
+		   "apr" : 66,
+		   "roi" : 66
+		  },{
+		   "period" : 330,
+		   "name" : "11 Month",
+		   "apr" : 72,
+		   "roi" : 72
+		  },{
+		   "period" : 365,
+		   "name" : "12 Month",
+		   "apr" : 78,
+		   "roi" : 78
+		  }]
+	},
+	"farm" : {
+		"title" : "Staking Program",
+		"description" : "",
+		"contract" : "",
+		"package" : [{
+			"period" : 30,
+			"name" : "1 Month",
+			"apr" : 10,
+			"roi" : 10
+		},{
+			"period" : 60,
+			"name" : "2 Month",
+			"apr" : 20,
+			"roi" : 20
+		},{
+			"period" : 60,
+			"name" : "2 Month",
+			"apr" : 20,
+			"roi" : 20
+		},{
+			"period" : 60,
+			"name" : "2 Month",
+			"apr" : 20,
+			"roi" : 20
+		},{
+			"period" : 60,
+			"name" : "2 Month",
+			"apr" : 20,
+			"roi" : 20
+		},{
+			"period" : 60,
+			"name" : "2 Month",
+			"apr" : 20,
+			"roi" : 20
+		},{
+			"period" : 60,
+			"name" : "2 Month",
+			"apr" : 20,
+			"roi" : 20
+		},{
+			"period" : 60,
+			"name" : "2 Month",
+			"apr" : 20,
+			"roi" : 20
+		},{
+			"period" : 60,
+			"name" : "2 Month",
+			"apr" : 20,
+			"roi" : 20
+		},{
+			"period" : 60,
+			"name" : "2 Month",
+			"apr" : 20,
+			"roi" : 20
+		},{
+			"period" : 60,
+			"name" : "2 Month",
+			"apr" : 20,
+			"roi" : 20
+		},{
+			"period" : 60,
+			"name" : "2 Month",
+			"apr" : 20,
+			"roi" : 20
+		}]
 	},
 	"contact" : "",
 	"footer" : "",
