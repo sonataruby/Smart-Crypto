@@ -5,76 +5,76 @@
   "name" : "SUPER CAR 1",
   "description" : "SPEED: 300\nACCELERACTION: 70\nHANDLING: 70\nNITRO: 80\n",
   "url" : "/images/gallery/CAR 1.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 2",
   "description" : "SPEED: 330\nACCELERACTION: 60\nHANDLING: 60\nNITRO: 50\n",
   "url" : "/images/gallery/CAR 2.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 3",
   "description" : "SPEED: 320\nACCELERACTION: 70\nHANDLING: 50\nNITRO: 60\n",
   "url" : "/images/gallery/CAR 3.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 4",
   "description" : "SPEED: 310\nACCELERACTION: 70\nHANDLING: 50\nNITRO: 70\n",
   "url" : "/images/gallery/CAR 4.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "NTF CAR 5",
  "description" : "SPEED: 320\nACCELERACTION: 70\nHANDLING: 50\nNITRO: 60\n",
   "url" : "/images/gallery/CAR 5.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 6",
   "description" : "SPEED: 330\nACCELERACTION: 60\nHANDLING: 50\nNITRO: 60\n",
   "url" : "/images/gallery/CAR 6.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 7",
   "description" : "SPEED: 330\nACCELERACTION: 50\nHANDLING: 60\nNITRO: 60\n",
   "url" : "/images/gallery/CAR 7.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 8",
   "description" : "SPEED: 340\nACCELERACTION: 50\nHANDLING: 60\nNITRO: 50\n",
   "url" : "/images/gallery/CAR 8.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 9",
   "description" : "SPEED: 340\nACCELERACTION: 50\nHANDLING: 50\nNITRO: 60\n",
   "url" : "/images/gallery/CAR 9.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 10",
   "description" : "SPEED: 350\nACCELERACTION: 60\nHANDLING: 40\nNITRO: 50\n",
   "url" : "/images/gallery/CAR 10.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 11",
   "description" : "SPEED: 300\nACCELERACTION: 80\nHANDLING: 60\nNITRO: 60\n",
   "url" : "/images/gallery/CAR 3.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 12",
   "description" : "SPEED: 310\nACCELERACTION: 70\nHANDLING: 60\nNITRO: 60\n",
   "url" : "/images/gallery/CAR 12.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 13",
   "description" : "SPEED: 320\nACCELERACTION: 60\nHANDLING: 60\nNITRO: 60\n",
   "url" : "/images/gallery/CAR 3.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 14",
   "description" : "SPEED: 330\nACCELERACTION: 60\nHANDLING: 50\nNITRO: 60\n",
   "url" : "/images/gallery/CAR 14.jpg",
-  "Price": 100
+  "price": 100
  }, {
   "name" : "SUPER CAR 15",
   "description" : "SPEED: 340\nACCELERACTION: 60\nHANDLING: 50\nNITRO: 50\n",
   "url" : "/images/gallery/CAR 15.jpg",
-  "Price": 100
+  "price": 100
  }]
 }
