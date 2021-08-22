@@ -1,0 +1,232 @@
+<div class="row">
+			<div class="col-md-2">
+
+				<div class="input-group mb-3">
+				  <input type="text" class="form-control" placeholder="Enter Phone Number">
+				  <span class="input-group-text" id="basic-addon2">Connect</span>
+				</div>
+
+				
+				<div>
+					<h4>Wallet Connect</h4>
+				</div>
+
+			</div>
+			<div class="col-md-10">
+				<div class="row">
+					<div class="col-6">
+						<div class="card">
+						<div class="card-body">
+						<h4>Session Create</h4>
+						<hr>
+						<form action="/farm/create" method="post">
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">Name</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="name" class="form-control" value="">
+						    </div>
+						</div>
+
+						
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">Start</label>
+						    <div class="col-sm-2">
+						      
+						      <select type="text" name="starttime_y" class="form-select">
+						      	<% for(var i=2021; i<=2028; i++) {%>
+						      		<option value="<%=i%>"><%=i%></option>
+						      	<%}%>
+						      </select>
+						    </div>
+
+						    <div class="col-sm-2">
+						      
+						      <select type="text" name="starttime_m" class="form-select">
+						      	<% for(var i=1; i<=12; i++) {%>
+						      		<option value="<%=i%>"><%=i%></option>
+						      	<%}%>
+						      </select>
+						    </div>
+
+						    <div class="col-sm-2">
+						      
+						      <select type="text" name="starttime_d" class="form-select">
+						      	<% for(var i=1; i<=31; i++) {%>
+						      		<option value="<%=i%>"><%=i%></option>
+						      	<%}%>
+						      </select>
+						    </div>
+
+						    <div class="col-sm-2">
+						      <select type="text" name="starttime_h" class="form-select">
+						      	<% for(var i=0; i<24; i++) {%>
+						      		<option value="<%=i%>"><%=i%></option>
+						      	<%}%>
+						      </select>
+						    </div>
+
+						    <div class="col-sm-2">
+						      <select type="text" name="starttime_min" class="form-select">
+						      	<% for(var i=0; i<60; i++) {%>
+						      		<option value="<%=i%>"><%=i%></option>
+						      	<%}%>
+						      </select>
+						    </div>
+						</div>
+
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">Period</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="period" class="form-control" value="">
+						    </div>
+						</div>
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">APR</label>
+						    <div class="col-sm-10">
+						      <input type="text" name="apr" class="form-control" value="">
+						    </div>
+						</div>
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">Min Deposit</label>
+						    <div class="col-sm-8">
+						      <input type="text" name="deposit" class="form-control" value="100">
+						    </div>
+						    <div class="col-sm-2 d-grid gap-2">
+						    	<button class="btn btn-sm btn-info btn-block"><%= token.name%></button>
+						    </div>
+						</div>
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">Token Reward</label>
+						    <div class="col-sm-8">
+						      <input type="text" name="reward" class="form-control" value="">
+						    </div>
+						    <div class="col-sm-2 d-grid gap-2">
+						    	<button class="btn btn-sm btn-info btn-block"><%= token.name%></button>
+						    </div>
+						</div>
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">NFT Reward</label>
+						    <div class="col-sm-8">
+						      <input type="text" name="nftreward" class="form-control" value="">
+						    </div>
+						    <div class="col-sm-2 d-grid gap-2">
+						    	<button class="btn btn-sm btn-primary btn-block"><%= token.name%> NFT</button>
+						    </div>
+						</div>
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label"></label>
+						    <div class="col-sm-10">
+						      <button type="submit" class="btn btn-primary" value="">Create Session</button>
+						    </div>
+						</div>
+						</form>
+						</div>
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="card">
+						<div class="card-body">
+							<h4>Session Update</h4>
+							<hr>
+							<form action="/farm/update" method="post">
+							<div class="mb-3 row">
+							    <label  class="col-sm-2 col-form-label">Name</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" value="">
+							    </div>
+							</div>
+
+							
+
+							<div class="mb-3 row">
+							    <label  class="col-sm-2 col-form-label">Status</label>
+							    <div class="col-sm-10">
+							      <div class="form-check">
+									  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+									  <label class="form-check-label" for="flexCheckChecked">
+									    Online / Offline
+									  </label>
+									</div>
+							    </div>
+							</div>
+
+							<div class="mb-3 row">
+							    <label  class="col-sm-2 col-form-label"></label>
+							    <div class="col-sm-10">
+							      <button type="submit" class="btn btn-primary" value="">Update Session</button>
+							    </div>
+							</div>
+							</form>
+						</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<h4>Session List</h4>
+
+				<div class="card">
+						<div class="card-body">
+				<table class="table">
+					<thead>
+						
+						<th>Name</th>
+						<th>Deposit</th>
+						<th>Start</th>
+						<th>Period</th>
+						<th>Finish</th>
+						<th>Reward</th>
+						<th>Holder</th>
+						<th>Status</th>
+						<th></td>
+						<th></td>
+					</thead>
+					
+					<% items.forEach(function(data, index){ %>
+					<tr>
+						
+						<td><%= data.pool_name%></td>
+						<td><%= data.min_deposit%> <%= token.name%></td>
+						<td>
+							<span class="TimeStart<%=index%>"></span>
+							<script> 
+							var timeStart = moment.unix(<%= data.timestart%>).format('MM/DD/YYYY hh:mm:ss a');
+							$(".TimeStart<%=index%>").html(timeStart);
+							</script>
+						</td>
+						<td><%= data.period%> hour</td>
+						<td>
+							<span class="TimeEnd<%=index%>"></span>
+							<script> 
+							var calcTime = <%= data.timestart%>;
+							var period = <%= data.period%>;
+							calcTime = calcTime + period * 3600;
+							var timeStart = moment.unix(calcTime).format('MM/DD/YYYY hh:mm:ss a');
+							$(".TimeEnd<%=index%>").html(timeStart);
+							</script>
+						</td>
+						<td><%= data.reward_token%></td>
+						<td><%= data.amount_holder%></td>
+						<td><%= (data.status > 0 ? "Enable" : "Disable")%></td>
+						<td class="text-end">
+							<a class="btn btn-sm btn-primary" href="/farm/<%= data.log_id%>/sync">Sync Blockchain</a>
+							<button class="btn btn-sm btn-primary">Claim All</button>
+							<button class="btn btn-sm btn-primary">Claim NFT</button>
+						</td>
+						<td class="text-end">
+							<button class="btn btn-sm btn-primary">Edit</button>
+							<a class="btn btn-sm btn-primary" href="/farm/<%= data.log_id%>/<%= (data.status > 0 ? "disable" : "enable")%>"><%= (data.status > 0 ? "Enable" : "Disable")%></a>
+						</td>
+					</tr>
+					<% }); %>
+				</table>
+				</div>
+				</div>
+			</div>
+		</div>
