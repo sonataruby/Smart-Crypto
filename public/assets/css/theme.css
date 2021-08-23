@@ -13,6 +13,22 @@
    background-color: var(--info);
    color: #FFF;
 }
+.icon-metamask{
+  position: relative;
+}
+.icon-metamask::before{
+  background-image: url(./../images/metamask.png) !important;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 38px;
+  height: 38px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: red !important;
+  z-index: 9999999999;
+}
 .bg-theme-grad-alt{
    background-color: blueviolet;
    background-repeat: no-repeat;

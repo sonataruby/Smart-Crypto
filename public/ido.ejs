@@ -51,7 +51,7 @@
                         </div>
                         <div class="token-action">
                             <a class="btn btn-md btn-round btn-grad" href="https://bscscan.com/token/<%= token.contract %>">Token Contracts</a>
-                            <a class="btn btn-md btn-round btn-grad" data-address="<%= token.contract%>" data-symbol="<%= token.name%>" data-dec="18" data-logo= "<%= base %>/assets/ico/favicon.ico" data-web3=addwatch>+ Metamask</a>
+                            <a class="btn btn-md btn-round icon-metamask" data-address="<%= token.contract%>" data-symbol="<%= token.name%>" data-dec="18" data-logo= "<%= base %>/assets/ico/favicon.ico" data-web3=addwatch>Metamask</a>
                         </div>
                         <ul class="icon-list">
                             <li><em class="fab fa-bitcoin"></em></li>
@@ -83,7 +83,7 @@
 				<div class="input-group mb-3 input-group-lg">
 				  <input type="text" class="form-control" readonly id="LinkRef" placeholder="Link Ref" aria-describedby="basic-addon2">
 				  <div class="input-group-append">
-				    <button class="input-group-text bg-primary text-white" id="basic-addon2" onClick="CopyClip('LinkRef')">Copy Link</button>
+				    <button class="input-group-text bg-primary text-white btn-with-icon" id="basic-addon2" onClick="CopyClip('LinkRef')">Copy Link</button>
 				  </div>
 				</div>
 			</div>

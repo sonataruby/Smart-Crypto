@@ -14,9 +14,21 @@ const FarmController = {
 		return data;
 	},
 	"create" : async (obj) => {
-		sql = "INSERT INTO `farm_task` (`log_id`, `reward_token`, `reward_nft`, `timestart`, `min_deposit`, `pool_name`, `apr`, `period`, `status`) VALUES ('"+obj.log_id+"', '"+obj.reward+"', '"+obj.nftreward+"', '"+obj.startTime+"', '"+obj.deposit+"', '"+obj.name+"', '"+obj.apr+"', '"+obj.period+"', '1');"
+		let address = await blockchain.loadAddress();
+
+		let period = obj.period; 
+        let generation = 1;
+        let startTime = obj.startTime;
+        let blockTime = await blockchain.web3.eth.getBlock();
+        var StartSessionTime = startTime;
+        if(startTime < blockTime) StartSessionTime = blockTime;
+        let reward = blockchain.web3.utils.toWei(obj.reward.toString(), "ether"); 
+
+		await contract.startSession(address.AddressContractSmartToken, reward, period, StartSessionTime, generation).call().then((value) => {
+           sql = "INSERT INTO `farm_task` (`log_id`, `reward_token`, `reward_nft`, `timestart`, `min_deposit`, `pool_name`, `apr`, `period`, `status`) VALUES ('"+value+"', '"+obj.reward+"', '"+obj.nftreward+"', '"+obj.startTime+"', '"+obj.deposit+"', '"+obj.name+"', '"+obj.apr+"', '"+obj.period+"', '1');"
+		   console.log(obj);
+        });
 		
-		console.log(obj);
 		//await db(sql);
 	},
 	"update" : async (id, name, status) => {
