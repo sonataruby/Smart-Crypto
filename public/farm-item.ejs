@@ -42,8 +42,9 @@ jQuery(document).ready(function(){
 		var timeStart = $(this).attr("data-timestart");
 		var timeEnd = parseInt(timeStart) + parseInt(periodEx);
 		$(this).html(moment.unix(timeStart).format('MMM D, YYYY, HH:mmA'));
-		$(this).parent().find("[data-timeend]").html(timeUnix(timeEnd));
+		
         var CountFinish = moment.unix(timeEnd).format('YYYY/MM/DD HH:mm:ss');
+        $(this).parent().find("[data-timeend]").html(CountFinish);
         var parentTabs = $(this).parent().find("[data-timeend]");
         var parentTabsT = $(this).parent().parent();
 
