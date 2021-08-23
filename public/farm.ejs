@@ -1,62 +1,13 @@
+
 <section class="bg-white mb-4">
-    <div class="container mb-3">
-    	<h3 class="d-flex justify-content-between">Smart Farm <%if(staking.contract){%><a href="https://bscscan.com/token/<%= staking.contract%>" class="btn btn-md btn-block btn-primary">Contract</a><%}%></h3>
-        <hr>
-    </div>
-    <div class="container">
-
-        
-
-        <div class="row">
-            <% farm.package.forEach(function(data, index){ %>
-                <div class="col-md-3 mb-3 col-sm-6 col-12">
-                    <div class="border round text-left p-3">
-                        <h6><%= data.name%></h6>
-                        <h7>100 <%= token.name%></h7>
-                        <hr>
-                        <p>
-                        APR : <%= data.apr%>%<br>
-                        Reward : <%= data.reward%> CARCAKE<br>
-                        NFT : <%= data.reward%>
-                        </p>
-                        <p></p>
-                        <button class="btn btn-md btn-block btn-primary" data-staking="join" id="basic-addon2">Create Pool</button>
-                    </div>
-                </div>
-             <% }); %>
+    <div class="page-header">
+        <div class="container mb-3">
+        	<h3 class="d-flex justify-content-between">Smart Farm <%if(staking.contract){%><a href="https://bscscan.com/token/<%= staking.contract%>" class="btn btn-md btn-block btn-primary">Contract</a><%}%></h3>
+            
         </div>
-        
-        
     </div>
-</section>
 
+    <div class="container" data-ejs-load="/farm/item">
 
-<section class="bg-white">
-    <div class="container">
-        <div class="nk-block">
-            <h4>Your Task</h4>
-            <table class="table">
-                <tr>
-                    <td>Join</td>
-                    <td>Finish</td>
-                    <td>Blance</td>
-                    <td>APR</td>
-                    <td></td>
-                </tr>
-
-                <tr>
-                    <td>15/08/2021 09:55:12</td>
-                    <td>19/08/2021 09:55:12</td>
-                    <td>100 CAR</td>
-                    <td>51%</td>
-                    <td class="text-right">
-                        <button class="btn btn-sm btn-primary">Widthdraw</button>
-                        <button class="btn btn-sm btn-info">Claim</button>
-                    </td>
-                </tr>
-
-            </table>
-        </div>
-        
     </div>
 </section>

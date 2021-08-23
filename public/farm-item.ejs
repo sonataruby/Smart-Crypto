@@ -1,0 +1,68 @@
+ <div class="row">
+            
+            <% items.forEach(function(data, index){ %>
+
+                <div class="col-md-4 mb-4 col-sm-6 col-12">
+                    <div class="border round text-left p-3">
+                        <h6><%= data.pool_name%></h6>
+                        <h7><%= data.min_deposit%> <%= token.name%></h7>
+                        <hr>
+                        <p>
+                            Start : <span data-timestart="<%= data.timestart%>" data-period="<%= data.period%>"><%= data.timestart%></span><br>
+                            End : <span data-timeend="<%= data.timeend%>"><%= data.timeend%></span><br>
+                            Period : <%= data.period%> h
+                        </p>
+                        <p>
+                            APR : <%= data.apr%>%<br>
+                            Reward : <%= data.reward_token%> <%= token.name%> , <%= data.reward_nft%> NFT
+                            
+                        </p>
+
+                        <div class="claimOnly">
+                            <button class="btn btn-sm btn-primary" data-web3="farmclaim">Claim</button>
+                        </div>
+                        <div class="joinOnly">
+                            <button class="btn btn-sm btn-info" data-web3="farmpool" data-session="<%= data.min_deposit%>" data-amount="<%= data.min_deposit%>">Approve</button>
+                            <button data-web3="farmclaim" class="btn btn-sm btn-primary">Deposit</button>
+                        </div>
+                        
+                    </div>
+                   
+                </div>
+             <% }); %>
+        </div>
+
+<script src="/assets/js/countdown.js?ver=1930"></script>
+<script>
+jQuery(document).ready(function(){
+	$("[data-timestart]").each(function(res){
+		var period = $(this).attr("data-period");
+		periodEx = parseInt(period) * 3600;
+
+		var timeStart = $(this).attr("data-timestart");
+		var timeEnd = parseInt(timeStart) + parseInt(periodEx);
+		$(this).html(moment.unix(timeStart).format('MMM D, YYYY, HH:mmA'));
+		$(this).parent().find("[data-timeend]").html(timeUnix(timeEnd));
+        var CountFinish = moment.unix(timeEnd).format('YYYY/MM/DD HH:mm:ss');
+        var parentTabs = $(this).parent().find("[data-timeend]");
+        var parentTabsT = $(this).parent().parent();
+
+        parentTabs.countdown(CountFinish).on('update.countdown', function(event) {
+              var format = '%H:%M:%S';
+              if(event.offset.totalDays > 0) {
+                format = '%-d day%!d ' + format;
+              }
+              if(event.offset.weeks > 0) {
+                format = '%-w week%!w ' + format;
+              }
+              $(this).html(event.strftime(format));
+              parentTabsT.find(".claimOnly").remove();
+            })
+            .on('finish.countdown', function(event) {
+              $(this).html('<span class="text-primary text-wrap">Pool Finish!</span>').parent().addClass('disabled');
+                parentTabsT.find(".joinOnly").remove();
+            });
+	});
+	
+});
+</script>

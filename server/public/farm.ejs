@@ -32,7 +32,7 @@
 						<div class="mb-3 row">
 						    <label  class="col-sm-2 col-form-label">Start</label>
 						    <div class="col-sm-2">
-						      
+						      Year
 						      <select type="text" name="starttime_y" class="form-select">
 						      	<% for(var i=2021; i<=2028; i++) {%>
 						      		<option value="<%=i%>"><%=i%></option>
@@ -41,7 +41,7 @@
 						    </div>
 
 						    <div class="col-sm-2">
-						      
+						      Month
 						      <select type="text" name="starttime_m" class="form-select">
 						      	<% for(var i=1; i<=12; i++) {%>
 						      		<option value="<%=i%>"><%=i%></option>
@@ -50,7 +50,7 @@
 						    </div>
 
 						    <div class="col-sm-2">
-						      
+						      Day
 						      <select type="text" name="starttime_d" class="form-select">
 						      	<% for(var i=1; i<=31; i++) {%>
 						      		<option value="<%=i%>"><%=i%></option>
@@ -59,6 +59,7 @@
 						    </div>
 
 						    <div class="col-sm-2">
+						    	Hour
 						      <select type="text" name="starttime_h" class="form-select">
 						      	<% for(var i=0; i<24; i++) {%>
 						      		<option value="<%=i%>"><%=i%></option>
@@ -67,6 +68,7 @@
 						    </div>
 
 						    <div class="col-sm-2">
+						    	Min
 						      <select type="text" name="starttime_min" class="form-select">
 						      	<% for(var i=0; i<60; i++) {%>
 						      		<option value="<%=i%>"><%=i%></option>
@@ -78,15 +80,21 @@
 
 						<div class="mb-3 row">
 						    <label  class="col-sm-2 col-form-label">Period</label>
-						    <div class="col-sm-10">
+						    <div class="col-sm-8">
 						      <input type="text" name="period" class="form-control" value="">
+						    </div>
+						    <div class="col-sm-2 d-grid gap-2">
+						    	<button class="btn btn-sm btn-outline-info btn-block">Hour</button>
 						    </div>
 						</div>
 
 						<div class="mb-3 row">
 						    <label  class="col-sm-2 col-form-label">APR</label>
-						    <div class="col-sm-10">
+						    <div class="col-sm-8">
 						      <input type="text" name="apr" class="form-control" value="">
+						    </div>
+						    <div class="col-sm-2 d-grid gap-2">
+						    	<button class="btn btn-sm btn-outline-info btn-block">%</button>
 						    </div>
 						</div>
 

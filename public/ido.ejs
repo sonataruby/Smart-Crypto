@@ -47,7 +47,7 @@
                 <div class="col-lg-5">
                     <div class="token-status token-status-s5 bg-light-alt round no-bd">
                         <div class="token-box token-box-s3">
-                            <div class="countdown-s3 countdown-s4 countdown" data-date=""></div>
+                            <div class="countdown-s3 countdown-s4 countdown" data-date=""><span class="timeCoundown"></span></div>
                         </div>
                         <div class="token-action">
                             <a class="btn btn-md btn-round btn-grad" href="https://bscscan.com/token/<%= token.contract %>">Token Contracts</a>
@@ -98,9 +98,9 @@
 </style>
 
 <script type="text/javascript">
-	$(".timeend").bind('DOMSubtreeModified', function(){
-		$(".countdown").attr("data-date",$(".timeend").text());
-		$("#getting-started").html($(".timeend").text());
+	$(".timeCoundown").bind('DOMSubtreeModified', function(){
+		$(".countdown").attr("data-date",$(".timeCoundown").text());
+		$("#getting-started").html($(".timeCoundown").text());
 		SmartApps.Plugins.countdown();
 	});
   

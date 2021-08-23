@@ -1,7 +1,18 @@
 const fs = require('fs');
+const db = require('./server/db');
+let con;
+let getCon = async function() {
+  if (!con) {
+    con = await db.getConnection();
+  }
+  
+  return con;
+}
+
 const path = require("path");
 const _ = require("lodash");
 //const io   = require('socket.io');
+const hostname = "http://localhost:5000";
 
 //const vhost = require('vhost');
 const express = require("express");
@@ -41,6 +52,8 @@ app.use(cookieParser());
 
 
 
+
+
 app.get("/", (req, res) => {
  app.set('layout', './layout/home')
  const dataMain = readJSONFile('main.json');
@@ -56,11 +69,37 @@ app.get("/ido", (req, res) => {
  res.render(dataMain.public.ido == true ? "ido" : "coming",dataMain);
 });
 
+
+/*
+Farm
+*/
 app.get("/farm", (req, res) => {
  const dataMain = readJSONFile('main.json');
  app.set('layout', './layout/pages');
+ 
  res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
 });
+
+app.get("/farm/item", async (req, res) => {
+  app.set('layout', './layout/nolayout');
+  var dataMain = [];
+  await axios.get(hostname + '/data/farm')
+    .then((response)=>{
+      dataMain = response.data;
+        
+      })
+    .catch((err)=>{
+      //console.log(err);
+    });
+  
+  var dataMainConfig = readJSONFile('main.json');
+  let startTime = Math.floor(new Date().getTime()/1000) + 30;
+  dataMainConfig.items = dataMain;
+  dataMainConfig.TimeChecked = startTime;
+  
+  res.render("farm-item",dataMainConfig);
+});
+
 
 app.get("/staking", (req, res) => {
  const dataMain = readJSONFile('main.json');
@@ -163,6 +202,41 @@ app.get("/token/", (req, res) => {
     res.send(data);
     res.end( data );
 });
+
+
+var dbQuery = async function(databaseQuery) {
+    let con = await getCon();
+    return new Promise(data => {
+        
+        con.query(databaseQuery, function (error, result) { // change db->connection for your code
+            if (error) {
+                console.log(error);
+                data('{"error": "404 page not found", "err_code": 404}');
+            }
+            try {
+                
+
+                data(JSON.stringify(result));
+
+            } catch (error) {
+                data('{"error": "404 page not found", "err_code": 404}');
+            }
+
+        });
+    });
+
+}
+
+app.get('/data/:any', async (req, res) => {
+
+  let sql = `SELECT * FROM farm_task WHERE status = '1' ORDER BY status,timestart DESC LIMIT 100`;
+  var data = await dbQuery(sql);
+  res.header('Content-Type', 'application/json');
+  res.send(data);
+  res.end( data);
+  
+});
+
 // start express server on port 5000
 app.listen(5000, () => {
   console.log("server started on  5000");

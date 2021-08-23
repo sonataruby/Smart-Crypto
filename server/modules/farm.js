@@ -9,7 +9,7 @@ const FarmController = {
 		contract = await blockchain.loadFram();
 	},
 	"findAll" : async () => {
-		let sql = `SELECT * FROM farm_task`;
+		let sql = `SELECT * FROM farm_task ORDER BY timestart DESC LIMIT 100`;
 		let data = await db(sql);
 		return data;
 	},
