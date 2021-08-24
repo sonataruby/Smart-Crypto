@@ -52,3 +52,4 @@ module.exports.loadContract = loadContract;
 module.exports.loadFram = loadFram;
 module.exports.call = call;
 module.exports.web3 = web3;
+module.exports.loadAddress = loadAddress;
