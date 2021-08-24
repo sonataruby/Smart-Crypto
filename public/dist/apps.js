@@ -81915,6 +81915,17 @@ module.exports = {
         });
         
     },
+    deposit : async (amount, session_id) => {
+        let status = await blockchain.isStatus();
+        if(status == false){
+            await blockchain.connect();
+        }
+        const gasPrice = await blockchain.web3.eth.getGasPrice();
+        let depositAmount = blockchain.web3.utils.toWei(amount.toString(),"ether");
+        await contractFarm.deposit(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then((value) => {
+            console.log(value);
+        });
+    },
     claim : async (lastSessionId) => {
 
         let status = await blockchain.isStatus();
