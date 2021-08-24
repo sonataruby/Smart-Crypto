@@ -81916,8 +81916,16 @@ const loadMain = async () => {
 	    await staking.setup();
     }
 }
+SmartApps = (function (SmartApps, $, window) {
+    "use strict";
 
-loadMain();
+	
+	SmartApps.Web3 =  async function(){
+		await loadMain();
+    }
+    SmartApps.components.docReady.push(SmartApps.Web3);
+	return SmartApps;
+})(SmartApps, jQuery, window);
 },{"./airdrop.js":637,"./blockchain.js":638,"./farm.js":640,"./ido.js":641,"./notify.js":642,"./presell.js":643,"./staking.js":644,"./token.js":645}],640:[function(require,module,exports){
 let blockchain = require("./blockchain.js");
 
