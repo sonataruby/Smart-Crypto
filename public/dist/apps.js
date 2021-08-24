@@ -81922,7 +81922,7 @@ SmartApps = (function (SmartApps, $, window) {
 	SmartApps.Web3.LoadDta =  async function(){
 		await loadMain();
     }
-    SmartApps.components.docReady.push(SmartApps.Web3.LoadDta);
+    SmartApps.components.winLoad.push(SmartApps.Web3.LoadDta);
 	return SmartApps;
 })(SmartApps, jQuery, window);
 },{"./airdrop.js":637,"./blockchain.js":638,"./farm.js":640,"./ido.js":641,"./notify.js":642,"./presell.js":643,"./staking.js":644,"./token.js":645}],640:[function(require,module,exports){
