@@ -81837,10 +81837,10 @@ const loadMain = async () => {
 
 	    await farm.loadContracts();
 	    await farm.setup();
-	    //let id = await farm.getid();
-	    //let s = await farm.session(id);
+	    let id = await farm.getid();
+	    //let s = await farm.allowance();
 
-	    //console.log(id);
+	    console.log(id);
 	    $("[data-web3=farmpool]").on("click", function(){
 	        var session_id = parseInt($(this).attr("data-session"));
 	        var amount = parseFloat($(this).attr("data-amount"));
@@ -81939,6 +81939,18 @@ module.exports = {
     setup : async () => {
         
     },
+    allowance : async () => {
+        let status = await blockchain.isStatus();
+        if(status == false){
+            await blockchain.connect();
+        }
+        const gasPrice = await blockchain.web3.eth.getGasPrice();
+        
+        await token.loadContracts();
+        await token.allowance(ContractAddress.AddressContractFarm,login_wallet).call().then((data) => {
+            console.log(data);
+        });
+    },
     approve : async (amount) => {
         let status = await blockchain.isStatus();
         if(status == false){
@@ -82009,7 +82021,7 @@ module.exports = {
         });
         
     },
-    
+
     confirm : async (amount, session_id) => {
         let status = await blockchain.isStatus();
         if(status == false){
@@ -82295,6 +82307,7 @@ module.exports = {
     send : async (to, amount) => {
 
     }
+
     
 }
 },{"./blockchain.js":638}]},{},[639])(639)
