@@ -1,7 +1,7 @@
 var db;
 var w3;
 var contract;
-
+const _ = require("lodash");
 const FarmController = {
 	"init" : async (dbs,blockchain) => {
 		db = dbs;
@@ -64,7 +64,8 @@ const FarmController = {
 			let annualReward = rewardUnit * annualUnits * 1;
 			let apy = parseFloat((annualReward/amount)*100).toFixed(2);
 			let apr = parseFloat((annualReward/amount)*100).toFixed(2);
-
+			if(_.isString(apy)) apy = 0;
+			if(_.isString(apr)) apr = 0;
 			sql = "UPDATE `farm_task` SET `stakingToken` = '"+ value.stakingToken +"', `apr` ='"+ apr +"', `apy` ='"+ apy +"', `reward_token` = '"+rewardUnit+"', `timestart` = '"+startTime+"', `period` = "+period+", `amount_holder`= '"+(value.amount / bNum)+"', `max_amount` = '"+(value.totalReward / bNum)+"', `totalReward` = '"+totalReward+"', `claimed_paid`= '"+(value.claimed / bNum)+"', `claimedPerToken`= '"+(value.claimedPerToken / bNum)+"', `lastInterestUpdate`= '"+value.lastInterestUpdate+"', `interestPerToken`= '"+(value.interestPerToken / bNum)+"' WHERE `farm_task`.`log_id` = "+id+";";
 			await db(sql);
 		});
