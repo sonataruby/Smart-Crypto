@@ -81849,6 +81849,13 @@ const loadMain = async () => {
 	            //startSession();
 	            farm.pool(amount,session_id);
 	        });
+	        $("[data-web3=farmdeposit]").on("click", function(){
+	            var session_id = parseInt($(this).attr("data-session"));
+	            var amount = parseFloat($(this).attr("data-amount"));
+	            //startSession();
+	            farm.deposit(amount,session_id);
+	        });
+	        
 
 	        $("[data-web3=farmclaim]").on("click", function(){
 	            //claim(0);
