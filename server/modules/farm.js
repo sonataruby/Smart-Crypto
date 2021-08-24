@@ -32,7 +32,7 @@ const FarmController = {
                 lastSessionId = value;
             });
 
-           if (sessionId != undefined && parseInt(sessionId) > 0) {
+           if (lastSessionId != undefined && parseInt(lastSessionId) > 0) {
 	           sql = "INSERT INTO `farm_task` (`log_id`, `reward_token`, `reward_nft`, `timestart`, `min_deposit`, `pool_name`, `apr`, `period`, `status`) VALUES ('"+sessionId+"', '"+obj.reward+"', '"+obj.nftreward+"', '"+obj.startTime+"', '"+obj.deposit+"', '"+obj.name+"', '"+obj.apr+"', '"+obj.period+"', '1');"
 			   //console.log(obj);
 			    await db(sql);
@@ -62,10 +62,10 @@ const FarmController = {
 			let rewardUnit = totalReward/period;
 			let annualUnits = 31556952;  // 1 year in seconds
 			let annualReward = rewardUnit * annualUnits * 1;
-			let apy = (annualReward/amount)*100;
-			let apr = (annualReward/amount)*100;
+			let apy = parseFloat((annualReward/amount)*100).toFixed(2);
+			let apr = parseFloat((annualReward/amount)*100).toFixed(2);
 
-			sql = "UPDATE `farm_task` SET `stakingToken` = '"+ value.stakingToken +"', `apr` ='"+apr+"', `apy` ='"+apy+"', `reward_token` = '"+rewardUnit+"', `timestart` = '"+startTime+"', `period` = "+period+", `amount_holder`= '"+(value.amount / bNum)+"', `max_amount` = '"+(value.totalReward / bNum)+"', `totalReward` = '"+totalReward+"', `claimed_paid`= '"+(value.claimed / bNum)+"', `claimedPerToken`= '"+(value.claimedPerToken / bNum)+"', `lastInterestUpdate`= '"+value.lastInterestUpdate+"', `interestPerToken`= '"+(value.interestPerToken / bNum)+"' WHERE `farm_task`.`log_id` = "+id+";";
+			sql = "UPDATE `farm_task` SET `stakingToken` = '"+ value.stakingToken +"', `apr` ='"+ apr +"', `apy` ='"+ apy +"', `reward_token` = '"+rewardUnit+"', `timestart` = '"+startTime+"', `period` = "+period+", `amount_holder`= '"+(value.amount / bNum)+"', `max_amount` = '"+(value.totalReward / bNum)+"', `totalReward` = '"+totalReward+"', `claimed_paid`= '"+(value.claimed / bNum)+"', `claimedPerToken`= '"+(value.claimedPerToken / bNum)+"', `lastInterestUpdate`= '"+value.lastInterestUpdate+"', `interestPerToken`= '"+(value.interestPerToken / bNum)+"' WHERE `farm_task`.`log_id` = "+id+";";
 			await db(sql);
 		});
 	},
