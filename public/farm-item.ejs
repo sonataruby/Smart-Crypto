@@ -5,12 +5,12 @@
                 <div class="col-md-4 mb-4 col-sm-6 col-12">
                     <div class="border round text-left p-3">
                         <h6><%= data.pool_name%></h6>
-                        <h7><%= data.min_deposit%> <%= token.name%></h7>
+                        <h7>Min Deposit : <%= data.min_deposit%> <%= token.name%></h7>
                         <hr>
                         <p>
-                            Start : <span data-timestart="<%= data.timestart%>" data-period="<%= data.period%>"><%= data.timestart%></span><br>
-                            End : <span data-timeend="<%= data.timeend%>"><%= data.timeend%></span><br>
-                            Period : <%= data.period%> h
+                            Start Time: <span data-timestart="<%= data.timestart%>" data-period="<%= data.period%>"><%= data.timestart%></span><br>
+                            End Time: <span data-timeend="<%= data.timeend%>"><%= data.timeend%></span><br>
+                            Period : <%= data.period%> hour
                         </p>
                         <p>
                             APR : <%= data.apr%>%<br>

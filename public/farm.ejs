@@ -1,13 +1,27 @@
 
 <section class="bg-white mb-4">
+
+    
+    
     <div class="page-header">
         <div class="container mb-3">
-        	<h3 class="d-flex justify-content-between">Smart Farm <%if(staking.contract){%><a href="https://bscscan.com/token/<%= staking.contract%>" class="btn btn-md btn-block btn-primary">Contract</a><%}%></h3>
+        	<h3 class="d-flex justify-content-between"><div><em class="ikon ikon-cash"></em>Farm Pool <%= token.name%> - <%= token.name%> NFT</div><%if(token.contract){%><a href="https://bscscan.com/token/<%= token.contract%>" target="_bank" class="btn btn-md btn-block btn-primary">Contract</a><%}%></h3>
             
         </div>
     </div>
 
-    <div class="container" data-ejs-load="/farm/item">
+    <div class="container mb-3" data-ejs-load="/farm/item">
 
     </div>
+
+
+    <%- include("./components/wallet-balance.ejs") %>
+
+    <div class="container mb-3">
+        <h5>Your pool</h5>
+    </div>
+    <div class="container mb-3" data-ejs-task="/farm/task">
+
+    </div>
+
 </section>

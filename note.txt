@@ -1,0 +1,11 @@
+[Farm NFT]
+Mục tiêu của trò chơi là đặt cược mã thông báo CAR để lấy phần thưởng CAR. 
+Công thức đặt cọc nằm trong Hợp đồng thông minh. Ngoài ra, thời gian đặt cược sẽ diễn ra trong Phiên trò chơi. 
+Tùy chọn: Mỗi người chơi có thể rút 1 nft trong mỗi phiên trò chơi hoặc CAR
+[Farm CAR]
+Mục tiêu của trò chơi là đặt cược  NFT để nhận phần thưởng CAR. 
+Khi yêu cầu phần thưởng CAR, NFT sẽ bị xóa.
+[Mint CAR]
+Mục tiêu của trò chơi là sử dụng mã thông báo CAR để đúc các CAR NFT. 
+Bạn chi tiêu càng nhiều, chất lượng của CAR NFT đúc càng cao. 
+Trò chơi này cũng có một bảng xếp hạng. Mười người chiến thắng hàng đầu của bảng xếp hạng có thể yêu cầu các mã thông báo bổ sung.

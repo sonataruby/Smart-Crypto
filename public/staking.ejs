@@ -1,8 +1,10 @@
 <section class="bg-white mb-4">
+    <%- include("./components/wallet-balance.ejs") %>
     <div class="container mb-3">
     	<h3 class="d-flex justify-content-between">Smart Staking Manager <%if(staking.contract){%><a href="https://bscscan.com/token/<%= staking.contract%>" class="btn btn-md btn-block btn-primary">Contract</a><%}%></h3>
         <hr>
     </div>
+
     <div class="container">
 
         <div class="row mb-4">
@@ -17,7 +19,7 @@
 
         <div class="row">
             <% staking.package.forEach(function(data, index){ %>
-                <div class="col-md-2 mb-3 col-sm-6 col-12">
+                <div class="col-md-3 mb-3 col-sm-6 col-12">
                     <div class="border round text-center p-3">
                         <h6><%= data.name%></h6>
                         <p>APR : <%= data.apr%>%<br>
@@ -33,33 +35,3 @@
     </div>
 </section>
 
-
-<section class="bg-white">
-    <div class="container">
-        <div class="nk-block">
-            <h4>Your Staking Task</h4>
-            <table class="table">
-                <tr>
-                    <td>Join</td>
-                    <td>Finish</td>
-                    <td>Blance</td>
-                    <td>APR</td>
-                    <td></td>
-                </tr>
-
-                <tr>
-                    <td>15/08/2021 09:55:12</td>
-                    <td>19/08/2021 09:55:12</td>
-                    <td>100 CAR</td>
-                    <td>51%</td>
-                    <td class="text-right">
-                        <button class="btn btn-sm btn-primary">Widthdraw</button>
-                        <button class="btn btn-sm btn-info">Claim</button>
-                    </td>
-                </tr>
-
-            </table>
-        </div>
-        
-    </div>
-</section>
