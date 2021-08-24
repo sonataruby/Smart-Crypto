@@ -16,19 +16,27 @@ const FarmController = {
 	"create" : async (obj) => {
 		let address = await w3.loadAddress();
 
-		let period = obj.period; 
+		let period = 3600 * parseInt(obj.period); 
+
         let generation = 1;
         let startTime = obj.startTime;
 
         var StartSessionTime = startTime;
         
-        let reward = w3.web3.utils.toWei(obj.reward.toString(), "ether"); 
+        let totalReward = w3.web3.utils.toWei(obj.reward.toString(), "ether"); 
 
         
-		await contract.startSession(address.AddressContractSmartToken, reward, period, StartSessionTime, generation).send({from: "0xe6B84663Dc54b9B29f0a1A04B59e94d92BfE4DFf", gas : 300000}).then(async (value) => {
-           sql = "INSERT INTO `farm_task` (`log_id`, `reward_token`, `reward_nft`, `timestart`, `min_deposit`, `pool_name`, `apr`, `period`, `status`) VALUES ('"+value+"', '"+obj.reward+"', '"+obj.nftreward+"', '"+obj.startTime+"', '"+obj.deposit+"', '"+obj.name+"', '"+obj.apr+"', '"+obj.period+"', '1');"
-		   //console.log(obj);
-		    await db(sql);
+		await contract.startSession(address.AddressContractSmartToken, totalReward, period, StartSessionTime, generation).send({from: "0xe6B84663Dc54b9B29f0a1A04B59e94d92BfE4DFf", gas : 300000}).then(async (value) => {
+           let lastSessionId = 0;
+           await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
+                lastSessionId = value;
+            });
+
+           if (sessionId != undefined && parseInt(sessionId) > 0) {
+	           sql = "INSERT INTO `farm_task` (`log_id`, `reward_token`, `reward_nft`, `timestart`, `min_deposit`, `pool_name`, `apr`, `period`, `status`) VALUES ('"+sessionId+"', '"+obj.reward+"', '"+obj.nftreward+"', '"+obj.startTime+"', '"+obj.deposit+"', '"+obj.name+"', '"+obj.apr+"', '"+obj.period+"', '1');"
+			   //console.log(obj);
+			    await db(sql);
+			}
         });
 		
 		//await db(sql);
@@ -47,7 +55,17 @@ const FarmController = {
 			console.log(value);
 			var bNum = 10 ** 18;
 
-			sql = "UPDATE `farm_task` SET `stakingToken` = '"+ value.stakingToken +"', `reward_token` = '"+(value.totalReward/ bNum)+"', `timestart` = '"+value.startTime+"', `amount_holder`= '"+(value.amount / bNum)+"', `claimed_paid`= '"+(value.claimed / bNum)+"', `claimedPerToken`= '"+(value.claimedPerToken / bNum)+"', `lastInterestUpdate`= '"+value.lastInterestUpdate+"', `interestPerToken`= '"+(value.interestPerToken / bNum)+"' WHERE `farm_task`.`log_id` = "+id+";";
+			let amount = parseFloat(w3.web3.utils.fromWei(value.amount));
+			let totalReward = parseFloat(w3.web3.utils.fromWei(value.totalReward));
+			let startTime = parseInt(value.startTime);
+			let period = parseInt(value.period);
+			let rewardUnit = totalReward/period;
+			let annualUnits = 31556952;  // 1 year in seconds
+			let annualReward = rewardUnit * annualUnits * 1;
+			let apy = (annualReward/amount)*100;
+			let apr = (annualReward/amount)*100;
+
+			sql = "UPDATE `farm_task` SET `stakingToken` = '"+ value.stakingToken +"', `apr` ='"+apr+"', `apy` ='"+apy+"', `reward_token` = '"+rewardUnit+"', `timestart` = '"+startTime+"', `period` = "+period+", `amount_holder`= '"+(value.amount / bNum)+"', `max_amount` = '"+(value.totalReward / bNum)+"', `totalReward` = '"+totalReward+"', `claimed_paid`= '"+(value.claimed / bNum)+"', `claimedPerToken`= '"+(value.claimedPerToken / bNum)+"', `lastInterestUpdate`= '"+value.lastInterestUpdate+"', `interestPerToken`= '"+(value.interestPerToken / bNum)+"' WHERE `farm_task`.`log_id` = "+id+";";
 			await db(sql);
 		});
 	},

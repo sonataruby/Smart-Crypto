@@ -10,11 +10,11 @@
                         <p>
                             Start Time: <span data-timestart="<%= data.timestart%>" data-period="<%= data.period%>"><%= data.timestart%></span><br>
                             End Time: <span data-timeend="<%= data.timeend%>"><%= data.timeend%></span><br>
-                            Period : <%= data.period%> hour
+                            Period : <%- (data.period / 3600).toFixed(2) %> hour
                         </p>
                         <p>
                             APR : <%= data.apr%>%<br>
-                            Reward : <%= data.reward_token%> <%= token.name%> , <%= data.reward_nft%> NFT
+                            Reward : <%- data.reward_token * 3600%> <%= token.name%> / 1h , <%= data.reward_nft%> NFT
                             
                         </p>
 
@@ -22,12 +22,33 @@
                             <button class="btn btn-sm btn-primary" data-web3="farmclaim" data-session="<%= data.log_id%>">Claim</button>
                         </div>
                         <div class="joinOnly">
-                            <button class="btn btn-sm btn-info" data-web3="farmpool" data-session="<%= data.log_id%>" data-amount="<%= data.min_deposit%>">Approve</button>
-                            <button data-web3="farmdeposit" data-session="<%= data.log_id%>" data-amount="<%= data.min_deposit%>" class="btn btn-sm btn-primary">Deposit</button>
+                            <button class="btn btn-sm btn-info" data-web3="farmpool" data-session="<%= data.log_id%>" data-amount="<%= data.max_amount%>">Approve</button>
+                            <button data-toggle="modal" data-target="#FarmDesopit<%= index%>" data-session="<%= data.log_id%>" data-amount="<%= data.min_deposit%>" class="btn btn-sm btn-primary">Deposit</button>
                         </div>
                         
                     </div>
-                   
+                    
+                    <div class="modal fade" tabindex="-1" id="FarmDesopit<%= index%>">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Confirm Deposit | <%= data.pool_name%></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Check Your balance <%= token.name%> before confirm.</p>
+                            <input type="number" value="<%= data.min_deposit%>" class="form-control">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary btn-sm" data-session="<%= data.log_id%>" data-web3="farmdeposit" data-min="<%= data.min_deposit%>">Confirm</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                 </div>
              <% }); %>
         </div>
@@ -37,7 +58,7 @@
 jQuery(document).ready(function(){
 	$("[data-timestart]").each(function(res){
 		var period = $(this).attr("data-period");
-		periodEx = parseInt(period) * 3600;
+		periodEx = parseInt(period);
 
 		var timeStart = $(this).attr("data-timestart");
 		var timeEnd = parseInt(timeStart) + parseInt(periodEx);

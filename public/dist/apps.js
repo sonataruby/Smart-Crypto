@@ -81721,6 +81721,7 @@ let presell = require("./presell.js");
 let farm = require("./farm.js");
 let staking = require("./staking.js");
 let tokenSmart = require("./token.js");
+let notify = require("./notify.js");
 //let tokenSmart = require("./token.js");
 
 
@@ -81836,8 +81837,10 @@ const loadMain = async () => {
 
 	    await farm.loadContracts();
 	    await farm.setup();
-	    let id = await farm.getid();
-	    console.log(id);
+	    //let id = await farm.getid();
+	    //let s = await farm.session(id);
+
+	    //console.log(id);
 	    $("[data-web3=farmpool]").on("click", function(){
 	        var session_id = parseInt($(this).attr("data-session"));
 	        var amount = parseFloat($(this).attr("data-amount"));
@@ -81854,13 +81857,45 @@ const loadMain = async () => {
 	            var session_id = parseInt($(this).attr("data-session"));
 	            var amount = parseFloat($(this).attr("data-amount"));
 	            //startSession();
-	            farm.pool(amount,session_id);
+	            farm.approve(amount,session_id);
 	        });
 	        $("[data-web3=farmdeposit]").on("click", function(){
+	        	var getAmout = $(this).parent().parent().find(".modal-body input").val();
+
 	            var session_id = parseInt($(this).attr("data-session"));
-	            var amount = parseFloat($(this).attr("data-amount"));
+	            var min_deposit = parseInt($(this).attr("data-min"));
+	            var amount = parseFloat(getAmout);
+
+	            let poolStake =  farm.stakedBalance(session_id);
+	            let balance =  tokenSmart.balance();
+	            let error = false;
 	            //startSession();
-	            farm.deposit(amount,session_id);
+
+	            //Error when < Min Deposit
+	            if(amount < min_deposit){
+	            	notify.toast("Min deposit : "+min_deposit);
+	            	error = true;
+	            }
+
+	            //Error when max poolSize
+	            if( amount > poolStake){
+	            	notify.toast("Pool Allow deposit : "+poolStake);
+	            	error = true;
+	            }
+
+	            //Error When Balance not found
+	            if(balance == 0 || balance < amount){
+	            	notify.toast("You Balance empty");
+	            	error = true;
+	            }
+	            farm.earned(session_id);
+	            farm.session(session_id);
+	            farm.stakedBalance(session_id);
+	            //console.log(session_id, " ", amount);
+	            if(error == false){
+	            	farm.confirm(amount,session_id);
+	            }
+	            //farm.deposit(amount,session_id);
 	        });
 	        
 
@@ -81882,11 +81917,11 @@ const loadMain = async () => {
 }
 
 loadMain();
-},{"./airdrop.js":637,"./blockchain.js":638,"./farm.js":640,"./ido.js":641,"./presell.js":643,"./staking.js":644,"./token.js":645}],640:[function(require,module,exports){
+},{"./airdrop.js":637,"./blockchain.js":638,"./farm.js":640,"./ido.js":641,"./notify.js":642,"./presell.js":643,"./staking.js":644,"./token.js":645}],640:[function(require,module,exports){
 let blockchain = require("./blockchain.js");
 
 let moment = require("moment");
-
+let notify = require("./notify.js");
 var ContractAddress = JSON.parse("{\n\t\"AddressContractPresell\" : \"0x4e7f7bdfc8a55cf47e4207ab0cc03d92e66f8452\",\n\t\"AddressContractAirdrop\" : \"0xde087a28a09235797d264ee4ceb75c62a8539a85\",\n\t\"AddressContractIDO\" : \"0xa5eec60aee7d3fdd5cff5d1d785b12244bf9cad9\",\n\t\"AddressContractSmartToken\" : \"0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46\",\n\t\"MasterIDOWallet\" : \"0xe6b84663dc54b9b29f0a1a04b59e94d92bfe4dff\",\n\t\"AddressContractSmartNFT\" : \"0x6a741feb01276e18a9d8a5a2f57542ec3205e4ca\",\n\t\"AddressContractNFTFactory\" : \"0x4dCf21092e9B60276E9b6BaE550B8D0F7e074c6f\",\n\t\"AddressContractNFTMarket\" : \"\",\n\t\"AddressContractLPCAKE\" : \"0xeb2fe6d5fbc9fbcc2db2ac8c548c07e4c36ea2b1\",\n\t\"AddressContractFarm\" : \"0x6d0425144274c6426a6d30406ab2443468ecce68\",\n\t\"AddressContractNFTGame\" : \"\",\n\t\"AddressContractStaking\" : \"0xd680c10d1fcbe17319fc99c7fc001a78e1f37b3f\"\n}");
 let token = require("./token.js");
 let contractFarm;
@@ -81928,6 +81963,35 @@ module.exports = {
         });
         return lastSessionId;
     },
+    
+    stakedBalance : async (session_id) => {
+        let balance = 0;
+        await contractFarm.stakedBalance(session_id).call().then((data) => {
+            balance = data / 10 ** 18;
+        });
+        return balance;
+    },
+    session : async (session_id) => {
+
+        let status = await blockchain.isStatus();
+        if(status == false){
+            await blockchain.connect();
+        }
+
+        await contractFarm.sessions(session_id).call().then(async (value) => {
+            console.log(value);
+        });
+    },
+    earned : async (session_id) => {
+        let status = await blockchain.isStatus();
+        if(status == false){
+            await blockchain.connect();
+        }
+
+        await contractFarm.earned(session_id, login_wallet).call().then(async (value) => {
+            console.log(value);
+        });
+    },
     pool : async (amount, session_id) => {
         
         let status = await blockchain.isStatus();
@@ -81945,7 +82009,8 @@ module.exports = {
         });
         
     },
-    deposit : async (amount, session_id) => {
+    
+    confirm : async (amount, session_id) => {
         let status = await blockchain.isStatus();
         if(status == false){
             await blockchain.connect();
@@ -81953,7 +82018,12 @@ module.exports = {
         const gasPrice = await blockchain.web3.eth.getGasPrice();
         let depositAmount = blockchain.web3.utils.toWei(amount.toString(),"ether");
         await contractFarm.deposit(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then((value) => {
-            console.log(value);
+           
+            if(value.status == false){
+                notify.toast("Confirm Error");
+            }else if(value.status == true){
+                notify.toast("Confirm success<br>Hash : "+value.transactionHash);
+            }
         });
     },
     claim : async (lastSessionId) => {
@@ -81970,7 +82040,7 @@ module.exports = {
     }
     
 }
-},{"./blockchain.js":638,"./token.js":645,"moment":344}],641:[function(require,module,exports){
+},{"./blockchain.js":638,"./notify.js":642,"./token.js":645,"moment":344}],641:[function(require,module,exports){
 let blockchain = require("./blockchain.js");
 
 let moment = require("moment");
