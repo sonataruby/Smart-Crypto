@@ -28,7 +28,7 @@ const FarmController = {
 		await contract.startSession(address.AddressContractSmartToken, reward, period, StartSessionTime, generation).send({from: "0xe6B84663Dc54b9B29f0a1A04B59e94d92BfE4DFf", gas : 300000}).then((value) => {
            sql = "INSERT INTO `farm_task` (`log_id`, `reward_token`, `reward_nft`, `timestart`, `min_deposit`, `pool_name`, `apr`, `period`, `status`) VALUES ('"+value+"', '"+obj.reward+"', '"+obj.nftreward+"', '"+obj.startTime+"', '"+obj.deposit+"', '"+obj.name+"', '"+obj.apr+"', '"+obj.period+"', '1');"
 		   //console.log(obj);
-		   await db(sql);
+		    db(sql);
         });
 		
 		//await db(sql);
