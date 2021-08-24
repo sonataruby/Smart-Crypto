@@ -25,10 +25,10 @@ const FarmController = {
         let reward = w3.web3.utils.toWei(obj.reward.toString(), "ether"); 
 
         
-		await contract.startSession(address.AddressContractSmartToken, reward, period, StartSessionTime, generation).send({from: "0xe6B84663Dc54b9B29f0a1A04B59e94d92BfE4DFf", gas : 300000}).then((value) => {
+		await contract.startSession(address.AddressContractSmartToken, reward, period, StartSessionTime, generation).send({from: "0xe6B84663Dc54b9B29f0a1A04B59e94d92BfE4DFf", gas : 300000}).then(async (value) => {
            sql = "INSERT INTO `farm_task` (`log_id`, `reward_token`, `reward_nft`, `timestart`, `min_deposit`, `pool_name`, `apr`, `period`, `status`) VALUES ('"+value+"', '"+obj.reward+"', '"+obj.nftreward+"', '"+obj.startTime+"', '"+obj.deposit+"', '"+obj.name+"', '"+obj.apr+"', '"+obj.period+"', '1');"
 		   //console.log(obj);
-		    db(sql);
+		    await db(sql);
         });
 		
 		//await db(sql);
@@ -44,6 +44,7 @@ const FarmController = {
 	"syncDB" : (id) => {
 
 		contract.sessions(id).call().then(async (value) => {
+			console.log(value);
 			var bNum = 10 ** 18;
 
 			sql = "UPDATE `farm_task` SET `stakingToken` = '"+ value.stakingToken +"', `reward_token` = '"+(value.totalReward/ bNum)+"', `timestart` = '"+value.startTime+"', `amount_holder`= '"+(value.amount / bNum)+"', `claimed_paid`= '"+(value.claimed / bNum)+"', `claimedPerToken`= '"+(value.claimedPerToken / bNum)+"', `lastInterestUpdate`= '"+value.lastInterestUpdate+"', `interestPerToken`= '"+(value.interestPerToken / bNum)+"' WHERE `farm_task`.`log_id` = "+id+";";

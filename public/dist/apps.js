@@ -81509,6 +81509,7 @@ function extend() {
 
 },{}],637:[function(require,module,exports){
 let blockchain = require("./blockchain.js");
+let notify = require("./notify.js");
 const axios = require('axios').default;
 let contractAirdrop;
 let login_wallet;
@@ -81565,20 +81566,21 @@ module.exports = {
         });
 
         if(checkAirdrop == true){
-            notify("Airdrop Ready");
+            notify.toast("Airdrop Ready");
         }else{
             await contractAirdrop.airdrop(token).send({from:login_wallet,gas : GAS}).then((res) => {
                 if(res.transactionHash){
-                    notify("Airdrop successful Tx : "+res.transactionHash);
+                    notify.toast("Airdrop successful Tx : "+res.transactionHash);
                 }
             });
         }
     }
 }
-},{"./blockchain.js":638,"axios":113}],638:[function(require,module,exports){
+},{"./blockchain.js":638,"./notify.js":642,"axios":113}],638:[function(require,module,exports){
 (function (process){(function (){
 let Web3 = require('web3');
 
+let notify = require("./notify.js");
 let httpProvider = "https://bsc-dataseed.binance.org";
 let login_wallet = "";
 let isConnect = false;
@@ -81711,7 +81713,7 @@ module.exports.loadContractStaking = async () => {
 	return contract.methods;
 }
 }).call(this)}).call(this,require('_process'))
-},{"_process":376,"web3":594}],639:[function(require,module,exports){
+},{"./notify.js":642,"_process":376,"web3":594}],639:[function(require,module,exports){
 let blockchain = require("./blockchain.js");
 let ido = require("./ido.js");
 let airdrop = require("./airdrop.js");
@@ -81720,6 +81722,8 @@ let farm = require("./farm.js");
 let staking = require("./staking.js");
 let tokenSmart = require("./token.js");
 //let tokenSmart = require("./token.js");
+
+
 
 const loadMain = async () => {
 	let wallet = await blockchain.login_wallet();
@@ -81793,6 +81797,7 @@ const loadMain = async () => {
 	PreSell
     */
     await presell.loadContracts();
+    
     $("#btnBuyToken, [data-web3=presell]").on("click", function(){
         presell.presell("0.1");
     });
@@ -81860,7 +81865,8 @@ const loadMain = async () => {
 	        
 
 	        $("[data-web3=farmclaim]").on("click", function(){
-	            //claim(0);
+	        	var session_id = parseInt($(this).attr("data-session"));
+	            farm.claim(session_id);
 	        });
 	    });
 	    $("[data-ejs-task]").load("/farm/task", function(){
@@ -81876,7 +81882,7 @@ const loadMain = async () => {
 }
 
 loadMain();
-},{"./airdrop.js":637,"./blockchain.js":638,"./farm.js":640,"./ido.js":641,"./presell.js":642,"./staking.js":643,"./token.js":644}],640:[function(require,module,exports){
+},{"./airdrop.js":637,"./blockchain.js":638,"./farm.js":640,"./ido.js":641,"./presell.js":643,"./staking.js":644,"./token.js":645}],640:[function(require,module,exports){
 let blockchain = require("./blockchain.js");
 
 let moment = require("moment");
@@ -81964,11 +81970,12 @@ module.exports = {
     }
     
 }
-},{"./blockchain.js":638,"./token.js":644,"moment":344}],641:[function(require,module,exports){
+},{"./blockchain.js":638,"./token.js":645,"moment":344}],641:[function(require,module,exports){
 let blockchain = require("./blockchain.js");
 
 let moment = require("moment");
 const axios = require('axios').default;
+let notify = require("./notify.js");
 let contractIdo;
 var ContractAddress = JSON.parse("{\n\t\"AddressContractPresell\" : \"0x4e7f7bdfc8a55cf47e4207ab0cc03d92e66f8452\",\n\t\"AddressContractAirdrop\" : \"0xde087a28a09235797d264ee4ceb75c62a8539a85\",\n\t\"AddressContractIDO\" : \"0xa5eec60aee7d3fdd5cff5d1d785b12244bf9cad9\",\n\t\"AddressContractSmartToken\" : \"0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46\",\n\t\"MasterIDOWallet\" : \"0xe6b84663dc54b9b29f0a1a04b59e94d92bfe4dff\",\n\t\"AddressContractSmartNFT\" : \"0x6a741feb01276e18a9d8a5a2f57542ec3205e4ca\",\n\t\"AddressContractNFTFactory\" : \"0x4dCf21092e9B60276E9b6BaE550B8D0F7e074c6f\",\n\t\"AddressContractNFTMarket\" : \"\",\n\t\"AddressContractLPCAKE\" : \"0xeb2fe6d5fbc9fbcc2db2ac8c548c07e4c36ea2b1\",\n\t\"AddressContractFarm\" : \"0x6d0425144274c6426a6d30406ab2443468ecce68\",\n\t\"AddressContractNFTGame\" : \"\",\n\t\"AddressContractStaking\" : \"0xd680c10d1fcbe17319fc99c7fc001a78e1f37b3f\"\n}");
 let presenterAddress;
@@ -82075,7 +82082,15 @@ module.exports = {
                 });
     }
 }
-},{"./blockchain.js":638,"axios":113,"moment":344}],642:[function(require,module,exports){
+},{"./blockchain.js":638,"./notify.js":642,"axios":113,"moment":344}],642:[function(require,module,exports){
+module.exports = {
+    toast : function(msg){
+        $('.toast').find(".toast-body").html(msg);
+        $('.toast').addClass("toast-error");
+        $('.toast').toast('show');
+    }
+}
+},{}],643:[function(require,module,exports){
 let blockchain = require("./blockchain.js");
 let contractPresell;
 let login_wallet;
@@ -82106,7 +82121,7 @@ module.exports = {
           });
     }
 }
-},{"./blockchain.js":638}],643:[function(require,module,exports){
+},{"./blockchain.js":638}],644:[function(require,module,exports){
 let blockchain = require("./blockchain.js");
 
 let moment = require("moment");
@@ -82128,7 +82143,7 @@ module.exports = {
         
     }
 }
-},{"./blockchain.js":638,"./token.js":644,"moment":344}],644:[function(require,module,exports){
+},{"./blockchain.js":638,"./token.js":645,"moment":344}],645:[function(require,module,exports){
 let blockchain = require("./blockchain.js");
 
 var ContractAddress = JSON.parse("{\n\t\"AddressContractPresell\" : \"0x4e7f7bdfc8a55cf47e4207ab0cc03d92e66f8452\",\n\t\"AddressContractAirdrop\" : \"0xde087a28a09235797d264ee4ceb75c62a8539a85\",\n\t\"AddressContractIDO\" : \"0xa5eec60aee7d3fdd5cff5d1d785b12244bf9cad9\",\n\t\"AddressContractSmartToken\" : \"0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46\",\n\t\"MasterIDOWallet\" : \"0xe6b84663dc54b9b29f0a1a04b59e94d92bfe4dff\",\n\t\"AddressContractSmartNFT\" : \"0x6a741feb01276e18a9d8a5a2f57542ec3205e4ca\",\n\t\"AddressContractNFTFactory\" : \"0x4dCf21092e9B60276E9b6BaE550B8D0F7e074c6f\",\n\t\"AddressContractNFTMarket\" : \"\",\n\t\"AddressContractLPCAKE\" : \"0xeb2fe6d5fbc9fbcc2db2ac8c548c07e4c36ea2b1\",\n\t\"AddressContractFarm\" : \"0x6d0425144274c6426a6d30406ab2443468ecce68\",\n\t\"AddressContractNFTGame\" : \"\",\n\t\"AddressContractStaking\" : \"0xd680c10d1fcbe17319fc99c7fc001a78e1f37b3f\"\n}");
