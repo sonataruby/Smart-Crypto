@@ -107,9 +107,13 @@ app.get("/farm/task/:wallet/:target/:hash/:amount/:id", async (req, res) => {
   var amount   = req.params.amount;
   var session_id   = req.params.id;
   if(target == "list"){
-
+    let sql = "SELECT * FROM farm_user WHERE wallet = '"+wallet+"' ORDER BY session_id DESC LIMIT 100";
+    var data = await dbQuery(sql);
+    console.log(data);
   }else if(target == "join"){
-    dbQuery("INSERT ")
+    sql = "INSERT INTO `farm_user` (`wallet`, `amount`, `session_id`, `hash`) VALUES ('"+wallet+"', '"+amount+"', '"+session_id+"', '"+hash+"');"
+    await dbQuery(sql);
+    await axios.get("http://localhost:3000/farm/"+session_id+"/sync");
   }
 });
 
