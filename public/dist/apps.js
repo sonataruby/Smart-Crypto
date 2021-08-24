@@ -81831,6 +81831,8 @@ const loadMain = async () => {
 
 	    await farm.loadContracts();
 	    await farm.setup();
+	    let id = await farm.getid();
+	    console.log(id);
 	    $("[data-web3=farmpool]").on("click", function(){
 	        var session_id = parseInt($(this).attr("data-session"));
 	        var amount = parseFloat($(this).attr("data-amount"));
@@ -81897,13 +81899,28 @@ module.exports = {
         
     },
     approve : async (amount) => {
-
+        let status = await blockchain.isStatus();
+        if(status == false){
+            await blockchain.connect();
+        }
+        const gasPrice = await blockchain.web3.eth.getGasPrice();
+        
+        await token.loadContracts();
+        let depositAmount = blockchain.web3.utils.toWei(amount.toString(),"ether");
+        await token.approve(ContractAddress.AddressContractFarm,depositAmount);
     },
     balance : async () => {
         let balance = 0;
         await contractFarm.stakedBalanceOf(login_wallet).call().then((data) => {
             console.log(data);
         });
+    },
+    getid : async () => {
+        let lastSessionId = 0;
+        await contractFarm.lastSessionIds(ContractAddress.AddressContractSmartToken).call().then((value) => {
+            lastSessionId = value;
+        });
+        return lastSessionId;
     },
     pool : async (amount, session_id) => {
         
@@ -82180,15 +82197,15 @@ module.exports = {
             return false;
         } 
 
-        await contractToken.allowance(wallet,login_wallet).call().then(async (value) => {
+       //await contractToken.allowance(wallet,login_wallet).call().then(async (value) => {
             
-            if(value < amount){
+        //    if(value < amount){
                 await contractToken.approve(wallet,amount).send({from: login_wallet, gasPrice: gasPrice, gas: approveGasEstimate * 3}).then((value) => {
                     console.log(value);
                 });
-            }
+            //}
             
-        });
+        //});
     },
     send : async (to, amount) => {
 
