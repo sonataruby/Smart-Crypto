@@ -54,7 +54,7 @@ const FarmController = {
 		sql = "DELETE `farm_task` WHERE `farm_task`.`log_id` = "+id+";"
 		await db(sql);
 	},
-	"syncDB" : (id) => {
+	"syncDB" : async (id) => {
 		if(id == 0){
 			let lastSessionId = 0;
 	           await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
