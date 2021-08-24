@@ -129,9 +129,9 @@ app.post("/farm/create", async (req, res) => {
     if(parseInt(unixtime) < startTime) unixtime = startTime;
     
     await Farm.init(dbQuery, blockchain);
-    await Farm.create({name : name, period : period, reward : reward, nftreward: nftreward, deposit : deposit, startTime : unixtime, apr: apr});
+    let lastSessionId = await Farm.create({name : name, period : period, reward : reward, nftreward: nftreward, deposit : deposit, startTime : unixtime, apr: apr});
 
-    res.redirect('/farm');
+    res.redirect("/farm/"+lastSessionId+"/sync");
     
 });
 

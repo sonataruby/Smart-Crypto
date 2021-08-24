@@ -99,6 +99,19 @@ app.get("/farm/item", async (req, res) => {
   
   res.render("farm-item",dataMainConfig);
 });
+app.get("/farm/task/:wallet/:target/:hash/:amount/:id", async (req, res) => {
+  app.set('layout', './layout/nolayout');
+  var wallet = req.params.wallet;
+  var target = req.params.target;
+  var hash   = req.params.hash;
+  var amount   = req.params.amount;
+  var session_id   = req.params.id;
+  if(target == "list"){
+
+  }else if(target == "join"){
+    dbQuery("INSERT ")
+  }
+});
 
 
 app.get("/staking", (req, res) => {

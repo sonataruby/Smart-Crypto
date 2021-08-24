@@ -81837,10 +81837,10 @@ const loadMain = async () => {
 
 	    await farm.loadContracts();
 	    await farm.setup();
-	    let id = await farm.getid();
+	    //let id = await farm.getid();
 	    //let s = await farm.allowance();
 
-	    console.log(id);
+	    //console.log(id);
 	    $("[data-web3=farmpool]").on("click", function(){
 	        var session_id = parseInt($(this).attr("data-session"));
 	        var amount = parseFloat($(this).attr("data-amount"));
@@ -81904,7 +81904,8 @@ const loadMain = async () => {
 	            farm.claim(session_id);
 	        });
 	    });
-	    $("[data-ejs-task]").load("/farm/task", function(){
+	    $("[data-ejs-task]").load("/farm/task/"+wallet+"/list/0x/0/0", function(data){
+	    	console.log(data);
 	    });
 	}
 	/*
@@ -81924,6 +81925,7 @@ let moment = require("moment");
 let notify = require("./notify.js");
 var ContractAddress = JSON.parse("{\n\t\"AddressContractPresell\" : \"0x4e7f7bdfc8a55cf47e4207ab0cc03d92e66f8452\",\n\t\"AddressContractAirdrop\" : \"0xde087a28a09235797d264ee4ceb75c62a8539a85\",\n\t\"AddressContractIDO\" : \"0xa5eec60aee7d3fdd5cff5d1d785b12244bf9cad9\",\n\t\"AddressContractSmartToken\" : \"0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46\",\n\t\"MasterIDOWallet\" : \"0xe6b84663dc54b9b29f0a1a04b59e94d92bfe4dff\",\n\t\"AddressContractSmartNFT\" : \"0x6a741feb01276e18a9d8a5a2f57542ec3205e4ca\",\n\t\"AddressContractNFTFactory\" : \"0x4dCf21092e9B60276E9b6BaE550B8D0F7e074c6f\",\n\t\"AddressContractNFTMarket\" : \"\",\n\t\"AddressContractLPCAKE\" : \"0xeb2fe6d5fbc9fbcc2db2ac8c548c07e4c36ea2b1\",\n\t\"AddressContractFarm\" : \"0x6d0425144274c6426a6d30406ab2443468ecce68\",\n\t\"AddressContractNFTGame\" : \"\",\n\t\"AddressContractStaking\" : \"0xd680c10d1fcbe17319fc99c7fc001a78e1f37b3f\"\n}");
 let token = require("./token.js");
+const axios = require('axios').default;
 let contractFarm;
 let login_wallet;
 let GAS = 300000; 
@@ -82029,12 +82031,13 @@ module.exports = {
         }
         const gasPrice = await blockchain.web3.eth.getGasPrice();
         let depositAmount = blockchain.web3.utils.toWei(amount.toString(),"ether");
-        await contractFarm.deposit(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then((value) => {
+        await contractFarm.deposit(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {
            
             if(value.status == false){
                 notify.toast("Confirm Error");
             }else if(value.status == true){
                 notify.toast("Confirm success<br>Hash : "+value.transactionHash);
+                await axios.get("/farm/task/"+login_wallet+"/join/"+value.transactionHash+"/"+session_id);
             }
         });
     },
@@ -82052,7 +82055,7 @@ module.exports = {
     }
     
 }
-},{"./blockchain.js":638,"./notify.js":642,"./token.js":645,"moment":344}],641:[function(require,module,exports){
+},{"./blockchain.js":638,"./notify.js":642,"./token.js":645,"axios":113,"moment":344}],641:[function(require,module,exports){
 let blockchain = require("./blockchain.js");
 
 let moment = require("moment");

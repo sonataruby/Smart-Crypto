@@ -7,18 +7,16 @@
                         <h6>#<%= data.log_id%> | <%= data.pool_name%></h6>
                         <h7>Min Deposit : <%= data.min_deposit%> <%= token.name%></h7>
                         <hr>
-                        <p>
-                            Start Time: <span data-timestart="<%= data.timestart%>" data-period="<%= data.period%>"><%= data.timestart%></span><br>
-                            End Time: <span data-timeend="<%= data.timeend%>"><%= data.timeend%></span><br>
-                            Period : <%- (data.period / 3600).toFixed(2) %> hour<br>
-                            Total Reward : <%- data.totalReward%> <%= token.name%> 
-                        </p>
-                        <p>
-                            APR : <%= data.apr%>% <br>
-                            Reward : <%- data.reward_token * 3600%> <%= token.name%> / 1h , <%= data.reward_nft%> NFT
-                            
-                        </p>
-
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item d-flex justify-content-between" data-timestart="<%= data.timestart%>" data-period="<%= data.period%>">Start Time: <span><%= data.timestart%></span></li>
+                          <li class="list-group-item d-flex justify-content-between"><b>End Time: </b><span data-timeend="<%= data.timeend%>"><%= data.timeend%></span></li>
+                          <li class="list-group-item d-flex justify-content-between"><b>Period : </b><%- (data.period / 3600).toFixed(2) %> hour</li>
+                          <li class="list-group-item d-flex justify-content-between"><b>Total Reward : </b><%- data.totalReward%> <%= token.name%> </li>
+                          <li class="list-group-item d-flex justify-content-between"><b>Holder : </b><%- data.amount_holder%> <%= token.name%> </li>
+                          <li class="list-group-item d-flex justify-content-between"><b>APR : </b><%= data.apr%>% </li>
+                          <li class="list-group-item d-flex justify-content-between"><b>Reward :</b> <%- data.reward_token * 3600%> <%= token.name%> / 1h , <%= data.reward_nft%> NFT</li>
+                        </ul>
+                        <hr>
                         <div class="claimOnly">
                             <button class="btn btn-sm btn-primary" data-web3="farmclaim" data-session="<%= data.log_id%>">Claim</button>
                         </div>
@@ -63,7 +61,7 @@ jQuery(document).ready(function(){
 
 		var timeStart = $(this).attr("data-timestart");
 		var timeEnd = parseInt(timeStart) + parseInt(periodEx);
-		$(this).html(moment.unix(timeStart).format('MMM D, YYYY, HH:mmA'));
+		$(this).find("span").html(moment.unix(timeStart).format('MMM D, YYYY, HH:mmA'));
 		
         var CountFinish = moment.unix(timeEnd).format('YYYY/MM/DD HH:mm:ss');
         $(this).parent().find("[data-timeend]").html(CountFinish);
