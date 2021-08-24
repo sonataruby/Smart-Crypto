@@ -15,7 +15,8 @@ const FarmController = {
 	},
 	"create" : async (obj) => {
 		let address = await w3.loadAddress();
-
+		console.log(address);
+		return;
 		let period = obj.period; 
         let generation = 1;
         let startTime = obj.startTime;
@@ -24,11 +25,12 @@ const FarmController = {
         if(startTime < blockTime) StartSessionTime = blockTime;
         let reward = w3.web3.utils.toWei(obj.reward.toString(), "ether"); 
 
+        /*
 		await contract.startSession(address.AddressContractSmartToken, reward, period, StartSessionTime, generation).call().then((value) => {
            sql = "INSERT INTO `farm_task` (`log_id`, `reward_token`, `reward_nft`, `timestart`, `min_deposit`, `pool_name`, `apr`, `period`, `status`) VALUES ('"+value+"', '"+obj.reward+"', '"+obj.nftreward+"', '"+obj.startTime+"', '"+obj.deposit+"', '"+obj.name+"', '"+obj.apr+"', '"+obj.period+"', '1');"
 		   console.log(obj);
         });
-		
+		*/
 		//await db(sql);
 	},
 	"update" : async (id, name, status) => {

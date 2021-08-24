@@ -81725,7 +81725,9 @@ const loadMain = async () => {
 	let wallet = await blockchain.login_wallet();
 	let isStatus = await blockchain.isStatus();
 	await tokenSmart.loadContracts();
-	let balance = await tokenSmart.balance();
+
+
+	
 
 	if(wallet == null || wallet == "" || isStatus == false){
 		$("#walletAddress").parent().html('<span id="metaConnect">Connect</span>' + '<em class="icon fas fa-angle-double-right"></em>');
@@ -81733,6 +81735,7 @@ const loadMain = async () => {
 			blockchain.connect();
 		});
 	}else{
+		let balance = await tokenSmart.balance();
 		$("#walletAddress").parent().html('<span>'+wallet+ '</span>' + '<em class="icon  fas fa-angle-double-right"></em>');
 		$(".walletaddress").html(wallet);
 		$(".balance").html(balance);
