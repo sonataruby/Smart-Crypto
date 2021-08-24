@@ -81918,10 +81918,9 @@ const loadMain = async () => {
 }
 SmartApps = (function (SmartApps, $, window) {
     "use strict";
-
 	
-	SmartApps.Web3 =  async function(){
-		await loadMain();
+	SmartApps.Web3 =  function(){
+		loadMain();
     }
     SmartApps.components.docReady.push(SmartApps.Web3);
 	return SmartApps;
