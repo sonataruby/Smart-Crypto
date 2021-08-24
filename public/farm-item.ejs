@@ -11,9 +11,10 @@
                             Start Time: <span data-timestart="<%= data.timestart%>" data-period="<%= data.period%>"><%= data.timestart%></span><br>
                             End Time: <span data-timeend="<%= data.timeend%>"><%= data.timeend%></span><br>
                             Period : <%- (data.period / 3600).toFixed(2) %> hour
+                            Total Reward : <%- data.totalReward%> <%= token.name%> 
                         </p>
                         <p>
-                            APR : <%= data.apr%>%<br>
+                            APR : <%= data.apr%>% <br>
                             Reward : <%- data.reward_token * 3600%> <%= token.name%> / 1h , <%= data.reward_nft%> NFT
                             
                         </p>
