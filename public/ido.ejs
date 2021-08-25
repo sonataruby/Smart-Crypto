@@ -111,15 +111,13 @@
 <div class="container">
 	
 	<div class="row">
-		<div class="col-6">
+		<div class="col-md-6 col-12">
 		<div class="card border">
 			<h4>IDO </h4>
 			<div>1 <%= token.name %> = <span class="pricebnb"></span></div>
 			<div class="">
 				<div class="htmlerror"></div>
 				
-				
-
 				  <div class="form-group">
 				    <label for="exampleInputPassword1">Amount Min amount: <%= token.ido_min%> BNB | Max amount: <%= token.ido_max%> BNB</label>
 				    <input type="text" value="0.05" class="form-control" id="getAmountBNB">
@@ -132,11 +130,11 @@
 		</div>
 		</div>
 
-		<div class="col-6">
+		<div class="col-md-6 col-12">
 			<div class="card border">
 				<h4>Claim</h4>
 				<p>Claim more token when first buy <%= token.name%></p>
-				
+				<p>Claim when you share link</p>
 				<button class="btn btn-primary" data-web3="claim">Claim Get Free Coin</button>
 				
 			</div>
@@ -149,24 +147,32 @@
 <div class="container">
 	<h4>IDO Package</h4>
 	<div class="row">
-		<div class="col-3">
-			<h4>0.3 BNB</h4>
-			<button type="button" data-web3="ido" data-value="0.3" class="btn btn-primary">Buy Token</button>
+		<div class="col-md-3 col-12">
+			<div class="border text-center p-3 round hoveborder">
+				<h4>0.3 BNB</h4>
+				<button type="button" data-web3="ido" data-value="0.3" class="btn btn-primary">Buy Token</button>
+			</div>
 		</div>
 
-		<div class="col-3">
-			<h4>0.5 BNB</h4>
-			<button type="button" data-web3="ido" data-value="0.5" class="btn btn-primary">Buy Token</button>
+		<div class="col-md-3 col-12">
+			<div class="border text-center p-3 round hoveborder">
+				<h4>0.5 BNB</h4>
+				<button type="button" data-web3="ido" data-value="0.5" class="btn btn-primary">Buy Token</button>
+			</div>
 		</div>
 
-		<div class="col-3">
-			<h4>1 BNB</h4>
-			<button type="button" data-web3="ido" data-value="1" class="btn btn-primary">Buy Token</button>
+		<div class="col-md-3 col-12">
+			<div class="border text-center p-3 round hoveborder">
+				<h4>1 BNB</h4>
+				<button type="button" data-web3="ido" data-value="1" class="btn btn-primary">Buy Token</button>
+			</div>
 		</div>
 
-		<div class="col-3">
-			<h4>1.5 BNB</h4>
-			<button type="button" data-web3="ido" data-value="1.5" class="btn btn-primary">Buy Token</button>
+		<div class="col-md-3 col-12">
+			<div class="border text-center p-3 round hoveborder">
+				<h4>1.5 BNB</h4>
+				<button type="button" data-web3="ido" data-value="1.5" class="btn btn-primary">Buy Token</button>
+			</div>
 		</div>
 	</div>
 </div>

@@ -98,7 +98,10 @@ app.get("/farm/item", async (req, res) => {
   dataMainConfig.TimeChecked = startTime;
   
   res.render("farm-item",dataMainConfig);
+
 });
+
+
 app.get("/farm/task/:wallet/:target/:hash/:amount/:id", async (req, res) => {
   app.set('layout', './layout/nolayout');
   var wallet = req.params.wallet;
@@ -110,6 +113,10 @@ app.get("/farm/task/:wallet/:target/:hash/:amount/:id", async (req, res) => {
     let sql = "SELECT * FROM farm_user WHERE wallet = '"+wallet+"' ORDER BY session_id DESC LIMIT 100";
     var data = await dbQuery(sql);
     console.log(data);
+    var dataMainConfig = readJSONFile('main.json')
+    dataMainConfig.items = JSON.parse(data);
+    res.render("farm-mypool",dataMainConfig);
+
   }else if(target == "join"){
     sql = "INSERT INTO `farm_user` (`wallet`, `amount`, `session_id`, `hash`) VALUES ('"+wallet+"', '"+amount+"', '"+session_id+"', '"+hash+"');"
     await dbQuery(sql);
@@ -246,7 +253,7 @@ var dbQuery = async function(databaseQuery) {
 
 app.get('/data/:any', async (req, res) => {
 
-  let sql = `SELECT * FROM farm_task WHERE status = '1' ORDER BY status,timestart DESC LIMIT 100`;
+  let sql = `SELECT * FROM farm_task WHERE status = '1' ORDER BY status,timestart DESC LIMIT 3`;
   var data = await dbQuery(sql);
   res.header('Content-Type', 'application/json');
   res.send(data);

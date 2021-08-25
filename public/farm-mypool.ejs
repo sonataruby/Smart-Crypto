@@ -1,0 +1,24 @@
+<% if(items.length > 0) { %>
+<h4>Your Pool</h4>
+<table class="table">
+	<tr>
+		<td>Pool</td>
+		<td>Deposit</td>
+		<td>Join Start</td>
+		<td></td>
+	</tr>
+	<% items.forEach(function(data, index){ %>
+	<tr>
+		
+		<td>#<%= data.session_id%></td>
+		<td><%= data.amount%> <%= token.name%></td>
+		<td><%= data.jointime%></td>
+		<td class="text-right">
+			<button class="btn btn-sm btn-info" data-web3="farmclaimpool" data-session="<%= data.session_id%>">Claim</button>
+			<button class="btn btn-sm btn-primary" data-web3="farmwithdraw" data-amount="<%= data.amount%>" data-session="<%= data.session_id%>">Withdraw</button>
+		</td>
+	</tr>
+	<% }); %>
+
+</table>
+<% } %>

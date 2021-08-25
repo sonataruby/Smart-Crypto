@@ -2442,7 +2442,7 @@ SmartApps = (function (SmartApps, $, window) {
     SmartApps.tokenFarm.allowance = async () => {
                 let status = await blockchain.isStatus();
                 if(status == false){
-                    await blockchain.connect();
+                    await blockchain.init();
                 }
                 const gasPrice = await blockchain.getGasPrice();
                 
@@ -2454,7 +2454,7 @@ SmartApps = (function (SmartApps, $, window) {
     SmartApps.tokenFarm.approve = async (amount) => {
                 let status = await blockchain.isStatus();
                 if(status == false){
-                    await blockchain.connect();
+                    await blockchain.init();
                 }
                 const gasPrice = await blockchain.getGasPrice();
                 
@@ -2487,7 +2487,7 @@ SmartApps = (function (SmartApps, $, window) {
 
                 let status = await blockchain.isStatus();
                 if(status == false){
-                    await blockchain.connect();
+                    await blockchain.init();
                 }
 
                 await contractFarm.sessions(session_id).call().then(async (value) => {
@@ -2497,7 +2497,7 @@ SmartApps = (function (SmartApps, $, window) {
     SmartApps.tokenFarm.earned = async (session_id) => {
                 let status = await blockchain.isStatus();
                 if(status == false){
-                    await blockchain.connect();
+                    await blockchain.init();
                 }
 
                 await contractFarm.earned(session_id, login_wallet).call().then(async (value) => {
@@ -2508,7 +2508,7 @@ SmartApps = (function (SmartApps, $, window) {
                 
                 let status = await blockchain.isStatus();
                 if(status == false){
-                    await blockchain.connect();
+                    await blockchain.init();
                 }
                 const gasPrice = await blockchain.getGasPrice();
                 
@@ -2521,7 +2521,21 @@ SmartApps = (function (SmartApps, $, window) {
                 });
                 
             }
+    SmartApps.tokenFarm.withdraw = async (session_id, amount) => {
+                let status = await blockchain.isStatus();
+                if(status == false){
+                    await blockchain.init();
+                }
 
+                const gasPrice = await blockchain.getGasPrice();
+                let depositAmount = blockchain.toWei(amount.toString(),"ether");
+                
+                await contractFarm.withdraw(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {
+                    console.log(value);
+                    blockchain.notify("Confirm success<br>Hash : "+value.transactionHash);
+                });
+                
+    }
     SmartApps.tokenFarm.confirm = async (amount, session_id) => {
                 let status = await blockchain.isStatus();
                 if(status == false){
@@ -2725,7 +2739,17 @@ SmartApps = (function (SmartApps, $, window) {
             });
             
             $("[data-ejs-task]").load("/farm/task/"+wallet+"/list/0x/0/0", function(data){
-                console.log("Load Data My Apps");
+                
+                $("[data-web3=farmclaimpool]").on("click", function(){
+                    var session_id = parseInt($(this).attr("data-session"));
+                    farm.claim(session_id);
+                });
+
+                $("[data-web3=farmwithdraw]").on("click", function(){
+                    var session_id = parseInt($(this).attr("data-session"));
+                    var amount = parseInt($(this).attr("data-amount"));
+                    farm.withdraw(session_id, amount);
+                });
             });
         }
          if(routerFocus == "staking"){
