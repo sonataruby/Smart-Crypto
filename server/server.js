@@ -135,6 +135,42 @@ app.post("/farm/create", async (req, res) => {
     
 });
 
+app.get("/files", async (req, res) => {
+    var path = __dirname.replace("/server","");
+    var files = req.query.files;
+    var fullFile = path + "/"+files;
+    const dataMain = readJSONFile('main.json');
+    dataMain.path = path;
+    dataMain.files = files;
+    dataMain.text = "";
+
+    if(files != "" && files != undefined){
+        dataMain.text = fs.readFileSync(fullFile);
+    }
+    
+
+    const fileJson = fs.readdirSync(path + "/json");
+    dataMain.filejson = fileJson;
+
+    const filecomponents = fs.readdirSync(path + "/public/components");
+    dataMain.components = filecomponents;
+
+    const filelayout = fs.readdirSync(path + "/public/layout");
+    dataMain.filelayout = filelayout;
+
+    res.render("file-manager",dataMain);
+});
+
+app.post("/files", async (req, res) => {
+    var name = req.body.name;
+    var code = req.body.code;
+    var path = __dirname.replace("/server","");
+    var fullFile = path + "/"+name;
+    fs.writeFileSync(fullFile, code);
+    res.redirect("/files?files="+name);
+
+});
+
 /*Farm Controller*/
 // start express server on port 5000
 app.listen(3000, () => {

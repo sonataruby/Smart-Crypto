@@ -1,0 +1,58 @@
+<div class="row">
+	<div class="col-2">
+		<ul class="list-group">
+		  <h5>Json (<%- filejson.length%>)</h5>
+		  <% filejson.forEach(function(data, index){ %>
+		  	<li class="list-group-item" aria-current="true"><a href="?files=json/<%=data%>">json/<%=data%></a></li>
+		  <% }); %>
+
+		  <h5>Components (<%- components.length%>)</h5>
+		  <% components.forEach(function(data, index){ %>
+		  	<li class="list-group-item" aria-current="true"><a href="?files=public/components/<%=data%>">components/<%=data%></a></li>
+		  <% }); %>
+
+		  <h5>Layout (<%- filelayout.length%>)</h5>
+		  <% filelayout.forEach(function(data, index){ %>
+		  	<li class="list-group-item" aria-current="true"><a href="?files=public/layout/<%=data%>">layout/<%=data%></a></li>
+		  <% }); %>
+
+		</ul>
+	</div>
+	<div class="col-10">
+		File Name
+		<form action="/files" method="post">
+		<div class="row">
+			<div class="col-10">
+				<input type="text" name="name" class="form-control" value="<%- files%>">
+			</div>
+			<div class="col-2">
+				<button type="submit" class="btn btn-md btn-primary">Submit</button>
+			</div>
+		</div>
+		<br>
+		<textarea class="form-control" name="code" style="min-height:650px;" id="code"><%- text%></textarea>
+		</form>
+	</div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/codemirror.min.js" integrity="sha512-hGVnilhYD74EGnPbzyvje74/Urjrg5LSNGx0ARG1Ucqyiaz+lFvtsXk/1jCwT9/giXP0qoXSlVDjxNxjLvmqAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/codemirror.min.css" integrity="sha512-6sALqOPMrNSc+1p5xOhPwGIzs6kIlST+9oGWlI4Wwcbj1saaX9J3uzO3Vub016dmHV7hM+bMi/rfXLiF5DNIZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/mode/twig/twig.min.js" integrity="sha512-Fn4bdhj5FW36UczGJyERY4k4sNpGGr2fAYbSwSPXwC8Of5Sl3CuRRsoBAT9HmWzCuiMjJWUZrWtpTY6A1dv1aQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script>
+  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: true,
+    mode: "htmlmixed"
+  }).setSize("100%", 750);
+</script>
+
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+ 
+}
+</style>
