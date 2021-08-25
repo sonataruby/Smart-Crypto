@@ -248,7 +248,6 @@ var dbQuery = async function(databaseQuery) {
 
         });
     });
-
 }
 
 app.get('/data/:any', async (req, res) => {
@@ -259,6 +258,18 @@ app.get('/data/:any', async (req, res) => {
   res.send(data);
   res.end( data);
   
+});
+
+app.get('/query/:query/:wallet/:amount/:tokenaddress', async (req, res) => {
+  var query = req.params.query;
+  var wallet = req.params.wallet;
+  var amount = req.params.amount;
+  var tokenaddress = req.params.tokenaddress;
+  var sql = null;
+  if(query == "approve"){
+    sql = "INSERT INTO `user_approve` (`wallet`, `amount`, `token_address`) VALUES ('"+wallet+"', '"+amount+"', '"+tokenaddress+"');"
+  }
+  if(sql != null) await dbQuery(sql);
 });
 
 // start express server on port 5000
