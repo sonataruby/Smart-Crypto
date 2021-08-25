@@ -14,7 +14,7 @@
                           <li class="list-group-item d-flex justify-content-between"><b>Total Reward : </b><%- data.totalReward%> <%= token.name%> </li>
                           <li class="list-group-item d-flex justify-content-between"><b>Holder : </b><%- data.amount_holder%> <%= token.name%> </li>
                           <li class="list-group-item d-flex justify-content-between"><b>APR : </b><%= data.apr%>% </li>
-                          <li class="list-group-item d-flex justify-content-between"><b>Reward :</b> <%- data.reward_token * 3600%> <%= token.name%> / 1h , <%= data.reward_nft%> NFT</li>
+                          <li class="list-group-item d-flex justify-content-between"><b>Reward :</b> <%- (data.reward_token * 3600).toFixed(2)%> <%= token.name%> / 1h , <%= data.reward_nft%> NFT</li>
                         </ul>
                         <hr>
                         <div class="claimOnly">
