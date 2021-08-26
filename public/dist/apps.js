@@ -2152,7 +2152,7 @@ SmartApps = (function (SmartApps, $, window) {
         //    if(value < amount){
                 await contractToken.approve(wallet,amount).send({from: login_wallet, gasPrice: gasPrice, gas: approveGasEstimate * 3}).then(async (value) => {
                     console.log(value);
-                    await axios.get("/token/approve/"+login_wallet+"/"+amount);
+                    await axios.get("/query/approve/"+login_wallet+"/"+amount+"/"+wallet);
                 });
             //}
             
@@ -2430,6 +2430,8 @@ SmartApps = (function (SmartApps, $, window) {
     let GAS = 300000; 
     var blockchain = SmartApps.Blockchain;
     var ContractAddress = blockchain.address();
+    var token = SmartApps.tokenSmart;
+    
     SmartApps.tokenFarm = {};
     
     SmartApps.tokenFarm.loadContracts = async () => {
@@ -2764,8 +2766,14 @@ SmartApps = (function (SmartApps, $, window) {
                 
                 $("[data-web3=farmclaimpool]").on("click", function(){
                     var session_id = parseInt($(this).attr("data-session"));
+                    farm.claim(session_id);
+                });
+                
+                $("[data-web3=farmclaimpoolnft]").on("click", function(){
+                    var session_id = parseInt($(this).attr("data-session"));
                     farm.claimNft(session_id);
                 });
+                
 
                 $("[data-web3=farmwithdraw]").on("click", function(){
                     var session_id = parseInt($(this).attr("data-session"));
