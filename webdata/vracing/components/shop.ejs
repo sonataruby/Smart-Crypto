@@ -1,0 +1,20 @@
+<div class="card mb-3 border card-hoder">
+  <div class="row no-gutters">
+    <div class="col-md-12">
+      <img src="<%= url%>" alt="...">
+    </div>
+    <div class="col-md-12">
+      <div class="card-body">
+        <h5 class="card-title"><%= name%></h5>
+        <p class="card-text"><%- String(description).replace(/\r|\n/g, '<br/>')%></p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="col-md-12">
+    	<hr>
+    	<div class="d-flex justify-content-between">
+    	<b><%= price%> <%= token.name%></b> <a href="#" data-web3="marketbuy" class="btn btn-sm btn-primary">Mint</a>
+    	</div>
+    </div>
+  </div>
+</div>
