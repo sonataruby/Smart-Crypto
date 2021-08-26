@@ -1,0 +1,26 @@
+<section class="bg-white ov-h mb-4">
+    
+   
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                   <h3 class="sub-heading-s2">Token Allocation</h3>
+                   <p><%= token.token_allocation.description%></p>
+                   <div class="token-bar-chart">
+                        <% token.token_allocation.package.forEach(function(data, id){ %>
+                       <div class="token-bar-item tbic<%=id > 4 ? (id+1) - 5 : id+1%>" data-percent="<%=data.percent%>" style="width: <%=data.percent%>%;">
+                           <div class="token-bar-txt">
+                               <span><%=data.percent%>%</span>
+                               <span><%=data.title%></span>
+                           </div>
+                       </div>
+                       <% }); %>
+                       
+                   </div>
+                   <br>
+                   <em><%= token.token_allocation.note%></em>
+               </div>
+            
+        </div>
+    </div><!-- .block @e -->
+</section>

@@ -1,0 +1,30 @@
+<div class="section section-footer section-m ov-h has-ovm">
+    <div class="container">
+        <!-- Block @s -->
+        <div class="nk-block block-footer">
+            <div class="row">
+                <div class="col">
+                    <div class="wgs wgs-text text-center mb-3">
+                        <ul class="social pdb-l justify-content-center">
+                            <%if(social.facebook){ %><li><a href="<%= social.youtube%>" target="_bank"><em class="social-icon fab fa-facebook-f"></em></a></li><%}%>
+                            <%if(social.twitter){ %><li><a href="<%= social.twitter%>" target="_bank"><em class="social-icon fab fa-twitter"></em></a></li><%}%>
+                            <%if(social.youtube){ %><li><a href="<%= social.youtube%>" target="_bank"><em class="social-icon fab fa-youtube"></em></a></li><%}%>
+                            <%if(social.github){ %><li><a href="<%= social.github%>" target="_bank"><em class="social-icon fab fa-github"></em></a></li><%}%>
+                            <%if(social.bitcoin){ %><li><a href="<%= social.bitcoin%>" target="_bank"><em class="social-icon fab fa-bitcoin"></em></a></li><%}%>
+                            <%if(social.medium){ %><li><a href="<%= social.medium%>" target="_bank"><em class="social-icon fab fa-medium-m"></em></a></li><%}%>
+                            <%if(social.telegram){ %><li><a href="<%= social.telegram%>" target="_bank"><em class="social-icon fab fa-telegram"></em></a></li><%}%>
+
+                        </ul>
+                        <a href="/" class="footer-logo">
+                            <img src="<%= logo2%>" srcset="<%= logo2%> 2x" alt="logo" style="max-width: 250px;">
+                        </a>
+                        <div class="copyright-text copyright-text-s3 pdt-m">
+                            <p><span class="d-sm-block"><%= copyright%>. </span>All trademarks and copyrights belong to their respective owners.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .block @e -->
+    </div>
+    <div class="nk-ovm shape-s"></div>
+</div>

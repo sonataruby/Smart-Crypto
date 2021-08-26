@@ -1,0 +1,49 @@
+ <!-- // -->
+<section class="section bg-theme tc-light ov-h" id="roadmap">
+    <div class="container">
+        <!-- Section Head @s -->
+        <div class="section-head text-center wide-auto-sm">
+            <h4 class="title title-semibold animated" data-animate="fadeInUp" data-delay=".1">Roadmap</h4>
+            <p class="animated" data-animate="fadeInUp" data-delay=".2">Our team working hardly to make archive lorem ipsum dolor sit amet, consectetur  amet, consectetur adipiscing elit. </p>
+        </div><!-- .section-head @e -->
+        <!-- Block @s -->
+        <div class="nk-block">
+            <div class="row justify-content-center">
+                <div class="col-xl-12">
+                    <div class="roadmap-all mgb-m50 animated" data-animate="fadeInUp" data-delay=".3">
+                        
+                        <div class="roadmap-wrap roadmap-wrap-done roadmap-wrap-s1 mb-0">
+                            <div class="row no-gutters">
+                               <% roadmap.forEach(function(user, index){ %>
+                                <div class="col-lg">
+                                    <div class="roadmap roadmap-s1 roadmap-done text-lg-center">
+                                        <div class="roadmap-step roadmap-step-s1">
+                                            <div class="roadmap-head roadmap-head-s1">
+                                                <span class="roadmap-time roadmap-time-s1"><%= user.time%></span>
+                                                <span class="roadmap-title roadmap-title-s1"><%= user.title%></span>
+                                            </div>
+                                            <ul class="roadmap-step-list roadmap-step-list-s1">
+                                                <li><%= String(user.concept).replace(/\r\n/g, '<br/>')%></li>
+                                                <li><%= user.team%></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div><!-- .col -->
+                                <% if(index == 3 || index == 7 || index == 11){%>
+                                		</div>
+                                	</div>
+                                	<div class="roadmap-wrap roadmap-wrap-done roadmap-wrap-s1 mb-0">
+                            			<div class="row no-gutters">
+                                <%}%>
+                                <% }); %>
+                            </div><!-- .row -->
+                        </div>
+                        
+                    </div>
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .block @e -->
+    </div>
+    <div class="nk-ovm shape-n"></div>
+</section>
+<!-- // -->

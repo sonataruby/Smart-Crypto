@@ -1,0 +1,50 @@
+<!-- Banner @s -->
+<div class="header-banner bg-theme-grad">
+<div class="nk-banner">
+    <div class="banner banner-fs banner-single">
+        <div class="banner-wrap">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-sm-10 col-md-10 col-xl-9">
+                        <div class="banner-caption tc-light text-center">
+                            <div class="cpn-title">
+                                <h1 class="title title-xl-s3 title-semibold"><%= token.name%> is the world's <sup>first platform</sup> to offer rewards to sports game players worldwide. </h1>
+                            </div>
+                            <div class="cpn-text cpn-text-center">
+                                <p class="lead"><%= token.name%> is a Play to earn platform on <br class="d-none d-md-block">the Binance Smart Chain and NFT.</p>
+                            </div>
+                            <div class="cpn-btns">
+                                <ul class="btn-grp d-flex justify-content-center">
+                                    <li><a data-web3="presell" class="btn btn-md btn-round btn-with-icon btn-light">
+                                        <span>Join Pre-Sale</span> 
+                                        <em class="icon fas fa-angle-double-right"></em>
+                                    </a></li>
+                                    <li><a href="<%- token.whitepaper %>" class="btn btn-md btn-round btn-with-icon btn-light">
+                                        <span>White Paper</span> 
+                                        <em class="icon fas fa-angle-double-right"></em>
+                                    </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div>
+            <div class="banner-social-wrap text-center">
+                <ul class="banner-social banner-social-vertical">
+                    <%if(social.facebook){ %><li><a href="<%- social.facebook %>"  target="_bank"><em class="fab fa-facebook-f"></em></a></li><%}%>
+                    <%if(social.twitter){ %><li><a href="<%- social.twitter %>"  target="_bank"><em class="fab fa-twitter"></em></a></li><%}%>
+                    <%if(social.youtube){ %><li><a href="<%- social.youtube %>"  target="_bank"><em class="fab fa-youtube"></em></a></li><%}%>
+                    <%if(social.github){ %><li><a href="<%- social.github %>"  target="_bank"><em class="fab fa-github"></em></a></li><%}%>
+                    <%if(social.bitcoin){ %><li><a href="<%- social.bitcoin %>"  target="_bank"><em class="fab fa-bitcoin"></em></a></li><%}%>
+                    <%if(social.medium){ %><li><a href="<%- social.medium %>"  target="_bank"><em class="fab fa-medium-m"></em></a></li><%}%>
+                    <%if(social.telegram){ %><li><a href="<%= social.telegram%>" target="_bank"><em class="social-icon fab fa-telegram"></em></a></li><%}%>
+                
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- .nk-banner -->
+<div class="bg-video bg-video-youtube" data-video="<%= token.youtube_bg%>" data-overlay="theme" data-opacity="80" data-cover="images/bg/bg-a.jpg"></div>
+</div>

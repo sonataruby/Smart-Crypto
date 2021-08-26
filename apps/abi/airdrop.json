@@ -3,7 +3,7 @@
 		"inputs": [
 			{
 				"internalType": "contract IERC20",
-				"name": "_ncfToken",
+				"name": "_SmartTokenContract",
 				"type": "address"
 			}
 		],
@@ -31,7 +31,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "TOKEN_CLAIM_F0",
+		"name": "AirdopReward",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -44,12 +44,12 @@
 	},
 	{
 		"inputs": [],
-		"name": "TOKEN_SWAPPED_TO_RECEIVE_COMMISSION_FROM_F2_AND_F3",
+		"name": "OpenAirdrop",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "bool",
 				"name": "",
-				"type": "uint256"
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -57,23 +57,10 @@
 	},
 	{
 		"inputs": [],
-		"name": "TOKEN_SWAPPED_TO_RECEIVE_COMMISSION_FROM_F2_AND_F7",
+		"name": "SmartTokenAidrop",
 		"outputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "admin",
-		"outputs": [
-			{
-				"internalType": "address",
+				"internalType": "contract IERC20",
 				"name": "",
 				"type": "address"
 			}
@@ -84,25 +71,12 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "presenterAddress",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "tokenWeb",
+				"type": "uint256"
 			}
 		],
-		"name": "buyToken",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "presenterAddress",
-				"type": "address"
-			}
-		],
-		"name": "claim",
+		"name": "airdrop",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -128,85 +102,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getMinPay",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getPrice",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getReward",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getSubply",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getSubplyPayout",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getTimeEnd",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getTimeStart",
+		"name": "des",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -272,32 +168,6 @@
 	},
 	{
 		"inputs": [],
-		"name": "minPay",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "ncfToken",
-		"outputs": [
-			{
-				"internalType": "contract IERC20",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "owner",
 		"outputs": [
 			{
@@ -326,37 +196,25 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_price",
+				"name": "_des",
 				"type": "uint256"
 			}
 		],
-		"name": "setPrice",
+		"name": "setDes",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_sub",
-				"type": "uint256"
-			}
-		],
-		"name": "setSubplyTotal",
+		"inputs": [],
+		"name": "setDisable",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_day",
-				"type": "uint256"
-			}
-		],
-		"name": "setTimeEnd",
+		"inputs": [],
+		"name": "setEnable",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -401,26 +259,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "totalPayout",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "withdrawBNB",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -428,7 +266,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "withdrawNCF",
+		"name": "withdraw",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

@@ -2,18 +2,13 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_crowns",
+				"internalType": "contract IERC20",
+				"name": "_smarttoken",
 				"type": "address"
 			},
 			{
 				"internalType": "address",
 				"name": "_nftFactory",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_nft",
 				"type": "address"
 			}
 		],
@@ -26,40 +21,9 @@
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "owner",
+				"name": "stakingToken",
 				"type": "address"
 			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "sessionId",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "baseAmount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amountWithBonus",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "percents",
-				"type": "uint256"
-			}
-		],
-		"name": "BonusClaimed",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
 			{
 				"indexed": true,
 				"internalType": "address",
@@ -81,7 +45,7 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "nftId",
+				"name": "claimedTime",
 				"type": "uint256"
 			}
 		],
@@ -91,6 +55,12 @@
 	{
 		"anonymous": false,
 		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "stakingToken",
+				"type": "address"
+			},
 			{
 				"indexed": true,
 				"internalType": "address",
@@ -106,13 +76,19 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "nftId",
+				"name": "amount",
 				"type": "uint256"
 			},
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "slotId",
+				"name": "startTime",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "totalStaked",
 				"type": "uint256"
 			}
 		],
@@ -123,13 +99,13 @@
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "address",
-				"name": "factory",
+				"name": "factoryAddress",
 				"type": "address"
 			}
 		],
-		"name": "NftFactorySet",
+		"name": "FactorySet",
 		"type": "event"
 	},
 	{
@@ -155,6 +131,12 @@
 		"anonymous": false,
 		"inputs": [
 			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "stakingToken",
+				"type": "address"
+			},
+			{
 				"indexed": false,
 				"internalType": "uint256",
 				"name": "sessionIdd",
@@ -177,10 +159,72 @@
 				"internalType": "uint256",
 				"name": "endTime",
 				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "generation",
+				"type": "uint256"
 			}
 		],
 		"name": "SessionStarted",
 		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "stakingToken",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "sessionId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "startTime",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "totalStaked",
+				"type": "uint256"
+			}
+		],
+		"name": "Withdrawn",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "SmartToken",
+		"outputs": [
+			{
+				"internalType": "contract IERC20",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -193,33 +237,38 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			}
 		],
 		"name": "balances",
 		"outputs": [
 			{
 				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "claimed",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
 				"name": "claimedTime",
 				"type": "uint256"
 			},
 			{
+				"internalType": "bool",
+				"name": "minted",
+				"type": "bool"
+			},
+			{
 				"internalType": "uint256",
-				"name": "nftId",
+				"name": "claimedReward",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "sp",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "claimedAmount",
+				"name": "unpaidReward",
 				"type": "uint256"
 			}
 		],
@@ -232,48 +281,16 @@
 				"internalType": "uint256",
 				"name": "_sessionId",
 				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_index",
-				"type": "uint256"
 			}
 		],
 		"name": "claim",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
+		"outputs": [
 			{
-				"internalType": "uint256",
-				"name": "_sessionId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_bonusPercent",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint8",
-				"name": "_v",
-				"type": "uint8"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "_r",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "_s",
-				"type": "bytes32"
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
-		"name": "claimAll",
-		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -285,7 +302,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "claimAll",
+		"name": "claimNft",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -299,13 +316,8 @@
 			},
 			{
 				"internalType": "address",
-				"name": "_address",
+				"name": "_owner",
 				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_index",
-				"type": "uint256"
 			}
 		],
 		"name": "claimable",
@@ -327,34 +339,9 @@
 				"type": "uint256"
 			},
 			{
-				"internalType": "uint8",
-				"name": "_index",
-				"type": "uint8"
-			},
-			{
 				"internalType": "uint256",
-				"name": "_nftId",
+				"name": "_amount",
 				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_sp",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint8",
-				"name": "_v",
-				"type": "uint8"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "_r",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "_s",
-				"type": "bytes32"
 			}
 		],
 		"name": "deposit",
@@ -390,29 +377,16 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "_sessionId",
 				"type": "uint256"
 			},
 			{
 				"internalType": "address",
-				"name": "",
+				"name": "_owner",
 				"type": "address"
 			}
 		],
-		"name": "earning",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "lastSessionId",
+		"name": "earned",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -427,34 +401,19 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "operator",
+				"name": "",
 				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bytes",
-				"name": "data",
-				"type": "bytes"
 			}
 		],
-		"name": "onERC721Received",
+		"name": "lastSessionIds",
 		"outputs": [
 			{
-				"internalType": "bytes4",
+				"internalType": "uint256",
 				"name": "",
-				"type": "bytes4"
+				"type": "uint256"
 			}
 		],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -506,6 +465,11 @@
 		"name": "sessions",
 		"outputs": [
 			{
+				"internalType": "address",
+				"name": "stakingToken",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
 				"name": "totalReward",
 				"type": "uint256"
@@ -522,12 +486,17 @@
 			},
 			{
 				"internalType": "uint256",
+				"name": "generation",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
 				"name": "claimed",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "totalSp",
+				"name": "amount",
 				"type": "uint256"
 			},
 			{
@@ -537,12 +506,12 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "interestPerPoint",
+				"name": "interestPerToken",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "claimedPerPoint",
+				"name": "claimedPerToken",
 				"type": "uint256"
 			},
 			{
@@ -571,30 +540,6 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "slots",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
 				"name": "_sessionId",
 				"type": "uint256"
 			}
@@ -614,6 +559,35 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "_sessionId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "stakedBalanceOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_lpToken",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
 				"name": "_totalReward",
 				"type": "uint256"
 			},
@@ -625,6 +599,11 @@
 			{
 				"internalType": "uint256",
 				"name": "_startTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_generation",
 				"type": "uint256"
 			}
 		],
@@ -642,6 +621,24 @@
 			}
 		],
 		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_sessionId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdraw",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

@@ -1,0 +1,59 @@
+ <section class="bg-white section ov-h" style="border-top:1px solid #ddd" id="tokensale">
+                <!-- Block @s -->
+                <div class="nk-block nk-block-token mgb-m30">
+                    <div class="section-head text-center wide-auto">
+                        <h4 class="title title-semibold animated" data-animate="fadeInUp" data-delay=".1"><%= token.name%> Tokens Details</h4>
+                    </div>
+
+                    <div class="container">
+                        <div class="text-center">
+                            Contract: <b><%= token.contract %></b><br>
+                            Symbol: <b><%= token.name %></b><br>
+                            
+                            Decimal: <b><%= token.decimal %></b><br>
+                            Network: <b>Binance Smart Chain</b>
+                            
+                        </div>
+                    </div>
+                    <br>
+                    <div class="tokdis-list">
+                        <div class="container">
+                            <div class="row text-center text-lg-left">
+                                <% token.detail_header.forEach(function(user){ %>
+                                <div class="col-md">
+                                    <div class="tokdis-item animated" data-animate="fadeInUp" data-delay=".2">
+                                        <span><%= user.span%></span>
+                                        <h5><%= user.h5%></h5>
+                                    </div>
+                                </div><!-- .col -->
+                                <% }); %>
+                                
+                            </div><!-- .row -->
+                        </div>
+                    </div>
+                    <div class="toktmln-list">
+                        <div class="container">
+                            <div class="row">
+                                 <% token.detail_content.forEach(function(user){ %>
+                                <div class="col-lg">
+                                    <div class="toktmln-item animated" data-animate="fadeInUp" data-delay=".6">
+                                        <div>
+                                            <span><%= user.title%></span>
+                                            <span><%= user.time%></span>
+                                        </div>
+                                        <div>
+                                            <span><%= user.bonus%></span>
+                                            <span><%= user.price%>/<%= token.name%></span>
+                                        </div>
+                                    </div>
+                                </div><!-- .col -->
+                                <% }); %>
+                                
+                            </div><!-- .row -->
+                        </div>
+                    </div>
+                </div><!-- .block @e -->
+                <!-- .section-tokensale -->
+                <div class="nk-ovm shape-n"></div>
+            </section>
+            

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const db = require('./server/db');
 
-
+const fsFile = require('./fsFile');
 const path = require("path");
 const _ = require("lodash");
 //const io   = require('socket.io');
@@ -25,15 +25,8 @@ const contract = require('truffle-contract');
 const MetaAuth = require('meta-auth');
 const metaAuth = new MetaAuth();
 
-//const socket = io.listen(server);
-function readJSONFile(filename) {
-	let jsonData = require(path.resolve(__dirname, "json/"+filename));
-  let jsonToken = require(path.resolve(__dirname, "json/main.json"));
-  let jsonMage = Object.assign({}, jsonToken, jsonData);
-  //console.log(_.mergeWith(jsonToken, jsonData, jsonMage));
-	return _.mergeWith(jsonToken, jsonData, jsonMage);
-}
-app.set('views', path.join(__dirname, '/public'))
+
+app.set('views', path.join(__dirname, '/apps'))
 app.use(express.static(path.join(__dirname, '/public')));
 app.engine('ejs', ejs.renderFile);
 app.set('view engine', 'ejs');
@@ -45,81 +38,25 @@ app.use(cookieParser());
 
 
 
-
+//app.use("/test", test);
 
 app.get("/", (req, res) => {
- app.set('layout', './layout/home')
- const dataMain = readJSONFile('main.json');
+app.set('layout', './layout/home')
+ const dataMain = fsFile.readJSONFile('main.json');
  
  res.render("index",dataMain);
 });
 
-app.get("/ido", (req, res) => {
- 
- const dataMain = readJSONFile('main.json');
- 
- app.set('layout', './layout/pages');
- res.render(dataMain.public.ido == true ? "ido" : "coming",dataMain);
-});
+require("./modules/ido")("/ido",app);
+require("./modules/farm")("/farm",app);
+require("./modules/airdrop")("/airdrop",app);
 
 
-/*
-Farm
-*/
-app.get("/farm", (req, res) => {
- const dataMain = readJSONFile('main.json');
- app.set('layout', './layout/pages');
- 
- res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
-});
 
-app.get("/farm/item", async (req, res) => {
-  app.set('layout', './layout/nolayout');
-  var dataMain = [];
-  await axios.get(hostname + '/data/farm')
-    .then((response)=>{
-      dataMain = response.data;
-        
-      })
-    .catch((err)=>{
-      //console.log(err);
-    });
-  
-  var dataMainConfig = readJSONFile('main.json');
-  let startTime = Math.floor(new Date().getTime()/1000) + 30;
-  dataMainConfig.items = dataMain;
-  dataMainConfig.TimeChecked = startTime;
-  
-  res.render("farm-item",dataMainConfig);
-
-});
-
-
-app.get("/farm/task/:wallet/:target/:hash/:amount/:id", async (req, res) => {
-  app.set('layout', './layout/nolayout');
-  var wallet = req.params.wallet;
-  var target = req.params.target;
-  var hash   = req.params.hash;
-  var amount   = req.params.amount;
-  var session_id   = req.params.id;
-  if(target == "list"){
-    let sql = "SELECT * FROM farm_user WHERE wallet = '"+wallet+"' ORDER BY session_id DESC LIMIT 100";
-    var data = await dbQuery(sql);
-    console.log(data);
-    var dataMainConfig = readJSONFile('main.json')
-    dataMainConfig.items = JSON.parse(data);
-    res.render("farm-mypool",dataMainConfig);
-
-  }else if(target == "join"){
-    sql = "INSERT INTO `farm_user` (`wallet`, `amount`, `session_id`, `hash`) VALUES ('"+wallet+"', '"+amount+"', '"+session_id+"', '"+hash+"');"
-    await dbQuery(sql);
-    await axios.get("http://localhost:3000/farm/"+session_id+"/sync");
-  }
-});
 
 
 app.get("/staking", (req, res) => {
- const dataMain = readJSONFile('main.json');
+ const dataMain = fsFile.readJSONFile('main.json');
  app.set('layout', './layout/pages');
  res.render(dataMain.public.staking == true ? "staking" : "coming",dataMain);
 });
@@ -127,22 +64,16 @@ app.get("/staking", (req, res) => {
 
 app.get("/gallery", (req, res) => {
  app.set('layout', './layout/pages');
- const dataMain = readJSONFile('main.json');
+ const dataMain = fsFile.readJSONFile('main.json');
  dataMain.pages = { name : dataMain.staking.title, description : dataMain.staking.description};
  res.render("gallery",dataMain);
 });
 
 
-app.get("/airdrop", (req, res) => {
- const dataMain = readJSONFile('main.json');
- app.set('layout', './layout/pages');
- dataMain.validateTelegram = 0;
- if(req.query.telegram != undefined && req.query.telegram != "" && req.query.telegram == "confirm") dataMain.validateTelegram = 1;
- res.render(dataMain.public.airdrop == true ? "airdrop" : "coming",dataMain);
-});
+
 
 app.get("/market", (req, res) => {
- const dataMain = readJSONFile('market.json');
+ const dataMain = fsFile.readJSONFile('market.json');
  app.set('layout', './layout/pages');
  res.render(dataMain.public.market == true ? "market" : "coming",dataMain);
 });
@@ -150,13 +81,13 @@ app.get("/market", (req, res) => {
 
 
 app.get("/game", (req, res) => {
- const dataMain = readJSONFile('main.json');
+ const dataMain = fsFile.readJSONFile('main.json');
  app.set('layout', './layout/pages');
  res.render(dataMain.public.game == true ? "game" : "coming",dataMain);
 });
 
 app.get("/token", (req, res) => {
- const dataMain = readJSONFile('main.json');
+ const dataMain = fsFile.readJSONFile('main.json');
 
  app.set('layout', './layout/pages');
  res.render("token",dataMain);
@@ -199,7 +130,7 @@ app.get('/api/:file', (req, res) => {
 app.get("/api/nft/:id", (req, res) => {
 
   	res.header('Content-Type', 'application/json');
-  	const data = readJSONFile('ntf.json');
+  	const data = fsFile.readJSONFile('ntf.json');
     var item = data[req.params.id];
     if(item == undefined) item = '{"error": "404 page not found", "err_code": 404}';
     res.send(item);
@@ -224,35 +155,11 @@ app.get("/token/", (req, res) => {
 var dbQuery = async function(databaseQuery) {
    
     let con = await  db.getConnection();
-    return new Promise(data => {
-        
-        con.query(databaseQuery, function (error, result) { // change db->connection for your code
-            if (error) {
-                console.log(error);
-                data('{"error": "404 page not found", "err_code": 404}');
-            }
-            try {
-                
-
-                data(JSON.stringify(result));
-
-            } catch (error) {
-                data('{"error": "404 page not found", "err_code": 404}');
-            }
-
-        });
-    });
+    let data = await db.dbQuery(con,databaseQuery);
+    return data;
 }
 
-app.get('/data/:any', async (req, res) => {
 
-  let sql = `SELECT * FROM farm_task WHERE status = '1' ORDER BY status,timestart DESC LIMIT 3`;
-  var data = await dbQuery(sql);
-  res.header('Content-Type', 'application/json');
-  res.send(data);
-  res.end( data);
-  
-});
 
 app.get('/query/:query/:wallet/:amount/:tokenaddress', async (req, res) => {
   var query = req.params.query;
