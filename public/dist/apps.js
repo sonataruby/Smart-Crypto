@@ -1870,8 +1870,8 @@ SmartApps = (function (SmartApps, $, window) {
     
 	var loginWallet = null;
 	var isConnect;
-	let ContractAddress = JSON.parse("{\n\t\"AddressContractPresell\" : \"0x4e7f7bdfc8a55cf47e4207ab0cc03d92e66f8452\",\n\t\"AddressContractAirdrop\" : \"0xde087a28a09235797d264ee4ceb75c62a8539a85\",\n\t\"AddressContractIDO\" : \"0xa5eec60aee7d3fdd5cff5d1d785b12244bf9cad9\",\n\t\"AddressContractSmartToken\" : \"0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46\",\n\t\"MasterIDOWallet\" : \"0xe6b84663dc54b9b29f0a1a04b59e94d92bfe4dff\",\n\t\"AddressContractSmartNFT\" : \"0x6a741feb01276e18a9d8a5a2f57542ec3205e4ca\",\n\t\"AddressContractNFTFactory\" : \"0x4dCf21092e9B60276E9b6BaE550B8D0F7e074c6f\",\n\t\"AddressContractNFTMarket\" : \"\",\n\t\"AddressContractLPCAKE\" : \"0xeb2fe6d5fbc9fbcc2db2ac8c548c07e4c36ea2b1\",\n\t\"AddressContractFarm\" : \"0x6d0425144274c6426a6d30406ab2443468ecce68\",\n\t\"AddressContractNFTGame\" : \"\",\n\t\"AddressContractStaking\" : \"0xd680c10d1fcbe17319fc99c7fc001a78e1f37b3f\"\n}");
-
+	//let ContractAddress = JSON.parse("{\n\t\"AddressContractPresell\" : \"0x4e7f7bdfc8a55cf47e4207ab0cc03d92e66f8452\",\n\t\"AddressContractAirdrop\" : \"0xde087a28a09235797d264ee4ceb75c62a8539a85\",\n\t\"AddressContractIDO\" : \"0xa5eec60aee7d3fdd5cff5d1d785b12244bf9cad9\",\n\t\"AddressContractSmartToken\" : \"0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46\",\n\t\"MasterIDOWallet\" : \"0xe6b84663dc54b9b29f0a1a04b59e94d92bfe4dff\",\n\t\"AddressContractSmartNFT\" : \"0x6a741feb01276e18a9d8a5a2f57542ec3205e4ca\",\n\t\"AddressContractNFTFactory\" : \"0x4dCf21092e9B60276E9b6BaE550B8D0F7e074c6f\",\n\t\"AddressContractNFTMarket\" : \"\",\n\t\"AddressContractLPCAKE\" : \"0xeb2fe6d5fbc9fbcc2db2ac8c548c07e4c36ea2b1\",\n\t\"AddressContractFarm\" : \"0x6d0425144274c6426a6d30406ab2443468ecce68\",\n\t\"AddressContractNFTGame\" : \"\",\n\t\"AddressContractStaking\" : \"0xd680c10d1fcbe17319fc99c7fc001a78e1f37b3f\"\n}");
+	let ContractAddress = JSON.parse("{\"AddressContractPresell\" : \"0x4995d0402fe7d595406bce9defbae10edd60b2b2\",\"AddressContractAirdrop\" : \"0xfd7FDf71064Bcb1af7D83812Bde20E3f7173fB94\",\"AddressContractIDO\" : \"0x4995d0402fe7d595406bce9defbae10edd60b2b2\",\"AddressContractSmartToken\" : \"0xfc00ccc1d5323d7c9ec36efe0ff62ad5c62ad86b\",\"MasterIDOWallet\" : \"0x845c91d87f662c1c3ddb2a2c5c10f583c63f5047\",\"AddressContractSmartNFT\" : \"\",\"AddressContractNFTFactory\" : \"\",\"AddressContractNFTMarket\" : \"\",\"AddressContractLPCAKE\" : \"\",\"AddressContractFarm\" : \"\",\"AddressContractNFTGame\" : \"\",\"AddressContractStaking\" : \"\"}");
 	const Web3Modal = window.Web3Modal.default;
 	const providerOptions = {
 	  /* See Provider Options Section */
@@ -2048,7 +2048,10 @@ SmartApps = (function (SmartApps, $, window) {
 			// Subscribe to chainId change
 			provider.on("chainChanged", (chainId) => {
 			  console.log("Chain ID",chainId);
-			  window.location.reload();
+			  if(chainId != 56){
+			  		SmartApps.Blockchain.notify("Plz select BSC Network mainnet");
+			  }
+			  //window.location.reload();
 			});
 
 			// Subscribe to provider connection
@@ -2064,7 +2067,7 @@ SmartApps = (function (SmartApps, $, window) {
 			});
 			provider.on("receipt", (error) => {
 				console.log("receipt", error);
-			})
+			});
 			
 		}else{
 			window.ethereum.on('accountsChanged', () => window.location.reload());
