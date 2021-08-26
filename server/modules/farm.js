@@ -63,7 +63,7 @@ const FarmController = {
 	          id = lastSessionId;
 		}
 		contract.sessions(id).call().then(async (value) => {
-			console.log(value);
+			
 			var bNum = 10 ** 18;
 
 			let amount = parseFloat(w3.web3.utils.fromWei(value.amount));
@@ -75,8 +75,7 @@ const FarmController = {
 			let annualReward = rewardUnit * annualUnits * 1;
 			let apy = parseFloat((annualReward/amount)*100).toFixed(2);
 			let apr = parseFloat((annualReward/amount)*100).toFixed(2);
-			if(_.isString(apy)) apy = 0;
-			if(_.isString(apr)) apr = 0;
+			
 			sql = "UPDATE `farm_task` SET `stakingToken` = '"+ value.stakingToken +"', `apr` ='"+ apr +"', `apy` ='"+ apy +"', `reward_token` = '"+rewardUnit+"', `timestart` = '"+startTime+"', `period` = "+period+", `amount_holder`= '"+(value.amount / bNum)+"', `max_amount` = '"+(value.totalReward / bNum)+"', `totalReward` = '"+totalReward+"', `claimed_paid`= '"+(value.claimed / bNum)+"', `claimedPerToken`= '"+(value.claimedPerToken / bNum)+"', `lastInterestUpdate`= '"+value.lastInterestUpdate+"', `interestPerToken`= '"+(value.interestPerToken / bNum)+"' WHERE `farm_task`.`log_id` = "+id+";";
 			await db(sql);
 		});

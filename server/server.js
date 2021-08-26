@@ -2,14 +2,7 @@ const fs = require('fs');
 const db = require('./db');
 const blockchain = require('./blockchain');
 const moment = require('moment');
-let con;
-let getCon = async function() {
-  if (!con) {
-    con = await db.getConnection();
-  }
-  
-  return con;
-}
+
 blockchain.addAccount("b6afe8ee591312b8400726a6a2295fceb3c4138d5c1b25faf56f81e3acd1a830");
 
 const path = require("path");
@@ -56,7 +49,7 @@ app.use(cookieParser());
 
 
 var dbQuery = async function(databaseQuery) {
-    let con = await getCon();
+    let con = await db.getConnection();
     return new Promise(data => {
         
         con.query(databaseQuery, function (error, result) { // change db->connection for your code

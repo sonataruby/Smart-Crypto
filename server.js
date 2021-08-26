@@ -1,13 +1,6 @@
 const fs = require('fs');
 const db = require('./server/db');
-let con;
-let getCon = async function() {
-  if (!con) {
-    con = await db.getConnection();
-  }
-  
-  return con;
-}
+
 
 const path = require("path");
 const _ = require("lodash");
@@ -229,7 +222,8 @@ app.get("/token/", (req, res) => {
 
 
 var dbQuery = async function(databaseQuery) {
-    let con = await getCon();
+   
+    let con = await  db.getConnection();
     return new Promise(data => {
         
         con.query(databaseQuery, function (error, result) { // change db->connection for your code
