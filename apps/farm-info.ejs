@@ -2,7 +2,7 @@
 	
 	<div id="game"></div>
 	<div class="text-center">
-		<button class="btn btn-primary round">How to play</button><br>
+		<button class="btn btn-primary btn-round btn-auto btn-primary btn-with-icon">How to play</button><br>
 		Project Public Mainet
 	</div>
 </div>
@@ -72,12 +72,17 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.setBaseURL('http://localhost:5000');
+    this.load.setBaseURL('https://cryptocar.cc');
 
     this.load.image('sky', 'assets/car/9144.jpg');
     this.load.image('controller', 'assets/car/control.png');
     this.load.image('logo', 'assets/car/logo_game.png');
     this.load.image('red', 'assets/car/start.png');
+
+    this.load.image('deposit', 'assets/images/DEPOSIT.png');
+    this.load.image('claim', 'assets/images/CLAIM.png');
+    this.load.image('withdraw', 'assets/images/WITHDRAW.png');
+    
     this.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 }
 
@@ -108,44 +113,48 @@ function create ()
 
 
 	
-	var textOptions = { fill: '#dc3545',fontFamily : 'Revalia', fontSize : 24, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 2};
-	this.add.text(100, 10, '<%= items.pool_name%>', { fill: '#0f0' });
-	this.add.text(100, 50, 'Total Value Lock', { fill: '#0f0' });
-	this.add.text(100, 70, '<%= block.amount%> <%= token.name%>', textOptions);
+	var textOptionsPool = { fill: '#dc3545',fontFamily : 'Revalia', fontSize : 32, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 3};
+
+	var textOptions = { fill: '#dc3545',fontFamily : 'Revalia', fontSize : 24, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 3};
+
+	this.add.text(100, 30, '<%= items.pool_name%>', textOptionsPool);
+	this.add.text(100, 80, 'Total Value Lock', { fill: '#0f0' });
+	this.add.text(100, 100, '<%= block.amount%> <%= token.name%>', textOptions);
 	
 	this.initialTime = <%= block.timeEnd%>;
-	this.add.text(100, 100, 'Remaining Time', { fill: '#0f0' });
-	CountDownTime = this.add.text(100, 120, '2021/01/09 0:0:0', textOptions);
+	this.add.text(100, 130, 'Remaining Time', { fill: '#0f0' });
+	CountDownTime = this.add.text(100, 150, '2021/01/09 0:0:0', textOptions);
 	timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true });
 
-	this.add.text(100, 140, 'Pool Rate', { fill: '#0f0' });
-	this.add.text(100, 160, '<%= block.rate%> <%= token.name%> / Year', textOptions);
-	this.add.text(100, 190, 'APR', { fill: '#0f0' });
-	this.add.text(100, 210, '<%= block.apr%> %', textOptions);
+	this.add.text(100, 190, 'Pool Rate', { fill: '#0f0' });
+	this.add.text(100, 210, '<%= block.rate%> <%= token.name%> / Year', textOptions);
+	this.add.text(100, 250, 'APR', { fill: '#0f0' });
+	this.add.text(100, 270, '<%= block.apr%> %', textOptions);
  	
 
- 	this.add.text(500, 50, 'Your Liquidity Deposit', { fill: '#0f0' });
-	this.add.text(500, 70, '<%= block.deposit%> <%= token.name%>', textOptions);
-	this.add.text(500, 100, 'Your Power', { fill: '#0f0' });
+ 	this.add.text(500, 80, 'Your Liquidity Deposit', { fill: '#0f0' });
+	this.add.text(500, 100, '<%= block.deposit%> <%= token.name%>', textOptions);
+	this.add.text(500, 130, 'Your Power', { fill: '#0f0' });
 
-	this.add.text(500, 140, 'Your Claim', { fill: '#0f0' });
-	this.add.text(500, 160, '<%= block.claimable%> <%= token.name%>', textOptions);
+	this.add.text(500, 190, 'Your Claim', { fill: '#0f0' });
+	this.add.text(500, 210, '<%= block.claimable%> <%= token.name%>', textOptions);
 
 	
-	var buttonOptions = { fill: '#dc3545',fontSize : 24, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 2};
+	var buttonOptions = { fill: '#dc3545',align : 'center',backgroundColor:'red',fontSize : 24, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 2};
 
-	const deposit = this.add.text(100, 400, 'Deposit', buttonOptions)
+	const deposit = this.add.image(160, 400, 'deposit')
 		.setInteractive()
 		.on('pointerdown', () => {
 			console.log("Click Deposit");
 			blockchain.confirm(<%= items.max_amount%>);
 		});
-	const ClaimButton = this.add.text(200, 400, 'Claim', buttonOptions).setInteractive()
+	
+	const ClaimButton = this.add.image(160+125+15, 400, 'claim').setInteractive()
 		.on('pointerdown', () => {
 			console.log("Click Claim");
 			blockchain.claim(<%= block.session_id%>);
 		});
-	const WithdrawButton = this.add.text(300, 400, 'Withdraw', buttonOptions).setInteractive()
+	const WithdrawButton = this.add.image(160+(125+15)*2, 400, 'withdraw').setInteractive()
 		.on('pointerdown', () => {
 			console.log("Click Withdraw");
 			blockchain.withdraw();
