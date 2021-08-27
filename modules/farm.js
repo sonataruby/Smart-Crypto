@@ -91,7 +91,7 @@ module.exports = function(prefix , app) {
 	    if(data == undefined){
 	    	res.status(200);
 	    }else{
-	    	console.log("Calc Data : ",data[0]);
+	    	console.log("Calc Data : ",data[0].total);
 	    	res.status(200).send(data.total);
 	    }
 
