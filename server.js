@@ -178,7 +178,7 @@ app.get('/query/:query/:wallet/:amount/:tokenaddress', async (req, res) => {
     }
     
   }
-  if(sql != null) await dbQuery(sql);
+  if(sql != null) await db.dbQuery(sql);
 });
 
 // start express server on port 5000
