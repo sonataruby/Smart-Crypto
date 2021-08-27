@@ -83,7 +83,7 @@ module.exports = function(prefix , app) {
 	    var amout = req.params.amout;
 	    var token = req.params.token;
 
-	    let sql = "SELECT SUM(amount) as total FROM user_approve WHERE wallet = '"+wallet+"' AND amount >='"+amout+"' AND token_address='"+token+"' LIMIT 1";
+	    let sql = "SELECT SUM(amount) as total FROM user_approve WHERE wallet = '"+wallet+"' AND token_address='"+token+"'";
 	    var data = await db.dbQuery(sql);
 
 	    res.header('Content-Type', 'application/json');
