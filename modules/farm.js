@@ -33,7 +33,7 @@ module.exports = function(prefix , app) {
 		block.claimable = blockchain.web3.utils.fromWei(claimable);
 
 		block.session_id = session_id;
-
+		block.timeEnd = 0;
 		await contract.sessions(session_id).call().then(async (value) => {
 			console.log(value);
 			//parseFloat(blockchain.eth.utils.fromWei(String(value.amount).toString()));
