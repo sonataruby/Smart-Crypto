@@ -86,7 +86,7 @@ module.exports = function(prefix , app) {
 	    let sql = "SELECT SUM(amount) as total FROM user_approve WHERE wallet = '"+wallet+"' AND token_address='"+token+"'";
 	    var data = await db.dbQuery(sql,true);
 
-	    res.header('Content-Type', 'application/json');
+	    //res.header('Content-Type', 'application/json');
 	    
 	    if(data == undefined){
 	    	res.status(200);
