@@ -87,20 +87,26 @@ module.exports = function(prefix , app) {
 	    var data = await db.dbQuery(sql,true);
 
 	    res.header('Content-Type', 'application/json');
-	    
-	    if(data == undefined){
+	    var data = '{"status": "false"}';
+  
+	    if(data == undefined || data == "" || data == null){
 	    	res.status(200);
+	    	data = '{"status": "false"}';
 	    }else{
 	    	console.log("Calc Data : ",parseFloat(data.total).toFixed(18));
 	    	//res.status(200);
 	    	if(parseFloat(data.total).toFixed(18) > amout){
-	    		res.write('{"status" : "true"}');
+	    		data = '{"status": "true"}';
+				
+				  
 	    	}
 	    	
 	    }
 
 	    res.status(200);
-	    res.end();
+	    res.send(data);
+		res.end( data );
+	   
 	});
 
 	app.get("/farm/task/:wallet/:target/:hash/:amount/:id", async (req, res) => {
