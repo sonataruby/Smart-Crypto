@@ -23,7 +23,7 @@ module.exports = function(prefix , app) {
             ? sign + "0." + "0".repeat(Math.max(Math.abs(pow)-1 || 0, 0)) + lead + decimal
             : sign + lead + (+pow >= decimal.length ? (decimal + "0".repeat(Math.max(+pow-decimal.length || 0, 0))) : (decimal.slice(0,+pow)+"."+decimal.slice(+pow)))
     }
-
+    
 	app.get(prefix, (req, res) => {
 	 const dataMain = fsFile.readJSONFile('main.json');
 	 app.set('layout', './layout/pages');
@@ -99,7 +99,7 @@ module.exports = function(prefix , app) {
 	    var token = req.params.token;
 
 	    let sql = "SELECT SUM(amount) as total FROM user_approve WHERE wallet = '"+wallet+"' AND token_address='"+token+"'";
-	    var data = await db.dbQuery(sql);
+	    var data = await db.dbQuery(sql,true);
 
 	    res.header('Content-Type', 'application/json');
 	    var dataJson = '{"status": false}';

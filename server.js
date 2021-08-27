@@ -169,7 +169,14 @@ app.get('/query/:query/:wallet/:amount/:tokenaddress', async (req, res) => {
   var tokenaddress = req.params.tokenaddress;
   var sql = null;
   if(query == "approve"){
-    sql = "INSERT INTO `user_approve` (`wallet`, `amount`, `token_address`) VALUES ('"+wallet+"', '"+amount+"', '"+tokenaddress+"');"
+    sqlcheck = "SELECT SUM(amount) as total FROM user_approve WHERE wallet = '"+wallet+"' AND token_address='"+tokenaddress+"'";
+    var dataCheck = await db.dbQuery(sql,true);
+    if(dataCheck.total > 0){
+      sql = "UPDATE `user_approve` SET `amount`='"+(dataCheck+amount)+"' WHERE `wallet`='"+wallet+"' AND `token_address` = '"+tokenaddress+"';"
+    }else{
+      sql = "INSERT INTO `user_approve` (`wallet`, `amount`, `token_address`) VALUES ('"+wallet+"', '"+amount+"', '"+tokenaddress+"');"
+    }
+    
   }
   if(sql != null) await dbQuery(sql);
 });
