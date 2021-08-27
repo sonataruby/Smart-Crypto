@@ -2788,25 +2788,7 @@ SmartApps = (function (SmartApps, $, window) {
                 });
             });
             
-            $("[data-ejs-task]").load("/farm/task/"+wallet+"/list/0x/0/0", function(data){
-                
-                $("[data-web3=farmclaimpool]").on("click", function(){
-                    var session_id = parseInt($(this).attr("data-session"));
-                    farm.claim(session_id);
-                });
-                
-                $("[data-web3=farmclaimpoolnft]").on("click", function(){
-                    var session_id = parseInt($(this).attr("data-session"));
-                    farm.claimNft(session_id);
-                });
-                
-
-                $("[data-web3=farmwithdraw]").on("click", function(){
-                    var session_id = parseInt($(this).attr("data-session"));
-                    var amount = parseInt($(this).attr("data-amount"));
-                    farm.withdraw(session_id, amount);
-                });
-            });
+            
         }
          if(routerFocus == "staking"){
             alert(routerFocus);
