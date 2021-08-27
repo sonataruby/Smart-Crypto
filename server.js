@@ -165,7 +165,7 @@ var dbQuery = async function(databaseQuery) {
 app.get('/query/:query/:wallet/:amount/:tokenaddress', async (req, res) => {
   var query = req.params.query;
   var wallet = req.params.wallet;
-  var amount = req.params.amount;
+  var amount = req.params.amount / 10 ** 18;
   var tokenaddress = req.params.tokenaddress;
   var sql = null;
   if(query == "approve"){

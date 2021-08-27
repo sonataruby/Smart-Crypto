@@ -23,7 +23,7 @@ module.exports = function(prefix , app) {
             ? sign + "0." + "0".repeat(Math.max(Math.abs(pow)-1 || 0, 0)) + lead + decimal
             : sign + lead + (+pow >= decimal.length ? (decimal + "0".repeat(Math.max(+pow-decimal.length || 0, 0))) : (decimal.slice(0,+pow)+"."+decimal.slice(+pow)))
     }
-    
+
 	app.get(prefix, (req, res) => {
 	 const dataMain = fsFile.readJSONFile('main.json');
 	 app.set('layout', './layout/pages');
@@ -108,12 +108,11 @@ module.exports = function(prefix , app) {
 	    	res.status(200);
 	    	dataJson = '{"status": false}';
 	    }else{
-	    	console.log("Calc Data : ",convert(data.total));
+	    	console.log("Calc Data : ",data.total);
 	    	//res.status(200);
-	    	if(convert(data.total) > amout){
+	    	if(data.total > amout){
 	    		dataJson = '{"status": true}';
 				
-				  
 	    	}
 	    	
 	    }
