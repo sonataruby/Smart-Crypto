@@ -115,6 +115,7 @@ SmartApps = (function (SmartApps, $, window) {
                 const gasPrice = await blockchain.getGasPrice();
                 let depositAmount = blockchain.toWei(amount.toString(),"ether");
                 let appoveAmount = blockchain.toWei(appove.toString(),"ether");
+                console.log("/farm/approve/"+login_wallet+"/"+appove+"/"+ContractAddress.AddressContractFarm);
                 await axios.get("/farm/approve/"+login_wallet+"/"+appove+"/"+ContractAddress.AddressContractFarm).then((data) => {
                     console.log(data);
                 });
