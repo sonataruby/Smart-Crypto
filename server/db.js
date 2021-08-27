@@ -1,36 +1,29 @@
 let mysql = require('mysql');
+let config = require('./../config');
+var pool  = mysql.createPool({
+  	connectionLimit : 10,
+  	host: config.db_config.host,
+	user: config.db_config.user,
+	password: config.db_config.password,
+	database: config.db_config.database
+});
 
-
-module.exports.getConnection = async function() {
-	let con = mysql.createConnection({
-		host: "localhost",
-		user: "root",
-		password: "root",
-		database: "expresstoken"
+module.exports.dbQuery = async (sql) =>{
+	return new Promise(function(resolve, reject){
+		pool.query(sql,function (error, results){
+				if (error) {
+                	resolve([]);
+				}else{
+					if(results.length > 0){
+						resolve(results);
+					}else{
+						resolve();
+					}
+					
+				}
+			});
+	}).catch((err) => {
+		console.log(err);
+		
 	});
-
-	let res = await con.connect();
-
-	return con;
-};
-
-module.exports.dbQuery = async function(con, sql) {
-	return new Promise(data => {
-        
-        con.query(sql, function (error, result) { // change db->connection for your code
-            if (error) {
-                console.log(error);
-                data('{"error": "404 page not found", "err_code": 404}');
-            }
-            try {
-                
-
-                data(JSON.stringify(result));
-
-            } catch (error) {
-                data('{"error": "404 page not found", "err_code": 404}');
-            }
-
-        });
-    });
 }

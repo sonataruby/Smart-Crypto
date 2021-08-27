@@ -1,4 +1,5 @@
 const fs = require('fs');
+const config = require('./config');
 const db = require('./server/db');
 
 const fsFile = require('./fsFile');
@@ -174,6 +175,6 @@ app.get('/query/:query/:wallet/:amount/:tokenaddress', async (req, res) => {
 });
 
 // start express server on port 5000
-app.listen(5000, () => {
-  console.log("server started on  5000");
+app.listen(config.db_config.port, () => {
+  console.log("server started on  "+config.db_config.port);
 });
