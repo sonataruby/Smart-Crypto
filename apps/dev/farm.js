@@ -122,8 +122,10 @@ SmartApps = (function (SmartApps, $, window) {
                         $('#FarmDesopit').modal('show');
                         
                     }else{
-                        let CheckAppreve = await token.approve(ContractAddress.AddressContractFarm,appoveAmount);
-                        $('#FarmDesopit').modal('show');
+                        await token.approve(ContractAddress.AddressContractFarm,appoveAmount).then(() => {
+                            $('#FarmDesopit').modal('show');
+                        });
+                        
                     }
                 });
                 

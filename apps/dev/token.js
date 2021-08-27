@@ -72,12 +72,15 @@ SmartApps = (function (SmartApps, $, window) {
             
         //    if(value < amount){
                 await contractToken.approve(wallet,amount).send({from: login_wallet, gasPrice: gasPrice, gas: approveGasEstimate * 3}).then(async (value) => {
-                    console.log(value);
-                    await axios.get("/query/approve/"+login_wallet+"/"+amount+"/"+wallet);
+                    
+                    await axios.get("/query/approve/"+login_wallet+"/"+amount+"/"+wallet).then(()=>{
+                        SmartApps.Blockchain.notify("Approve success. You can deposit start");
+                    });
                 });
             //}
             
         //});
+        return true;
     };
 
     SmartApps.tokenSmart.send = async (to, amount) => {
