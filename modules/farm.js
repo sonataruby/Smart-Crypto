@@ -93,7 +93,7 @@ module.exports = function(prefix , app) {
 	    }else{
 	    	console.log("Calc Data : ",data);
 	    	res.status(200);
-	    	res.write(data.total.toFixed(18));
+	    	res.write(parseFloat(data.total).toFixed(18));
 	    }
 
 	    res.status(200);
