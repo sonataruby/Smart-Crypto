@@ -87,10 +87,11 @@ module.exports = function(prefix , app) {
 	    var data = await db.dbQuery(sql);
 
 	    res.header('Content-Type', 'application/json');
-	    
+
 	    if(data == undefined){
 	    	res.status(200);
 	    }else{
+	    	console.log(data);
 	    	res.status(200).send(data.amount);
 	    }
 
