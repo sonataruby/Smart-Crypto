@@ -8,14 +8,14 @@ var pool  = mysql.createPool({
 	database: config.db_config.database
 });
 
-module.exports.dbQuery = async (sql) =>{
+module.exports.dbQuery = async (sql, rows=false) =>{
 	return new Promise(function(resolve, reject){
 		pool.query(sql,function (error, results){
 				if (error) {
                 	resolve([]);
 				}else{
 					if(results.length > 0){
-						resolve(results);
+						rows == false ? resolve(results) : resolve(results[0]);
 					}else{
 						resolve();
 					}

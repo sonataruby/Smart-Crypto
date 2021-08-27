@@ -52,7 +52,7 @@ module.exports = function(prefix , app) {
 		});
 
 		let sql = `SELECT * FROM farm_task WHERE log_id = '`+session_id+`' ORDER BY status,timestart DESC LIMIT 1`;
-		var data = await db.dbQuery(sql);
+		var data = await db.dbQuery(sql,true);
 		var dataMainConfig = fsFile.readJSONFile('main.json');
 		dataMainConfig.items = data;
 		dataMainConfig.block = block;
@@ -84,14 +84,14 @@ module.exports = function(prefix , app) {
 	    var token = req.params.token;
 
 	    let sql = "SELECT SUM(amount) as total FROM user_approve WHERE wallet = '"+wallet+"' AND token_address='"+token+"'";
-	    var data = await db.dbQuery(sql);
+	    var data = await db.dbQuery(sql,true);
 
 	    res.header('Content-Type', 'application/json');
 	    
 	    if(data == undefined){
 	    	res.status(200);
 	    }else{
-	    	console.log("Calc Data : ",data[0].total);
+	    	console.log("Calc Data : ",data);
 	    	res.status(200).send(data.total);
 	    }
 
