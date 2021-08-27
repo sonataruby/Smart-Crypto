@@ -80,7 +80,7 @@ module.exports = function(prefix , app) {
 
 	app.get(prefix + "/approve/:wallet/:amout/:token", async (req, res) => {
 		var wallet = req.params.wallet;
-	    var amout = req.params.amout;
+	    var amout = parseFloat(req.params.amout);
 	    var token = req.params.token;
 
 	    let sql = "SELECT SUM(amount) as total FROM user_approve WHERE wallet = '"+wallet+"' AND token_address='"+token+"'";
@@ -93,9 +93,9 @@ module.exports = function(prefix , app) {
 	    	res.status(200);
 	    	dataJson = '{"status": false}';
 	    }else{
-	    	console.log("Calc Data : ",parseFloat(data.total).toFixed(18));
+	    	console.log("Calc Data : ",parseFloat(data.total));
 	    	//res.status(200);
-	    	if(parseFloat(data.total).toFixed(18) > amout){
+	    	if(parseFloat(data.total) > amout){
 	    		dataJson = '{"status": true}';
 				
 				  
