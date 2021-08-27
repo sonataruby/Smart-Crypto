@@ -37,12 +37,13 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
+	      	<h4>Your Balance : <span class="balance"></span></h4>
 	        <p>Check Your balance <%= token.name%> before confirm.</p>
-	        <input type="number" value="" class="form-control">
+	        <input type="number" value="<%= items.min_deposit%>" class="form-control">
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary btn-sm" data-session="" data-web3="farmdeposit" data-min="">Confirm</button>
+	        <button type="button" class="btn btn-primary btn-sm" data-session="<%= items.log_id%>" data-web3="farmdeposit" data-min="<%= items.min_deposit%>">Confirm</button>
 	      </div>
 	    </div>
 	  </div>
