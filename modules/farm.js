@@ -16,21 +16,21 @@ module.exports = function(prefix , app) {
 	 res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
 	});
 
-	app.get(prefix + "/info/:session_id", async (req, res) => {
+	app.get(prefix + "/info/:session_id/:wallet", async (req, res) => {
 
 		app.set('layout', './layout/pages');
 		var session_id = req.params.session_id;
-
+		var wallet = req.params.wallet;
 		let contract = await blockchain.loadFram();
 		let address = await blockchain.loadAddress();
 
 		var block = {};
 
-		let stakedBalanceOf = await contract.stakedBalanceOf(session_id,"0xe6B84663Dc54b9B29f0a1A04B59e94d92BfE4DFf").call();
+		let stakedBalanceOf = await contract.stakedBalanceOf(session_id,wallet).call();
 		block.deposit = blockchain.web3.utils.fromWei(stakedBalanceOf);
 
-		let claimable = await contract.claimable(session_id,"0xe6B84663Dc54b9B29f0a1A04B59e94d92BfE4DFf").call();
-		block.claimable = blockchain.web3.utils.fromWei(claimable);
+		let claimable = await contract.claimable(session_id,wallet).call();
+		block.claimable = parseFloat(blockchain.web3.utils.fromWei(claimable)).toFixed(4);
 
 		block.session_id = session_id;
 		block.timeEnd = 0;

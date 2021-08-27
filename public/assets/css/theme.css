@@ -1,3 +1,15 @@
+.container-game{
+  width:80%; 
+  margin:auto;
+  position: relative;
+}
+@media (max-width: 920px){
+  .container-game{
+    width:98%; 
+    margin:auto;
+    position: relative;
+  }
+}
 .btn.walletLimit{
    display: inline-flex !important;
 }

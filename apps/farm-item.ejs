@@ -19,7 +19,7 @@
                         <hr>
                         <div class="claimOnly">
                             <button class="btn btn-sm btn-primary" data-web3="farmclaim" data-session="<%= data.log_id%>">Claim</button>
-                            <a class="btn btn-sm btn-info" href="/farm/info/<%= data.log_id%>">Info</a>
+                            <button class="btn btn-sm btn-info data-info" data-href="/farm/info/<%= data.log_id%>">Info</button>
                         </div>
                         <div class="joinOnly">
                             <button class="btn btn-sm btn-info" data-web3="farmpool" data-session="<%= data.log_id%>" data-amount="<%= data.max_amount%>">Approve</button>
@@ -58,6 +58,16 @@
 <script src="/assets/js/countdown.js?ver=1930"></script>
 <script>
 jQuery(document).ready(function(){
+
+  var wallet = "";
+  SmartApps.Blockchain.getLoginWallet().then((data) => {
+    wallet = data;
+  });
+  $(".data-info").on("click", function(){
+    var url = $(this).attr("data-href");
+    window.location.href= url + "/" + wallet;
+  });
+
 	$("[data-timestart]").each(function(res){
 		var period = $(this).attr("data-period");
 		periodEx = parseInt(period);
