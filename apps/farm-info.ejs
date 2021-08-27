@@ -73,6 +73,8 @@
 <script>
 jQuery(document).ready(function(){
 
+
+
 var Dom = {
 
   get:  function(id)                     { return ((id instanceof HTMLElement) || (id === document)) ? id : document.getElementById(id); },
@@ -114,8 +116,17 @@ var config = {
 const blockchain = SmartApps.tokenFarm;
 var game = new Phaser.Game(config);
 
+function resizeGame() {
+    game.scale.setGameSize(document.getElementById("game").offsetWidth, $( window ).height());
+}
+
+$( window ).resize(function() {
+    resizeGame();
+}); 
+
 function preload ()
 {
+
     this.load.setBaseURL('https://cryptocar.cc');
 
     this.load.image('sky', 'assets/car/9144.jpg');
@@ -186,19 +197,23 @@ function create ()
 	
 	var buttonOptions = { fill: '#dc3545',align : 'center',backgroundColor:'red',fontSize : 24, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 2};
 
-	const deposit = this.add.image(160, 400, 'deposit')
+	var setButtonControll = 160;
+	if(document.getElementById("game").offsetWidth < 520){
+		setButtonControll = 30;
+	}
+	const deposit = this.add.image(setButtonControll, 400, 'deposit')
 		.setInteractive()
 		.on('pointerdown', () => {
 			console.log("Click Deposit");
 			blockchain.createpool(<%= block.amount%>,<%= block.min_amount%>,<%= block.session_id%>);
 		});
 	
-	const ClaimButton = this.add.image(160+125+15, 400, 'claim').setInteractive()
+	const ClaimButton = this.add.image(setButtonControll+125+15, 400, 'claim').setInteractive()
 		.on('pointerdown', () => {
 			console.log("Click Claim");
 			blockchain.claim(<%= block.session_id%>);
 		});
-	const WithdrawButton = this.add.image(160+(125+15)*2, 400, 'withdraw').setInteractive()
+	const WithdrawButton = this.add.image(setButtonControll+(125+15)*2, 400, 'withdraw').setInteractive()
 		.on('pointerdown', () => {
 			console.log("Click Withdraw");
 			blockchain.withdraw();
