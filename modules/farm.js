@@ -87,16 +87,16 @@ module.exports = function(prefix , app) {
 	    var data = await db.dbQuery(sql,true);
 
 	    res.header('Content-Type', 'application/json');
-	    var data = '{"status": "false"}';
+	    var data = '{"status": false}';
   
 	    if(data == undefined || data == "" || data == null){
 	    	res.status(200);
-	    	data = '{"status": "false"}';
+	    	data = '{"status": false}';
 	    }else{
 	    	console.log("Calc Data : ",parseFloat(data.total).toFixed(18));
 	    	//res.status(200);
 	    	if(parseFloat(data.total).toFixed(18) > amout){
-	    		data = '{"status": "true"}';
+	    		data = '{"status": true}';
 				
 				  
 	    	}
