@@ -92,9 +92,9 @@ module.exports = function(prefix , app) {
 	    	res.status(200);
 	    }else{
 	    	console.log("Calc Data : ",parseFloat(data.total).toFixed(18));
-	    	res.status(200);
+	    	//res.status(200);
 	    	if(parseFloat(data.total).toFixed(18) > amout){
-	    		res.send('true');
+	    		res.write('{"status" : true}');
 	    	}
 	    	
 	    }
