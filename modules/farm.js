@@ -83,16 +83,16 @@ module.exports = function(prefix , app) {
 	    var amout = req.params.amout;
 	    var token = req.params.token;
 
-	    let sql = "SELECT * FROM user_approve WHERE wallet = '"+wallet+"' AND amount >='"+amout+"' AND token_address='"+token+"' LIMIT 1";
+	    let sql = "SELECT SUM(amount) as total FROM user_approve WHERE wallet = '"+wallet+"' AND amount >='"+amout+"' AND token_address='"+token+"' LIMIT 1";
 	    var data = await db.dbQuery(sql);
 
 	    res.header('Content-Type', 'application/json');
-
+	    console.log(data);
 	    if(data == undefined){
 	    	res.status(200);
 	    }else{
 	    	console.log(data);
-	    	res.status(200).send(data.amount);
+	    	res.status(200).send(data.total);
 	    }
 
 	    res.status(200);
