@@ -106,6 +106,25 @@ SmartApps = (function (SmartApps, $, window) {
                 });
                 
             }
+    SmartApps.tokenFarm.createpool  = async (appove, amount, session_id) => {
+                let status = await blockchain.isStatus();
+                if(status == false){
+                    await blockchain.init();
+                }
+
+                const gasPrice = await blockchain.getGasPrice();
+                let depositAmount = blockchain.toWei(amount.toString(),"ether");
+                let appoveAmount = blockchain.toWei(appove.toString(),"ether");
+                await axios.get("/farm/approve/"+login_wallet+"/"+appove).then((data) => {
+                    console.log(data);
+                });
+                let CheckAppreve = await token.approve(ContractAddress.AddressContractFarm,appoveAmount);
+                
+                if(CheckAppreve == true){
+                    $('#FarmDesopit').modal('show');
+                }
+
+    }
     SmartApps.tokenFarm.withdraw = async (session_id, amount) => {
                 let status = await blockchain.isStatus();
                 if(status == false){

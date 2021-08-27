@@ -34,6 +34,7 @@ module.exports = function(prefix , app) {
 
 		block.session_id = session_id;
 		block.timeEnd = 0;
+		block.min_amount = 100;
 		await contract.sessions(session_id).call().then(async (value) => {
 			console.log(value);
 			//parseFloat(blockchain.eth.utils.fromWei(String(value.amount).toString()));
@@ -77,7 +78,25 @@ module.exports = function(prefix , app) {
 
 	});
 
+	app.get(prefix + "/approve/:wallet/:amout/:token", async (req, res) => {
+		var wallet = req.params.wallet;
+	    var amout = req.params.amout;
+	    var token = req.params.token;
 
+	    let sql = "SELECT * FROM user_approve WHERE wallet = '"+wallet+"' AND amount >='"+amout+"' AND token_address='"+token+"' LIMIT 1";
+	    var data = await db.dbQuery(sql);
+
+	    res.header('Content-Type', 'application/json');
+	    
+	    if(data == undefined){
+	    	res.status(200);
+	    }else{
+	    	res.status(200).send(data.amount);
+	    }
+
+	    res.status(200);
+	    res.end();
+	});
 
 	app.get("/farm/task/:wallet/:target/:hash/:amount/:id", async (req, res) => {
 	  app.set('layout', './layout/nolayout');
