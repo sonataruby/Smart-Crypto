@@ -166,7 +166,7 @@ function create ()
 		.setInteractive()
 		.on('pointerdown', () => {
 			console.log("Click Deposit");
-			blockchain.confirm(<%= items.max_amount%>);
+			blockchain.confirm(<%= items.amount%>);
 		});
 	
 	const ClaimButton = this.add.image(160+125+15, 400, 'claim').setInteractive()

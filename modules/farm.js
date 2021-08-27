@@ -45,7 +45,6 @@ module.exports = function(prefix , app) {
 			let annualUnits = 31556952;  // 1 year in seconds
 			let annualReward = rewardUnit * annualUnits * 1;
 			block.timeEnd = startTime + period;
-
 			block.rate = annualReward;
 			block.apr = parseFloat((annualReward/amount)*100).toFixed(2);
 			block.amount = amount;
