@@ -117,8 +117,8 @@ SmartApps = (function (SmartApps, $, window) {
                 let appoveAmount = blockchain.toWei(appove.toString(),"ether");
                 
                 await axios.get("/farm/approve/"+login_wallet+"/"+appoveAmount+"/"+ContractAddress.AddressContractFarm).then(async (data) => {
-                    console.log(data);
-                    if(data.status == true){
+                    console.log(data.data);
+                    if(data.data.status == true){
                         $('#FarmDesopit').modal('show');
                         
                     }else{
