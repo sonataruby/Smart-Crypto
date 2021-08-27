@@ -6,6 +6,11 @@
 		Project Public Mainet
 	</div>
 </div>
+<audio id='music'>
+    <source src="/music/racer.ogg">
+    <source src="/music/racer.mp3">
+  </audio>
+
 <style>
 .container-game{
   width:80%; 
@@ -23,7 +28,22 @@
 <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
 <script>
 jQuery(document).ready(function(){
-	
+
+var Dom = {
+
+  get:  function(id)                     { return ((id instanceof HTMLElement) || (id === document)) ? id : document.getElementById(id); },
+  set:  function(id, html)               { Dom.get(id).innerHTML = html;                        },
+  on:   function(ele, type, fn, capture) { Dom.get(ele).addEventListener(type, fn, capture);    },
+  un:   function(ele, type, fn, capture) { Dom.get(ele).removeEventListener(type, fn, capture); },
+  show: function(ele, type)              { Dom.get(ele).style.display = (type || 'block');      },
+  blur: function(ev)                     { ev.target.blur();                                    },
+
+  
+
+  storage: window.localStorage || {}
+
+}
+
 
 var config = {
     type: Phaser.AUTO,
@@ -41,19 +61,40 @@ var config = {
         create: create,
         render: render
     },
+    google: {
+      families: ['Revalia']
+    }
 
 };
+
+const blockchain = SmartApps.tokenFarm;
 var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.setBaseURL('https://cryptocar.cc');
+    this.load.setBaseURL('http://localhost:5000');
 
     this.load.image('sky', 'assets/car/9144.jpg');
     this.load.image('controller', 'assets/car/control.png');
     this.load.image('logo', 'assets/car/logo_game.png');
     this.load.image('red', 'assets/car/start.png');
+    this.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 }
+
+function playMusic(){
+    var music = Dom.get('music');
+    music.loop = true;
+    music.volume = 0.05; // shhhh! annoying music!
+    music.muted = (Dom.storage.muted === "true");
+    music.play();
+    /*
+    Dom.toggleClassName('mute', 'on', music.muted);
+    Dom.on('mute', 'click', function() {
+      Dom.storage.muted = music.muted = !music.muted;
+      Dom.toggleClassName('mute', 'on', music.muted);
+    });
+    */
+  }
 
 function create ()
 {
@@ -64,42 +105,47 @@ function create ()
 	image.setScale(scale).setScrollFactor(0)
 
 	//this.add.image(400, 210, 'controller');
+
+
+	
+	var textOptions = { fill: '#dc3545',fontFamily : 'Revalia', fontSize : 24, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 2};
 	this.add.text(100, 10, '<%= items.pool_name%>', { fill: '#0f0' });
 	this.add.text(100, 50, 'Total Value Lock', { fill: '#0f0' });
-	this.add.text(100, 70, '<%= block.amount%> <%= token.name%>', { fill: '#0f0' });
+	this.add.text(100, 70, '<%= block.amount%> <%= token.name%>', textOptions);
 	
 	this.initialTime = <%= block.timeEnd%>;
 	this.add.text(100, 100, 'Remaining Time', { fill: '#0f0' });
-	CountDownTime = this.add.text(100, 120, '2021/01/09 0:0:0', { fill: '#0f0' });
+	CountDownTime = this.add.text(100, 120, '2021/01/09 0:0:0', textOptions);
 	timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true });
 
 	this.add.text(100, 140, 'Pool Rate', { fill: '#0f0' });
-	this.add.text(100, 160, '<%= block.rate%> <%= token.name%> / Year', { fill: '#0f0' });
+	this.add.text(100, 160, '<%= block.rate%> <%= token.name%> / Year', textOptions);
 	this.add.text(100, 190, 'APR', { fill: '#0f0' });
-	this.add.text(100, 210, '<%= block.apr%> %', { fill: '#0f0' });
+	this.add.text(100, 210, '<%= block.apr%> %', textOptions);
  	
 
  	this.add.text(500, 50, 'Your Liquidity Deposit', { fill: '#0f0' });
-	this.add.text(500, 70, '<%= block.deposit%> <%= token.name%>', { fill: '#0f0' });
+	this.add.text(500, 70, '<%= block.deposit%> <%= token.name%>', textOptions);
 	this.add.text(500, 100, 'Your Power', { fill: '#0f0' });
 
 	this.add.text(500, 140, 'Your Claim', { fill: '#0f0' });
-	this.add.text(500, 160, '<%= block.claimable%> <%= token.name%>', { fill: '#0f0' });
+	this.add.text(500, 160, '<%= block.claimable%> <%= token.name%>', textOptions);
 
-	const blockchain = SmartApps.tokenFarm;
+	
+	var buttonOptions = { fill: '#dc3545',fontSize : 24, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 2};
 
-	const deposit = this.add.text(100, 400, 'Deposit', { fill: '#0f0' })
+	const deposit = this.add.text(100, 400, 'Deposit', buttonOptions)
 		.setInteractive()
 		.on('pointerdown', () => {
 			console.log("Click Deposit");
 			blockchain.confirm(<%= items.max_amount%>);
 		});
-	const ClaimButton = this.add.text(200, 400, 'Claim', { fill: '#0f0' }).setInteractive()
+	const ClaimButton = this.add.text(200, 400, 'Claim', buttonOptions).setInteractive()
 		.on('pointerdown', () => {
 			console.log("Click Claim");
 			blockchain.claim(<%= block.session_id%>);
 		});
-	const WithdrawButton = this.add.text(300, 400, 'Withdraw', { fill: '#0f0' }).setInteractive()
+	const WithdrawButton = this.add.text(300, 400, 'Withdraw', buttonOptions).setInteractive()
 		.on('pointerdown', () => {
 			console.log("Click Withdraw");
 			blockchain.withdraw();
@@ -120,6 +166,7 @@ function create ()
     logo.setCollideWorldBounds(true);
 
     emitter.startFollow(logo);
+    playMusic();
     
 }
 
