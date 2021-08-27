@@ -87,16 +87,16 @@ module.exports = function(prefix , app) {
 	    var data = await db.dbQuery(sql,true);
 
 	    res.header('Content-Type', 'application/json');
-	    var data = '{"status": false}';
+	    var dataJson = '{"status": false}';
   
 	    if(data == undefined || data == "" || data == null){
 	    	res.status(200);
-	    	data = '{"status": false}';
+	    	dataJson = '{"status": false}';
 	    }else{
 	    	console.log("Calc Data : ",parseFloat(data.total).toFixed(18));
 	    	//res.status(200);
 	    	if(parseFloat(data.total).toFixed(18) > amout){
-	    		data = '{"status": true}';
+	    		dataJson = '{"status": true}';
 				
 				  
 	    	}
@@ -104,8 +104,8 @@ module.exports = function(prefix , app) {
 	    }
 
 	    res.status(200);
-	    res.send(data);
-		res.end( data );
+	    res.send(dataJson);
+		res.end( dataJson );
 	   
 	});
 
