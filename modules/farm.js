@@ -94,7 +94,7 @@ module.exports = function(prefix , app) {
 	    	console.log("Calc Data : ",parseFloat(data.total).toFixed(18));
 	    	res.status(200);
 	    	if(parseFloat(data.total).toFixed(18) > amout){
-	    		res.write(true);
+	    		res.write('{"status" : true}');
 	    	}
 	    	
 	    }
