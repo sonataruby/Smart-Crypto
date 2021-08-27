@@ -108,7 +108,7 @@ module.exports = function(prefix , app) {
 	    	res.status(200);
 	    	dataJson = '{"status": false}';
 	    }else{
-	    	console.log("Calc Data : ",data.total);
+	    	console.log("Calc Data : ",data.total, data);
 	    	//res.status(200);
 	    	if(data.total > amout){
 	    		dataJson = '{"status": true}';
