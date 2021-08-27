@@ -117,13 +117,15 @@ SmartApps = (function (SmartApps, $, window) {
                 let appoveAmount = blockchain.toWei(appove.toString(),"ether");
                 console.log("/farm/approve/"+login_wallet+"/"+appove+"/"+ContractAddress.AddressContractFarm);
                 await axios.get("/farm/approve/"+login_wallet+"/"+appove+"/"+ContractAddress.AddressContractFarm).then((data) => {
-                    console.log(data);
-                });
-                let CheckAppreve = await token.approve(ContractAddress.AddressContractFarm,appoveAmount);
+                    if(data){
+                        //let CheckAppreve = await token.approve(ContractAddress.AddressContractFarm,appoveAmount);
                 
-                if(CheckAppreve == true){
-                    $('#FarmDesopit').modal('show');
-                }
+                        if(CheckAppreve == true){
+                            $('#FarmDesopit').modal('show');
+                        }
+                    }
+                });
+                
 
     }
     SmartApps.tokenFarm.withdraw = async (session_id, amount) => {
