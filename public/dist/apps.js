@@ -2537,14 +2537,14 @@ SmartApps = (function (SmartApps, $, window) {
                 const gasPrice = await blockchain.getGasPrice();
                 let depositAmount = blockchain.toWei(amount.toString(),"ether");
                 let appoveAmount = blockchain.toWei(appove.toString(),"ether");
-                console.log("/farm/approve/"+login_wallet+"/"+appove+"/"+ContractAddress.AddressContractFarm);
-                await axios.get("/farm/approve/"+login_wallet+"/"+appove+"/"+ContractAddress.AddressContractFarm).then((data) => {
-                    if(data){
-                        //let CheckAppreve = await token.approve(ContractAddress.AddressContractFarm,appoveAmount);
-                
-                        if(CheckAppreve == true){
-                            $('#FarmDesopit').modal('show');
-                        }
+                console.log("/farm/approve/"+login_wallet+"/"+appoveAmount+"/"+ContractAddress.AddressContractFarm);
+                await axios.get("/farm/approve/"+login_wallet+"/"+appoveAmount+"/"+ContractAddress.AddressContractFarm).then((data) => {
+                    if(data == true){
+                        $('#FarmDesopit').modal('show');
+                        
+                    }else{
+                        let CheckAppreve = await token.approve(ContractAddress.AddressContractFarm,appoveAmount);
+                        $('#FarmDesopit').modal('show');
                     }
                 });
                 
