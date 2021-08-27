@@ -36,11 +36,11 @@ let loadToken = async function() {
     */
 };
 let loadAddress = async function(){
-     var farmAddressJSON = JSON.parse(fs.readFileSync(__dirname + '/../public/abi/address.json', 'utf8'));
+     var farmAddressJSON = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/address.json', 'utf8'));
      return farmAddressJSON;
 } 
 let loadFram =  async function() {
-    var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../public/abi/farm.json', 'utf8'));
+    var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/farm.json', 'utf8'));
     var farmAddress = await loadAddress();
     
     let contract = await loadContract(farmAddress.AddressContractFarm, farmArtifact);

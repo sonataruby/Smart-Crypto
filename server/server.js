@@ -84,14 +84,14 @@ const Farm = require('./modules/farm');
 
 
 app.get("/farm", async (req, res) => {
- await Farm.init(dbQuery, blockchain);
+ await Farm.init(blockchain);
  const dataMain = readJSONFile('main.json');
  dataMain.items = await Farm.findAll();
  res.render("farm",dataMain);
 
 });
 app.get("/farm/:id/:target", async (req, res) => {
-  await Farm.init(dbQuery, blockchain);
+  await Farm.init(blockchain);
   var session_id = req.params.id;
   var target = req.params.target;
   console.log(target);
