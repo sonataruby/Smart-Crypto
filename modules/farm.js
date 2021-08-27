@@ -92,7 +92,8 @@ module.exports = function(prefix , app) {
 	    	res.status(200);
 	    }else{
 	    	console.log("Calc Data : ",data);
-	    	res.status(200).send(data);
+	    	res.status(200);
+	    	res.send(data.total);
 	    }
 
 	    res.status(200);
