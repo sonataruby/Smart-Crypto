@@ -37,8 +37,9 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	      	<h4>Your Balance : <span class="balance"></span></h4>
+	      	<h4>Your Balance : <span class="balance"></span> <%= token.name%></h4>
 	        <p>Check Your balance <%= token.name%> before confirm.</p>
+	        <br>
 	        <input type="number" value="<%= items.min_deposit%>" class="form-control">
 	      </div>
 	      <div class="modal-footer">
