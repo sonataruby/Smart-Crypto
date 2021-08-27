@@ -19,9 +19,12 @@
                         <hr>
                         <div class="claimOnly">
                             <button class="btn btn-sm btn-primary" data-web3="farmclaim" data-session="<%= data.log_id%>">Claim</button>
+                            <a class="btn btn-sm btn-info" href="/farm/info/<%= data.log_id%>">Info</a>
                         </div>
                         <div class="joinOnly">
                             <button class="btn btn-sm btn-info" data-web3="farmpool" data-session="<%= data.log_id%>" data-amount="<%= data.max_amount%>">Approve</button>
+                            <button class="btn btn-sm btn-info" data-web3="farmpool" data-session="<%= data.log_id%>" data-amount="<%= data.max_amount%>">Info</button>
+
                             <button data-toggle="modal" data-target="#FarmDesopit<%= index%>" data-session="<%= data.log_id%>" data-amount="<%= data.min_deposit%>" class="btn btn-sm btn-primary">Deposit</button>
                         </div>
                         

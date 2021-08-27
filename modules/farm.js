@@ -2,6 +2,8 @@ const axios = require('axios').default;
 const fsFile = require('./../fsFile');
 const db = require('./../server/db');
 const hostname = "http://localhost:5000";
+const blockchain = require('./../server/blockchain');
+let Web3 = require('web3');
 module.exports = function(prefix , app) {
 	
 	/*
@@ -12,6 +14,50 @@ module.exports = function(prefix , app) {
 	 app.set('layout', './layout/pages');
 	 
 	 res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
+	});
+
+	app.get(prefix + "/info/:session_id", async (req, res) => {
+
+		app.set('layout', './layout/pages');
+		var session_id = req.params.session_id;
+
+		let contract = await blockchain.loadFram();
+		let address = await blockchain.loadAddress();
+
+		var block = {};
+
+		let stakedBalanceOf = await contract.stakedBalanceOf(session_id,"0xe6B84663Dc54b9B29f0a1A04B59e94d92BfE4DFf").call();
+		block.deposit = blockchain.web3.utils.fromWei(stakedBalanceOf);
+
+		let claimable = await contract.claimable(session_id,"0xe6B84663Dc54b9B29f0a1A04B59e94d92BfE4DFf").call();
+		block.claimable = blockchain.web3.utils.fromWei(claimable);
+
+		block.session_id = session_id;
+
+		await contract.sessions(session_id).call().then(async (value) => {
+			console.log(value);
+			//parseFloat(blockchain.eth.utils.fromWei(String(value.amount).toString()));
+			let amount = parseFloat(blockchain.web3.utils.fromWei(value.amount));
+			let totalReward = parseFloat(blockchain.web3.utils.fromWei(value.totalReward));
+			let startTime = parseInt(value.startTime);
+			let period = parseInt(value.period);
+			let rewardUnit = totalReward/period;
+			let annualUnits = 31556952;  // 1 year in seconds
+			let annualReward = rewardUnit * annualUnits * 1;
+			block.timeEnd = startTime + period;
+
+			block.rate = annualReward;
+			block.apr = parseFloat((annualReward/amount)*100).toFixed(2);
+			block.amount = amount;
+		});
+
+		let sql = `SELECT * FROM farm_task WHERE log_id = '`+session_id+`' ORDER BY status,timestart DESC LIMIT 1`;
+		var data = await db.dbQuery(sql);
+		var dataMainConfig = fsFile.readJSONFile('main.json');
+		dataMainConfig.items = data;
+		dataMainConfig.block = block;
+
+		res.render("farm-info",dataMainConfig);
 	});
 
 	app.get(prefix + "/item", async (req, res) => {
