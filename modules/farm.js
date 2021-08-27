@@ -91,9 +91,12 @@ module.exports = function(prefix , app) {
 	    if(data == undefined){
 	    	res.status(200);
 	    }else{
-	    	console.log("Calc Data : ",data);
+	    	console.log("Calc Data : ",parseFloat(data.total).toFixed(18));
 	    	res.status(200);
-	    	res.write(parseFloat(data.total).toFixed(18));
+	    	if(parseFloat(data.total).toFixed(18) > amout){
+	    		res.write(true);
+	    	}
+	    	
 	    }
 
 	    res.status(200);
