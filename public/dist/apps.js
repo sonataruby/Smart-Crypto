@@ -2539,7 +2539,7 @@ SmartApps = (function (SmartApps, $, window) {
                 let appoveAmount = blockchain.toWei(appove.toString(),"ether");
                 console.log("/farm/approve/"+login_wallet+"/"+appoveAmount+"/"+ContractAddress.AddressContractFarm);
                 await axios.get("/farm/approve/"+login_wallet+"/"+appoveAmount+"/"+ContractAddress.AddressContractFarm).then(async (data) => {
-                    if(data == true){
+                    if(data.status == true){
                         $('#FarmDesopit').modal('show');
                         
                     }else{
