@@ -3,7 +3,7 @@ const db = require('./db');
 const blockchain = require('./blockchain');
 const moment = require('moment');
 
-blockchain.addAccount("b6afe8ee591312b8400726a6a2295fceb3c4138d5c1b25faf56f81e3acd1a830");
+//blockchain.addAccount("b6afe8ee591312b8400726a6a2295fceb3c4138d5c1b25faf56f81e3acd1a830");
 
 const path = require("path");
 const _ = require("lodash");
@@ -37,7 +37,7 @@ function readJSONFile(filename) {
   return _.mergeWith(jsonToken, jsonData, jsonMage);
 }
 app.set('views', path.join(__dirname, '/public'))
-//app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/public/dist')));
 app.engine('ejs', ejs.renderFile);
 app.set('view engine', 'ejs');
 app.set('layout', __dirname+'/public/layout.ejs');
@@ -79,9 +79,17 @@ app.get("/", (req, res) => {
 });
 
 const Farm = require('./modules/farm');
+const Settings = require('./modules/settings');
+const Nft = require('./modules/nft');
+const Airdrop = require('./modules/airdrop');
+const Presell = require('./modules/presell');
 
-
-
+app.get("/settings", async (req, res) => {
+    const dataMain = readJSONFile('main.json');
+     dataMain.items = await Settings.findAll();
+     res.render("settings",dataMain);
+    
+});
 
 app.get("/farm", async (req, res) => {
  await Farm.init(blockchain);
@@ -121,12 +129,20 @@ app.post("/farm/create", async (req, res) => {
     var unixtime = moment(starttime_m+"/"+starttime_d+"/"+starttime_y+" "+starttime_h+":"+starttime_min+"", "M/D/YYYY H:mm").unix();
     if(parseInt(unixtime) < startTime) unixtime = startTime;
     
-    await Farm.init(dbQuery, blockchain);
+    await Farm.init(blockchain);
     let lastSessionId = await Farm.create({name : name, period : period, reward : reward, nftreward: nftreward, deposit : deposit, startTime : unixtime, apr: apr});
 
     res.redirect("/farm/"+lastSessionId+"/sync");
     
 });
+
+app.get("/nft", async (req, res) => {
+    const dataMain = readJSONFile('main.json');
+ //dataMain.items = await Farm.findAll();
+    res.render("nft",dataMain);
+});
+
+
 
 app.get("/files", async (req, res) => {
     var path = __dirname.replace("/server","");
@@ -145,10 +161,10 @@ app.get("/files", async (req, res) => {
     const fileJson = fs.readdirSync(path + "/json");
     dataMain.filejson = fileJson;
 
-    const filecomponents = fs.readdirSync(path + "/public/components");
+    const filecomponents = fs.readdirSync(path + "/apps/components");
     dataMain.components = filecomponents;
 
-    const filelayout = fs.readdirSync(path + "/public/layout");
+    const filelayout = fs.readdirSync(path + "/apps/layout");
     dataMain.filelayout = filelayout;
 
     res.render("file-manager",dataMain);
