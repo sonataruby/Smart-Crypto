@@ -14,35 +14,10 @@ const FarmController = {
 		return data;
 	},
 	"create" : async (obj) => {
-		let address = await w3.loadAddress();
-
-		let period = 3600 * parseInt(obj.period); 
-
-	        let generation = 1;
-	        let startTime = obj.startTime;
-
-	        var StartSessionTime = startTime;
-	        
-	        let totalReward = w3.web3.utils.toWei(obj.reward.toString(), "ether"); 
-
-        
-		await contract.startSession(address.AddressContractSmartToken, totalReward, period, StartSessionTime, generation).send({from: "0xe6B84663Dc54b9B29f0a1A04B59e94d92BfE4DFf", gas : 300000}).then(async (value) => {
-           let lastSessionId = 0;
-           await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
-                lastSessionId = value;
-            });
-
-           if (lastSessionId != undefined && parseInt(lastSessionId) > 0) {
-	           sql = "INSERT INTO `farm_task` (`log_id`, `reward_token`, `reward_nft`, `timestart`, `min_deposit`, `pool_name`, `apr`, `period`, `status`) VALUES ('"+lastSessionId+"', '"+obj.reward+"', '"+obj.nftreward+"', '"+obj.startTime+"', '"+obj.deposit+"', '"+obj.name+"', '"+obj.apr+"', '"+obj.period+"', '1');"
-			   //console.log(obj);
-			    await db.dbQuery(sql);
-			}
-        	});
-        	 let lastSessionId = 0;
-           await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
-                lastSessionId = value;
-            });
-        	return lastSessionId;
+		sql = "INSERT INTO `farm_task` (`log_id`, `min_deposit`, `pool_name`, `status`) VALUES ('"+obj.lastSessionId+"', '"+obj.deposit+"', '"+obj.name+"', '1');"
+		   //console.log(obj);
+		    await db.dbQuery(sql);
+		
 		
 		//await db(sql);
 	},
