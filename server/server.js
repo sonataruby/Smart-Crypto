@@ -142,7 +142,23 @@ app.get("/nft", async (req, res) => {
     res.render("nft",dataMain);
 });
 
+app.get("/presell", async (req, res) => {
+    const dataMain = readJSONFile('main.json');
+ //dataMain.items = await Farm.findAll();
+    res.render("presell",dataMain);
+});
 
+app.get("/airdrop", async (req, res) => {
+    const dataMain = readJSONFile('main.json');
+ //dataMain.items = await Farm.findAll();
+    res.render("airdrop",dataMain);
+});
+
+app.get("/ido", async (req, res) => {
+    const dataMain = readJSONFile('main.json');
+ //dataMain.items = await Farm.findAll();
+    res.render("ido",dataMain);
+});
 
 app.get("/files", async (req, res) => {
     var path = __dirname.replace("/server","");

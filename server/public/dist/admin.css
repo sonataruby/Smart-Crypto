@@ -51,22 +51,6 @@
 .bd-search {
   position: relative;
 }
-.bd-search ::after {
-  position: absolute;
-  top: 0.4rem;
-  right: 0.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 1.5rem;
-  padding-right: 0.25rem;
-  padding-left: 0.25rem;
-  font-size: 0.75rem;
-  color: #6c757d;
-  content: "Ctrl + /";
-  border: 1px solid #dee2e6;
-  border-radius: 0.125rem;
-}
 
 @media (max-width: 767.98px) {
   .bd-search {

@@ -33,6 +33,7 @@ SmartApps = (function (SmartApps, $, window) {
     	$("#mintQuality").on("click", function(){
     		mintQuality();
     	});
+        $(".contractaddress").html('<div>Contract : '+blockchain.address().AddressContractNFTFactory+'</div><div><a class="btn btn-md btn-primary" target="_bank" href="https://bscscan.com/address/'+blockchain.address().AddressContractNFTFactory+'">Contract</a></div>');
     }
 
     SmartApps.components.docReady.push(SmartApps.nft.factory);
