@@ -8,14 +8,14 @@
 
 		  <h5>Components (<%- components.length%>)</h5>
 		  <% components.forEach(function(data, index){ %>
-		  	<li class="list-group-item" aria-current="true"><a href="?files=public/components/<%=data%>">components/<%=data%></a></li>
+		  	<li class="list-group-item" aria-current="true"><a href="?files=apps/components/<%=data%>">components/<%=data%></a></li>
 		  <% }); %>
 
 		  <h5>Layout (<%- filelayout.length%>)</h5>
 		  <% filelayout.forEach(function(data, index){ %>
-		  	<li class="list-group-item" aria-current="true"><a href="?files=public/layout/<%=data%>">layout/<%=data%></a></li>
+		  	<li class="list-group-item" aria-current="true"><a href="?files=apps/layout/<%=data%>">layout/<%=data%></a></li>
 		  <% }); %>
-		  <li class="list-group-item" aria-current="true"><a href="?files=public/index.ejs">Index </a></li>
+		  <li class="list-group-item" aria-current="true"><a href="?files=apps/index.ejs">Index </a></li>
 		</ul>
 	</div>
 	<div class="col-10">
