@@ -91,7 +91,7 @@ SmartApps = (function (SmartApps, $, window) {
                     const vamount =  blockchain.toWei(amount.toString());
                     await contractIdo.buyToken(presenterAddress)
                     .send({from : login_wallet, value: vamount, gas : GAS})
-                    .then(function (res) {
+                    .then(async function (res) {
                         
                         blockchain.notify("Buy token successful Tx : "+res.transactionHash);
                         if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
