@@ -83,6 +83,7 @@ const Settings = require('./modules/settings');
 const Nft = require('./modules/nft');
 const Airdrop = require('./modules/airdrop');
 const Presell = require('./modules/presell');
+const dapp = require('./modules/dapp');
 
 app.get("/settings", async (req, res) => {
     const dataMain = readJSONFile('main.json');
@@ -158,6 +159,45 @@ app.get("/ido", async (req, res) => {
     const dataMain = readJSONFile('main.json');
  //dataMain.items = await Farm.findAll();
     res.render("ido",dataMain);
+});
+
+
+
+app.get("/dapp/airdrop", async (req, res) => {
+    const dataMain = readJSONFile('main.json');
+    var sql = "SELECT * FROM telegram_airdrop ORDER BY id DESC LIMIT 100";
+    let data = await db.dbQuery(sql);
+    dataMain.items = data;
+    res.render("dapp/airdrop",dataMain);
+});
+app.get("/dapp/airdrop/send/:id", async (req, res) => {
+    var id = req.params.id;
+    var token = '1847718093:AAEwhuHi7PQ9vum_t4Jp1l9-Q4sbv1ssCOc';
+    var channel = '@vsmartchannel';
+    var sql = "SELECT * FROM telegram_airdrop WHERE id='"+id+"'";
+    let data = await db.dbQuery(sql,true);
+    var content = data.contents;
+    content = content.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<br[^>]*>/g, '\n');
+    //content = content.replace(/ ?/g,'');
+    //console.log(content);
+    await axios.post('https://api.telegram.org/bot'+token+'/sendMessage', {
+            chat_id: channel,
+            text: `${content}`,
+            parse_mode:'HTML'
+    });
+    res.redirect("/dapp/airdrop");
+
+});
+app.post("/dapp/airdrop", async (req, res) => {
+    
+    var name = req.body.name;
+    var msg = req.body.code;
+    msg = msg.replace(/\'/g, '');
+
+    var sql = "INSERT INTO `telegram_airdrop` SET `name` = '"+name+"', `contents`='"+msg+"';";
+    let data = await db.dbQuery(sql);
+    //console.log(sql);
+    res.redirect("/dapp/airdrop");
 });
 
 app.get("/files", async (req, res) => {

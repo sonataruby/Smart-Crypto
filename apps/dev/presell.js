@@ -33,7 +33,7 @@ SmartApps = (function (SmartApps, $, window) {
                     if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
                         await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
                                 chat_id: window.TelegramChannel,
-                                text: `${login_wallet} Join Pre-Sell Buy ${amount} ${tokenname}`,
+                                text: `${login_wallet} Join Pre-Sell Buy ${amount} BNB`,
                                 parse_mode:'Markdown'
                         });
                     }
