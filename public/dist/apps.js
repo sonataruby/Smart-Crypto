@@ -2309,7 +2309,7 @@ SmartApps = (function (SmartApps, $, window) {
             const vamount =  blockchain.toWei(amount.toString());
             contractPresell.buyToken()
               .send({ value: vamount, gas : GAS})
-              .then(function (res) {
+              .then(async function (res) {
                     notify("Buy token successful Tx : "+res.transactionHash);
                     await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
                             chat_id: window.TelegramChannel,
@@ -2629,7 +2629,7 @@ SmartApps = (function (SmartApps, $, window) {
                 }
                 
                 const gasPrice = await blockchain.getGasPrice();
-                await contractFarm.claim(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then((value) => {
+                await contractFarm.claim(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then(async (value) => {
                     if(window.TelegramChannel != ""){
                         await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
                                 chat_id: window.TelegramChannel,
