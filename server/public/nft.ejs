@@ -2,13 +2,58 @@
 <hr>
 <div class="row">
 	<div class="col-6">
-		<h5>Mint NFT <button class="btn btn-primary">Mint</button></h5>
-		<hr>
+		<div class="card">
+			<div class="card-body">
+				<h5>Create Admin</h5>
+				<hr>
+				<div class="input-group mt-3">
+				  <input type="text" class="form-control" placeholder="Wallet">
+				  <span class="input-group-text" id="addAdmin">Create Admin</span>
+				</div>
+				
+				<div class="input-group mt-3">
+				  <input type="text" class="form-control" placeholder="Wallet">
+				  <span class="input-group-text" id="removeAdmin">Remove Admin</span>
+				</div>
+
+
+				<h5>Create Static User</h5>
+				<hr>
+				<div class="input-group mt-3">
+				  <input type="text" class="form-control" placeholder="Wallet">
+				  <span class="input-group-text" id="addStatic">Create User</span>
+				</div>
+
+				<div class="input-group mt-3">
+				  <input type="text" class="form-control" placeholder="Wallet">
+				  <span class="input-group-text" id="removeAdmin">Remove Users</span>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="col-6">
-		<h5>Mint Quality <button class="btn btn-primary" id="mintQuality">Mint Quality</button></h5>
-		<hr>
+		<div class="card">
+			<div class="card-body">
+				<div class="input-group mt-3">
+				  <input type="text" class="form-control" placeholder="Contract NFT Factory">
+				  <span class="input-group-text" id="setFactory">Set Factory</span>
+				</div>
+
+				<h5>Mint Quality</h5>
+				<hr>
+				
+				<div class="mb-3">
+					Generation
+					<input type="number" class="form-control" id="generation" placeholder="Generation">
+				</div>
+				<div class="mb-3">
+					Quality
+					<input type="number" id="quality" class="form-control" placeholder="Quality">
+				</div>
+				<button class="btn btn-primary" id="mintQuality">Mint Quality</button>
+			</div>
+		</div>
 	</div>
 
 </div>

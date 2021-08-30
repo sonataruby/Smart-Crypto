@@ -128,14 +128,16 @@ app.get('/api/:file', (req, res) => {
 });
 */
 
-app.get("/api/nft/:id", (req, res) => {
+app.get("/api/nft/:id", async (req, res) => {
 
+    var id = req.params.id;
   	res.header('Content-Type', 'application/json');
-  	const data = fsFile.readJSONFile('ntf.json');
-    var item = data[req.params.id];
+    sql = "SELECT * FORM `nft_smart` WHERE tokenId='"+id+"');";
+    let item = await db.dbQuery(sql, true);
     if(item == undefined) item = '{"error": "404 page not found", "err_code": 404}';
     res.send(item);
     res.end( item);
+    
 });
 
 app.get("/api/nft/", (req, res) => {

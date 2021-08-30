@@ -43,6 +43,7 @@ function nl2br(str){
  return str.replace(/(?:\r\n|\r|\n)/g, '<br>');
 }
 
+
 var SmartApps = (function (jQ, win, doc){
     "use strict";
     var SmartApps = {AppInfo: {name: "SmartCrypto", package: "1.9.2", version: "1.0.4", author: "SmartCrypto"} };
