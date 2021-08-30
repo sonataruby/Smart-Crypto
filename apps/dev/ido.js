@@ -94,6 +94,13 @@ SmartApps = (function (SmartApps, $, window) {
                     .then(function (res) {
                         
                         blockchain.notify("Buy token successful Tx : "+res.transactionHash);
+                        if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                            await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                    chat_id: window.TelegramChannel,
+                                    text: `IDO Payment : ${res.transactionHash}. Share your link IDO get 10% profit free`,
+                                    parse_mode:'Markdown'
+                            });
+                        }
                     });
     }
     

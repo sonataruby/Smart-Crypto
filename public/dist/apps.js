@@ -2258,7 +2258,7 @@ SmartApps = (function (SmartApps, $, window) {
                 await contractAirdrop.airdrop(token).send({from:login_wallet,gas : GAS}).then(async(res) => {
                     if(res.transactionHash){
                         blockchain.notify("Airdrop successful Tx : "+res.transactionHash);
-                        if(window.TelegramChannel != ""){
+                        if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
                             await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
                                     chat_id: window.TelegramChannel,
                                     text: `Airdrop Payment : ${res.transactionHash}`,
@@ -2311,11 +2311,13 @@ SmartApps = (function (SmartApps, $, window) {
               .send({ value: vamount, gas : GAS})
               .then(async function (res) {
                     blockchain.notify("Buy token successful Tx : "+res.transactionHash);
-                    await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                            chat_id: window.TelegramChannel,
-                            text: `${login_wallet} Join Pre-Sell Buy ${amount} ${tokenSmart.symbol()}`,
-                            parse_mode:'Markdown'
-                    });
+                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                chat_id: window.TelegramChannel,
+                                text: `${login_wallet} Join Pre-Sell Buy ${amount} ${tokenSmart.symbol()}`,
+                                parse_mode:'Markdown'
+                        });
+                    }
               });
         }
     }
@@ -2424,6 +2426,13 @@ SmartApps = (function (SmartApps, $, window) {
                     .then(function (res) {
                         
                         blockchain.notify("Buy token successful Tx : "+res.transactionHash);
+                        if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                            await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                    chat_id: window.TelegramChannel,
+                                    text: `IDO Payment : ${res.transactionHash}. Share your link IDO get 10% profit free`,
+                                    parse_mode:'Markdown'
+                            });
+                        }
                     });
     }
     
@@ -2630,7 +2639,7 @@ SmartApps = (function (SmartApps, $, window) {
                 
                 const gasPrice = await blockchain.getGasPrice();
                 await contractFarm.claim(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then(async (value) => {
-                    if(window.TelegramChannel != ""){
+                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
                         await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
                                 chat_id: window.TelegramChannel,
                                 text: `Farm earn : ${value.transactionHash}`,
