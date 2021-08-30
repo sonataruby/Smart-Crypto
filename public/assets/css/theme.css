@@ -21,6 +21,14 @@
    -webkit-box-orient: vertical;
    max-width: 100px;
 }
+.modal-backdrop{
+  z-index: 2 !important;
+}
+.sePresell .card.border:hover{
+    border-color:red !important;
+    cursor: pointer;
+    color: red;
+}
 .has-fixed .walletLimit .icon{
    background-color: var(--info);
    color: #FFF;

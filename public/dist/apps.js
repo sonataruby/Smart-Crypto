@@ -2581,7 +2581,7 @@ SmartApps = (function (SmartApps, $, window) {
                 
                
                 let balance = 0;
-                await contractFarm.stakedBalanceOf(login_wallet).call().then((data) => {
+                await contractFarm.stakedBalanceOf(login_wallet).call().then( async (data) => {
                     let depositAmount = blockchain.toWei(data.toString(),"ether");
 
                     await contractFarm.withdraw(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {    
@@ -2691,7 +2691,12 @@ SmartApps = (function (SmartApps, $, window) {
         await tokenPresell.loadContracts();
         
         $("#btnBuyToken, [data-web3=presell]").on("click", function(){
-            tokenPresell.presell("0.1");
+            var amount_in = $("#presellValue").val();
+            var amount = 0.1;
+            if(amount_in > 0){
+                amount = amount_in;
+            }
+            tokenPresell.presell(amount.toString());
         });
 
         /*
