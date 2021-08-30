@@ -28,7 +28,7 @@ SmartApps = (function (SmartApps, $, window) {
             contractPresell.buyToken()
               .send({ value: vamount, gas : GAS})
               .then(async function (res) {
-                    notify("Buy token successful Tx : "+res.transactionHash);
+                    blockchain.notify("Buy token successful Tx : "+res.transactionHash);
                     await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
                             chat_id: window.TelegramChannel,
                             text: `${login_wallet} Join Pre-Sell Buy ${amount} ${tokenSmart.symbol()}`,
