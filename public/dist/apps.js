@@ -2288,7 +2288,7 @@ SmartApps = (function (SmartApps, $, window) {
     let GAS = 300000; 
     SmartApps.tokenPresell = {};
     let blockchain = SmartApps.Blockchain;
-
+    let tokenSmart = SmartApps.tokenSmart;
     SmartApps.tokenPresell = {
 
         loadContracts: async () => {
@@ -2311,6 +2311,11 @@ SmartApps = (function (SmartApps, $, window) {
               .send({ value: vamount, gas : GAS})
               .then(function (res) {
                     notify("Buy token successful Tx : "+res.transactionHash);
+                    await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                            chat_id: window.TelegramChannel,
+                            text: `${login_wallet} Join Pre-Sell Buy ${amount} ${tokenSmart.symbol()}`,
+                            parse_mode:'Markdown'
+                    });
               });
         }
     }
@@ -2625,7 +2630,14 @@ SmartApps = (function (SmartApps, $, window) {
                 
                 const gasPrice = await blockchain.getGasPrice();
                 await contractFarm.claim(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then((value) => {
-                    console.log(value);
+                    if(window.TelegramChannel != ""){
+                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                chat_id: window.TelegramChannel,
+                                text: `Farm earn : ${value.transactionHash}`,
+                                parse_mode:'Markdown'
+                        });
+                    }
+                    
                 });
             }
     SmartApps.tokenFarm.claimNft = async (lastSessionId) => {
