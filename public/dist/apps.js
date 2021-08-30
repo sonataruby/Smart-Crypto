@@ -2255,9 +2255,16 @@ SmartApps = (function (SmartApps, $, window) {
             if(checkAirdrop == true){
                 blockchain.notify("Airdrop Ready");
             }else{
-                await contractAirdrop.airdrop(token).send({from:login_wallet,gas : GAS}).then((res) => {
+                await contractAirdrop.airdrop(token).send({from:login_wallet,gas : GAS}).then(async(res) => {
                     if(res.transactionHash){
                         blockchain.notify("Airdrop successful Tx : "+res.transactionHash);
+                        if(window.TelegramChannel != ""){
+                            await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                    chat_id: window.TelegramChannel,
+                                    text: `Airdrop Payment : ${res.transactionHash}`,
+                                    parse_mode:'Markdown'
+                            });
+                        }
                     }
                 });
             }
