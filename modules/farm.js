@@ -107,6 +107,7 @@ module.exports = function(prefix , app) {
 
 	app.get(prefix + "/info/:session_id/:wallet", async (req, res) => {
 
+		app.set('layout', config.layout.dir + "/pages");
 		
 		var session_id = req.params.session_id;
 		var wallet = req.params.wallet;
