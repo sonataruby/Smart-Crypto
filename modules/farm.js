@@ -1,51 +1,107 @@
 const axios = require('axios').default;
 const fsFile = require('./../fsFile');
 const db = require('./../server/db');
+const config = require('./../config');
 const hostname = "http://localhost:5000";
 const blockchain = require('./../server/blockchain');
 let Web3 = require('web3');
 module.exports = function(prefix , app) {
 	
-	/*
-	Farm
-	*/
-	const convert = function(n){
-        var sign = +n < 0 ? "-" : "",
-            toStr = n.toString();
-        if (!/e/i.test(toStr)) {
-            return n;
-        }
-        var [lead,decimal,pow] = n.toString()
-            .replace(/^-/,"")
-            .replace(/^([0-9]+)(e.*)/,"$1.$2")
-            .split(/e|\./);
-        return +pow < 0 
-            ? sign + "0." + "0".repeat(Math.max(Math.abs(pow)-1 || 0, 0)) + lead + decimal
-            : sign + lead + (+pow >= decimal.length ? (decimal + "0".repeat(Math.max(+pow-decimal.length || 0, 0))) : (decimal.slice(0,+pow)+"."+decimal.slice(+pow)))
-    }
 
-	app.get(prefix, (req, res) => {
+	const loadInfoPool = async (session_id) => {
+		let contract = await blockchain.loadFram();
+	 	let address = await blockchain.loadAddress();
+	 	var obj = {};
+	 	obj.id = parseInt(session_id);
+	 	let TimeNow = Math.floor(new Date().getTime()/1000) + 30;
+	 	await contract.sessions(session_id).call().then(async (value) => {
+
+	 		var amount = parseFloat(blockchain.web3.utils.fromWei(value.amount == 0 ? value.totalReward : value.amount));
+			var totalReward = parseFloat(blockchain.web3.utils.fromWei(value.totalReward));
+			var startTime = parseInt(value.startTime);
+			var period = parseInt(value.period);
+			var rewardUnit = totalReward/period;
+
+			var annualReward = rewardUnit * 31556952;//1 year
+			var annualRewardDay = rewardUnit * 86400;//1 Day
+			var annualRewardWeek = rewardUnit * 604800;//1 week
+			var annualRewardMonth = rewardUnit * 2629743;//1 Month
+			var timeEnd = startTime + period;
+
+			obj.startTime = startTime;
+			obj.timeEnd = timeEnd;
+
+			obj.period = period;
+			obj.rewardDay = annualRewardDay;
+			obj.rewardWeek = annualRewardWeek;
+			obj.rewardMonth = annualRewardMonth;
+			obj.rewardYear = annualReward;
+			obj.aprday = parseFloat((annualRewardDay/amount)*100).toFixed(2);
+			obj.aprweek = parseFloat((annualRewardWeek/amount)*100).toFixed(2);
+			obj.apr = parseFloat((annualReward/amount)*100).toFixed(2);
+			obj.amount = amount;
+			obj.totalReward = totalReward;
+			obj.reward_nft = 1;
+			if(startTime < TimeNow && timeEnd > TimeNow){
+				obj.joinPool = '<button class="btn btn-sm btn-info data-info" data-href="/farm/info/'+session_id+'">Join Pool</button>';
+			}else if(startTime > TimeNow && timeEnd > TimeNow){
+				obj.joinPool = '<b>Wait Time Start<b>';
+			}else if(timeEnd < TimeNow){
+				obj.joinPool = '<div class="btn-group btn-sm" role="group" aria-label="Basic example"><button type="button" data-web3="farmclaim" data-session="'+session_id+'" class="btn btn-sm btn-secondary">Claim</button><button type="button" data-web3="withdraw" data-session="'+session_id+'" class="btn btn-sm btn-secondary">Withdraw</button></div>';
+			}
+
+	 	});
+	 	return obj;
+	}
+	app.get(prefix, async (req, res) => {
+	 app.set('layout', config.layout.dir + "/pages");
 	 const dataMain = fsFile.readJSONFile('main.json');
-	 app.set('layout', './layout/pages');
+
+	 let contract = await blockchain.loadFram();
+	 let address = await blockchain.loadAddress();
+	 let lastSessionId = 0;
+
+	 await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
+	 	lastSessionId = value;
+	 });
 	 
+	 var object = [];
+	 if(lastSessionId > 3){
+	 	for (var i = lastSessionId; i > lastSessionId - 3; i--) {
+	 		var data = await loadInfoPool(i);
+	 		object.push(data);
+	 	}
+	 }else{
+	 	for (var i = lastSessionId; i > 0; i--) {
+	 		var data = await loadInfoPool(i);
+	 		object.push(data);
+	 	}
+	 }
+
+	 dataMain.items = object;
 	 res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
 	});
 
 	app.get(prefix + "/info/:session_id/:wallet", async (req, res) => {
 
-		app.set('layout', './layout/pages');
+		
 		var session_id = req.params.session_id;
 		var wallet = req.params.wallet;
 		let contract = await blockchain.loadFram();
 		let address = await blockchain.loadAddress();
 
 		var block = {};
+		block.deposit = 0;
+		block.claimable = 0;
+		if(wallet.length > 40){
+			let stakedBalanceOf = await contract.stakedBalanceOf(session_id,wallet).call();
+			block.deposit = blockchain.web3.utils.fromWei(stakedBalanceOf);
+			let claimable = await contract.claimable(session_id,wallet).call();
+			block.claimable = parseFloat(blockchain.web3.utils.fromWei(claimable)).toFixed(4);
+		}
+		
 
-		let stakedBalanceOf = await contract.stakedBalanceOf(session_id,wallet).call();
-		block.deposit = blockchain.web3.utils.fromWei(stakedBalanceOf);
-
-		let claimable = await contract.claimable(session_id,wallet).call();
-		block.claimable = parseFloat(blockchain.web3.utils.fromWei(claimable)).toFixed(4);
+		
 
 		block.session_id = session_id;
 		block.timeEnd = 0;
@@ -76,7 +132,7 @@ module.exports = function(prefix , app) {
 	});
 
 	app.get(prefix + "/item", async (req, res) => {
-	  app.set('layout', './layout/nolayout');
+	  app.set('layout', config.layout.dir + "/nolayout");
 	 
 	  let sql = `SELECT * FROM farm_task WHERE status = '1' ORDER BY status,timestart DESC LIMIT 3`;
 	  var dataMain = await db.dbQuery(sql);
@@ -124,7 +180,7 @@ module.exports = function(prefix , app) {
 	});
 
 	app.get("/farm/task/:wallet/:target/:hash/:amount/:id", async (req, res) => {
-	  app.set('layout', './layout/nolayout');
+	  app.set('layout', config.layout.dir + "/nolayout");
 	  var wallet = req.params.wallet;
 	  var target = req.params.target;
 	  var hash   = req.params.hash;

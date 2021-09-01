@@ -15,7 +15,7 @@
                             </div>
                             <div class="cpn-btns">
                                 <ul class="btn-grp d-flex justify-content-center">
-                                    <li><a data-web3="presell" class="btn btn-md btn-round btn-with-icon btn-light">
+                                    <li><a data-toggle="modal" data-target="#PresellBox" class="btn btn-md btn-round btn-with-icon btn-light">
                                         <span>Join Pre-Sale</span> 
                                         <em class="icon fas fa-angle-double-right"></em>
                                     </a></li>
@@ -48,3 +48,44 @@
 <!-- .nk-banner -->
 <div class="bg-video bg-video-youtube" data-video="<%= token.youtube_bg%>" data-overlay="theme" data-opacity="80" data-cover="images/bg/bg-a.jpg"></div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="PresellBox" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Buy Presell <%=token.name%></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body sePresell">
+            <div class="row mb-4">
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card card-body border" onClick="$('#presellValue').val(0.2);">
+                        0.2 BNB
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card card-body border" onClick="$('#presellValue').val(0.3);">
+                        0.3 BNB
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card card-body border" onClick="$('#presellValue').val(0.4);">
+                        0.4 BNB
+                    </div>
+                </div>
+            </div>
+
+            Customs BNB Value<br>
+            <input type="text" id="presellValue" value="0.1" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-sm btn-primary" data-web3="presell">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+

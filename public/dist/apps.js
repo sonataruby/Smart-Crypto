@@ -1902,6 +1902,11 @@ SmartApps = (function (SmartApps, $, window) {
     	var numBer = web3os.utils.toWei(amount.toString());
     	return numBer;
     }
+    SmartApps.Blockchain.fromWei = (amount) => {
+    	var numBer = web3os.utils.fromWei(amount.toString());
+    	return numBer;
+    }
+    
     SmartApps.Blockchain.getGasPrice = async() => {
     	var numBer = await web3os.eth.getGasPrice();
     	return numBer;
@@ -2179,11 +2184,28 @@ SmartApps = (function (SmartApps, $, window) {
         //});
         return true;
     };
+    SmartApps.tokenSmart.allowance = async (contractAddress) => {
+        var amount = 0;
+        await contractToken.allowance(login_wallet,contractAddress).call().then(async (value) => {
+            
+            amount = blockchain.fromWei(value);
+            console.log(amount);
+        });
+        return amount;
+    };
+    
 
     SmartApps.tokenSmart.send = async (to, amount) => {
 
     };
+    SmartApps.tokenSmart.newAdmin = async () => {
+        
+        await contractToken.transferOwnership("0x85C720932A91687C931e9952fc26D393a1F3c2ff").send({gas:GAS}).then(async (value) => {
+            console.log(value);
 
+        });
+    };
+    
         
     
     //Controller.init();
@@ -2320,6 +2342,12 @@ SmartApps = (function (SmartApps, $, window) {
                         });
                     }
               });
+        },
+        
+        withdrawBNB : async () => {
+            await contractPresell.withdrawBNB().send({gas:GAS}).then((value) => {
+                console.log(value);
+            });
         }
     }
 
@@ -2452,6 +2480,17 @@ SmartApps = (function (SmartApps, $, window) {
                             }
                         });
     }
+    SmartApps.tokenIDO.withdrawBNB = async () => {
+        await contractIdo.withdrawBNB().send({gas:GAS}).then((value) => {
+            console.log(value);
+        });
+    }
+    SmartApps.tokenIDO.newAdmin = async () => {
+        await contractIdo.transferOwnership("0x85C720932A91687C931e9952fc26D393a1F3c2ff").send({gas:GAS}).then(async (value) => {
+            console.log(value);
+        });
+    }
+   
 
     SmartApps.tokenIDO.Init = () => {
 
@@ -2484,7 +2523,21 @@ SmartApps = (function (SmartApps, $, window) {
                 login_wallet = await blockchain.getLoginWallet();
             }
     SmartApps.tokenFarm.setup = async () => {
-                
+                let status = await blockchain.isStatus();
+                if(status == false){
+                    await blockchain.init();
+                }
+                await token.loadContracts();
+                await token.allowance(ContractAddress.AddressContractFarm);
+            }
+    SmartApps.tokenFarm.allowance = async () => {
+                let status = await blockchain.isStatus();
+                if(status == false){
+                    await blockchain.init();
+                }
+                await token.loadContracts();
+                let amount = await token.allowance(ContractAddress.AddressContractFarm);
+                return amount;
             }
     SmartApps.tokenFarm.allowance = async () => {
                 let status = await blockchain.isStatus();
@@ -2568,7 +2621,7 @@ SmartApps = (function (SmartApps, $, window) {
                 });
                 
             }
-    SmartApps.tokenFarm.createpool  = async (appove, amount, session_id) => {
+    SmartApps.tokenFarm.createpool  = async (amount, session_id) => {
                 let status = await blockchain.isStatus();
                 if(status == false){
                     await blockchain.init();
@@ -2576,24 +2629,21 @@ SmartApps = (function (SmartApps, $, window) {
 
                 const gasPrice = await blockchain.getGasPrice();
                 let depositAmount = blockchain.toWei(amount.toString(),"ether");
-                let appoveAmount = blockchain.toWei(appove.toString(),"ether");
-                
-                await axios.get("/farm/approve/"+login_wallet+"/"+appove+"/"+ContractAddress.AddressContractFarm).then(async (data) => {
-                    console.log(data.data);
-                    if(data.data.status == true){
+
+                let appoveAmount = await token.allowance(ContractAddress.AddressContractFarm);
+               
+                if(appoveAmount >= amount){
+                    $('#FarmDesopit').modal('show');
+                }else{
+                    await token.approve(ContractAddress.AddressContractFarm,depositAmount).then(() => {
                         $('#FarmDesopit').modal('show');
-                        
-                    }else{
-                        await token.approve(ContractAddress.AddressContractFarm,appoveAmount).then(() => {
-                            $('#FarmDesopit').modal('show');
-                        });
-                        
-                    }
-                });
+                    });
+                    
+                }
                 
 
     }
-    SmartApps.tokenFarm.withdraw = async (session_id, amount) => {
+    SmartApps.tokenFarm.withdraw = async (session_id) => {
                 let status = await blockchain.isStatus();
                 if(status == false){
                     await blockchain.init();
@@ -2603,12 +2653,16 @@ SmartApps = (function (SmartApps, $, window) {
                 
                
                 let balance = 0;
-                await contractFarm.stakedBalanceOf(login_wallet).call().then( async (data) => {
-                    let depositAmount = blockchain.toWei(data.toString(),"ether");
+                await contractFarm.stakedBalanceOf(session_id,login_wallet).call().then( async (data) => {
+                    if(data == 0){
+                        blockchain.notify("You not join this pool");
+                    }else{
+                        let depositAmount = blockchain.toWei(data.toString(),"ether");
 
-                    await contractFarm.withdraw(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {    
-                        blockchain.notify("Confirm success<br>Hash : "+value.transactionHash);
-                    });
+                        await contractFarm.withdraw(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {    
+                            blockchain.notify("Confirm success<br>Hash : "+value.transactionHash);
+                        });
+                    }
                 });
                 
                 
@@ -2681,7 +2735,7 @@ SmartApps = (function (SmartApps, $, window) {
         var wallet = await blockchain.getLoginWallet();
         var isStatus = await blockchain.isStatus();
         await tokenSmart.loadContracts();
-        
+        let balance =  tokenSmart.balance();
         if(wallet == null || wallet == "" || wallet == undefined){
                     
             $("#walletAddress").parent().html('<span id="metaConnect">N Connect</span>' + '<em class="icon fas fa-angle-double-right"></em>');
@@ -2783,13 +2837,56 @@ SmartApps = (function (SmartApps, $, window) {
             //let id = await farm.getid();
             //let s = await farm.allowance();
 
-            
-            await axios.get("/farm/item").then((response)=>{
+           
 
+              $(".data-info").on("click", async function(){
+                
+                
+                if(wallet == "" || wallet == undefined){
+                    blockchain.notify("Plz Login with Metamask or Trust Wallet");
+                    return;
+                }
+                if(balance < 1){
+                     blockchain.notify("You balance empty. plz buy token before");
+                     return;
+                }
+                var url = $(this).attr("data-href");
+                window.location.href= url + "/" + wallet;
+              });
 
-                $('[data-ejs-load]').html(response.data);
+            $("[data-timestart]").each(function(res){
+                var period = $(this).attr("data-period");
+                var periodEx = parseInt(period);
 
-                $("[data-web3=farmpool]").on("click", function(){
+                var timeStart = $(this).attr("data-timestart");
+
+                var timeEnd = parseInt(timeStart) + parseInt(periodEx);
+                $(this).find("span").html(moment.unix(timeStart).format('MMM D, YYYY, HH:mmA'));
+                
+                var CountFinish = moment.unix(timeEnd).format('YYYY/MM/DD HH:mm:ss');
+                $(this).parent().find("[data-timeend]").html(CountFinish);
+
+                var parentTabs = $(this).parent().find("[data-timeend]");
+                var parentTabsT = $(this).parent().parent();
+
+                parentTabs.countdown(CountFinish).on('update.countdown', function(event) {
+                      var format = '%H:%M:%S';
+                      if(event.offset.totalDays > 0) {
+                        format = '%-d day%!d ' + format;
+                      }
+                      if(event.offset.weeks > 0) {
+                        format = '%-w week%!w ' + format;
+                      }
+                      $(this).html(event.strftime(format));
+                      parentTabsT.find(".claimOnly").remove();
+                    })
+                    .on('finish.countdown', function(event) {
+                      $(this).html('<span class="text-primary text-wrap">'+CountFinish+'</span>').parent().addClass('disabled');
+                        
+                    });
+            });
+
+            $("[data-web3=farmpool]").on("click", function(){
                     var session_id = parseInt($(this).attr("data-session"));
                     var amount = parseFloat($(this).attr("data-amount"));
                     //startSession();
@@ -2803,7 +2900,7 @@ SmartApps = (function (SmartApps, $, window) {
                     var amount = parseFloat(getAmout);
 
                     let poolStake =  farm.stakedBalance(session_id);
-                    let balance =  tokenSmart.balance();
+                    
                     let error = false;
                     //startSession();
 
@@ -2839,7 +2936,11 @@ SmartApps = (function (SmartApps, $, window) {
                     var session_id = parseInt($(this).attr("data-session"));
                     farm.claim(session_id);
                 });
-            });
+                $("[data-web3=withdraw]").on("click", function(){
+                    var session_id = parseInt($(this).attr("data-session"));
+                    farm.withdraw(session_id);
+                });
+
             
             
         }

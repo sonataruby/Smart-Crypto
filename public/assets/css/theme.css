@@ -1,8 +1,42 @@
+.game-layout{
+  position: relative;
+}
 .container-game{
   width:80%; 
   margin:auto;
   position: relative;
 }
+.buttonGameLeftBack{
+   position: absolute;
+   
+   width: 120px;
+   height: 120px;
+   background-color: red;
+   left: 0;
+   top: 30%;
+   -webkit-border-top-right-radius: 100px;
+  -webkit-border-bottom-right-radius: 100px;
+  -moz-border-radius-topright: 100px;
+  -moz-border-radius-bottomright: 100px;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+.buttonGameRighBack{
+  position: absolute;
+   
+   width: 120px;
+   height: 120px;
+   background-color: red;
+   right: 0;
+  top: 30%;
+  -webkit-border-top-left-radius: 100px;
+-webkit-border-bottom-left-radius: 100px;
+-moz-border-radius-topleft: 100px;
+-moz-border-radius-bottomleft: 100px;
+border-top-left-radius: 100px;
+border-bottom-left-radius: 100px;
+}
+
 @media (max-width: 920px){
   .container-game{
     width:98%; 

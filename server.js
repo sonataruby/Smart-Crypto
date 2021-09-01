@@ -27,6 +27,7 @@ const MetaAuth = require('meta-auth');
 const metaAuth = new MetaAuth();
 
 
+
 app.set('views', path.join(__dirname, '/apps'))
 app.use(express.static(path.join(__dirname, '/public')));
 app.engine('ejs', ejs.renderFile);
@@ -38,11 +39,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
+const homeLayout = () => {
+  return config.layout.dir + "/home";
+}
+const pageLayout = () => {
+  return config.layout.dir + "/pages";
+}
+
+const noLayout = () => {
+  return config.layout.dir + "/nolayout";
+}
 
 //app.use("/test", test);
 
+app.set('layout', pageLayout());
+
+
 app.get("/", (req, res) => {
-app.set('layout', './layout/home')
+app.set('layout', homeLayout())
  const dataMain = fsFile.readJSONFile('main.json');
  
  res.render("index",dataMain);
@@ -58,13 +72,13 @@ require("./modules/airdrop")("/airdrop",app);
 
 app.get("/staking", (req, res) => {
  const dataMain = fsFile.readJSONFile('main.json');
- app.set('layout', './layout/pages');
+ 
  res.render(dataMain.public.staking == true ? "staking" : "coming",dataMain);
 });
 
 
 app.get("/gallery", (req, res) => {
- app.set('layout', './layout/pages');
+ 
  const dataMain = fsFile.readJSONFile('main.json');
  dataMain.pages = { name : dataMain.staking.title, description : dataMain.staking.description};
  res.render("gallery",dataMain);
@@ -75,7 +89,7 @@ app.get("/gallery", (req, res) => {
 
 app.get("/market", (req, res) => {
  const dataMain = fsFile.readJSONFile('market.json');
- app.set('layout', './layout/pages');
+ 
  res.render(dataMain.public.market == true ? "market" : "coming",dataMain);
 });
 
@@ -83,14 +97,14 @@ app.get("/market", (req, res) => {
 
 app.get("/game", (req, res) => {
  const dataMain = fsFile.readJSONFile('main.json');
- app.set('layout', './layout/pages');
+ 
  res.render(dataMain.public.game == true ? "game" : "coming",dataMain);
 });
 
 app.get("/token", (req, res) => {
  const dataMain = fsFile.readJSONFile('main.json');
 
- app.set('layout', './layout/pages');
+ 
  res.render("token",dataMain);
 });
 
@@ -186,4 +200,6 @@ app.get('/query/:query/:wallet/:amount/:tokenaddress', async (req, res) => {
 // start express server on port 5000
 app.listen(config.db_config.port, () => {
   console.log("server started on  "+config.db_config.port);
+  console.log("Layout  "+config.layout.dir);
+  
 });
