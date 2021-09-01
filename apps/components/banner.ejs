@@ -67,8 +67,12 @@ jQuery(document).ready(function(){
         caclcBuyPresell();
     });
 
-    
+    var showPresell = "<%=showPresell%>";
+    if(showPresell == "presell"){
+        $("#PresellBox").modal("show");
+    }
 });
+
 </script>
 <!-- Modal -->
 <div class="modal fade" id="PresellBox" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

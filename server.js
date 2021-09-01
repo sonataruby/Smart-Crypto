@@ -59,6 +59,8 @@ app.get("/", (req, res) => {
 app.set('layout', homeLayout())
  const dataMain = fsFile.readJSONFile('main.json');
  
+  dataMain.showPresell = req.query.join;
+ 
  res.render("index",dataMain);
 });
 
