@@ -691,7 +691,7 @@ SmartApps = function (SmartApps, $, window, document) {
         var wallet = await blockchain.getLoginWallet();
         var isStatus = await blockchain.isStatus();
         await tokenSmart.loadContracts();
-       
+        var contractFarm =  await blockchain.loadContractFarm();
         let address =  await blockchain.address();
         if(wallet == null || wallet == "" || wallet == undefined){
                     
@@ -711,7 +711,7 @@ SmartApps = function (SmartApps, $, window, document) {
 
         $("#createFarmSession").on("click", function(){
             
-            var contract =  blockchain.loadContractFarm();
+            
             
             var _period = $("#period").val();
             var reward = $("#reward").val();
@@ -745,9 +745,9 @@ SmartApps = function (SmartApps, $, window, document) {
 
                 
             
-                contract.startSession(address.AddressContractSmartToken, totalReward, period, StartSessionTime, generation).send({from: wallet, gas : 300000}).then(async (value) => {
+                contractFarm.startSession(address.AddressContractSmartToken, totalReward, period, StartSessionTime, generation).send({from: wallet, gas : 300000}).then(async (value) => {
                    let lastSessionId = 0;
-                   await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
+                   await contractFarm.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
                         lastSessionId = value;
                         window.location.href="/farm/crate?session_id="+lastSessionId+"&name="+name+"&deposit="+deposit+"&nftreward="+nftreward+"&color="+color+"&color2="+color2+"&image="+image+"&totalReward="+totalReward;
                     });
