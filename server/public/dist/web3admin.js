@@ -527,7 +527,7 @@ SmartApps = function (SmartApps, $, window, document) {
             
                 contract.startSession(address.AddressContractSmartToken, totalReward, period, StartSessionTime, generation).send({from: wallet, gas : 300000}).then(async (value) => {
                    let lastSessionId = 0;
-                   await contract.lastSessionIds(address.AddressContractSmartToken).send({gas:GAS}).then((value) => {
+                   await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
                         lastSessionId = value;
                         window.location.href="/farm/crate?session_id="+lastSessionId+"&name="+name+"&deposit="+deposit+"&nftreward="+nftreward+"&color="+color+"&color2="+color2+"&image="+image+"&totalReward="+totalReward;
                     });
