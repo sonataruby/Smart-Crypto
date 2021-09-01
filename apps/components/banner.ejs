@@ -49,6 +49,27 @@
 <div class="bg-video bg-video-youtube" data-video="<%= token.youtube_bg%>" data-overlay="theme" data-opacity="80" data-cover="images/bg/bg-a.jpg"></div>
 </div>
 
+<script>
+var caclcBuyPresell = function(){
+    
+        var bnbBuy = $("#presellValue").val();
+        var bnbPrice = $("#bnbPrice").text();
+        var NumberBuy = Number(bnbBuy / bnbPrice).toFixed(2);
+
+        $("#CalcBuyToken").html(NumberBuy + " <%=token.name%>");
+    
+}
+jQuery(document).ready(function(){
+    $("#bnbPrice").bind('DOMSubtreeModified', function(){
+        caclcBuyPresell();
+    });
+    $("#presellValue").on("input change", function(){
+        caclcBuyPresell();
+    });
+
+    
+});
+</script>
 <!-- Modal -->
 <div class="modal fade" id="PresellBox" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -62,24 +83,30 @@
       <div class="modal-body sePresell">
             <div class="row mb-4">
                 <div class="col-12 col-md-4 mb-3">
-                    <div class="card card-body border" onClick="$('#presellValue').val(0.2);">
+                    <div class="card card-body border" onClick="$('#presellValue').val(0.2);caclcBuyPresell();">
                         0.2 BNB
                     </div>
                 </div>
                 <div class="col-12 col-md-4 mb-3">
-                    <div class="card card-body border" onClick="$('#presellValue').val(0.3);">
+                    <div class="card card-body border" onClick="$('#presellValue').val(0.3);caclcBuyPresell();">
                         0.3 BNB
                     </div>
                 </div>
                 <div class="col-12 col-md-4 mb-3">
-                    <div class="card card-body border" onClick="$('#presellValue').val(0.4);">
+                    <div class="card card-body border" onClick="$('#presellValue').val(0.4);caclcBuyPresell();">
                         0.4 BNB
                     </div>
                 </div>
             </div>
-
+            <div>1 <%=token.name%> = <span class="price"></span> = <span class="pricebnb" id="bnbPrice"></span> BNB</div>
             Customs BNB Value<br>
-            <input type="text" id="presellValue" value="0.1" class="form-control">
+            <div class="input-group mb-3">
+              <input type="text" id="presellValue" value="0.1" class="form-control">
+              <div class="input-group-append">
+                <span class="input-group-text" id="CalcBuyToken"><%=token.name%></span>
+              </div>
+            </div>
+            
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>

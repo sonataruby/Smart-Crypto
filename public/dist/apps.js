@@ -2248,16 +2248,17 @@ SmartApps = (function (SmartApps, $, window) {
                 let price_usd = response.data.USD;
                 contractIdo.getPrice().call().then(function(res){
                     var price_token_bnb = Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-                
+                    var price_bnb = Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');;
                     if(price_usd > 0){
                         
                         price_token_bnb = (price_usd * price_token_bnb).toFixed(4) + " USD";
                         
                     }else{
                         price_token_bnb = price_token_bnb + " BNB";
+
                     }
                     $(".price").html(price_token_bnb);
-                    $(".pricebnb").html(price_token_bnb);
+                    $(".pricebnb").html(price_bnb/2);
                 });
               }).catch((err)=>{
               //console.log(err);
@@ -2657,7 +2658,7 @@ SmartApps = (function (SmartApps, $, window) {
                     if(data == 0){
                         blockchain.notify("You not join this pool");
                     }else{
-                        let depositAmount = blockchain.toWei(data.toString(),"ether");
+                        let depositAmount = data.toString();
 
                         await contractFarm.withdraw(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {    
                             blockchain.notify("Confirm success<br>Hash : "+value.transactionHash);
@@ -2785,11 +2786,11 @@ SmartApps = (function (SmartApps, $, window) {
         /*
         Airdrop Setup
         */
-        
+        const airdrop = SmartApps.Airdrop;
+        await airdrop.loadContracts();
+        await airdrop.setup();
         if(routerFocus == "airdrop"){
-            const airdrop = SmartApps.Airdrop;
-            await airdrop.loadContracts();
-            await airdrop.setup();
+            
 
             $("[data-web3=airdrop]").on("click", function(){
                 var token = $(this).attr("data-token");

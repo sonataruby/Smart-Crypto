@@ -30,16 +30,17 @@ SmartApps = (function (SmartApps, $, window) {
                 let price_usd = response.data.USD;
                 contractIdo.getPrice().call().then(function(res){
                     var price_token_bnb = Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-                
+                    var price_bnb = Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');;
                     if(price_usd > 0){
                         
                         price_token_bnb = (price_usd * price_token_bnb).toFixed(4) + " USD";
                         
                     }else{
                         price_token_bnb = price_token_bnb + " BNB";
+
                     }
                     $(".price").html(price_token_bnb);
-                    $(".pricebnb").html(price_token_bnb);
+                    $(".pricebnb").html(price_bnb/2);
                 });
               }).catch((err)=>{
               //console.log(err);
