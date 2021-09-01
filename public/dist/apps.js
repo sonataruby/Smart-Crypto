@@ -2604,8 +2604,14 @@ SmartApps = (function (SmartApps, $, window) {
                 let depositAmount = blockchain.toWei(amount.toString(),"ether");
                 let CheckAppreve = await token.approve(ContractAddress.AddressContractFarm,depositAmount);
                 
-                await contractFarm.deposit(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then((value) => {
-                    console.log(value);
+                await contractFarm.deposit(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then( async (value) => {
+                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                chat_id: window.TelegramChannel,
+                                text: `${login_wallet} Join FARM POLL`,
+                                parse_mode:'Markdown'
+                        });
+                    }
                 });
                 
             }
