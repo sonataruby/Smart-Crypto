@@ -2694,15 +2694,23 @@ SmartApps = (function (SmartApps, $, window) {
                 }
                 
                 const gasPrice = await blockchain.getGasPrice();
-                await contractFarm.claim(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then(async (value) => {
-                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                                chat_id: window.TelegramChannel,
-                                text: `Farm earn : ${value.transactionHash}`,
-                                parse_mode:'Markdown'
+                await contractFarm.claimable(lastSessionId,login_wallet).call().then( async (data) => {
+                    if(data == 0){
+                        blockchain.notify("Balance empty. You can not claim");
+                    }else{
+
+                        await contractFarm.claim(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then(async (value) => {
+                            blockchain.notify("Claim farm success<br>Hash : "+value.transactionHash);
+                            if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                                await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                        chat_id: window.TelegramChannel,
+                                        text: `Farm earn : ${value.transactionHash}`,
+                                        parse_mode:'Markdown'
+                                });
+                            }
+                            
                         });
                     }
-                    
                 });
             }
     SmartApps.tokenFarm.claimNft = async (lastSessionId) => {
