@@ -1,5 +1,6 @@
 const fs = require('fs');
 const db = require('./db');
+const config = require("./../config");
 const blockchain = require('./blockchain');
 const moment = require('moment');
 
@@ -96,6 +97,11 @@ app.get("/farm", async (req, res) => {
  await Farm.init(blockchain);
  const dataMain = readJSONFile('main.json');
  dataMain.items = await Farm.findAll();
+ var path = __dirname.replace("/server","/public/assets");
+ const dir = "/game";
+ const fileJson = fs.readdirSync(path + dir);
+ dataMain.fileBG = fileJson;
+ dataMain.filedir = "assets"+dir+"/";
  res.render("farm",dataMain);
 
 });
@@ -114,12 +120,15 @@ app.get("/farm/:id/:target", async (req, res) => {
 app.post("/farm/create", async (req, res) => {
     var name = req.body.name;
     
-    var period = req.body.period;
-    var reward = req.body.reward;
+    var logid = req.body.session_id;
+    var name = req.body.name;
     var nftreward = req.body.nftreward;
     var deposit = req.body.deposit;
-    var apr = req.body.apr;
-    
+    var image = req.body.image;
+    var color = req.body.color;
+    var color2 = req.body.color2;
+    var totalReward = req.body.totalReward;
+
     var starttime_y = req.body.starttime_y;
     var starttime_m = req.body.starttime_m;
     var starttime_d = req.body.starttime_d;
@@ -129,11 +138,17 @@ app.post("/farm/create", async (req, res) => {
     let startTime = Math.floor(new Date().getTime()/1000) + 30;
     var unixtime = moment(starttime_m+"/"+starttime_d+"/"+starttime_y+" "+starttime_h+":"+starttime_min+"", "M/D/YYYY H:mm").unix();
     if(parseInt(unixtime) < startTime) unixtime = startTime;
-    
-    await Farm.init(blockchain);
-    let lastSessionId = await Farm.create({name : name, period : period, reward : reward, nftreward: nftreward, deposit : deposit, startTime : unixtime, apr: apr});
-
-    res.redirect("/farm/"+lastSessionId+"/sync");
+    const dataMain = readJSONFile('main.json');
+    //await Farm.init(blockchain);
+    await Farm.create({lastSessionId : session_id, name : name, nftreward: nftreward, deposit : deposit, image : image, color: color, color2 : color2});
+    if(config.telegram.telegram.TelegramChannel != ""){
+        await axios.post('https://api.telegram.org/bot'+config.telegram.telegram.token+'/sendMessage', {
+                chat_id: config.telegram.telegram.TelegramChannel,
+                text: `Game Farm Pool\nOpen new session\nReward ${totalReward} token\n You can join now ${dataMain.base}/farm`,
+                parse_mode:'Markdown'
+        });
+    }
+    res.redirect("/farm");
     
 });
 

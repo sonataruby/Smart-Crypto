@@ -471,7 +471,7 @@ SmartApps = function (SmartApps, $, window, document) {
         var wallet = await blockchain.getLoginWallet();
         var isStatus = await blockchain.isStatus();
         await tokenSmart.loadContracts();
-        await SmartApps.tokenPresell.loadContracts();
+       
         let address =  await blockchain.address();
         if(wallet == null || wallet == "" || wallet == undefined){
                     
@@ -487,20 +487,7 @@ SmartApps = function (SmartApps, $, window, document) {
             $(".balance").html(balance);
         }
 
-        $("#newadmin").on("click", function(){
-            tokenSmart.newAdmin();
-        });
-
-        $("#newadminIDO").on("click", function(){
-            SmartApps.tokenIDO.newAdmin();
-        });
-
-        $("#rutbnbIDO").on("click", function(){
-            SmartApps.tokenIDO.withdrawBNB();
-        });
-        $("#rutbnbPresell").on("click", function(){
-            SmartApps.tokenPresell.withdrawBNB();
-        });
+        
 
         $("#createFarmSession").on("click", function(){
             
@@ -510,6 +497,10 @@ SmartApps = function (SmartApps, $, window, document) {
             var reward = $("#reward").val();
             var nftreward = $("#nftreward").val();
             var deposit = $("#deposit").val();
+            var image = $("#image").val();
+            var color = $("#color").val();
+            var color2 = $("#color2").val();
+
             var apr = $("#apr").val();
             var name = $("#name").val();
             var starttime_y = $("#starttime_y").val();
@@ -532,12 +523,13 @@ SmartApps = function (SmartApps, $, window, document) {
                 var StartSessionTime = startTime;
                 let totalReward = blockchain.toWei(reward.toString(), "ether"); 
 
+                
             
                 contract.startSession(address.AddressContractSmartToken, totalReward, period, StartSessionTime, generation).send({from: wallet, gas : 300000}).then(async (value) => {
                    let lastSessionId = 0;
-                   await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
+                   await contract.lastSessionIds(address.AddressContractSmartToken).send({gas:GAS}).then((value) => {
                         lastSessionId = value;
-                        window.location.href="/farm/crate/"+lastSessionId+"/"+name+"/"+deposit;
+                        window.location.href="/farm/crate?session_id="+lastSessionId+"&name="+name+"&deposit="+deposit+"&nftreward="+nftreward+"&color="+color+"&color2="+color2+"&image="+image+"&totalReward="+totalReward;
                     });
                 });
         });

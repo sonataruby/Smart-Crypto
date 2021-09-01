@@ -14,7 +14,7 @@ const FarmController = {
 		return data;
 	},
 	"create" : async (obj) => {
-		sql = "INSERT INTO `farm_task` (`log_id`, `min_deposit`, `pool_name`, `status`) VALUES ('"+obj.lastSessionId+"', '"+obj.deposit+"', '"+obj.name+"', '1');"
+		sql = "INSERT INTO `farm_task` (`log_id`, `min_deposit`, `pool_name`, `status`, `reward_nft`, `image`, `color`, `color2`) VALUES ('"+obj.lastSessionId+"', '"+obj.deposit+"', '"+obj.name+"', '1', '"+obj.nftreward+"', '"+obj.image+"', '"+obj.color+"', '"+obj.color2+"');"
 		   //console.log(obj);
 		    await db.dbQuery(sql);
 		

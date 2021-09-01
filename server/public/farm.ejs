@@ -129,7 +129,11 @@
 							<div class="mb-3 row">
 							    <label  class="col-sm-12 col-form-label">Game Background</label>
 							    <div class="col-sm-12">
-							      <select type="text" id="background" class="form-select" value="">
+							      <select  id="image" class="form-select" value="">
+							      		<% fileBG.forEach(function(data, index){ %>
+							      		<option value="<%=filedir%><%=data%>"><%=filedir%><%=data%></option>
+		  
+		  								<% }); %>
 							      		<option value=""></option>
 							      </select>
 							    </div>
@@ -138,19 +142,23 @@
 							<div class="mb-3 row">
 							    <label  class="col-sm-4 col-form-label">Font Color</label>
 							    <div class="col-sm-4">
-							      <input type="text" name="fontcolor" id="fontcolor" class="form-control" value="">
+							      <input type="text" name="fontcolor" id="color" class="form-control" value="">
 							    </div>
 							    <div class="col-sm-4 d-grid gap-4">
-							    	<button class="btn btn-sm btn-primary btn-block">#Color</button>
+							    	<input type="text" name="fontcolor" id="color2" class="form-control" value="">
 							    </div>
 							</div>
 
 
-							<div class="border" style="height:160px"></div>
+							<div class="border" style="min-height:160px" id="preview"></div>
 
+							<script>
+								$("#image").on("change", function(){
+									var image = $(this).val();
+									$("#preview").html('<img src="<%-base%>'+image+'" style="width:100%; max-width:100%;">');
+								});
+							</script>
 							
-							<br>
-							<button type="submit" class="btn btn-primary" value="">Update Session</button>
 							
 						</div>
 						</div>

@@ -56,7 +56,7 @@ function preload ()
 
     this.load.setBaseURL('/');
 
-    this.load.image('sky', 'assets/car/9144.jpg');
+    this.load.image('sky', game_1.background);
     this.load.image('controller', 'assets/car/control.png');
     this.load.image('logo', 'assets/car/logo_game.png');
     this.load.image('red', 'assets/car/start.png');
@@ -95,57 +95,72 @@ function create ()
 
 
 	
-	var textOptionsPool = { fill: '#dc3545',fontFamily : 'Revalia', fontSize : 32, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 3};
+	var textOptionsPool = { fill: game_1.color,fontFamily : 'Revalia', fontSize : 48, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 3};
 
-	var textOptions = { fill: '#dc3545',fontFamily : 'Revalia', fontSize : 24, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 3};
+	var textOptions = { fill: game_1.color,fontFamily : 'Revalia', fontSize : 24, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 0};
+	var textOptions1 = { fill: game_1.color2,fontFamily : 'Revalia', fontSize : 18, fontWeight : 'bold'};
 
 	this.add.text(100, 30, game_1.pool_name, textOptionsPool);
-	this.add.text(100, 80, 'Total Value Lock', { fill: '#0f0' });
-	this.add.text(100, 100, game_1.amount, textOptions);
+	var OptionHightTop = 10;
+	this.add.text(100, OptionHightTop+80, 'Total Value Lock', textOptions1);
+	this.add.text(100, OptionHightTop+100, game_1.amount, textOptions);
 	
 	this.initialTime = game_1.timeEnd;
-	this.add.text(100, 130, 'Remaining Time', { fill: '#0f0' });
-	CountDownTime = this.add.text(100, 150, '2021/01/09 0:0:0', textOptions);
+	this.add.text(100, OptionHightTop+130, 'Remaining Time', textOptions1);
+	CountDownTime = this.add.text(100, OptionHightTop+150, '2021/01/09 0:0:0', textOptions);
 	timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true });
 
-	this.add.text(100, 190, 'Pool Rate', { fill: '#0f0' });
-	this.add.text(100, 210, game_1.rate, textOptions);
-	this.add.text(100, 250, 'APR', { fill: '#0f0' });
-	this.add.text(100, 270, game_1.apr, textOptions);
+	this.add.text(100, OptionHightTop+190, 'Pool Rate', textOptions1);
+	this.add.text(100, OptionHightTop+210, game_1.rate, textOptions);
+	this.add.text(100, OptionHightTop+250, 'APR', textOptions1);
+	this.add.text(100, OptionHightTop+270, game_1.apr, textOptions);
  	
 
- 	this.add.text(500, 80, 'Your Liquidity Deposit', { fill: '#0f0' });
-	this.add.text(500, 100, game_1.deposit, textOptions);
-	this.add.text(500, 130, 'Your Power', { fill: '#0f0' });
-	this.add.text(500, 150, game_1.rate, textOptions);
+ 	this.add.text(500, OptionHightTop+80, 'Your Liquidity Deposit', textOptions1);
+	this.add.text(500, OptionHightTop+100, game_1.deposit, textOptions);
+	this.add.text(500, OptionHightTop+130, 'Your Power', textOptions1);
+	this.add.text(500, OptionHightTop+150, game_1.aprweek, textOptions);
 
-	this.add.text(500, 190, 'Your Claim', { fill: '#0f0' });
-	this.add.text(500, 210, game_1.claimable, textOptions);
+	this.add.text(500, OptionHightTop+190, 'Your Claim', textOptions1);
+	this.add.text(500, OptionHightTop+210, game_1.claimable, textOptions);
 
 	
 	var buttonOptions = { fill: '#dc3545',align : 'center',backgroundColor:'red',fontSize : 24, fontWeight : 'bold', shadow : (5, 5, 'rgba(0,0,0,0.5)', 5) , anchor : 0.5, stroke : '#FFF', strokeThickness : 2};
 
 	var setButtonControll = 160;
+	var setButtonControll2 = setButtonControll + 160;
+	var setButtonControll3 = setButtonControll + 295;
 	if(document.getElementById("game").offsetWidth < 520){
 		setButtonControll = 60;
 	}
+	if(game_1.status == 1){
 	const deposit = this.add.image(setButtonControll, 400, 'deposit')
 		.setInteractive()
 		.on('pointerdown', () => {
 			blockchain.createpool(game_1.min_deposit,game_1.id);
 		});
-	
-	const ClaimButton = this.add.image(setButtonControll+125+15, 400, 'claim').setInteractive()
-		.on('pointerdown', () => {
-			console.log("Click Claim");
-			blockchain.claim(game_1.id);
-		});
-	const WithdrawButton = this.add.image(setButtonControll+(125+15)*2, 400, 'withdraw').setInteractive()
-		.on('pointerdown', () => {
-			console.log("Click Withdraw");
-			blockchain.withdraw(game_1.id);
-		});
-	
+		setButtonControll2 = setButtonControll + 140;
+		setButtonControll3 = setButtonControll + 280;
+	}else{
+		setButtonControll2 = setButtonControll;
+		setButtonControll3 = setButtonControll + 160;
+	}
+
+	if(game_1.status == -1 || game_1.status == 1){
+		const ClaimButton = this.add.image(setButtonControll2, 400, 'claim').setInteractive()
+			.on('pointerdown', () => {
+				console.log("Click Claim");
+				blockchain.claim(game_1.id);
+			});
+		const WithdrawButton = this.add.image(setButtonControll3, 400, 'withdraw').setInteractive()
+			.on('pointerdown', () => {
+				console.log("Click Withdraw");
+				blockchain.withdraw(game_1.id);
+			});
+	}else{
+		this.add.text(setButtonControll, 400, "Wait game start", textOptions);
+	}
+
     var particles = this.add.particles('red');
 
     var emitter = particles.createEmitter({

@@ -16,11 +16,15 @@
         <% items.forEach(function(data, index){ %>
             <div class="col-md-4 mb-3 col-12">
                 <div id="plance" class="border round text-left p-3 <%- index == 0 ? 'border-primary' : "border-secondary"%> ">
+                    <h4><%= data.name%></h4>
+                    <hr>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item d-flex justify-content-between" data-timestart="<%= data.startTime%>" data-period="<%= data.period%>"><b>Start Time:</b> <span><%= data.startTime%></span></li>
                       <li class="list-group-item d-flex justify-content-between"><b>End Time: </b><span data-timeend="<%= data.timeEnd%>"><%= data.timeEnd%></span></li>
                       <li class="list-group-item d-flex justify-content-between"><b>Period : </b><%- (data.period / 3600).toFixed(2) %> hour</li>
                       <li><hr></li>
+                      
+                      <li class="list-group-item d-flex justify-content-between"><b>Min Deposit : </b><%- data.min_deposit%> <%= token.name%> </li>
                       <li class="list-group-item d-flex justify-content-between"><b>Total Reward : </b><%- data.totalReward%> <%= token.name%> </li>
                       <li class="list-group-item d-flex justify-content-between"><b>Pool Holder : </b><%- data.amount%> <%= token.name%> </li>
                       <li class="list-group-item d-flex justify-content-between"><b>APR : </b><%= data.apr%>% </li>

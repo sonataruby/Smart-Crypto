@@ -2,7 +2,7 @@ SmartApps = (function (SmartApps, $, window) {
     "use strict";    
     let contractAirdrop;
     let login_wallet;
-    let GAS = 300000; 
+    let GAS = 150000; 
     let blockchain = SmartApps.Blockchain;
 
     SmartApps.Airdrop = {};

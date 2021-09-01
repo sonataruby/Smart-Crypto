@@ -15,7 +15,8 @@ module.exports = function(prefix , app) {
 	 	obj.id = parseInt(session_id);
 	 	let TimeNow = Math.floor(new Date().getTime()/1000) + 30;
 	 	await contract.sessions(session_id).call().then(async (value) => {
-
+	 		var LoadDB = await db.dbQuery("SELECT * FROM farm_task WHERE log_id='"+session_id+"'",true);
+	 		
 	 		var amount = parseFloat(blockchain.web3.utils.fromWei(value.amount == 0 ? value.totalReward : value.amount));
 			var totalReward = parseFloat(blockchain.web3.utils.fromWei(value.totalReward));
 			var startTime = parseInt(value.startTime);
@@ -27,6 +28,15 @@ module.exports = function(prefix , app) {
 			var annualRewardWeek = rewardUnit * 604800;//1 week
 			var annualRewardMonth = rewardUnit * 2629743;//1 Month
 			var timeEnd = startTime + period;
+
+			obj.name = "No Name";
+			obj.reward_nft = 0;
+			obj.min_deposit = 100;
+			if(LoadDB != "" && LoadDB != undefined){
+				obj.name = LoadDB.pool_name;
+				obj.reward_nft = parseInt(LoadDB.reward_nft);
+				obj.min_deposit = parseInt(LoadDB.min_deposit);
+			}
 
 			obj.startTime = startTime;
 			obj.timeEnd = timeEnd;
@@ -41,18 +51,26 @@ module.exports = function(prefix , app) {
 			obj.apr = parseFloat((annualReward/amount)*100).toFixed(2);
 			obj.amount = amount;
 			obj.totalReward = totalReward;
-			obj.reward_nft = 1;
+			obj.image = LoadDB.image == "" || LoadDB.image == undefined ? "assets/car/9144.jpg" : LoadDB.image;
+			obj.color = LoadDB.color == "" || LoadDB.color == undefined ? "#0f0" : LoadDB.color;
+			obj.color2 = LoadDB.color2 == "" || LoadDB.color2 == undefined ? "red" : LoadDB.color2;
+			
 			if(startTime < TimeNow && timeEnd > TimeNow){
 				obj.joinPool = '<button class="btn btn-sm btn-info data-info" data-href="/farm/info/'+session_id+'">Join Pool</button>';
+				obj.status = 1;
 			}else if(startTime > TimeNow && timeEnd > TimeNow){
 				obj.joinPool = '<b>Wait Time Start<b>';
+				obj.status = 0;
 			}else if(timeEnd < TimeNow){
+				obj.status = -1;
 				obj.joinPool = '<div class="btn-group btn-sm" role="group" aria-label="Basic example"><button type="button" data-web3="farmclaim" data-session="'+session_id+'" class="btn btn-sm btn-secondary">Claim</button><button type="button" data-web3="withdraw" data-session="'+session_id+'" class="btn btn-sm btn-secondary">Withdraw</button></div>';
 			}
 
 	 	});
 	 	return obj;
 	}
+
+
 	app.get(prefix, async (req, res) => {
 	 app.set('layout', config.layout.dir + "/pages");
 	 const dataMain = fsFile.readJSONFile('main.json');
@@ -90,44 +108,24 @@ module.exports = function(prefix , app) {
 		let contract = await blockchain.loadFram();
 		let address = await blockchain.loadAddress();
 
-		var block = {};
-		block.deposit = 0;
-		block.claimable = 0;
+		
+		
+		
+		var dataMainConfig = fsFile.readJSONFile('main.json');
+		//dataMainConfig.items = data;
+		dataMainConfig.block = await loadInfoPool(session_id);
+
+		dataMainConfig.block.deposit = 0;
+		dataMainConfig.block.claimable = 0;
+
 		if(wallet.length > 40){
 			let stakedBalanceOf = await contract.stakedBalanceOf(session_id,wallet).call();
-			block.deposit = blockchain.web3.utils.fromWei(stakedBalanceOf);
+			dataMainConfig.block.deposit = blockchain.web3.utils.fromWei(stakedBalanceOf);
 			let claimable = await contract.claimable(session_id,wallet).call();
-			block.claimable = parseFloat(blockchain.web3.utils.fromWei(claimable)).toFixed(4);
+			dataMainConfig.block.claimable = parseFloat(blockchain.web3.utils.fromWei(claimable)).toFixed(4);
 		}
-		
 
-		
-
-		block.session_id = session_id;
-		block.timeEnd = 0;
-		block.min_amount = 100;
-		await contract.sessions(session_id).call().then(async (value) => {
-			console.log(value);
-			//parseFloat(blockchain.eth.utils.fromWei(String(value.amount).toString()));
-			let amount = parseFloat(blockchain.web3.utils.fromWei(value.amount));
-			let totalReward = parseFloat(blockchain.web3.utils.fromWei(value.totalReward));
-			let startTime = parseInt(value.startTime);
-			let period = parseInt(value.period);
-			let rewardUnit = totalReward/period;
-			let annualUnits = 31556952;  // 1 year in seconds
-			let annualReward = rewardUnit * annualUnits * 1;
-			block.timeEnd = startTime + period;
-			block.rate = annualReward;
-			block.apr = parseFloat((annualReward/amount)*100).toFixed(2);
-			block.amount = amount;
-		});
-
-		let sql = `SELECT * FROM farm_task WHERE log_id = '`+session_id+`' ORDER BY status,timestart DESC LIMIT 1`;
-		var data = await db.dbQuery(sql,true);
-		var dataMainConfig = fsFile.readJSONFile('main.json');
-		dataMainConfig.items = data;
-		dataMainConfig.block = block;
-
+		console.log(dataMainConfig.block);
 		res.render("farm-info",dataMainConfig);
 	});
 

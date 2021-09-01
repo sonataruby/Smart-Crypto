@@ -45,11 +45,11 @@
 	      	<h4>Your Balance : <span class="balance"></span> <%= token.name%></h4>
 	        <p>Check Your balance <%= token.name%> before confirm.</p>
 	        <br>
-	        <input type="number" value="<%= items.min_deposit%>" class="form-control">
+	        <input type="number" value="<%= block.min_deposit%>" class="form-control">
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary btn-sm" data-session="<%= items.log_id%>" data-web3="farmdeposit" data-min="<%= items.min_deposit%>">Confirm</button>
+	        <button type="button" class="btn btn-primary btn-sm" data-session="<%= block.id%>" data-web3="farmdeposit" data-min="<%= block.min_deposit%>">Confirm</button>
 	      </div>
 	    </div>
 	  </div>
@@ -77,15 +77,20 @@
 <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
 <script>
 var game_1 = {
-	id : <%=block.session_id%>,
+	id : <%=block.id%>,
 	min_deposit : 100,
-	pool_name : "<%= items.pool_name%>",
+	pool_name : "<%= block.name%>",
 	amount : "<%= block.amount%> <%= token.name%>",
 	rate : "<%= block.rate%> <%= token.name%> / Year",
 	apr : "<%= block.apr%> %",
+	aprweek : "<%=block.aprweek%> % / Week",
 	deposit : "<%= block.deposit%> <%= token.name%>",
 	claimable : "<%= block.claimable%> <%= token.name%>",
-	timeEnd : "<%=block.timeEnd%>"
+	timeEnd : "<%=block.timeEnd%>",
+	status : <%=block.status%>,
+	background : "<%=block.image%>",
+	color : "<%=block.color%>",
+	color2 : "<%=block.color2%>"
 }
 </script>
 <script src="/dist/game_1.js"></script>
