@@ -2175,9 +2175,7 @@ SmartApps = (function (SmartApps, $, window) {
         //    if(value < amount){
                 await contractToken.approve(wallet,amount).send({from: login_wallet, gasPrice: gasPrice, gas: approveGasEstimate * 3}).then(async (value) => {
                     
-                    await axios.get("/query/approve/"+login_wallet+"/"+amount+"/"+wallet).then(()=>{
-                        SmartApps.Blockchain.notify("Approve success. You can deposit start");
-                    });
+                    SmartApps.Blockchain.notify("Approve success. You can deposit start");
                 });
             //}
             
@@ -2189,7 +2187,7 @@ SmartApps = (function (SmartApps, $, window) {
         await contractToken.allowance(login_wallet,contractAddress).call().then(async (value) => {
             
             amount = blockchain.fromWei(value);
-            console.log(amount);
+           
         });
         return amount;
     };
@@ -2540,18 +2538,7 @@ SmartApps = (function (SmartApps, $, window) {
                 let amount = await token.allowance(ContractAddress.AddressContractFarm);
                 return amount;
             }
-    SmartApps.tokenFarm.allowance = async () => {
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.init();
-                }
-                const gasPrice = await blockchain.getGasPrice();
-                
-                await token.loadContracts();
-                await token.allowance(ContractAddress.AddressContractFarm,login_wallet).call().then((data) => {
-                    console.log(data);
-                });
-            }
+    
     SmartApps.tokenFarm.approve = async (amount) => {
                 let status = await blockchain.isStatus();
                 if(status == false){
@@ -2944,17 +2931,20 @@ SmartApps = (function (SmartApps, $, window) {
                 $("[data-web3=farmclaim]").on("click", function(){
                     var session_id = parseInt($(this).attr("data-session"));
                     farm.claim(session_id);
+                    return;
                 });
+
                 $("[data-web3=withdraw]").on("click", function(){
                     var session_id = parseInt($(this).attr("data-session"));
                     farm.withdraw(session_id);
+                    return;
                 });
 
             
             
         }
          if(routerFocus == "staking"){
-            alert(routerFocus);
+            //alert(routerFocus);
          }
         
     }

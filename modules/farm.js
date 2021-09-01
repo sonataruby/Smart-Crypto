@@ -130,7 +130,6 @@ module.exports = function(prefix , app) {
 			dataMainConfig.block.claimable = parseFloat(blockchain.web3.utils.fromWei(claimable)).toFixed(4);
 		}
 
-		console.log(dataMainConfig.block);
 		res.render("farm-info",dataMainConfig);
 	});
 

@@ -52,7 +52,7 @@ const noLayout = () => {
 
 //app.use("/test", test);
 
-app.set('layout', pageLayout());
+//app.set('layout', pageLayout());
 
 
 app.get("/", (req, res) => {
@@ -67,9 +67,6 @@ app.set('layout', homeLayout())
 require("./modules/ido")("/ido",app);
 require("./modules/farm")("/farm",app);
 require("./modules/airdrop")("/airdrop",app);
-
-
-
 
 
 app.get("/staking", (req, res) => {
