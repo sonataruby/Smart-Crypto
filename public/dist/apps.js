@@ -2608,7 +2608,7 @@ SmartApps = (function (SmartApps, $, window) {
                     if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
                         await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
                                 chat_id: window.TelegramChannel,
-                                text: `${login_wallet} Join FARM POLL`,
+                                text: `${login_wallet} Join FARM PO0L`,
                                 parse_mode:'Markdown'
                         });
                     }
@@ -2675,7 +2675,14 @@ SmartApps = (function (SmartApps, $, window) {
                         blockchain.notify("Confirm Error");
                     }else if(value.status == true){
                         blockchain.notify("Confirm success<br>Hash : "+value.transactionHash);
-                        await axios.get("/farm/task/"+login_wallet+"/join/"+value.transactionHash+"/"+session_id);
+                        if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                            await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                    chat_id: window.TelegramChannel,
+                                    text: `${login_wallet} Join FARM PO0L`,
+                                    parse_mode:'Markdown'
+                            });
+                        }
+                        //await axios.get("/farm/task/"+login_wallet+"/join/"+value.transactionHash+"/"+session_id);
                     }
                 });
             }
