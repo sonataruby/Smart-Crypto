@@ -32,10 +32,16 @@ module.exports = function(prefix , app) {
 			obj.name = "No Name";
 			obj.reward_nft = 0;
 			obj.min_deposit = 100;
+			obj.image = "assets/car/9144.jpg";
+			obj.color = "#0f0";
+			obj.color2 = "red";
 			if(LoadDB != "" && LoadDB != undefined){
 				obj.name = LoadDB.pool_name;
 				obj.reward_nft = parseInt(LoadDB.reward_nft);
 				obj.min_deposit = parseInt(LoadDB.min_deposit);
+				obj.image = LoadDB.image == "" || LoadDB.image == undefined ? "assets/car/9144.jpg" : LoadDB.image;
+				obj.color = LoadDB.color == "" || LoadDB.color == undefined ? "#0f0" : LoadDB.color;
+				obj.color2 = LoadDB.color2 == "" || LoadDB.color2 == undefined ? "red" : LoadDB.color2;
 			}
 
 			obj.startTime = startTime;
@@ -51,9 +57,8 @@ module.exports = function(prefix , app) {
 			obj.apr = parseFloat((annualReward/amount)*100).toFixed(2);
 			obj.amount = amount;
 			obj.totalReward = totalReward;
-			obj.image = LoadDB.image == "" || LoadDB.image == undefined ? "assets/car/9144.jpg" : LoadDB.image;
-			obj.color = LoadDB.color == "" || LoadDB.color == undefined ? "#0f0" : LoadDB.color;
-			obj.color2 = LoadDB.color2 == "" || LoadDB.color2 == undefined ? "red" : LoadDB.color2;
+
+			
 			
 			if(startTime < TimeNow && timeEnd > TimeNow){
 				obj.joinPool = '<button class="btn btn-sm btn-info data-info" data-href="/farm/info/'+session_id+'">Join Pool</button>';
