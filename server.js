@@ -56,7 +56,7 @@ const noLayout = () => {
 
 
 app.get("/", (req, res) => {
-app.set('layout', homeLayout())
+ app.set('layout', homeLayout())
  const dataMain = fsFile.readJSONFile('main.json');
  
   dataMain.showPresell = req.query.join;
@@ -70,6 +70,7 @@ require("./modules/airdrop")("/airdrop",app);
 
 
 app.get("/staking", (req, res) => {
+  app.set('layout', pageLayout())
  const dataMain = fsFile.readJSONFile('main.json');
  
  res.render(dataMain.public.staking == true ? "staking" : "coming",dataMain);
@@ -95,8 +96,6 @@ app.get("/game", (req, res) => {
 
 app.get("/token", (req, res) => {
  const dataMain = fsFile.readJSONFile('main.json');
-
- 
  res.render("token",dataMain);
 });
 
