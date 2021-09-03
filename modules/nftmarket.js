@@ -39,6 +39,7 @@ module.exports = function(prefix , app) {
 		    		sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+index+"' LIMIT 1";
     				item = await db.dbQuery(sql, true);
     				var readObject = {};
+
     				if(item == undefined){
     					readObject = await insert_items(index, value.quality, value.generation);
 
@@ -46,6 +47,7 @@ module.exports = function(prefix , app) {
     					readObject = JSON.parse(item.data);
 
     				}
+    				readObject.id = index;
     				readObject.attributes[0].value = value.quality;
     				readObject.attributes[1].value = value.generation;
                 	object.push(readObject);
@@ -59,6 +61,7 @@ module.exports = function(prefix , app) {
 
 		const insert_items = async (tokenID, quality, generation) =>{
 			const data = {
+			  "id" : tokenID,
 		      "attributes": [{
 		              "trait_type": "QUALITY",
 		              "value": quality
@@ -96,9 +99,19 @@ module.exports = function(prefix , app) {
 		app.get(prefix, (req, res) => {
 		  app.set('layout', config.layout.dir + "/pages");
 		 const dataMain = fsFile.readJSONFile('market.json');
-		 
+		 dataMain.loadJS = ["market.js"];
 		 res.render(dataMain.public.market == true ? "market" : "coming",dataMain);
 		});
+
+		app.get(prefix + "/main/:page", (req, res) => {
+			app.set('layout', config.layout.dir + "/nolayout");
+			const dataMain = fsFile.readJSONFile('market.json');
+			const sql = "SELECT * FROM `nftmarket`";
+			const data = await db.dbQuery(sql);
+			dataMain.items = data;
+			res.render(dataMain.public.market == true ? "market-item" : "coming",dataMain);
+		});
+
 
 		app.get(prefix + "/token/:token", (req, res) => {
 		  app.set('layout', config.layout.dir + "/pages");
@@ -107,14 +120,38 @@ module.exports = function(prefix , app) {
 		 res.render(dataMain.public.market == true ? "market" : "coming",dataMain);
 		});
 
-		app.get(prefix + "/wallet/:wallet", async (req, res) => {
+		app.get(prefix + "/account", async (req, res) => {
 		  app.set('layout', config.layout.dir + "/pages");
 		  const dataMain = fsFile.readJSONFile('market.json');
-		  var wallet = req.params.wallet;
-		  var data = await getItems(wallet);
-		  dataMain.items = data;
+		  dataMain.loadJS = ["market.js"];
 		 res.render(dataMain.public.market == true ? "market-wallet" : "coming",dataMain);
 		});
+
+
+		app.post(prefix + "/items/:wallet", async (req, res) => {
+			app.set('layout', config.layout.dir + "/nolayout");
+			var wallet = req.params.wallet;
+
+			const dataMain = fsFile.readJSONFile('market.json');
+			var data = [];
+			if(wallet.length > 40){
+				data = await getItems(wallet);
+			}
+			
+			dataMain.items = data;
+			res.render(dataMain.public.market == true ? "market-my-item" : "coming",dataMain);
+		});
+		app.post(prefix + "/sell/:wallet", async (req, res) => {
+			var wallet = req.params.wallet;
+			var tokenID = req.body.tokenid;
+			var price = req.body.price;
+			var hash = req.body.hash;
+			var name = req.body.name;
+			var description = req.body.description;
+			sql = "INSERT INTO `nftmarket` SET wallet='"+wallet+"', tokenId='"+tokenID+"', name='"+name+"', description='"+description+"', price='"+price+"'";
+    		await db.dbQuery(sql, true);
+		});
+		
 
 
 }
