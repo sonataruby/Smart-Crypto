@@ -12,6 +12,7 @@ module.exports.dbQuery = async (sql, rows=false) =>{
 	return new Promise(function(resolve, reject){
 		pool.query(sql,function (error, results){
 				if (error) {
+					console.log("Error query",error)
                 	resolve([]);
 				}else{
 					if(results.length > 0){

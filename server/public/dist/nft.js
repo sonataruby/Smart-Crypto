@@ -9,7 +9,11 @@ SmartApps = (function (SmartApps, $, window) {
     	var factory = await blockchain.loadContractNFTFactory();
     	var smartnft     = await blockchain.loadContractSmartnft();
     	var wallet = await blockchain.getLoginWallet();
+        
     	var GAS = 1000000;
+        const getHash = async () => {
+            await blockchain.getNftTokenID('0x07001734f75842810691ca7a66cedf79a7107efe6ddff4c97157d4a82c994568');
+        }
     	const isGenerator = async () => {
     		let isGen = await factory.isGenerator(wallet).call();
     		console.log(isGen);
@@ -34,11 +38,16 @@ SmartApps = (function (SmartApps, $, window) {
     	}
         const mint = async () => {
             let isStaticUser = await factory.isStaticUser(wallet).call();
-            console.log(wallet, " StaticUser ", isStaticUser);
+            
             if(isStaticUser == true){
                 
-                await factory.mint(wallet,0).send({gas:GAS}).then((value) => {
-                    console.log(value);
+                await factory.mint(wallet,0).send({gas:GAS}).then( async (value) => {
+                   
+                    let tokenID = await blockchain.getNftTokenID(value.transactionHash);
+                    if(tokenID > 0){
+                        await axios.post("/api/nft/"+value.transactionHash);
+                    }
+
                 });
             }
             
@@ -48,6 +57,7 @@ SmartApps = (function (SmartApps, $, window) {
 
             await smartnft.setFactory(facAddress).send({gas:GAS}).then((value) => {
                     console.log(value);
+
                 });
         }
 
@@ -105,7 +115,12 @@ SmartApps = (function (SmartApps, $, window) {
             }
         }
         
-
+        const setURL = async (url) => {
+            
+            await smartnft.setBaseUri(url).send({gas:GAS}).then((value) => {
+                    console.log(value);
+            });
+        }
 
         const trand = async(setwallet) => {
             //let smartnft = await blockchain.address().AddressContractNFTFactory;
@@ -121,11 +136,13 @@ SmartApps = (function (SmartApps, $, window) {
 		        let id = await smartnft.tokenOfOwnerByIndex(wallet, i);
 		        console.log(`#${i} id: ${id}`);
 		    }
-
-    		console.log(balance);
+            await smartnft.tokenURI(5).call().then((value) => {
+                console.log(value);
+            });
+    		
     	}
-        //isGenerator();
-    	//getNFT();
+        //getHash();
+    	getNFT();
     	//trand();
     	$("#mintQuality").on("click", function(){
             var generation = $("#generation").val();
@@ -136,6 +153,13 @@ SmartApps = (function (SmartApps, $, window) {
         $("#setFactory").on("click", function(){
             setFactory();
         });
+
+        $("#setURL").on("click", function(){
+            var seturl = $(this).parent().find("input").val();
+            console.log(seturl);
+            setURL(seturl);
+        });
+        
         $("#mint").on("click", function(){
             console.log("Mint");
             mint();

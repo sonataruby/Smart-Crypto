@@ -54,6 +54,9 @@ let loadSmartNFT =  async function() {
     let contract = await loadContract(farmAddress.AddressContractSmartNFT, farmArtifact);
     return contract.methods;
 };
+let getHash =  async function() {
+    return web3.eth;
+}
 
 module.exports.addAccount = addAccount;
 module.exports.loadContract = loadContract;
@@ -62,3 +65,4 @@ module.exports.call = call;
 module.exports.web3 = web3;
 module.exports.loadAddress = loadAddress;
 module.exports.loadSmartNFT = loadSmartNFT;
+module.exports.getHash = getHash;
