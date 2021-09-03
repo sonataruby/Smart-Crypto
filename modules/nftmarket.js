@@ -148,8 +148,14 @@ module.exports = function(prefix , app) {
 			var hash = req.body.hash;
 			var name = req.body.name;
 			var description = req.body.description;
-			sql = "INSERT INTO `nftmarket` SET wallet='"+wallet+"', tokenId='"+tokenID+"', name='"+name+"', description='"+description+"', price='"+price+"'";
-    		await db.dbQuery(sql, true);
+			var money_contract = req.body.money_contract;
+			var nft_contract = req.body.nft_contract;
+			let sqlcheck = "SELECT * FROM `nftmarket` WHERE tokenId='"+tokenID+"' AND nft_contract='"+nft_contract+"'";
+			item = await db.dbQuery(sqlcheck, true);
+			if(item == undefined){
+				let sql = "INSERT INTO `nftmarket` SET wallet='"+wallet+"', tokenId='"+tokenID+"', name='"+name+"', description='"+description+"', price='"+price+"', money_contract='"+money_contract+"', nft_contract='"+nft_contract+"'";
+	    		await db.dbQuery(sql, true);
+	    	}
 		});
 		
 

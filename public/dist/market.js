@@ -46,6 +46,13 @@ SmartApps = (function (SmartApps, $, window) {
             console.log(value);
         });
     }
+
+    SmartApps.Market.AllowTrade =  async () => {
+        await contractMarket.enableSales(true).send({gas:GAS}).then((value)=>{
+            console.log(value);
+        });
+    }
+    
     SmartApps.Market.sell =  async (tokenID, price, name, description) => {
         await contractMarket.sell(tokenID, price, ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then(async (value)=>{
             if(value.transactionHash){

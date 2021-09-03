@@ -3,6 +3,14 @@
 <div class="row">
 	<div class="col-6">
 		<div class="card">
+
+		
+			<div class="card-body">
+				<button id="AllowTrade" class="btn btn-primary">Allow trade market</button>
+			</div>
+		</div>
+		<br>
+		<div class="card">
 			<div class="card-body">
 				<h5>Fee</h5>
 				<hr>
@@ -85,6 +93,12 @@
 			}
 			
 		});
+
+		$("#AllowTrade").on("click", function(){
+			SmartApps.Market.AllowTrade();
+			
+		});
+		
 		
 	});
 </script>
