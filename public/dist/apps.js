@@ -2059,6 +2059,15 @@ SmartApps = (function (SmartApps, $, window) {
 
 			return contract.methods;
 		};
+	SmartApps.Blockchain.getNftTokenID = async (tx) => {
+			var tokenID = 0;
+            await web3os.eth.getTransactionReceipt(tx).then(function(data){
+                let transaction = data;
+                let logs = data.logs;
+                tokenID = web3os.utils.hexToNumber(logs[0].topics[3]);
+            });
+            return tokenID;
+        }
     SmartApps.Blockchain.init = async () => {
     	//BlockchainCom = SmartApps.Blockchain;
     	//SmartApps.Blockchain.login_wallet();
@@ -2225,7 +2234,7 @@ SmartApps = (function (SmartApps, $, window) {
     "use strict";    
     let contractAirdrop;
     let login_wallet;
-    let GAS = 150000; 
+    let GAS = 300000; 
     let blockchain = SmartApps.Blockchain;
 
     SmartApps.Airdrop = {};
@@ -2515,7 +2524,7 @@ SmartApps = (function (SmartApps, $, window) {
     var presenterAddress;
     var investorAddress;
     var login_wallet;
-    let GAS = 150000; 
+    let GAS = 300000; 
     var blockchain = SmartApps.Blockchain;
     var ContractAddress = blockchain.address();
     var token = SmartApps.tokenSmart;

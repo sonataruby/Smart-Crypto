@@ -21,10 +21,7 @@ let loadContract = async function(address, abi) {
     return contract;
 };
 
-let call = async function(instance, method, address, args) {
-    let raw = await instance.methods[method](...args).call();
-    return raw;
-};
+
 
 let loadToken = async function() {
    /*
@@ -61,7 +58,6 @@ let getHash =  async function() {
 module.exports.addAccount = addAccount;
 module.exports.loadContract = loadContract;
 module.exports.loadFram = loadFram;
-module.exports.call = call;
 module.exports.web3 = web3;
 module.exports.loadAddress = loadAddress;
 module.exports.loadSmartNFT = loadSmartNFT;

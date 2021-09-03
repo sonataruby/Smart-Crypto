@@ -134,8 +134,11 @@ SmartApps = (function (SmartApps, $, window) {
     		let balance = await smartnft.balanceOf(wallet).call();
     		for(var i=1; i<=balance; i++) {
 		        let id = await smartnft.tokenOfOwnerByIndex(wallet, i);
-		        console.log(`#${i} id: ${id}`);
+                let option = await smartnft.paramsOf(i);
+                console.log(option)
+		        //console.log(id._parent);
 		    }
+
             await smartnft.tokenURI(5).call().then((value) => {
                 console.log(value);
             });

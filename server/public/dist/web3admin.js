@@ -303,13 +303,14 @@ SmartApps = (function (SmartApps, $, window) {
 
 			return contract.methods;
 		};
-	SmartApps.Blockchain.getNftTokenID = async () => {
-            web3os.eth.getTransactionReceipt('0x07001734f75842810691ca7a66cedf79a7107efe6ddff4c97157d4a82c994568').then(function(data){
+	SmartApps.Blockchain.getNftTokenID = async (tx) => {
+			var tokenID = 0;
+            await web3os.eth.getTransactionReceipt(tx).then(function(data){
                 let transaction = data;
                 let logs = data.logs;
-                console.log(data);
-                console.log(web3os.utils.hexToNumber(logs[0].topics[3]));
+                tokenID = web3os.utils.hexToNumber(logs[0].topics[3]);
             });
+            return tokenID;
         }
     SmartApps.Blockchain.init = async () => {
     	//BlockchainCom = SmartApps.Blockchain;
@@ -483,7 +484,7 @@ SmartApps = (function (SmartApps, $, window) {
     var presenterAddress;
     var investorAddress;
     var login_wallet;
-    let GAS = 150000; 
+    let GAS = 300000; 
     var blockchain = SmartApps.Blockchain;
     var ContractAddress = blockchain.address();
     var token = SmartApps.tokenSmart;
