@@ -103,7 +103,7 @@ module.exports = function(prefix , app) {
 		 res.render(dataMain.public.market == true ? "market" : "coming",dataMain);
 		});
 
-		app.get(prefix + "/main/:page", (req, res) => {
+		app.get(prefix + "/main/:page", async (req, res) => {
 			app.set('layout', config.layout.dir + "/nolayout");
 			const dataMain = fsFile.readJSONFile('market.json');
 			const sql = "SELECT * FROM `nftmarket`";
