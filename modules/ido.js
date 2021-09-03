@@ -6,6 +6,7 @@ module.exports = function(prefix , app) {
 	const dataMain = fsFile.readJSONFile('main.json');
  
 	 app.set('layout', './layout/pages');
+	 dataMain.loadJS = ["ido.js"];
 	 res.render(dataMain.public.ido == true ? "ido" : "coming",dataMain);
 	});
 }

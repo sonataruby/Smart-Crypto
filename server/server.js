@@ -157,6 +157,12 @@ app.get("/nft", async (req, res) => {
  //dataMain.items = await Farm.findAll();
     res.render("nft",dataMain);
 });
+app.get("/nftmarket", async (req, res) => {
+    const dataMain = readJSONFile('main.json');
+ //dataMain.items = await Farm.findAll();
+    res.render("nftmarket",dataMain);
+});
+
 
 app.get("/presell", async (req, res) => {
     const dataMain = readJSONFile('main.json');

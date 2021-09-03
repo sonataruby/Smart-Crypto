@@ -1,0 +1,90 @@
+<h4 class="contractaddress d-flex justify-content-between"></h4>
+<hr>
+<div class="row">
+	<div class="col-6">
+		<div class="card">
+			<div class="card-body">
+				<h5>Fee</h5>
+				<hr>
+				<div class="input-group mt-3">
+				  <input type="text" class="form-control" placeholder="Wallet">
+				  <span class="input-group-text" id="setFeeReceiver">Fee Receiver Wallet</span>
+				</div>
+				
+				<div class="input-group mt-3">
+				  <input type="text" class="form-control" placeholder="Wallet">
+				  <span class="input-group-text" id="setFeeRate">Fee Rate</span>
+				</div>
+
+			</div>
+		</div>
+			
+	</div>
+
+	<div class="col-6">
+		<div class="card">
+			<div class="card-body">
+				<div class="input-group mt-3">
+				  <input type="text" class="form-control" placeholder="Allow NFT Contract">
+				  <span class="input-group-text" id="addSupportedNft">Set Allow</span>
+				</div>
+			</div>
+
+			<div class="card-body">
+				<div class="input-group mt-3">
+				  <input type="text" class="form-control" placeholder="Remove NFT Contract">
+				  <span class="input-group-text" id="removeSupportedNft">Remove Allow</span>
+				</div>
+			</div>
+
+			
+		</div>
+
+			<br>
+		<div class="card">
+			<div class="card-body">
+				<div class="input-group mt-3">
+				  <input type="text" class="form-control" placeholder="Add Supported Currency">
+				  <span class="input-group-text" id="addSupportedCurrency">Add Supported Currency</span>
+				</div>
+			</div>
+
+			<div class="card-body">
+				<div class="input-group mt-3">
+				  <input type="text" class="form-control" placeholder="Supported Currency">
+				  <span class="input-group-text" id="removeSupportedCurrency">Remove Supported Currency</span>
+				</div>
+			</div>
+
+		</div>
+
+		
+
+	</div>
+
+</div>
+
+
+<script>
+	$(document).ready(function(){
+		$("#addSupportedNft").on("click", function(){
+			var address = $(this).parent().find("input").val();
+			if(address.length > 40){
+				SmartApps.Market.addSupportedNft(address);
+			}else{
+				alert("Error Wallet")
+			}
+			
+		});
+		$("#addSupportedCurrency").on("click", function(){
+			var address = $(this).parent().find("input").val();
+			if(address.length > 40){
+				SmartApps.Market.addSupportedCurrency(address);
+			}else{
+				alert("Error Wallet")
+			}
+			
+		});
+		
+	});
+</script>

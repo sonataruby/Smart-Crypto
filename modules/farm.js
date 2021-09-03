@@ -79,32 +79,33 @@ module.exports = function(prefix , app) {
 
 
 	app.get(prefix, async (req, res) => {
-	 app.set('layout', config.layout.dir + "/pages");
-	 const dataMain = fsFile.readJSONFile('main.json');
+		 app.set('layout', config.layout.dir + "/pages");
+		 const dataMain = fsFile.readJSONFile('main.json');
 
-	 let contract = await blockchain.loadFram();
-	 let address = await blockchain.loadAddress();
-	 let lastSessionId = 0;
+		 let contract = await blockchain.loadFram();
+		 let address = await blockchain.loadAddress();
+		 let lastSessionId = 0;
 
-	 await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
-	 	lastSessionId = value;
-	 });
-	 
-	 var object = [];
-	 if(lastSessionId > 3){
-	 	for (var i = lastSessionId; i > lastSessionId - 3; i--) {
-	 		var data = await loadInfoPool(i);
-	 		object.push(data);
-	 	}
-	 }else{
-	 	for (var i = lastSessionId; i > 0; i--) {
-	 		var data = await loadInfoPool(i);
-	 		object.push(data);
-	 	}
-	 }
+		 await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
+		 	lastSessionId = value;
+		 });
+		 
+		 var object = [];
+		 if(lastSessionId > 3){
+		 	for (var i = lastSessionId; i > lastSessionId - 3; i--) {
+		 		var data = await loadInfoPool(i);
+		 		object.push(data);
+		 	}
+		 }else{
+		 	for (var i = lastSessionId; i > 0; i--) {
+		 		var data = await loadInfoPool(i);
+		 		object.push(data);
+		 	}
+		 }
 
-	 dataMain.items = object;
-	 res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
+		 dataMain.items = object;
+		 dataMain.loadJS = ["farm.js"];
+		 res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
 	});
 
 	app.get(prefix + "/info/:session_id/:wallet", async (req, res) => {
@@ -116,9 +117,6 @@ module.exports = function(prefix , app) {
 		let contract = await blockchain.loadFram();
 		let address = await blockchain.loadAddress();
 
-		
-		
-		
 		var dataMainConfig = fsFile.readJSONFile('main.json');
 		//dataMainConfig.items = data;
 		dataMainConfig.block = await loadInfoPool(session_id);
@@ -132,7 +130,7 @@ module.exports = function(prefix , app) {
 			let claimable = await contract.claimable(session_id,wallet).call();
 			dataMainConfig.block.claimable = parseFloat(blockchain.web3.utils.fromWei(claimable)).toFixed(4);
 		}
-
+		dataMainConfig.loadJS = ["farm.js","game_1.js"];
 		res.render("farm-info",dataMainConfig);
 	});
 

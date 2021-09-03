@@ -467,12 +467,394 @@ SmartApps = (function (SmartApps, $, window) {
         
     
     //Controller.init();
-    SmartApps.tokenSmart.Init = () => {
+    SmartApps.tokenSmart.Init = async () => {
+        await blockchain.init();
+        var wallet = await blockchain.getLoginWallet();
+        var isStatus = await blockchain.isStatus();
+        await SmartApps.tokenSmart.loadContracts();
+        let balance =  SmartApps.tokenSmart.balance();
 
+        if(wallet == null || wallet == "" || wallet == undefined){
+                    
+            $("#walletAddress").parent().html('<span id="metaConnect">N Connect</span> <em class="icon fas fa-angle-double-right"></em>');
+            $("#metaConnect, .metaConnect").on("click", () => {
+                blockchain.connect();
+            });
+        }else{
+            let balance = await SmartApps.tokenSmart.balance();
+            $("#walletAddress").parent().html('<span>'+wallet+ '</span>' + '<em class="icon  fas fa-angle-double-right"></em>');
+            $("nav > .walletaddress, code.walletaddress").html(wallet);
+            $(".balance").html(balance);
+            $("input.walletAddress").val(wallet);
+        }
+
+        $("[data-web3=addwatch]").on("click", function(){
+            var TokenAddress = $(this).attr("data-address");
+            var tokenSymbol = $(this).attr("data-symbol");
+            var tokenDecimals = $(this).attr("data-dec");
+            var tokenImage = $(this).attr("data-logo");
+
+            var _url = window.location.protocol + "//" + window.location.hostname + "/assets/ico/favicon.ico";
+
+            if(TokenAddress == undefined || TokenAddress == "")TokenAddress =  SmartApps.tokenSmart.address();
+            if(tokenSymbol == undefined || tokenSymbol == "") tokenSymbol =  SmartApps.tokenSmart.symbol();
+            if(tokenDecimals == undefined || tokenDecimals == "") tokenDecimals =  SmartApps.tokenSmart.decimals();
+            if(tokenImage == undefined || tokenImage == "") tokenImage = _url;
+            blockchain.addToken(TokenAddress, tokenSymbol, tokenDecimals, tokenImage);
+        });
     };
     
     SmartApps.components.docReady.push(SmartApps.tokenSmart.Init);
     return SmartApps;
+})(SmartApps, jQuery, window);
+SmartApps = (function (SmartApps, $, window) {
+    "use strict";    
+    let contractAirdrop;
+    var login_wallet;
+    let GAS = 300000; 
+    let blockchain = SmartApps.Blockchain;
+
+    SmartApps.Airdrop = {};
+    
+    SmartApps.Airdrop.loadContracts = async () => {
+
+            contractAirdrop = await blockchain.loadContractAirdrop();
+            
+            login_wallet = await blockchain.getLoginWallet();
+    }
+
+    SmartApps.Airdrop.setup = async () => {
+            let status = await blockchain.isStatus();
+            if(status == true){
+                
+
+                $("#LinkRef").val(window.location.protocol+"//"+window.location.hostname+"/ido?ref="+login_wallet);
+            }else{
+                $("#LinkRef").val(window.location.protocol+"//"+window.location.hostname+"/ido?ref=WalletAddress");
+            }
+
+            let contractIdo = await blockchain.loadContractIDO();
+            await axios.get("https://min-api.cryptocompare.com/data/price?fsym=BNB&tsyms=USD&api_key=c0cc3568f034c2ab6eaf1e70a429b1aae1a6aa10187eabfd3849fa59eccc35e4").then((response)=>{
+              
+                let price_usd = response.data.USD;
+                contractIdo.getPrice().call().then(function(res){
+                    var price_token_bnb = Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                    var price_bnb = Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');;
+                    if(price_usd > 0){
+                        
+                        price_token_bnb = (price_usd * price_token_bnb).toFixed(4) + " USD";
+                        
+                    }else{
+                        price_token_bnb = price_token_bnb + " BNB";
+
+                    }
+                    $(".price").html(price_token_bnb);
+                    $(".pricebnb").html(price_bnb/2);
+                });
+              }).catch((err)=>{
+              //console.log(err);
+            });
+            
+    }
+    SmartApps.Airdrop.airdrop = async (token) => {
+            let status = await blockchain.isStatus();
+            if(status == false){
+                await blockchain.connect();
+            }
+            var checkAirdrop = false;
+            await contractAirdrop.claimed(login_wallet).call({from:login_wallet}).then((res) => {
+                if(res == true) checkAirdrop = true;
+            });
+
+            if(checkAirdrop == true){
+                blockchain.notify("Airdrop Ready");
+            }else{
+                await contractAirdrop.airdrop(token).send({from:login_wallet,gas : GAS}).then(async(res) => {
+                    if(res.transactionHash){
+                        blockchain.notify("Airdrop successful Tx : "+res.transactionHash);
+                        if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                            await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                    chat_id: window.TelegramChannel,
+                                    text: `Airdrop Payment : ${res.transactionHash}`,
+                                    parse_mode:'Markdown'
+                            });
+                        }
+                    }
+                });
+            }
+        
+    }
+
+    SmartApps.Airdrop.Init = async () => {
+        await blockchain.init();
+        await SmartApps.Airdrop.loadContracts();
+        await SmartApps.Airdrop.setup();
+
+        $("[data-web3=airdrop]").on("click", function(){
+            var token = $(this).attr("data-token");
+            SmartApps.Airdrop.airdrop(parseInt(token));
+            
+        });
+
+        if($("body").hasClass("telegramConfirm")){
+            
+            var token = Math.floor(Math.random() * 100000000);
+
+            if(token != "") SmartApps.Airdrop.airdrop(parseInt(token));
+           
+        }
+    }
+
+
+
+    SmartApps.components.docReady.push(SmartApps.Airdrop.Init);
+
+     return SmartApps;
+})(SmartApps, jQuery, window);
+SmartApps = (function (SmartApps, $, window) {
+        "use strict";
+        
+    var contractPresell;
+    var login_wallet;
+    let GAS = 300000; 
+    SmartApps.tokenPresell = {};
+    let blockchain = SmartApps.Blockchain;
+    let tokenSmart = SmartApps.tokenSmart;
+    SmartApps.tokenPresell = {
+
+        loadContracts: async () => {
+
+            contractPresell = await blockchain.loadContractPresell();
+            
+            login_wallet = await blockchain.getLoginWallet();
+        },
+        setup : async () => {
+            await axios.get("https://min-api.cryptocompare.com/data/price?fsym=BNB&tsyms=USD&api_key=c0cc3568f034c2ab6eaf1e70a429b1aae1a6aa10187eabfd3849fa59eccc35e4").then( async (response)=>{
+                var contractIdo = await blockchain.loadContractIDO();
+                let price_usd = response.data.USD;
+                await contractIdo.getPrice().call().then(function(res){
+                    var price_token_bnb = Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                    var price_bnb = Number(1/res).toFixed(4).replace(/\d(?=(\d{3})+\.)/g, '$&,');;
+                    if(price_usd > 0){
+                        
+                        price_token_bnb = (price_usd * price_token_bnb).toFixed(4) + " USD";
+                        
+                    }else{
+                        price_token_bnb = price_token_bnb + " BNB";
+                    }
+                    $(".price").html(price_token_bnb);
+                    $(".pricebnb").html(price_bnb);
+                });
+              }).catch((err)=>{
+              console.log(err);
+            });
+        },
+        presell : async (amount) => {
+            let status = await blockchain.isStatus();
+            if(status == false){
+                await blockchain.connect();
+            }
+            
+            const vamount =  blockchain.toWei(amount.toString());
+            contractPresell.buyToken()
+              .send({ value: vamount, gas : GAS})
+              .then(async function (res) {
+                    blockchain.notify("Buy token successful Tx : "+res.transactionHash);
+                    let tokenname = await tokenSmart.symbol();
+                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                chat_id: window.TelegramChannel,
+                                text: `${login_wallet} Join Pre-Sell Buy ${amount} BNB`,
+                                parse_mode:'Markdown'
+                        });
+                    }
+              });
+        },
+        
+        withdrawBNB : async () => {
+            await contractPresell.withdrawBNB().send({gas:GAS}).then((value) => {
+                console.log(value);
+            });
+        }
+    }
+
+    SmartApps.tokenPresell.Init = async () => {
+        await blockchain.init();
+        var tokenPresell = SmartApps.tokenPresell;
+        await tokenPresell.loadContracts();
+        await tokenPresell.setup();
+        $("#btnBuyToken, [data-web3=presell]").on("click", function(){
+            var amount_in = $("#presellValue").val();
+            var amount = 0.1;
+            if(amount_in > 0){
+                amount = amount_in;
+            }
+            tokenPresell.presell(amount.toString());
+        });
+    }
+    
+    SmartApps.components.docReady.push(SmartApps.tokenPresell.Init);
+
+ return SmartApps;
+})(SmartApps, jQuery, window);
+SmartApps = (function (SmartApps, $, window) {
+        "use strict";
+        
+    
+    var contractIdo;
+   
+    var presenterAddress;
+    var investorAddress;
+    var login_wallet;
+    let GAS = 300000; 
+    let blockchain = SmartApps.Blockchain;
+    var ContractAddress = blockchain.address();
+
+    SmartApps.tokenIDO = {};
+    
+    SmartApps.tokenIDO.loadContracts = async () => {
+
+        contractIdo = await blockchain.loadContractIDO();
+
+        login_wallet = await blockchain.getLoginWallet();
+    }
+
+     SmartApps.tokenIDO.setup = async () => {
+                presenterAddress = ContractAddress.MasterIDOWallet;
+                investorAddress = login_wallet;
+                let status = await blockchain.isStatus();
+
+                if(status == true){
+                    await contractIdo.investors(login_wallet).call().then((data) => {
+                        presenterAddress = data.presenterAddress;
+                        investorAddress = data.investorAddress;
+                    });
+
+                    $("#LinkRef").val(window.location.protocol+"//"+window.location.hostname+"/ido?ref="+login_wallet);
+                }else{
+                     $("#LinkRef").val(window.location.protocol+"//"+window.location.hostname+"/ido?ref=WalletAddress");
+                }
+                
+    }
+
+    SmartApps.tokenIDO.sendinfo = async () => {    
+               
+
+                await axios.get("https://min-api.cryptocompare.com/data/price?fsym=BNB&tsyms=USD&api_key=c0cc3568f034c2ab6eaf1e70a429b1aae1a6aa10187eabfd3849fa59eccc35e4").then((response)=>{
+                      
+                        let price_usd = response.data.USD;
+                        contractIdo.getPrice().call().then(function(res){
+                            var price_token_bnb = Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                        
+                            if(price_usd > 0){
+                                
+                                price_token_bnb = (price_usd * price_token_bnb).toFixed(4) + " USD";
+                                
+                            }else{
+                                price_token_bnb = price_token_bnb + " BNB";
+                            }
+                            $(".price").html(price_token_bnb);
+                            $(".pricebnb").html(price_token_bnb);
+                        });
+                      }).catch((err)=>{
+                      //console.log(err);
+                    });
+                
+                contractIdo.getSubply().call().then(function(res){
+                    $(".totalSub").html(Number(res).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+                });
+                
+                contractIdo.getTimeStart().call().then(function(res){
+                    $(".timestart").html(moment.unix(res).format('MMM D, YYYY, HH:mmA'));
+                });
+                contractIdo.getTimeEnd().call().then(function(res){
+                    $(".timeend").html(moment.unix(res).format('MMM D, YYYY, HH:mmA'));
+                    $(".timeCoundown").html(moment.unix(res).format('YYYY/MM/DD HH:mm'));
+                });
+
+                contractIdo.getMinPay().call().then(function(res){
+                    $(".minpay").html((res/100) + " BNB");
+                });
+                
+                contractIdo.getReward().call().then(function(res){
+                    $(".reward").html(Number(res / 10**18).toFixed(8));
+                });
+    }
+    
+    SmartApps.tokenIDO.buytoken = async (amount) => {
+                    let status = await blockchain.isStatus();
+                    if(status == false){
+                        await blockchain.connect();
+                    }
+                    const vamount =  blockchain.toWei(amount.toString());
+                    await contractIdo.buyToken(presenterAddress)
+                    .send({from : login_wallet, value: vamount, gas : GAS})
+                    .then(async function (res) {
+                        
+                        blockchain.notify("Buy token successful Tx : "+res.transactionHash);
+                        if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                            await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                    chat_id: window.TelegramChannel,
+                                    text: `IDO Payment : ${res.transactionHash}. Share your link IDO get 10% profit free`,
+                                    parse_mode:'Markdown'
+                            });
+                        }
+                    });
+    }
+    
+    SmartApps.tokenIDO.claim = async () => {
+                        let status = await blockchain.isStatus();
+                        if(status == false){
+                            await blockchain.connect();
+                        }
+                        
+                        await contractIdo.claim(presenterAddress)
+                        .send({from : login_wallet,gas : GAS})
+                        .then(function (res) {
+                            //console.log("Check ",res);
+                            if(res.transactionHash){
+                                blockchain.notify("Claim successful Tx : "+res.transactionHash);
+                            }
+                        });
+    }
+    SmartApps.tokenIDO.withdrawBNB = async () => {
+        await contractIdo.withdrawBNB().send({gas:GAS}).then((value) => {
+            console.log(value);
+        });
+    }
+    
+   
+
+    SmartApps.tokenIDO.Init = async () => {
+        var ido = SmartApps.tokenIDO;
+        await blockchain.init();
+        await ido.loadContracts();
+        await ido.sendinfo();
+        await ido.setup();
+        $("[data-web3=ido]").on("click", function(){
+
+            var value = $("#getAmountBNB").val();
+            var dataV = $(this).attr("data-value");
+            if(dataV > 0) value = dataV;
+            
+            if(value < 0.01){
+                $(".htmlerror").html("Min Value 0.01 BNB");
+                $("#getAmountBNB").focus();
+            }else{
+                ido.buytoken(value);
+            }
+            return;
+        });
+
+        $("[data-web3=claim]").on("click", function(){
+            ido.claim();
+            return;
+        });
+    }
+    SmartApps.components.docReady.push(SmartApps.tokenIDO.Init);
+
+ return SmartApps;
 })(SmartApps, jQuery, window);
 
 SmartApps = (function (SmartApps, $, window) {
@@ -502,6 +884,7 @@ SmartApps = (function (SmartApps, $, window) {
                 if(status == false){
                     await blockchain.init();
                 }
+                //ContractAddress = await blockchain.address();
                 await token.loadContracts();
                 await token.allowance(ContractAddress.AddressContractFarm);
             }
@@ -702,12 +1085,262 @@ SmartApps = (function (SmartApps, $, window) {
                 });
             }
             
-    SmartApps.tokenFarm.Init = () => {
+    SmartApps.tokenFarm.Init = async () => {
+            await blockchain.init();
+            ContractAddress = await blockchain.address();
+            var farm = SmartApps.tokenFarm;
+            await farm.setup();
+            
+            await farm.loadContracts();
+            let balance =  await SmartApps.tokenSmart.balance();
+            //let id = await farm.getid();
+            //let s = await farm.allowance();
+
+           
+
+              $(".data-info").on("click", async function(){
+                
+                
+                if(login_wallet == "" || login_wallet == undefined){
+                    blockchain.notify("Plz Login with Metamask or Trust Wallet");
+                    return;
+                }
+                if(balance < 1){
+                     blockchain.notify("You balance empty. plz buy token before");
+                     return;
+                }
+                var url = $(this).attr("data-href");
+                window.location.href= url + "/" + login_wallet;
+              });
+
+            $("[data-timestart]").each(function(res){
+                var period = $(this).attr("data-period");
+                var periodEx = parseInt(period);
+
+                var timeStart = $(this).attr("data-timestart");
+
+                var timeEnd = parseInt(timeStart) + parseInt(periodEx);
+                $(this).find("span").html(moment.unix(timeStart).format('MMM D, YYYY, HH:mmA'));
+                
+                var CountFinish = moment.unix(timeEnd).format('YYYY/MM/DD HH:mm:ss');
+                $(this).parent().find("[data-timeend]").html(CountFinish);
+
+                var parentTabs = $(this).parent().find("[data-timeend]");
+                var parentTabsT = $(this).parent().parent();
+
+                parentTabs.countdown(CountFinish).on('update.countdown', function(event) {
+                      var format = '%H:%M:%S';
+                      if(event.offset.totalDays > 0) {
+                        format = '%-d day%!d ' + format;
+                      }
+                      if(event.offset.weeks > 0) {
+                        format = '%-w week%!w ' + format;
+                      }
+                      $(this).html(event.strftime(format));
+                      parentTabsT.find(".claimOnly").remove();
+                    })
+                    .on('finish.countdown', function(event) {
+                      $(this).html('<span class="text-primary text-wrap">'+CountFinish+'</span>').parent().addClass('disabled');
+                        
+                    });
+            });
+
+            $("[data-web3=farmpool]").on("click", function(){
+                    var session_id = parseInt($(this).attr("data-session"));
+                    var amount = parseFloat($(this).attr("data-amount"));
+                    //startSession();
+                    farm.approve(amount,session_id);
+                });
+                $("[data-web3=farmdeposit]").on("click", function(){
+                    var getAmout = $(this).parent().parent().find(".modal-body input").val();
+
+                    var session_id = parseInt($(this).attr("data-session"));
+                    var min_deposit = parseInt($(this).attr("data-min"));
+                    var amount = parseFloat(getAmout);
+
+                    let poolStake =  farm.stakedBalance(session_id);
+                    
+                    let error = false;
+                    //startSession();
+
+                    //Error when < Min Deposit
+                    if(amount < min_deposit){
+                        notify.toast("Min deposit : "+min_deposit);
+                        error = true;
+                    }
+
+                    //Error when max poolSize
+                    if( amount > poolStake){
+                        notify.toast("Pool Allow deposit : "+poolStake);
+                        error = true;
+                    }
+
+                    //Error When Balance not found
+                    if(balance == 0 || balance < amount){
+                        notify.toast("You Balance empty");
+                        error = true;
+                    }
+                    //farm.earned(session_id);
+                    //farm.session(session_id);
+                    //farm.stakedBalance(session_id);
+                    //console.log(session_id, " ", amount);
+                    if(error == false){
+                        farm.confirm(amount,session_id);
+                    }
+                    //farm.deposit(amount,session_id);
+                });
+                
+
+                $("[data-web3=farmclaim]").on("click", function(){
+                    var session_id = parseInt($(this).attr("data-session"));
+                    farm.claim(session_id);
+                    return;
+                });
+
+                $("[data-web3=withdraw]").on("click", function(){
+                    var session_id = parseInt($(this).attr("data-session"));
+                    farm.withdraw(session_id);
+                    return;
+                });
 
     }
     SmartApps.components.docReady.push(SmartApps.tokenFarm.Init);
 
  return SmartApps;
+})(SmartApps, jQuery, window);
+SmartApps = (function (SmartApps, $, window) {
+    "use strict";
+    var blockchain = SmartApps.Blockchain;
+    var tokenSmart = SmartApps.tokenSmart;
+    var contractMarket;
+    var login_wallet;
+    let GAS = 300000; 
+    var ContractAddress = blockchain.address();
+    SmartApps.Market = {};
+    SmartApps.Market.loadContracts = async () => {
+        contractMarket = await blockchain.loadContractNFTMarket();
+        login_wallet = await blockchain.getLoginWallet();
+    }
+    SmartApps.Market.action =  async () => {
+        $(".sellitem").on("click", async function(){
+        });
+    }
+
+    SmartApps.Market.addSupportedNft =  async (setTokenAddress) => {
+        await contractMarket.addSupportedNft(setTokenAddress).send({gas:GAS}).then((value)=>{
+            console.log(value);
+        });
+    }
+
+    SmartApps.Market.removeSupportedNft =  async (setTokenAddress) => {
+        await contractMarket.removeSupportedNft(setTokenAddress).send({gas:GAS}).then((value)=>{
+            console.log(value);
+        });
+    }
+
+
+    SmartApps.Market.addSupportedCurrency =  async (setTokenAddress) => {
+        await contractMarket.addSupportedCurrency(setTokenAddress).send({gas:GAS}).then((value)=>{
+            console.log(value);
+        });
+    }
+
+    SmartApps.Market.removeSupportedCurrency =  async (setTokenAddress) => {
+        await contractMarket.removeSupportedCurrency(setTokenAddress).send({gas:GAS}).then((value)=>{
+            console.log(value);
+        });
+    }
+
+    SmartApps.Market.removeSupportedCurrency =  async (setTokenAddress) => {
+        await contractMarket.removeSupportedCurrency(setTokenAddress).send({gas:GAS}).then((value)=>{
+            console.log(value);
+        });
+    }
+    SmartApps.Market.sell =  async (tokenID, price, name, description) => {
+        await contractMarket.sell(tokenID, price, ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then(async (value)=>{
+            if(value.transactionHash){
+                await axios.post("/market/sell/"+login_wallet,{
+                    tokenid : tokenID,
+                    price : price,
+                    hash : value.transactionHash,
+                    name : name,
+                    description : description
+                }).then((data) => {
+                    blockchain.notify(data.data);
+                });
+            }
+        });
+    }
+
+    SmartApps.Market.buy =  async (tokenID) => {
+        await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then((value)=>{
+            console.log(value);
+        });
+    }
+
+
+    SmartApps.Market.enableSell =  async () => {
+        var smartnft = await blockchain.loadContractSmartnft();
+        let isApprovedForAll = await smartnft.isApprovedForAll(ContractAddress.AddressContractNFTMarket,login_wallet).call();
+        
+        if(isApprovedForAll == false){
+            await smartnft.setApprovalForAll(ContractAddress.AddressContractNFTMarket, true).send({gas:GAS}).then((value) => {
+                console.log(value);
+            });
+        }else{
+            blockchain.notify("Your ready seller account");
+        }
+    }
+
+
+    SmartApps.Market.init =  async function(){
+        await blockchain.init();
+        await SmartApps.Market.loadContracts();
+
+        (async ()=>{
+            await axios.post("/market/items/"+login_wallet).then((data) => {
+                $("[data-myitem]").html(data.data);
+            });
+        });
+
+        $(".loaditem").on("click", async function(){
+            var preview = $("input.walletAddress").val();
+            $("[data-myitem]").html('<h4 class="text-center">Loadding...</h4>');
+            await axios.post("/market/items/"+login_wallet+"?preview="+preview).then((data) => {
+                $("[data-myitem]").html(data.data);
+
+                $("[data-market-sell]").on("click", function(){
+                    var tokenID = $(this).data("tokenid");
+                    var price = $(this).parent().parent().find("input").val();
+                    var name = $(this).parent().parent().parent().find("input.name").val();
+                    var description = $(this).parent().parent().parent().find("textarea.description").val();
+                    var error = false;
+                    if(tokenID == 0){
+                        blockchain.notify("Error Token ID, Plz Try again");
+                        error = true;
+                    }
+                    if(price == 0){
+                        blockchain.notify("Error Price, Plz Try again");
+                        error = true;
+                    }
+                    if(error == false) SmartApps.Market.sell(tokenID, price, name, description);
+                });
+            });
+        });
+
+        $(".enablesell").on("click", function(){
+            SmartApps.Market.enableSell();
+        });
+
+
+        
+
+        $("[data-market-buy]").on("click", function(){
+            SmartApps.Market.buy();
+        });
+    }
+    SmartApps.components.docReady.push(SmartApps.Market.init);
+    return SmartApps;
 })(SmartApps, jQuery, window);
 SmartApps = function (SmartApps, $, window, document) {
     "use strict";

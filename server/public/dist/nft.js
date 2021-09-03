@@ -145,7 +145,7 @@ SmartApps = (function (SmartApps, $, window) {
     		
     	}
         //getHash();
-    	getNFT();
+    	//getNFT();
     	//trand();
     	$("#mintQuality").on("click", function(){
             var generation = $("#generation").val();
@@ -202,6 +202,8 @@ SmartApps = (function (SmartApps, $, window) {
             removeAdmin(setwallet);
         });
 
+
+        
         $(".contractaddress").html('<div>Contract : '+blockchain.address().AddressContractNFTFactory+'</div><div><a class="btn btn-md btn-primary" target="_bank" href="https://bscscan.com/address/'+blockchain.address().AddressContractNFTFactory+'">Contract</a></div>');
     }
 

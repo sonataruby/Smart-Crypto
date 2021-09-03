@@ -60,8 +60,8 @@ app.get("/", (req, res) => {
  const dataMain = fsFile.readJSONFile('main.json');
  
   dataMain.showPresell = req.query.join;
- 
- res.render("index",dataMain);
+  dataMain.loadJS = ["presell.js"];
+  res.render("index",dataMain);
 });
 
 require("./modules/ido")("/ido",app);

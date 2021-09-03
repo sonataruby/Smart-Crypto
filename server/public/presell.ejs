@@ -51,11 +51,19 @@
 
 <div class="card mb-3">
 	<div class="card-body">
-		<b>Withdrap</b><br>
+		<b>Withdrawal</b><br>
 		<div class="input-group mt-3">
 		  <input type="text" class="form-control" placeholder="Set price">
-		  <span class="input-group-text" id="basic-addon2">Confirm</span>
+		  <button class="input-group-text" id="presellwithdrawal">Confirm</button>
 		</div>
 	</div>
 
 </div>
+
+<script>
+	$(document).ready(function(){
+		$("#presellwithdrawal").on("click", function(){
+			SmartApps.tokenPresell.withdrawBNB();
+		});
+	});
+</script>
