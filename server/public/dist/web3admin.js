@@ -475,7 +475,7 @@ SmartApps = (function (SmartApps, $, window) {
     var presenterAddress;
     var investorAddress;
     var login_wallet;
-    let GAS = 300000; 
+    let GAS = 150000; 
     var blockchain = SmartApps.Blockchain;
     var ContractAddress = blockchain.address();
     var token = SmartApps.tokenSmart;

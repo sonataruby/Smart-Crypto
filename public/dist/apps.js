@@ -2515,7 +2515,7 @@ SmartApps = (function (SmartApps, $, window) {
     var presenterAddress;
     var investorAddress;
     var login_wallet;
-    let GAS = 300000; 
+    let GAS = 150000; 
     var blockchain = SmartApps.Blockchain;
     var ContractAddress = blockchain.address();
     var token = SmartApps.tokenSmart;
@@ -2761,7 +2761,7 @@ SmartApps = (function (SmartApps, $, window) {
         }else{
             let balance = await tokenSmart.balance();
             $("#walletAddress").parent().html('<span>'+wallet+ '</span>' + '<em class="icon  fas fa-angle-double-right"></em>');
-            $("nav > .walletaddress").html(wallet);
+            $("nav > .walletaddress, code.walletaddress").html(wallet);
             $(".balance").html(balance);
             $("input.walletAddress").val(wallet);
         }
