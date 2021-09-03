@@ -169,15 +169,15 @@ app.get("/api/nft/:id", async (req, res) => {
     }
 
     var id = req.params.id;
-
-  	res.header('Content-Type', 'application/json');
+    var item = {};
+  	//res.setHeader('Content-Type', 'application/json');
     sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+id+"' LIMIT 1";
-    let item = await db.dbQuery(sql, true);
-    console.log(item);
-    if(item == undefined || item == "") item = '{"error": "404 page not found", "err_code": 404}';
+    item = await db.dbQuery(sql, true);
+    
+    if(item == undefined || item.length == 0) item.data = '{"error": "404 page not found", "err_code": 404}';
 
     res.send(item.data);
-    res.end( item.data);
+    res.end(item.data);
     
 });
 
