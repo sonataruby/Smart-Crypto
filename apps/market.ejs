@@ -1,11 +1,23 @@
  <section class="bg-white">
- 	<div class="container">
- 		<h4 class="d-flex justify-content-between">NFT Market <div> <a href="#" class="btn btn-info">NFT CARs</a> <a href="#" class="btn btn-primary">NFT Accessories</a></div></h4>
-        <hr>
- 		<div class="card-columns">
- 		<% item.forEach(function(data, index){ %>
- 			<%- include("components/shop.ejs",data) %>
- 		<% }); %>
- 		</div>
+
+ 	<div class="container-market">
+       <h5 class="text-center border p-4">Testnet NFT MARKET</h5>
+       <div class="row">
+              
+              <div class="col-md-2">
+                     <%- include("components/categories.ejs") %>
+              </div>
+
+              <div class="col-md-10">
+                     <h4 class="d-flex justify-content-between">NFT Market <div> <a href="#" class="btn btn-info">Create</a> <a href="#" class="btn btn-primary btn-sell">Sell</a></div></h4>
+                     <hr>
+                     <div class="card-columns">
+                     <% item.forEach(function(data, index){ %>
+                            <%- include("components/shop.ejs",data) %>
+                     <% }); %>
+                     </div>
+              </div>
+       </div>
+ 		
  	</div>
  </section>

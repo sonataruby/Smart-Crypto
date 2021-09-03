@@ -84,14 +84,7 @@ app.get("/gallery", (req, res) => {
 });
 
 
-
-
-app.get("/market", (req, res) => {
- const dataMain = fsFile.readJSONFile('market.json');
- 
- res.render(dataMain.public.market == true ? "market" : "coming",dataMain);
-});
-
+require("./modules/nftmarket")("/market",app);
 
 
 app.get("/game", (req, res) => {
@@ -147,7 +140,8 @@ app.get("/api/nft/:id", async (req, res) => {
   	res.header('Content-Type', 'application/json');
     sql = "SELECT * FORM `nft_smart` WHERE tokenId='"+id+"');";
     let item = await db.dbQuery(sql, true);
-    if(item == undefined) item = '{"error": "404 page not found", "err_code": 404}';
+    if(item == undefined || item == "") item = '{"error": "404 page not found", "err_code": 404}';
+
     res.send(item);
     res.end( item);
     

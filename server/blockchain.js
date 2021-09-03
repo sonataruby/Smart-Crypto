@@ -47,9 +47,18 @@ let loadFram =  async function() {
     return contract.methods;
 };
 
+let loadSmartNFT =  async function() {
+    var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/smartnft.json', 'utf8'));
+    var farmAddress = await loadAddress();
+    
+    let contract = await loadContract(farmAddress.AddressContractSmartNFT, farmArtifact);
+    return contract.methods;
+};
+
 module.exports.addAccount = addAccount;
 module.exports.loadContract = loadContract;
 module.exports.loadFram = loadFram;
 module.exports.call = call;
 module.exports.web3 = web3;
 module.exports.loadAddress = loadAddress;
+module.exports.loadSmartNFT = loadSmartNFT;

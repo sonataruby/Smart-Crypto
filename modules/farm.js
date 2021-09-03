@@ -33,12 +33,14 @@ module.exports = function(prefix , app) {
 			obj.reward_nft = 0;
 			obj.min_deposit = 100;
 			obj.image = "assets/car/9144.jpg";
+			obj.thumbnail = "assets/car/thumbnail.png";
 			obj.color = "#0f0";
 			obj.color2 = "red";
 			if(LoadDB != "" && LoadDB != undefined){
 				obj.name = LoadDB.pool_name;
 				obj.reward_nft = parseInt(LoadDB.reward_nft);
 				obj.min_deposit = parseInt(LoadDB.min_deposit);
+				obj.thumbnail = LoadDB.thumbnail == "" || LoadDB.thumbnail == undefined ? "assets/car/thumbnail.png" : LoadDB.thumbnail;
 				obj.image = LoadDB.image == "" || LoadDB.image == undefined ? "assets/car/9144.jpg" : LoadDB.image;
 				obj.color = LoadDB.color == "" || LoadDB.color == undefined ? "#0f0" : LoadDB.color;
 				obj.color2 = LoadDB.color2 == "" || LoadDB.color2 == undefined ? "red" : LoadDB.color2;

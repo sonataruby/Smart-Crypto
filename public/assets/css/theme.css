@@ -6,6 +6,8 @@
   margin:auto;
   position: relative;
 }
+
+
 .buttonGameLeftBack{
    position: absolute;
    
@@ -44,6 +46,36 @@ border-bottom-left-radius: 100px;
     position: relative;
   }
 }
+
+.container-market{
+  width:80%; 
+  margin:auto;
+  position: relative;
+}
+
+.image-radius-top{
+-webkit-border-top-left-radius: 6px !important;
+-webkit-border-top-right-radius: 6px !important;
+-moz-border-radius-topleft: 6px !important;
+-moz-border-radius-topright: 6px !important;
+border-top-left-radius: 6px !important;
+border-top-right-radius: 6px !important;
+border-bottom: 0px !important;
+
+background: linear-gradient(124deg, rgba(2,0,36,1) 0%, rgba(121,9,32,1) 35%, rgba(51,37,3,1) 100%);
+
+}
+
+.not-radius-top{
+-webkit-border-top-left-radius: 0px !important;
+-webkit-border-top-right-radius: 0px !important;
+-moz-border-radius-topleft: 0px !important;
+-moz-border-radius-topright: 0px !important;
+border-top-left-radius: 0px !important;
+border-top-right-radius: 0px !important;
+border-top: 0px !important;
+}
+
 .btn.walletLimit{
    display: inline-flex !important;
 }
