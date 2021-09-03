@@ -83,7 +83,7 @@ module.exports = function(prefix , app) {
 		          ],
 		      "description": "No Description",
 		      "external_url": "https://cryptocar.cc/api/nft/"+tokenID,
-		      "image": "https://cryptocar.cc/nfts/"+generation+".gif",
+		      "image": "https://cryptocar.cc/nfts/"+generation+".png",
 		      "name": "CFX 17",
 		      "animation_url": "",
 		      "youtube_url": "",
