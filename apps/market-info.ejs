@@ -23,7 +23,7 @@
                             <div class="col-md-6">
                                    
                                    <h4 class="d-flex justify-content-between"><%=item.name%>
-                                       <ul class="social pdb-l justify-content-center">
+                                       <ul class="social justify-content-center">
                                           <%if(social.facebook){ %><li><a href="<%= social.youtube%>" target="_bank"><em class="social-icon fab fa-facebook-f"></em></a></li><%}%>
                                           <%if(social.twitter){ %><li><a href="<%= social.twitter%>" target="_bank"><em class="social-icon fab fa-twitter"></em></a></li><%}%>
                                           <%if(social.youtube){ %><li><a href="<%= social.youtube%>" target="_bank"><em class="social-icon fab fa-youtube"></em></a></li><%}%>
@@ -34,7 +34,12 @@
 
                                       </ul>
                                    </h4>
+
                                    <hr>
+                                   <div>Seller : <%=item.seller%></div>
+                                   <div>Contract : <%=item.nft%></div>
+                                   <div>Token ID : #<%=item.tokenId%></div>
+
                                    <p><%=item.description%></p>
                                    <div class="border p-3">
                                    <h5 class="d-flex justify-content-between">Price : <%=item.price%> <%=token.name%> <button class="btn btn-primary" data-tokenid="<%=item.tokenId%>" data-market-buy="true" >BUY</button></h5>
