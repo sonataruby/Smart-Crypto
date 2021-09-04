@@ -18,14 +18,49 @@
 	            	<textarea type="text" class="form-control description" placeholder="Description"><%=data.description%></textarea>
             	</div>
             	<hr>
-
+            	
             	<div class="input-group mb-3 p-4">
 				  <input type="text" class="form-control" placeholder="Price" aria-label="Recipient's username" aria-describedby="button-addon2">
 				  <div class="input-group-append">
 				    <button class="btn btn-primary btn-sm" data-market-sell data-tokenid="<%=data.id%>" type="button" id="button-addon2">SELL</button>
+				    
 				  </div>
 				</div>
+
+				<hr>
+				<button class="btn btn-primary btn-sm" data-tokenid="<%=data.id%>" data-toggle="modal" data-target="#transferWallet" type="button">Transfer</button>
             </div>
         </div>
     <%});%>
+</div>
+
+
+<script>
+$('#transferWallet').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) 
+  var recipient = button.data('tokenid')
+  var modal = $(this)
+  modal.find('.modal-footer button.confirm').attr("data-tokenid",recipient)
+})
+
+</script>
+<div class="modal fade" id="transferWallet" tabindex="-1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">NFT Transfer</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Enter Wallet Transfer</p>
+        <input type="text" id="TransferNftWallet" class="form-control" placeholder="Wallet Transfer" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button"  class="btn btn-primary confirm" data-tokenid="0" data-nft-transfer="true">Confirm</button>
+      </div>
+    </div>
+  </div>
 </div>

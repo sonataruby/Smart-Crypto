@@ -1287,7 +1287,13 @@ SmartApps = (function (SmartApps, $, window) {
         
     }
 
-
+    SmartApps.Market.transfer = async (sendto, tokenID) => {
+        var smartnft = await blockchain.loadContractSmartnft();
+        smartnft.transferFrom(login_wallet,sendto,tokenID).send({gas:GAS}).then(async (value) =>{
+            $('#transferWallet').modal('hide');
+            blockchain.notify("Your transfer complete");
+        });
+    }
     SmartApps.Market.cancelsell =  async (tokenID) => {
         await contractMarket.cancelSell(tokenID, ContractAddress.AddressContractSmartNFT).send({gas:GAS}).then(async (value)=>{
             if(value.transactionHash){
@@ -1303,7 +1309,8 @@ SmartApps = (function (SmartApps, $, window) {
 
     SmartApps.Market.buy =  async (tokenID) => {
         await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then((value)=>{
-            console.log(value);
+            
+            blockchain.notify("Your buy NFT complete");
         });
     }
 
@@ -1351,6 +1358,22 @@ SmartApps = (function (SmartApps, $, window) {
                     }
                     if(error == false) SmartApps.Market.sell(tokenID, price, name, description);
                 });
+
+                $("[data-nft-transfer]").on("click", function(){
+                    var tokenID = $(this).data("tokenid");
+                    var sendto = $("#TransferNftWallet").val();
+                    if(sendto.length < 40){
+                        blockchain.notify("Error Wallet");
+                        return false;
+                    }
+                    if(tokenID < 1){
+                        blockchain.notify("Error Token ID");
+                        return false;
+                    }
+
+                    SmartApps.Market.transfer(sendto,tokenID);
+                });
+                
             });
     }
 
@@ -1394,10 +1417,10 @@ SmartApps = (function (SmartApps, $, window) {
                 console.log("Load Main Market");
                 await loadMainItem(1);
             //}
-            var myitem = $(this).attr('data-myitem');
-            if(typeof myitem !== typeof undefined && myitem !== false) {
+            //var myitem = $(this).attr('data-myitem');
+            //if(typeof myitem !== typeof undefined && myitem !== false) {
                 await loadMyItem();
-            }
+            //}
             
         };
 
@@ -1409,12 +1432,9 @@ SmartApps = (function (SmartApps, $, window) {
         });
 
         
-
-
-        
-
         $("[data-market-buy]").on("click", function(){
-            SmartApps.Market.buy();
+            var tokenID = $(this).data("tokenid");
+            SmartApps.Market.buy(tokenID);
         });
     }
     SmartApps.components.docReady.push(SmartApps.Market.init);

@@ -169,6 +169,48 @@ module.exports = function(prefix , app) {
     		
 		}
 
+
+		const getItemsMarketsInfo = async (tokenID) => {
+
+			let contract = await blockchain.loadSmartNFT();
+	 		let address = await blockchain.loadAddress();
+	 		let contractMarket = await blockchain.loadMarketNFT();
+	 		
+
+	        var object = {};
+	        await contract.paramsOf(tokenID).call().then(async (value) => {
+                //console.log(value);
+                var InfoSell = await contractMarket.getSales(tokenID,address.AddressContractSmartNFT).call();
+                
+	                sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+tokenID+"' LIMIT 1";
+    				item = await db.dbQuery(sql, true);
+    				let jsonData = JSON.parse(item.data);
+	                var dataObj = {
+	                	name : item.name,
+	                	description : item.description,
+	                	image : jsonData.image,
+	                	attributes : jsonData.attributes,
+	                    buyer: InfoSell.buyer,
+	                    currency: InfoSell.currency,
+	                    id: InfoSell.id,
+	                    length: InfoSell.length,
+	                    nft: InfoSell.nft,
+	                    price: InfoSell.price,
+	                    seller: InfoSell.seller,
+	                    startTime: InfoSell.startTime,
+	                    status: InfoSell.status,
+	                    tokenId: InfoSell.tokenId
+	                };
+	                object = dataObj;
+	            
+
+            });
+
+	        
+	        return object;
+    		
+		}
+
 		const insert_items = async (tokenID, quality, generation) =>{
 			const data = {
 			  "id" : tokenID,
@@ -222,11 +264,16 @@ module.exports = function(prefix , app) {
 		});
 
 
-		app.get(prefix + "/token/:token/:tokenid", (req, res) => {
-		  app.set('layout', config.layout.dir + "/pages");
-		 const dataMain = fsFile.readJSONFile('market.json');
-		 dataMain.loadJS = ["market.js"];
-		 res.render(dataMain.public.market == true ? "market-info" : "coming",dataMain);
+		app.get(prefix + "/token/:token/:tokenid", async (req, res) => {
+			var token = req.params.token;
+			var tokenid = req.params.tokenid;
+		  	app.set('layout', config.layout.dir + "/pages");
+		 	const dataMain = fsFile.readJSONFile('market.json');
+		 	dataMain.loadJS = ["market.js"];
+
+		 	let infoItem = await getItemsMarketsInfo(tokenid);
+		 	dataMain.item = infoItem;
+		 	res.render(dataMain.public.market == true ? "market-info" : "coming",dataMain);
 
 		});
 
