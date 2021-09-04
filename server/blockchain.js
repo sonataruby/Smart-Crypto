@@ -68,4 +68,5 @@ module.exports.loadFram = loadFram;
 module.exports.web3 = web3;
 module.exports.loadAddress = loadAddress;
 module.exports.loadSmartNFT = loadSmartNFT;
+module.exports.loadMarketNFT = loadMarketNFT;
 module.exports.getHash = getHash;

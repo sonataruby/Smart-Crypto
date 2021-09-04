@@ -1263,8 +1263,11 @@ SmartApps = (function (SmartApps, $, window) {
     SmartApps.Market.sell =  async (tokenID, price, name, description) => {
         await contractMarket.sell(tokenID, price, ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS*2}).then(async (value)=>{
             if(value.transactionHash){
+
+                let id = await blockchain.getNftTokenID(value.transactionHash);
                 await axios.post("/market/sell/"+login_wallet,{
                     tokenid : tokenID,
+                    sell_id : id,
                     price : price,
                     hash : value.transactionHash,
                     name : name,
@@ -1280,19 +1283,18 @@ SmartApps = (function (SmartApps, $, window) {
 
     SmartApps.Market.getMySell =  async () => {
     }
-    SmartApps.Market.getMarketList =  async () => {
-        await contractMarket.getSales(1,ContractAddress.AddressContractSmartNFT).call().then((value) => {
+    SmartApps.Market.getMarketList =  async (tokenid) => {
+        await contractMarket.getSales(tokenid,ContractAddress.AddressContractSmartNFT).call().then((value) => {
             console.log(value);
         });
     }
 
 
     SmartApps.Market.cancelsell =  async (tokenID) => {
-        await contractMarket.cancelSell(tokenID, ContractAddress.AddressContractSmartNFT).send({gas:GAS*2}).then(async (value)=>{
+        await contractMarket.cancelSell(tokenID, ContractAddress.AddressContractSmartNFT).send({gas:GAS}).then(async (value)=>{
             if(value.transactionHash){
                 await axios.post("/market/cancelsell/"+login_wallet,{
-                    tokenid : tokenID,
-                    nft_contract : ContractAddress.AddressContractSmartNFT
+                    tokenid : tokenID
                 }).then((data) => {
                     blockchain.notify(data.data);
                 });
@@ -1333,16 +1335,21 @@ SmartApps = (function (SmartApps, $, window) {
     SmartApps.Market.init =  async function(){
         await blockchain.init();
         await SmartApps.Market.loadContracts();
-        await SmartApps.Market.getMarketList();
+        
         let isSeller = await SmartApps.Market.isSeller();
         
         if(isSeller == true){
             $(".enablesell").attr("href","#");
             $(".enablesell").text("Controller");
-            $(".enablesell").on("click", function(){
+            $(".enablesell").on("click", async ()=>{
                 $("[data-myitem]").html('<h4 class="text-center">Loadding...</h4>');
                 await axios.post("/market/mysell/"+login_wallet).then((data) => {
                     $("[data-myitem]").html(data.data);
+                    $("[data-market-cancelsell]").on("click",function (){
+                        var tokenid = $(this).data("tokenid");
+                        SmartApps.Market.cancelsell(tokenid);
+                    });
+                    
                 });
             });
         }else{

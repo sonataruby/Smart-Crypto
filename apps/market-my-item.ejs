@@ -5,9 +5,10 @@
             	<img src="<%=data.image%>" style="width:100%">
             	<hr>
             	<div class="p-4">
-            		Model : <%=data.attributes[0].value%><br>
-            		Lever : <%=data.attributes[1].value%><br>
-            		Power : <%=data.attributes[2].value%><br>
+            		TokenID : #<%=data.id%><br>
+            		<% data.attributes.forEach(function(dataAttributes, index2){ %>
+	            		<%=dataAttributes.trait_type%> : <%=dataAttributes.value%><br>
+	            	<%});%>
             	</div>
             	<hr>
             	<div class="p-4">

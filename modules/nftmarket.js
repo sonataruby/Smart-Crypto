@@ -61,68 +61,62 @@ module.exports = function(prefix , app) {
 
 
 		const getItemsMySell = async (wallet) => {
+			let address = await blockchain.loadAddress();
 			let contract = await blockchain.loadMarketNFT();
-	 		let address = await blockchain.loadAddress();
-	 		let total = await contract.totalSupply().call();
-	 		let balance = await contract.balanceOf(wallet).call();
-
-	 		var obj = [];
-    		for(var i=1; i<=total; i++) {
-    			const owner = await contract.ownerOf(i).call();
+			sql = "SELECT * FROM `nft_smart` WHERE wallet='"+wallet+"' AND sell_id > 0 LIMIT 100";
+    		let item = await db.dbQuery(sql);
+    		var objectMySell = [];
+    		for (const data of item) {
+    			var RData = JSON.parse(data.data);
     			
-                if(owner == wallet){
-                	obj.push(i);
-                }
-		    }
-
-		    var object = [];
-		    for(var i=0; i<obj.length; i++) {
-		    	let index = parseInt(obj[i])
-		    	
-
-		    	await contract.paramsOf(index).call().then(async (value) => {
-		    		
-                });
-		    }
-
-
-		    return object;
+    			var value = await contract.getSales(data.sell_id,address.AddressContractSmartNFT).call();
+		        var dataSet = {};
+	            dataSet.name = data.name;
+	            dataSet.description = data.description;
+	            dataSet.image = RData.image;
+	            dataSet.attributes = RData.attributes;
+	            dataSet.price = value.price;
+	            dataSet.seller = value.seller;
+	            dataSet.startTime = value.startTime;
+	            dataSet.status = value.status;
+	            dataSet.tokenId = value.tokenId;
+	            dataSet.nft = value.nft;
+	            dataSet.id = value.id;
+	            dataSet.currency = value.currency;
+	            
+	            objectMySell.push(dataSet);
+    		}
+    		
+		    return objectMySell;
     		
 		}
 
 		const insert_items = async (tokenID, quality, generation) =>{
+			const name = "CFX 17";
+			const description = "No Description";
 			const data = {
 			  "id" : tokenID,
-		      "attributes": [{
-		              "trait_type": "QUALITY",
-		              "value": quality
-		            },
+		      "attributes": [
 		            {
-		              "trait_type": "Generation",
+		              "trait_type": "Lever",
 		              "value": generation
 		            },
 		            {
-		              "display_type": "boost_number",
-		              "trait_type": "Power",
-		              "value": 2000
-		            },
-		            {
-		              "display_type": "boost_number",
-		              "trait_type": "map_point",
-		              "value": 130
+		              "trait_type": "Models",
+		              "value": quality
 		            }
 		          ],
-		      "description": "No Description",
+		      "description": description,
 		      "external_url": "https://cryptocar.cc/api/nft/"+tokenID,
 		      "image": "https://cryptocar.cc/nfts/"+generation+".png",
-		      "name": "CFX 17",
+		      "name": name,
 		      "animation_url": "",
 		      "youtube_url": "",
 		      "facebook_url": "",
 		      "tiwter_url": "",
 		      "smart_url": ""
 		    }
-			sql = "INSERT INTO `nft_smart` SET tokenId='"+tokenID+"', data='"+JSON.stringify(data)+"'";
+			sql = "INSERT INTO `nft_smart` SET tokenId='"+tokenID+"', data='"+JSON.stringify(data)+"', name='"+name+"', description='"+description+"'";
     		await db.dbQuery(sql, true);
     		return data;
 		}
@@ -166,7 +160,8 @@ module.exports = function(prefix , app) {
 			const dataMain = fsFile.readJSONFile('market.json');
 			var data = [];
 			if(wallet.length > 40){
-				data = await getItems(wallet);
+				
+				data = await getItemsMySell(wallet);
 			}
 			
 			dataMain.items = data;
@@ -197,10 +192,11 @@ module.exports = function(prefix , app) {
 			var description = req.body.description;
 			var money_contract = req.body.money_contract;
 			var nft_contract = req.body.nft_contract;
-			let sqlcheck = "SELECT * FROM `nftmarket` WHERE tokenId='"+tokenID+"' AND nft_contract='"+nft_contract+"'";
+			var sell_id = req.body.sell_id;
+			let sqlcheck = "SELECT * FROM `nft_smart` WHERE tokenId='"+tokenID+"'";
 			item = await db.dbQuery(sqlcheck, true);
-			if(item == undefined){
-				let sql = "INSERT INTO `nftmarket` SET wallet='"+wallet+"', tokenId='"+tokenID+"', name='"+name+"', description='"+description+"', price='"+price+"', money_contract='"+money_contract+"', nft_contract='"+nft_contract+"'";
+			if(item != undefined){
+				let sql = "UPDATE  `nft_smart` name='"+name+"', description='"+description+"', sell_id='"+sell_id+"'";
 	    		await db.dbQuery(sql, true);
 	    	}
 		});
