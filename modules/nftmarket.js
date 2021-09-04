@@ -59,6 +59,37 @@ module.exports = function(prefix , app) {
     		
 		}
 
+
+		const getItemsMySell = async (wallet) => {
+			let contract = await blockchain.loadMarketNFT();
+	 		let address = await blockchain.loadAddress();
+	 		let total = await contract.totalSupply().call();
+	 		let balance = await contract.balanceOf(wallet).call();
+
+	 		var obj = [];
+    		for(var i=1; i<=total; i++) {
+    			const owner = await contract.ownerOf(i).call();
+    			
+                if(owner == wallet){
+                	obj.push(i);
+                }
+		    }
+
+		    var object = [];
+		    for(var i=0; i<obj.length; i++) {
+		    	let index = parseInt(obj[i])
+		    	
+
+		    	await contract.paramsOf(index).call().then(async (value) => {
+		    		
+                });
+		    }
+
+
+		    return object;
+    		
+		}
+
 		const insert_items = async (tokenID, quality, generation) =>{
 			const data = {
 			  "id" : tokenID,
@@ -113,11 +144,12 @@ module.exports = function(prefix , app) {
 		});
 
 
-		app.get(prefix + "/token/:token", (req, res) => {
+		app.get(prefix + "/token/:token/:tokenid", (req, res) => {
 		  app.set('layout', config.layout.dir + "/pages");
 		 const dataMain = fsFile.readJSONFile('market.json');
-		 
-		 res.render(dataMain.public.market == true ? "market" : "coming",dataMain);
+		 dataMain.loadJS = ["market.js"];
+		 res.render(dataMain.public.market == true ? "market-info" : "coming",dataMain);
+
 		});
 
 		app.get(prefix + "/account", async (req, res) => {
@@ -141,6 +173,7 @@ module.exports = function(prefix , app) {
 			dataMain.items = data;
 			res.render(dataMain.public.market == true ? "market-my-item" : "coming",dataMain);
 		});
+
 		app.post(prefix + "/sell/:wallet", async (req, res) => {
 			var wallet = req.params.wallet;
 			var tokenID = req.body.tokenid;

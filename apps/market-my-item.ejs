@@ -3,7 +3,13 @@
         <div class="col-md-4 mb-3 col-12" id="plance">
             <div class="shadown border round">
             	<img src="<%=data.image%>" style="width:100%">
-
+            	<hr>
+            	<div class="p-4">
+            		Model : <%=data.attributes[0].value%><br>
+            		Lever : <%=data.attributes[1].value%><br>
+            		Power : <%=data.attributes[2].value%><br>
+            	</div>
+            	<hr>
             	<div class="p-4">
             		<b>Name</b>
 	            	<input type="text" class="form-control name" placeholder="Name" value="<%=data.name%>">

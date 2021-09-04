@@ -51,6 +51,13 @@ let loadSmartNFT =  async function() {
     let contract = await loadContract(farmAddress.AddressContractSmartNFT, farmArtifact);
     return contract.methods;
 };
+let loadMarketNFT =  async function() {
+    var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/nftmarket.json', 'utf8'));
+    var farmAddress = await loadAddress();
+    
+    let contract = await loadContract(farmAddress.AddressContractNFTMarket, farmArtifact);
+    return contract.methods;
+};
 let getHash =  async function() {
     return web3.eth;
 }
