@@ -159,6 +159,20 @@ module.exports = function(prefix , app) {
 		 res.render(dataMain.public.market == true ? "market-wallet" : "coming",dataMain);
 		});
 
+		app.post(prefix + "/mysell/:wallet", async (req, res) => {
+			app.set('layout', config.layout.dir + "/nolayout");
+			var wallet = req.params.wallet;
+
+			const dataMain = fsFile.readJSONFile('market.json');
+			var data = [];
+			if(wallet.length > 40){
+				data = await getItems(wallet);
+			}
+			
+			dataMain.items = data;
+			res.render(dataMain.public.market == true ? "market-my-sell" : "coming",dataMain);
+		});
+
 
 		app.post(prefix + "/items/:wallet", async (req, res) => {
 			app.set('layout', config.layout.dir + "/nolayout");

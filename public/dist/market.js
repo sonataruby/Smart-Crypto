@@ -102,13 +102,14 @@ SmartApps = (function (SmartApps, $, window) {
 
     SmartApps.Market.isSeller =  async () => {
         var smartnft = await blockchain.loadContractSmartnft();
-        let isApprovedForAll = await smartnft.isApprovedForAll(ContractAddress.AddressContractNFTMarket,login_wallet).call();
+       
+        var isApprovedForAll = await smartnft.isApprovedForAll(login_wallet,ContractAddress.AddressContractNFTMarket).call();
         return isApprovedForAll;
     }
 
     SmartApps.Market.enableSell =  async () => {
         var smartnft = await blockchain.loadContractSmartnft();
-        let isApprovedForAll = await smartnft.isApprovedForAll(ContractAddress.AddressContractNFTMarket,login_wallet).call();
+        let isApprovedForAll = await smartnft.isApprovedForAll(login_wallet,ContractAddress.AddressContractNFTMarket).call();
         
         if(isApprovedForAll == false){
             await smartnft.setApprovalForAll(ContractAddress.AddressContractNFTMarket, true).send({gas:GAS}).then((value) => {
@@ -119,20 +120,28 @@ SmartApps = (function (SmartApps, $, window) {
         }
     }
 
-    SmartApps.Market.enableSell =  async () => {
-    }
+    
 
 
     SmartApps.Market.init =  async function(){
         await blockchain.init();
         await SmartApps.Market.loadContracts();
         await SmartApps.Market.getMarketList();
-        let isSeller = SmartApps.Market.isSeller();
-
+        let isSeller = await SmartApps.Market.isSeller();
+        
         if(isSeller == true){
             $(".enablesell").attr("href","#");
             $(".enablesell").text("Controller");
-            
+            $(".enablesell").on("click", function(){
+                $("[data-myitem]").html('<h4 class="text-center">Loadding...</h4>');
+                await axios.post("/market/mysell/"+login_wallet).then((data) => {
+                    $("[data-myitem]").html(data.data);
+                });
+            });
+        }else{
+            $(".enablesell").on("click", function(){
+                SmartApps.Market.enableSell();
+            });
         }
 
         (async ()=>{
@@ -166,9 +175,7 @@ SmartApps = (function (SmartApps, $, window) {
             });
         });
 
-        $(".enablesell").on("click", function(){
-            SmartApps.Market.enableSell();
-        });
+        
 
 
         

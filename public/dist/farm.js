@@ -247,10 +247,7 @@ SmartApps = (function (SmartApps, $, window) {
                     blockchain.notify("Plz Login with Metamask or Trust Wallet");
                     return;
                 }
-                if(balance < 1){
-                     blockchain.notify("You balance empty. plz buy token before");
-                     return;
-                }
+                
                 var url = $(this).attr("data-href");
                 window.location.href= url + "/" + login_wallet;
               });
