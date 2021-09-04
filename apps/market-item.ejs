@@ -1,5 +1,25 @@
+
 <div class="card-columns">
 <% items.forEach(function(data, index){ %>
-       <%- include("components/shop.ejs",data) %>
+      <div class="card mb-3 border card-hoder">
+         <div class="row no-gutters">
+           <div class="col-md-12">
+             <img src="<%= data.image%>" alt="...">
+           </div>
+           <div class="col-md-12">
+             <div class="card-body">
+               <h5 class="card-title"><%= data.name%></h5>
+               <p class="card-text"><%- String(data.description).replace(/\r|\n/g, '<br/>')%></p>
+               <p class="card-text"><small class="text-muted"><%=data.startTime%></small></p>
+             </div>
+           </div>
+           <div class="col-md-12">
+              <hr>
+              <div class="d-flex justify-content-between">
+              <b><%= data.price%> <%= token.name%></b> <a href="/market/token/0x8849e0bc8395a25f53b60466f6da1fac5a34a2bd/<%=data.id%>"  class="btn btn-sm btn-primary">BUY</a>
+              </div>
+           </div>
+         </div>
+       </div>
 <% }); %>
 </div>

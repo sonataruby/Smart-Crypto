@@ -11,10 +11,8 @@
               <div class="col-md-10">
                      <h4 class="d-flex justify-content-between">NFT Market <div> <a href="#" class="btn btn-info">Create NFT</a> <a href="/market/account" class="btn btn-primary btn-sell">Sell</a></div></h4>
                      <hr>
-                     <div class="card-columns">
-                     <% item.forEach(function(data, index){ %>
-                            <%- include("components/shop.ejs",data) %>
-                     <% }); %>
+                     <div data-mainmarket="true">
+                     
                      </div>
               </div>
        </div>

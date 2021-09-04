@@ -1283,10 +1283,8 @@ SmartApps = (function (SmartApps, $, window) {
 
     SmartApps.Market.getMySell =  async () => {
     }
-    SmartApps.Market.getMarketList =  async (tokenid) => {
-        await contractMarket.getSales(tokenid,ContractAddress.AddressContractSmartNFT).call().then((value) => {
-            console.log(value);
-        });
+    SmartApps.Market.getMarketList =  async () => {
+        
     }
 
 
@@ -1332,42 +1330,9 @@ SmartApps = (function (SmartApps, $, window) {
     
 
 
-    SmartApps.Market.init =  async function(){
-        await blockchain.init();
-        await SmartApps.Market.loadContracts();
-        
-        let isSeller = await SmartApps.Market.isSeller();
-        
-        if(isSeller == true){
-            $(".enablesell").attr("href","#");
-            $(".enablesell").text("Controller");
-            $(".enablesell").on("click", async ()=>{
-                $("[data-myitem]").html('<h4 class="text-center">Loadding...</h4>');
-                await axios.post("/market/mysell/"+login_wallet).then((data) => {
-                    $("[data-myitem]").html(data.data);
-                    $("[data-market-cancelsell]").on("click",function (){
-                        var tokenid = $(this).data("tokenid");
-                        SmartApps.Market.cancelsell(tokenid);
-                    });
-                    
-                });
-            });
-        }else{
-            $(".enablesell").on("click", function(){
-                SmartApps.Market.enableSell();
-            });
-        }
-
-        (async ()=>{
-            await axios.post("/market/items/"+login_wallet).then((data) => {
-                $("[data-myitem]").html(data.data);
-            });
-        });
-
-        $(".loaditem").on("click", async function(){
-            var preview = $("input.walletAddress").val();
-            $("[data-myitem]").html('<h4 class="text-center">Loadding...</h4>');
-            await axios.post("/market/items/"+login_wallet+"?preview="+preview).then((data) => {
+    const loadMyItem = async ()=>{
+        $("[data-myitem]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
+        await axios.post("/market/myitem/"+login_wallet).then((data) => {
                 $("[data-myitem]").html(data.data);
 
                 $("[data-market-sell]").on("click", function(){
@@ -1387,6 +1352,60 @@ SmartApps = (function (SmartApps, $, window) {
                     if(error == false) SmartApps.Market.sell(tokenID, price, name, description);
                 });
             });
+    }
+
+    const loadMainItem = async (page)=>{
+        $("[data-mainmarket]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
+        await axios.get("/market/main/"+page).then((data) => {
+                $("[data-mainmarket]").html(data.data);
+        });
+    }
+
+    SmartApps.Market.init =  async function(){
+        await blockchain.init();
+        await SmartApps.Market.loadContracts();
+        await SmartApps.Market.getMarketList();
+
+        let isSeller = await SmartApps.Market.isSeller();
+        
+        if(isSeller == true){
+            $(".enablesell").attr("href","#");
+            $(".enablesell").text("Controller");
+            $(".enablesell").on("click", async ()=>{
+                $("[data-myitem]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
+                await axios.post("/market/mysell/"+login_wallet).then((data) => {
+                    $("[data-myitem]").html(data.data);
+                    $("[data-market-cancelsell]").on("click",function (){
+                        var tokenid = $(this).data("tokenid");
+                        SmartApps.Market.cancelsell(tokenid);
+                    });
+                    
+                });
+            });
+        }else{
+            $(".enablesell").on("click", function(){
+                SmartApps.Market.enableSell();
+            });
+        }
+
+        var loadMainDefault = async ()=>{
+            var mainmarket = $(this).attr('data-mainmarket');
+            //if(mainmarket.length > 0) {
+                console.log("Load Main Market");
+                await loadMainItem(1);
+            //}
+            var myitem = $(this).attr('data-myitem');
+            if(typeof myitem !== typeof undefined && myitem !== false) {
+                await loadMyItem();
+            }
+            
+        };
+
+        await loadMainDefault();
+        $(".loaditem").on("click", async function(){
+            var preview = $("input.walletAddress").val();
+            
+            await loadMyItem();
         });
 
         
