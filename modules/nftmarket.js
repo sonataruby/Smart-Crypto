@@ -199,6 +199,7 @@ module.exports = function(prefix , app) {
 	                	description : item.description,
 	                	image : String(jsonData.image).replace(/\.png/g,'.gif'),
 	                	attributes : jsonData.attributes,
+	                	model : getModelName(jsonData.attributes[1].value),
 	                    buyer: InfoSell.buyer,
 	                    currency: InfoSell.currency,
 	                    id: InfoSell.id,
@@ -206,7 +207,7 @@ module.exports = function(prefix , app) {
 	                    nft: InfoSell.nft,
 	                    price: InfoSell.price / 10**18,
 	                    seller: InfoSell.seller,
-	                    startTime: InfoSell.startTime,
+	                    startTime: moment.unix(InfoSell.startTime).format('MMM D, YYYY, HH:mm A'),,
 	                    status: InfoSell.status,
 	                    tokenId: InfoSell.tokenId
 	                };
