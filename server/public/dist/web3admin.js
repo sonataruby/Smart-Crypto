@@ -1291,9 +1291,10 @@ SmartApps = (function (SmartApps, $, window) {
                     money_contract : ContractAddress.AddressContractSmartToken,
                     nft_contract : ContractAddress.AddressContractSmartNFT
                 }).then((data) => {
-                    blockchain.notify(data.data);
-                    loadMyItem();
+                    
                 });
+                blockchain.notify(data.data);
+                await loadMyController();
             }
         });
     }
@@ -1424,6 +1425,17 @@ SmartApps = (function (SmartApps, $, window) {
         });
     }
 
+    const loadMyController = async () => {
+            $("[data-myitem]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
+                await axios.post("/market/mysell/"+login_wallet).then((data) => {
+                    $("[data-myitem]").html(data.data);
+                    $("[data-market-cancelsell]").on("click",function (){
+                        var tokenid = $(this).data("tokenid");
+                        SmartApps.Market.cancelsell(tokenid);
+                    });
+                    
+                });
+            }
     SmartApps.Market.init =  async function(){
         await blockchain.init();
         await tokenSmart.loadContracts();
@@ -1437,15 +1449,7 @@ SmartApps = (function (SmartApps, $, window) {
             $(".enablesell").attr("href","#");
             $(".enablesell").text("Controller");
             $(".enablesell").on("click", async ()=>{
-                $("[data-myitem]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
-                await axios.post("/market/mysell/"+login_wallet).then((data) => {
-                    $("[data-myitem]").html(data.data);
-                    $("[data-market-cancelsell]").on("click",function (){
-                        var tokenid = $(this).data("tokenid");
-                        SmartApps.Market.cancelsell(tokenid);
-                    });
-                    
-                });
+                await loadMyController();
             });
         }else{
             $(".enablesell").on("click", function(){
