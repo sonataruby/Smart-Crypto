@@ -60,7 +60,7 @@ function preload ()
     this.load.image('controller', 'assets/car/control.png');
     this.load.image('logo', 'assets/car/logo_game.png');
     this.load.image('red', 'assets/car/start.png');
-
+    this.load.image('claimnft', 'assets/car/claimnft.png');
     this.load.image('deposit', 'assets/images/DEPOSIT.png');
     this.load.image('claim', 'assets/images/CLAIM.png');
     this.load.image('withdraw', 'assets/images/WITHDRAW.png');
@@ -157,6 +157,13 @@ function create ()
 				console.log("Click Withdraw");
 				blockchain.withdraw(game_1.id);
 			});
+
+		const ClaimNFTButton = this.add.image(setButtonControll2+300, 350, 'claimnft').setInteractive()
+			.on('pointerdown', () => {
+				console.log("Click Claim NFT");
+				blockchain.claimNft(game_1.id);
+			});
+		
 	}else{
 		this.add.text(setButtonControll, 400, "Wait game start", textOptions);
 	}

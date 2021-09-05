@@ -190,7 +190,7 @@ module.exports = function(prefix , app) {
 	                var dataObj = {
 	                	name : item.name,
 	                	description : item.description,
-	                	image : jsonData.image,
+	                	image : String(jsonData.image).replace(/\.png/g,'.gif'),
 	                	attributes : jsonData.attributes,
 	                    buyer: InfoSell.buyer,
 	                    currency: InfoSell.currency,
@@ -229,7 +229,7 @@ module.exports = function(prefix , app) {
 		          ],
 		      "description": "No Description",
 		      "external_url": "https://cryptocar.cc/api/nft/"+tokenID,
-		      "image": "https://cryptocar.cc/nfts/"+lever+".png",
+		      "image": "https://cryptocar.cc/nfts/"+model+"/"+lever+".png",
 		      "name": "CFX 17",
 		      "animation_url": "",
 		      "youtube_url": "",
