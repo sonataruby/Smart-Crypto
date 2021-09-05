@@ -17,7 +17,7 @@
                                           <% item.attributes.forEach(function(dataAttributes, index2){ %>
                                                  <li class="col-12 col-md-4 mb-2">
                                                         <div class="border p-2 rounded">
-                                                        <%=dataAttributes.trait_type%> : <%=dataAttributes.value%>
+                                                        <%=dataAttributes.trait_type%> : <%- (dataAttributes.trait_type == "Model" ? data.model : dataAttributes.value)%>
                                                         </div>
                                                  </li>
                                           <%});%>
