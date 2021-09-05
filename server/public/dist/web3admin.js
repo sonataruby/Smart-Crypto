@@ -1329,7 +1329,7 @@ SmartApps = (function (SmartApps, $, window) {
     SmartApps.Market.buy =  async (tokenID, amount) => {
         
         await tokenSmart.loadContracts();
-        amount = amount + 50;
+       // amount = amount + 50;
         let depositAmount = blockchain.toWei(amount.toString(),"ether");
         //let CheckAppreve = await SmartApps.tokenSmart.approve(ContractAddress.AddressContractNFTMarket,depositAmount);
         //let appoveAmount = await tokenSmart.allowance(login_wallet,ContractAddress.AddressContractNFTMarket);
@@ -1337,7 +1337,7 @@ SmartApps = (function (SmartApps, $, window) {
         let appoveAmount = await tokenSmart.allowance(ContractAddress.AddressContractNFTMarket);
        
         
-        if(appoveAmount < 102){
+        if(appoveAmount < amount){
             await tokenSmart.approve(ContractAddress.AddressContractNFTMarket,depositAmount).then(async() => {
                 await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then((value)=>{
             
