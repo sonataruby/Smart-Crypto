@@ -207,7 +207,7 @@ module.exports = function(prefix , app) {
 	                    nft: InfoSell.nft,
 	                    price: InfoSell.price / 10**18,
 	                    seller: InfoSell.seller,
-	                    startTime: moment.unix(InfoSell.startTime).format('MMM D, YYYY, HH:mm A'),,
+	                    startTime: moment.unix(InfoSell.startTime).format('MMM D, YYYY, HH:mm A'),
 	                    status: InfoSell.status,
 	                    tokenId: InfoSell.tokenId
 	                };
