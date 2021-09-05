@@ -50,8 +50,9 @@ module.exports = function(prefix , app) {
 
     				}
     				readObject.id = index;
-    				readObject.attributes[0].value = value.quality;
-    				readObject.attributes[1].value = value.generation;
+    				readObject.attributes[0].value = value.generation;
+    				readObject.attributes[1].value = value.quality;
+    				readObject.model = getModelName(value.quality);
                 	object.push(readObject);
                 });
 		    }
@@ -61,7 +62,10 @@ module.exports = function(prefix , app) {
     		
 		}
 
-
+		const getModelName = (id)=>{
+			var dataJson = ["NORMAL","NORMAL","SPECIAL","RARE","EPIC","LEGENDARY"];
+			return dataJson[id];
+		}
 		const getItemsMySell = async (wallet) => {
 
 			let contract = await blockchain.loadSmartNFT();
@@ -89,11 +93,13 @@ module.exports = function(prefix , app) {
 		                sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+tokenID+"' LIMIT 1";
 	    				item = await db.dbQuery(sql, true);
 	    				let jsonData = JSON.parse(item.data);
+
 		                var dataObj = {
 		                	name : item.name,
 		                	description : item.description,
 		                	image : jsonData.image,
 		                	attributes : jsonData.attributes,
+		                	model : getModelName(jsonData.attributes[1].value),
 		                    buyer: InfoSell.buyer,
 		                    currency: InfoSell.currency,
 		                    id: InfoSell.id,
@@ -111,7 +117,7 @@ module.exports = function(prefix , app) {
 	            });
 	        }
 
-	        console.log(object);
+	        
 	        return object;
     		
 		}
@@ -149,6 +155,7 @@ module.exports = function(prefix , app) {
 		                	description : item.description,
 		                	image : jsonData.image,
 		                	attributes : jsonData.attributes,
+		                	model : getModelName(jsonData.attributes[1].value),
 		                    buyer: InfoSell.buyer,
 		                    currency: InfoSell.currency,
 		                    id: InfoSell.id,

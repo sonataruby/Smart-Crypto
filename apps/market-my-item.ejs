@@ -5,9 +5,9 @@
             	<img src="<%=data.image%>" style="width:100%">
             	<hr>
             	<div class="p-4">
-            		TokenID : #<%=data.id%><br>
+            		TokenID : #<%=data.id%> <br>
             		<% data.attributes.forEach(function(dataAttributes, index2){ %>
-	            		<%=dataAttributes.trait_type%> : <%=dataAttributes.value%><br>
+	            		<%=dataAttributes.trait_type%> : <%- (dataAttributes.trait_type == "Model" ? data.model : dataAttributes.value)%><br>
 	            	<%});%>
             	</div>
             	<hr>

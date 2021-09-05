@@ -7,7 +7,7 @@
             	<hr>
             	<h5><%=data.name%></h5>
             	<% data.attributes.forEach(function(dataAttributes, index2){ %>
-            	<%=dataAttributes.trait_type%> : <%=dataAttributes.value%><br>
+            	<%=dataAttributes.trait_type%> : <%- (trim(dataAttributes.trait_type) == "Model" ? data.model : dataAttributes.value)%><br>
             	<%});%>
             	<div class="p-4">
             		<button class="btn btn-primary btn-sm" data-market-cancelsell data-tokenid="<%=data.tokenId%>" type="button">CLOSE SELL</button>
