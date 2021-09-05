@@ -3,12 +3,14 @@ SmartApps = (function (SmartApps, $, window) {
     var blockchain = SmartApps.Blockchain;
     var tokenSmart = SmartApps.tokenSmart;
     var contractMarket;
+    var contractToken;
     var login_wallet;
     let GAS = 300000; 
     var ContractAddress = blockchain.address();
     SmartApps.Market = {};
     SmartApps.Market.loadContracts = async () => {
         contractMarket = await blockchain.loadContractNFTMarket();
+        //contractToken = await blockchain.loadContractSmart();
         login_wallet = await blockchain.getLoginWallet();
     }
     SmartApps.Market.action =  async () => {
@@ -47,6 +49,18 @@ SmartApps = (function (SmartApps, $, window) {
         });
     }
 
+    SmartApps.Market.setFeeReceiver =  async (setTokenAddress) => {
+        await contractMarket.setFeeReceiver(setTokenAddress).send({gas:GAS}).then((value)=>{
+            console.log(value);
+        });
+    }
+
+    SmartApps.Market.setFeeRate =  async (rate) => {
+        await contractMarket.setFeeRate(rate).send({gas:GAS}).then((value)=>{
+            console.log(value);
+        });
+    }
+
     SmartApps.Market.AllowTrade =  async () => {
         await contractMarket.enableSales(true).send({gas:GAS}).then((value)=>{
             console.log(value);
@@ -54,7 +68,8 @@ SmartApps = (function (SmartApps, $, window) {
     }
     
     SmartApps.Market.sell =  async (tokenID, price, name, description) => {
-        await contractMarket.sell(tokenID, price, ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS*2}).then(async (value)=>{
+        let depositAmount = blockchain.toWei(price.toString(),"ether");
+        await contractMarket.sell(tokenID, depositAmount, ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS*2}).then(async (value)=>{
             if(value.transactionHash){
 
                 let id = await blockchain.getNftTokenID(value.transactionHash);
@@ -103,11 +118,32 @@ SmartApps = (function (SmartApps, $, window) {
     }
 
 
-    SmartApps.Market.buy =  async (tokenID) => {
-        await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then((value)=>{
+    SmartApps.Market.buy =  async (tokenID, amount) => {
+        
+        await tokenSmart.loadContracts();
+        amount = amount + 50;
+        let depositAmount = blockchain.toWei(amount.toString(),"ether");
+        //let CheckAppreve = await SmartApps.tokenSmart.approve(ContractAddress.AddressContractNFTMarket,depositAmount);
+        //let appoveAmount = await tokenSmart.allowance(login_wallet,ContractAddress.AddressContractNFTMarket);
+
+        let appoveAmount = await tokenSmart.allowance(ContractAddress.AddressContractNFTMarket);
+       
+        
+        if(appoveAmount < 102){
+            await tokenSmart.approve(ContractAddress.AddressContractNFTMarket,depositAmount).then(async() => {
+                await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then((value)=>{
             
-            blockchain.notify("Your buy NFT complete");
-        });
+                    blockchain.notify("Your buy NFT complete");
+                });
+            });
+        }else{
+            await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then((value)=>{
+            
+                blockchain.notify("Your buy NFT complete");
+            });
+        }
+        
+        
     }
 
     SmartApps.Market.isSeller =  async () => {
@@ -182,9 +218,11 @@ SmartApps = (function (SmartApps, $, window) {
 
     SmartApps.Market.init =  async function(){
         await blockchain.init();
+        await tokenSmart.loadContracts();
         await SmartApps.Market.loadContracts();
         await SmartApps.Market.getMarketList();
-
+        await tokenSmart.allowance(ContractAddress.AddressContractNFTMarket);
+        //await SmartApps.Market.buy(1,100);
         let isSeller = await SmartApps.Market.isSeller();
         
         if(isSeller == true){
@@ -230,7 +268,8 @@ SmartApps = (function (SmartApps, $, window) {
         
         $("[data-market-buy]").on("click", function(){
             var tokenID = $(this).data("tokenid");
-            SmartApps.Market.buy(tokenID);
+            var amount = $(this).data("amount");
+            SmartApps.Market.buy(tokenID,amount);
         });
     }
     SmartApps.components.docReady.push(SmartApps.Market.init);

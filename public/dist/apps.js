@@ -2200,11 +2200,12 @@ SmartApps = (function (SmartApps, $, window) {
     };
     SmartApps.tokenSmart.allowance = async (contractAddress) => {
         var amount = 0;
-        await contractToken.allowance(login_wallet,contractAddress).call().then(async (value) => {
+        await contractToken.allowance(login_wallet, contractAddress).call().then(async (value) => {
             
-            amount = blockchain.fromWei(value);
+            amount = await blockchain.fromWei(value);
            
         });
+       
         return amount;
     };
     

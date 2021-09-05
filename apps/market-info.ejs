@@ -7,7 +7,7 @@
               </div>
 
               <div class="col-md-10">
-                     <h4 class="d-flex justify-content-between"><div><%=item.name%></div><div> <a href="/market" class="btn btn-info">Back Market</a> <a href="#" data-market-buy="true" data-tokenid="<%=item.tokenId%>" class="btn btn-primary">Buy Now</a></div></h4>
+                     <h4 class="d-flex justify-content-between"><div><%=item.name%></div><div> <a href="/market" class="btn btn-info">Back Market</a> <a href="#" data-market-buy="true" data-tokenid="<%=item.tokenId%>" data-amount="<%=item.price%>" class="btn btn-primary">Buy Now</a></div></h4>
                      <hr>
                      <div class="row">
                             <div class="col-md-6">
@@ -49,7 +49,7 @@
                                                  Price : <%=item.price%> <%=token.name%><br>
                                                  <span style="font-size:12px; color:#333;">Your Balance : <span class="balance"></span> <%=token.name%></span>
                                           </div>
-                                          <button class="btn btn-primary" data-tokenid="<%=item.tokenId%>" data-market-buy="true" >BUY</button>
+                                          <button class="btn btn-primary" data-tokenid="<%=item.tokenId%>" data-amount="<%=item.price%>" data-market-buy="true" >BUY</button>
                                    </h5>
                                    </div>
                             </div>
