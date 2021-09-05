@@ -330,7 +330,7 @@ module.exports = function(prefix , app) {
 				jsonData.name = name;
 				jsonData.description = description;
 
-				let sql = "UPDATE `nft_smart` SET name='"+name+"', description='"+description+"', data='"+JSON.stringify(data)+"', sell_id='1' WHERE tokenId='"+tokenID+"'";
+				let sql = "UPDATE `nft_smart` SET name='"+name+"', description='"+description+"', data='"+JSON.stringify(jsonData)+"', sell_id='1' WHERE tokenId='"+tokenID+"'";
 	    		await db.dbQuery(sql, true);
 	    	}
 		});
