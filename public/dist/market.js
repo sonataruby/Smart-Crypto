@@ -132,15 +132,30 @@ SmartApps = (function (SmartApps, $, window) {
         
         if(appoveAmount < amount){
             await tokenSmart.approve(ContractAddress.AddressContractNFTMarket,depositAmount).then(async() => {
-                await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then((value)=>{
+                await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
             
                     blockchain.notify("Your buy NFT complete");
+
+                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                chat_id: window.TelegramChannel,
+                                text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`,
+                                parse_mode:'Markdown'
+                        });
+                    }
                 });
             });
         }else{
-            await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then((value)=>{
+            await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
             
                 blockchain.notify("Your buy NFT complete");
+                if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                    await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                            chat_id: window.TelegramChannel,
+                            text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`,
+                            parse_mode:'Markdown'
+                    });
+                }
             });
         }
         
@@ -250,19 +265,22 @@ SmartApps = (function (SmartApps, $, window) {
         }
 
         var loadMainDefault = async ()=>{
-            var mainmarket = $(this).attr('data-mainmarket');
-            //if(mainmarket.length > 0) {
+
+            var mainmarket = $("[data-mainmarket]");
+            if(mainmarket.length > 0) {
                 console.log("Load Main Market");
                 await loadMainItem(1);
-            //}
-            //var myitem = $(this).attr('data-myitem');
-            //if(typeof myitem !== typeof undefined && myitem !== false) {
+            }
+            var myitem = $("[data-myitem]");
+            if(myitem.length > 0) {
                 await loadMyItem();
-            //}
+            }
             
         };
+        
 
         await loadMainDefault();
+
         $(".loaditem").on("click", async function(){
             var preview = $("input.walletAddress").val();
             

@@ -109,6 +109,9 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */var r="function"==typeof Symbol&&Symbol.for,i=r?Symbol.for("react.element"):60103,o=r?Symbol.for("react.portal"):60106,a=r?Symbol.for("react.fragment"):60107,u=r?Symbol.for("react.strict_mode"):60108,l=r?Symbol.for("react.profiler"):60114,c=r?Symbol.for("react.provider"):60109,A=r?Symbol.for("react.context"):60110,s=r?Symbol.for("react.async_mode"):60111,f=r?Symbol.for("react.concurrent_mode"):60111,d=r?Symbol.for("react.forward_ref"):60112,I=r?Symbol.for("react.suspense"):60113,g=r?Symbol.for("react.suspense_list"):60120,M=r?Symbol.for("react.memo"):60115,N=r?Symbol.for("react.lazy"):60116,p=r?Symbol.for("react.block"):60121,j=r?Symbol.for("react.fundamental"):60117,v=r?Symbol.for("react.responder"):60118,w=r?Symbol.for("react.scope"):60119;function y(e){if("object"==typeof e&&null!==e){var t=e.$$typeof;switch(t){case i:switch(e=e.type){case s:case f:case a:case l:case u:case I:return e;default:switch(e=e&&e.$$typeof){case A:case d:case N:case M:case c:return e;default:return t}}case o:return t}}}function m(e){return y(e)===f}t.AsyncMode=s,t.ConcurrentMode=f,t.ContextConsumer=A,t.ContextProvider=c,t.Element=i,t.ForwardRef=d,t.Fragment=a,t.Lazy=N,t.Memo=M,t.Portal=o,t.Profiler=l,t.StrictMode=u,t.Suspense=I,t.isAsyncMode=function(e){return m(e)||y(e)===s},t.isConcurrentMode=m,t.isContextConsumer=function(e){return y(e)===A},t.isContextProvider=function(e){return y(e)===c},t.isElement=function(e){return"object"==typeof e&&null!==e&&e.$$typeof===i},t.isForwardRef=function(e){return y(e)===d},t.isFragment=function(e){return y(e)===a},t.isLazy=function(e){return y(e)===N},t.isMemo=function(e){return y(e)===M},t.isPortal=function(e){return y(e)===o},t.isProfiler=function(e){return y(e)===l},t.isStrictMode=function(e){return y(e)===u},t.isSuspense=function(e){return y(e)===I},t.isValidElementType=function(e){return"string"==typeof e||"function"==typeof e||e===a||e===f||e===l||e===u||e===I||e===g||"object"==typeof e&&null!==e&&(e.$$typeof===N||e.$$typeof===M||e.$$typeof===c||e.$$typeof===A||e.$$typeof===d||e.$$typeof===j||e.$$typeof===v||e.$$typeof===w||e.$$typeof===p)},t.typeOf=y},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.ProviderController=void 0;var r=n(1),i=r.__importStar(n(6)),o=n(2),a=n(3),u=n(17),l=function(){function e(e){var t=this;this.cachedProvider="",this.shouldCacheProvider=!1,this.disableInjectedProvider=!1,this.eventController=new u.EventController,this.injectedProvider=null,this.providers=[],this.network="",this.getUserOptions=function(){var e=a.isMobile(),n=t.providers.map((function(e){return e.id})),r=!!t.injectedProvider&&!t.disableInjectedProvider,i=[];r&&e?i.push(o.INJECTED_PROVIDER_ID):(r&&i.push(o.INJECTED_PROVIDER_ID),n.forEach((function(e){e!==o.INJECTED_PROVIDER_ID&&(t.shouldDisplayProvider(e)&&i.push(e))})));var u=[];return i.forEach((function(e){var n=t.getProvider(e);if(void 0!==n){var r=n.id,i=n.name,o=n.logo,l=n.connector;u.push({name:i,logo:o,description:a.getProviderDescription(n),onClick:function(){return t.connectTo(r,l)}})}})),u},this.connectTo=function(e,n){return r.__awaiter(t,void 0,void 0,(function(){var t,i,a,u;return r.__generator(this,(function(l){switch(l.label){case 0:return l.trys.push([0,2,,3]),t=this.getProviderOption(e,"package"),i=this.getProviderOption(e,"options"),a=r.__assign({network:this.network||void 0},i),[4,n(t,a)];case 1:return u=l.sent(),this.eventController.trigger(o.CONNECT_EVENT,u),this.shouldCacheProvider&&this.cachedProvider!==e&&this.setCachedProvider(e),[3,3];case 2:return l.sent(),this.eventController.trigger(o.ERROR_EVENT),[3,3];case 3:return[2]}}))}))},this.cachedProvider=a.getLocal(o.CACHED_PROVIDER_KEY)||"",this.disableInjectedProvider=e.disableInjectedProvider,this.shouldCacheProvider=e.cacheProvider,this.providerOptions=e.providerOptions,this.network=e.network,this.injectedProvider=a.getInjectedProvider(),this.providers=Object.keys(i.connectors).map((function(e){var n;(n=e===o.INJECTED_PROVIDER_ID?t.injectedProvider||i.providers.FALLBACK:a.getProviderInfoById(e),t.providerOptions[e])&&(void 0!==t.providerOptions[e].display&&(n=r.__assign(r.__assign({},n),t.providerOptions[e].display)));return r.__assign(r.__assign({},n),{connector:i.connectors[e],package:n.package})})),Object.keys(this.providerOptions).filter((function(e){return e.startsWith("custom-")})).map((function(e){if(e&&t.providerOptions[e]){var n=t.providerOptions[e];void 0!==n.display&&void 0!==n.connector&&t.providers.push(r.__assign(r.__assign(r.__assign(r.__assign({},i.providers.FALLBACK),{id:e}),n.display),{connector:n.connector}))}}))}return e.prototype.shouldDisplayProvider=function(e){var t=this.getProvider(e);if(void 0!==t){var n=this.providerOptions[e];if(n)if(!!n.package){var r=t.package?t.package.required:void 0;if(!r||!r.length)return!0;var i=n.options;if(i&&Object.keys(i).length){var o=a.findMatchingRequiredOptions(r,i);if(r.length===o.length)return!0}}}return!1},e.prototype.getProvider=function(e){return a.filterMatches(this.providers,(function(t){return t.id===e}),void 0)},e.prototype.getProviderOption=function(e,t){return this.providerOptions&&this.providerOptions[e]&&this.providerOptions[e][t]?this.providerOptions[e][t]:{}},e.prototype.clearCachedProvider=function(){this.cachedProvider="",a.removeLocal(o.CACHED_PROVIDER_KEY)},e.prototype.setCachedProvider=function(e){this.cachedProvider=e,a.setLocal(o.CACHED_PROVIDER_KEY,e)},e.prototype.connectToCachedProvider=function(){return r.__awaiter(this,void 0,void 0,(function(){var e;return r.__generator(this,(function(t){switch(t.label){case 0:return void 0===(e=this.getProvider(this.cachedProvider))?[3,2]:[4,this.connectTo(e.id,e.connector)];case 1:t.sent(),t.label=2;case 2:return[2]}}))}))},e.prototype.on=function(e,t){var n=this;return this.eventController.on({event:e,callback:t}),function(){return n.eventController.off({event:e,callback:t})}},e.prototype.off=function(e,t){this.eventController.off({event:e,callback:t})},e}();t.ProviderController=l}])}));
 //# sourceMappingURL=index.js.map
+$.fn.hasAttr = function(name) {  
+   return this.attr(name) !== undefined;
+};
 SmartApps = (function (SmartApps, $, window) {
     "use strict";
     
@@ -872,7 +875,7 @@ SmartApps = (function (SmartApps, $, window) {
     var ContractAddress = blockchain.address();
     var token = SmartApps.tokenSmart;
     
-    SmartApps.tokenFarm = {};
+    SmartApps.tokenFarm = {}; 
     
     SmartApps.tokenFarm.loadContracts = async () => {
 
@@ -1085,7 +1088,20 @@ SmartApps = (function (SmartApps, $, window) {
                     console.log(value);
                 });
             }
-            
+    
+    SmartApps.tokenFarm.setNFT = async () => {
+
+                let status = await blockchain.isStatus();
+                if(status == false){
+                    await blockchain.connect();
+                }
+                
+                const gasPrice = await blockchain.getGasPrice();
+                await contractFarm.setNftFactory(ContractAddress.AddressContractNFTFactory).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then((value) => {
+                    console.log(value);
+                });
+            }
+
     SmartApps.tokenFarm.Init = async () => {
             await blockchain.init();
             ContractAddress = await blockchain.address();
@@ -1340,15 +1356,30 @@ SmartApps = (function (SmartApps, $, window) {
         
         if(appoveAmount < amount){
             await tokenSmart.approve(ContractAddress.AddressContractNFTMarket,depositAmount).then(async() => {
-                await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then((value)=>{
+                await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
             
                     blockchain.notify("Your buy NFT complete");
+
+                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                chat_id: window.TelegramChannel,
+                                text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`,
+                                parse_mode:'Markdown'
+                        });
+                    }
                 });
             });
         }else{
-            await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then((value)=>{
+            await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
             
                 blockchain.notify("Your buy NFT complete");
+                if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
+                    await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                            chat_id: window.TelegramChannel,
+                            text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`,
+                            parse_mode:'Markdown'
+                    });
+                }
             });
         }
         
@@ -1458,19 +1489,22 @@ SmartApps = (function (SmartApps, $, window) {
         }
 
         var loadMainDefault = async ()=>{
-            var mainmarket = $(this).attr('data-mainmarket');
-            //if(mainmarket.length > 0) {
+
+            var mainmarket = $("[data-mainmarket]");
+            if(mainmarket.length > 0) {
                 console.log("Load Main Market");
                 await loadMainItem(1);
-            //}
-            //var myitem = $(this).attr('data-myitem');
-            //if(typeof myitem !== typeof undefined && myitem !== false) {
+            }
+            var myitem = $("[data-myitem]");
+            if(myitem.length > 0) {
                 await loadMyItem();
-            //}
+            }
             
         };
+        
 
         await loadMainDefault();
+
         $(".loaditem").on("click", async function(){
             var preview = $("input.walletAddress").val();
             
@@ -1515,7 +1549,9 @@ SmartApps = function (SmartApps, $, window, document) {
         }
 
         
-
+        $("#settupfactory").on("click", function(){
+            SmartApps.tokenFarm.setNFT();
+        });
         $("#createFarmSession").on("click", function(){
             
             

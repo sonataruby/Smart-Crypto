@@ -1,4 +1,5 @@
 
+				<button class="btn btn-sm btn-primary" id="settupfactory">Setup Factory NFT</button>
 				<div class="row">
 					<div class="col-8">
 						<div class="card">
@@ -164,64 +165,6 @@
 						</div>
 					</div>
 				</div>
-				<br>
-				<h4>Session List</h4>
-
-				<div class="card">
-						<div class="card-body">
-				<table class="table">
-					<thead>
-						
-						<th>Name</th>
-						<th>Deposit</th>
-						<th>Start</th>
-						<th>Period</th>
-						<th>Finish</th>
-						<th>Reward</th>
-						<th>Holder</th>
-						<th>Status</th>
-						<th></td>
-						<th></td>
-					</thead>
-					
-					<% items.forEach(function(data, index){ %>
-					<tr>
-						
-						<td><%= data.pool_name%></td>
-						<td><%= data.min_deposit%> <%= token.name%></td>
-						<td>
-							<span class="TimeStart<%=index%>"></span>
-							<script> 
-							var timeStart = moment.unix(<%= data.timestart%>).format('MM/DD/YYYY hh:mm:ss a');
-							$(".TimeStart<%=index%>").html(timeStart);
-							</script>
-						</td>
-						<td><%- (data.period / 3600).toFixed(2)%> hour</td>
-						<td>
-							<span class="TimeEnd<%=index%>"></span>
-							<script> 
-							var calcTime = <%= data.timestart%>;
-							var period = <%= data.period%>;
-							calcTime = calcTime + period * 3600;
-							var timeStart = moment.unix(calcTime).format('MM/DD/YYYY hh:mm:ss a');
-							$(".TimeEnd<%=index%>").html(timeStart);
-							</script>
-						</td>
-						<td><%= data.reward_token%> / 1s</td>
-						<td><%= data.amount_holder%></td>
-						<td><%= (data.status > 0 ? "Enable" : "Disable")%></td>
-						<td class="text-end">
-							<a class="btn btn-sm btn-primary" href="/farm/<%= data.log_id%>/sync">Sync Blockchain</a>
-							<button class="btn btn-sm btn-primary">Claim All</button>
-							<button class="btn btn-sm btn-primary">Claim NFT</button>
-						</td>
-						<td class="text-end">
-							<button class="btn btn-sm btn-primary">Edit</button>
-							<a class="btn btn-sm btn-primary" href="/farm/<%= data.log_id%>/<%= (data.status > 0 ? "disable" : "enable")%>"><%= (data.status > 0 ? "Enable" : "Disable")%></a>
-						</td>
-					</tr>
-					<% }); %>
-				</table>
-				</div>
-				</div>
+				
+				
 			

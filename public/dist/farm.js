@@ -13,7 +13,7 @@ SmartApps = (function (SmartApps, $, window) {
     var ContractAddress = blockchain.address();
     var token = SmartApps.tokenSmart;
     
-    SmartApps.tokenFarm = {};
+    SmartApps.tokenFarm = {}; 
     
     SmartApps.tokenFarm.loadContracts = async () => {
 
@@ -226,7 +226,20 @@ SmartApps = (function (SmartApps, $, window) {
                     console.log(value);
                 });
             }
-            
+    
+    SmartApps.tokenFarm.setNFT = async () => {
+
+                let status = await blockchain.isStatus();
+                if(status == false){
+                    await blockchain.connect();
+                }
+                
+                const gasPrice = await blockchain.getGasPrice();
+                await contractFarm.setNftFactory(ContractAddress.AddressContractNFTFactory).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then((value) => {
+                    console.log(value);
+                });
+            }
+
     SmartApps.tokenFarm.Init = async () => {
             await blockchain.init();
             ContractAddress = await blockchain.address();

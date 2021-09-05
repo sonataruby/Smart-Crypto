@@ -1865,6 +1865,9 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;
 //# sourceMappingURL=axios.map
+$.fn.hasAttr = function(name) {  
+   return this.attr(name) !== undefined;
+};
 SmartApps = (function (SmartApps, $, window) {
     "use strict";
     
