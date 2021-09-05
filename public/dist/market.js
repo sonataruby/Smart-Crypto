@@ -142,6 +142,7 @@ SmartApps = (function (SmartApps, $, window) {
                                 text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`,
                                 parse_mode:'Markdown'
                         });
+                        window.location.href="/market/account";
                     }
                 });
             });
@@ -155,6 +156,7 @@ SmartApps = (function (SmartApps, $, window) {
                             text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`,
                             parse_mode:'Markdown'
                     });
+                     window.location.href="/market/account";
                 }
             });
         }
