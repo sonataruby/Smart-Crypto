@@ -5,6 +5,8 @@ const config = require('./../config');
 const hostname = "http://localhost:5000";
 const blockchain = require('./../server/blockchain');
 let Web3 = require('web3');
+const moment = require('moment');
+
 module.exports = function(prefix , app) {
 		
 		const getMyItems = async (wallet) => {
@@ -154,7 +156,7 @@ module.exports = function(prefix , app) {
 		                    nft: InfoSell.nft,
 		                    price: InfoSell.price,
 		                    seller: InfoSell.seller,
-		                    startTime: InfoSell.startTime,
+		                    startTime: moment.unix(InfoSell.startTime).format('MMM D, YYYY, HH:mm A'),
 		                    status: InfoSell.status,
 		                    tokenId: InfoSell.tokenId
 		                };
@@ -211,31 +213,23 @@ module.exports = function(prefix , app) {
     		
 		}
 
-		const insert_items = async (tokenID, quality, generation) =>{
+		const insert_items = async (tokenID, model, lever) =>{
 			const data = {
 			  "id" : tokenID,
-		      "attributes": [{
-		              "trait_type": "QUALITY",
-		              "value": quality
+		      "attributes": [
+		      		{
+		              "trait_type": "Lever",
+		              "value": lever
 		            },
-		            {
-		              "trait_type": "Generation",
-		              "value": generation
-		            },
-		            {
-		              "display_type": "boost_number",
-		              "trait_type": "Power",
-		              "value": 2000
-		            },
-		            {
-		              "display_type": "boost_number",
-		              "trait_type": "map_point",
-		              "value": 130
+		      		{
+		              "trait_type": "Model",
+		              "value": model
 		            }
+		            
 		          ],
 		      "description": "No Description",
 		      "external_url": "https://cryptocar.cc/api/nft/"+tokenID,
-		      "image": "https://cryptocar.cc/nfts/"+generation+".png",
+		      "image": "https://cryptocar.cc/nfts/"+lever+".png",
 		      "name": "CFX 17",
 		      "animation_url": "",
 		      "youtube_url": "",
@@ -323,8 +317,13 @@ module.exports = function(prefix , app) {
 			
 			let sqlcheck = "SELECT * FROM `nft_smart` WHERE tokenId='"+tokenID+"'";
 			item = await db.dbQuery(sqlcheck, true);
+
 			if(item != undefined){
-				let sql = "UPDATE `nft_smart` SET name='"+name+"', description='"+description+"', sell_id='1' WHERE tokenId='"+tokenID+"'";
+				let jsonData = JSON.parse(item.data);
+				jsonData.name = name;
+				jsonData.description = description;
+
+				let sql = "UPDATE `nft_smart` SET name='"+name+"', description='"+description+"', data='"+JSON.stringify(data)+"', sell_id='1' WHERE tokenId='"+tokenID+"'";
 	    		await db.dbQuery(sql, true);
 	    	}
 		});

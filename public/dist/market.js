@@ -69,6 +69,7 @@ SmartApps = (function (SmartApps, $, window) {
                     nft_contract : ContractAddress.AddressContractSmartNFT
                 }).then((data) => {
                     blockchain.notify(data.data);
+                    loadMyItem();
                 });
             }
         });
@@ -85,6 +86,7 @@ SmartApps = (function (SmartApps, $, window) {
         smartnft.transferFrom(login_wallet,sendto,tokenID).send({gas:GAS}).then(async (value) =>{
             $('#transferWallet').modal('hide');
             blockchain.notify("Your transfer complete");
+            loadMyItem();
         });
     }
     SmartApps.Market.cancelsell =  async (tokenID) => {
@@ -94,6 +96,7 @@ SmartApps = (function (SmartApps, $, window) {
                     tokenid : tokenID
                 }).then((data) => {
                     blockchain.notify(data.data);
+                    
                 });
             }
         });

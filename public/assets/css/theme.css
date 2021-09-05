@@ -99,6 +99,9 @@ border-top: 0px !important;
    background-color: var(--info);
    color: #FFF;
 }
+.attributes .border:hover{
+  border-color: red !important;
+}
 .icon-metamask{
   position: relative;
 }
