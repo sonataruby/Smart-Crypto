@@ -24,14 +24,16 @@ var jsonAddress = loadDataJSON('address');
 var jsonSmartToken = loadDataJSON('smarttoken');
 var jsonNFTFac = loadDataJSON('nftfactory');
 var jsonSmartNFT = loadDataJSON('smartnft');
-
+var jsonNFTMarket = loadDataJSON('nftmarket');
+var jsonStaking = loadDataJSON('staking');
 gulp.task('blockchain', function() {
     return gulp.src('apps/dev/blockchain.js')
         .pipe(replace(/{jsondata}/g, jsonAddress))
         .pipe(replace(/{smarttoken}/g, jsonSmartToken))
         .pipe(replace(/{nftfac}/g, jsonNFTFac))
         .pipe(replace(/{smartnft}/g, jsonSmartNFT))
-        
+        .pipe(replace(/{nftmarket}/g, jsonNFTMarket))
+        .pipe(replace(/{stacking}/g, jsonStaking))
         .pipe(concat('blockchain_dev.js'))
         //.pipe(uglify())
         .pipe(gulp.dest("apps/dev"))
@@ -68,13 +70,77 @@ gulp.task('web3', function() {
             'node_modules/axios/dist/axios.js',
             'apps/dev/blockchain_dev.js',
             'apps/dev/token.js',
-            'apps/dev/airdrop.js',
-            'apps/dev/presell.js',
-            'apps/dev/ido.js',
-            'apps/dev/farm.js',
-            'apps/dev/client.js'
+            //'apps/dev/airdrop.js',
+            //'apps/dev/presell.js',
+            //'apps/dev/ido.js',
+            //'apps/dev/farm.js',
+            //'apps/dev/client.js'
         ])
         .pipe(concat('apps.js'))
+        //.pipe(uglify())
+        .pipe(gulp.dest("public/dist"))
+        .pipe(browserSync.stream());
+    
+});
+
+gulp.task('airdrop', function() {
+    
+    return gulp.src([
+            'apps/dev/airdrop.js',
+            //'apps/dev/ido.js',
+        ])
+        .pipe(concat('airdrop.js'))
+        //.pipe(uglify())
+        .pipe(gulp.dest("public/dist"))
+        .pipe(browserSync.stream());
+    
+});
+
+gulp.task('presell', function() {
+    
+    return gulp.src([
+            'apps/dev/presell.js',
+            //'apps/dev/ido.js',
+        ])
+        .pipe(concat('presell.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest("public/dist"))
+        .pipe(browserSync.stream());
+    
+});
+
+gulp.task('ido', function() {
+    
+    return gulp.src([
+            'apps/dev/ido.js',
+        ])
+        .pipe(concat('ido.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest("public/dist"))
+        .pipe(browserSync.stream());
+    
+});
+
+gulp.task('farm', function() {
+    
+    return gulp.src([
+            'apps/dev/farm.js',
+        ])
+        .pipe(concat('farm.js'))
+        //.pipe(uglify())
+        .pipe(gulp.dest("public/dist"))
+        .pipe(browserSync.stream());
+    
+});
+
+
+
+gulp.task('market', function() {
+    
+    return gulp.src([
+            'apps/dev/market.js',
+        ])
+        .pipe(concat('market.js'))
         //.pipe(uglify())
         .pipe(gulp.dest("public/dist"))
         .pipe(browserSync.stream());
@@ -103,10 +169,11 @@ gulp.task('web3admin', function() {
             'node_modules/web3modal/dist/index.js',
             'apps/dev/blockchain_dev.js',
             'apps/dev/token.js',
-            //'apps/dev/airdrop.js',
-            //'apps/dev/presell.js',
-            //'apps/dev/ido.js',
-            //'apps/dev/farm.js',
+            'apps/dev/airdrop.js',
+            'apps/dev/presell.js',
+            'apps/dev/ido.js',
+            'apps/dev/farm.js',
+            'apps/dev/market.js',
             'apps/dev/admin.js'
         ])
         .pipe(concat('web3admin.js'))
@@ -118,7 +185,7 @@ gulp.task('web3admin', function() {
 
 //gulp.task('clean', () => del(['data/dev/assent/js/*.js', 'data/dev/assent/css/*.css']));
 
-gulp.task('default', gulp.series(['blockchain','web3','web3admin','bootstrap','game'],function(done) { 
+gulp.task('default', gulp.series(['blockchain','web3','web3admin','bootstrap','game','airdrop','ido','presell','farm','market'],function(done) { 
     // default task code here
     done();
 }));

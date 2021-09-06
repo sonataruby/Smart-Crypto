@@ -105,6 +105,32 @@ SmartApps = (function (SmartApps, $, window) {
             loadMyItem();
         });
     }
+
+    SmartApps.Market.mint = async () => {
+        var nftFactory = await blockchain.loadContractNFTFactory();
+        let isStaticUser = await nftFactory.isStaticUser(login_wallet).call();
+        if(isStaticUser == true){
+            nftFactory.mint(login_wallet,1).send({gas:GAS}).then(async (value) =>{
+                blockchain.notify("Your NFT Mint complete");
+                await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                        chat_id: window.TelegramChannel,
+                        text: `CAR NFT Mint complete\nHash : ${value.transactionHash}\nCan open sell on NFT Market`,
+                        parse_mode:'Markdown'
+                });
+                loadMyItem();
+            });
+        }else{
+            blockchain.notify("Error : Your need join S3 Game Play first");
+        }
+        
+    }
+    SmartApps.Market.AccessMintNFT = async () => {
+        var nftFactory = await blockchain.loadContractNFTFactory();
+        let isStaticUser = await nftFactory.isStaticUser(login_wallet).call();
+        return isStaticUser;
+    };
+    
+
     SmartApps.Market.cancelsell =  async (tokenID) => {
         await contractMarket.cancelSell(tokenID, ContractAddress.AddressContractSmartNFT).send({gas:GAS}).then(async (value)=>{
             if(value.transactionHash){
@@ -253,7 +279,22 @@ SmartApps = (function (SmartApps, $, window) {
         await tokenSmart.allowance(ContractAddress.AddressContractNFTMarket);
         //await SmartApps.Market.buy(1,100);
         let isSeller = await SmartApps.Market.isSeller();
+        let can_mint = await SmartApps.Market.AccessMintNFT();
+
         
+        if(can_mint == true){
+            if($("[data-mint-nft]").length > 0){
+                $("[data-mint-nft]").on("click", async() => {
+                    await SmartApps.Market.mint();
+                });
+            }
+        }else{
+            if($("[data-mint-nft]").length > 0){
+                $("[data-mint-nft]").attr("href","/farm");
+                $("[data-mint-nft]").html("Join S3 Game");
+            }
+        }
+
         if(isSeller == true){
             $(".enablesell").attr("href","#");
             $(".enablesell").text("Controller");
