@@ -4,8 +4,6 @@ const config = require("./../config");
 const blockchain = require('./blockchain');
 const moment = require('moment');
 
-//blockchain.addAccount("b6afe8ee591312b8400726a6a2295fceb3c4138d5c1b25faf56f81e3acd1a830");
-
 const path = require("path");
 const _ = require("lodash");
 //const io   = require('socket.io');

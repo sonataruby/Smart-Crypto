@@ -50,12 +50,25 @@
 
 
 <div class="card mb-3">
-	<div class="card-body">
-		<b>Withdrawal</b><br>
-		<div class="input-group mt-3">
-		  <input type="text" class="form-control" placeholder="Set price">
-		  <button class="input-group-text" id="presellwithdrawal">Confirm</button>
-		</div>
+	<div class="row">
+			<div class="col-6">
+				<div class="card-body">
+					<b>Withdrawal</b><br>
+					<div class="input-group mt-3">
+					  <input type="text" class="form-control" placeholder="Set price">
+					  <button class="input-group-text" id="presellwithdrawal">Confirm</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="card-body">
+					<b>withdrawNCF</b><br>
+					<div class="input-group mt-3">
+					  <input type="text" class="form-control" placeholder="Set price">
+					  <button class="input-group-text" id="presellwithdrawalnft">Confirm</button>
+					</div>
+				</div>
+			</div>
 	</div>
 
 </div>
@@ -65,5 +78,9 @@
 		$("#presellwithdrawal").on("click", function(){
 			SmartApps.tokenPresell.withdrawBNB();
 		});
+		$("#presellwithdrawalnft").on("click", function(){
+			SmartApps.tokenPresell.withdrawNCF();
+		});
+		
 	});
 </script>

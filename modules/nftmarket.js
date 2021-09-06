@@ -92,7 +92,16 @@ module.exports = function(prefix , app) {
 	                if(InfoSell.seller == wallet){
 		                sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+tokenID+"' LIMIT 1";
 	    				item = await db.dbQuery(sql, true);
-	    				let jsonData = JSON.parse(item.data);
+	    				jsonData = {};
+	    				if(item == undefined){
+	    					jsonData = {};
+	    					jsonData.image = "";
+	    					jsonData.attributes = [];
+	    					jsonData.attributes[1].value = 0;
+	    				}else{
+	    					jsonData = JSON.parse(item.data);
+	    				}
+	    				
 
 		                var dataObj = {
 		                	name : item.name,
@@ -149,6 +158,7 @@ module.exports = function(prefix , app) {
 	                
 		                sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+tokenID+"' LIMIT 1";
 	    				item = await db.dbQuery(sql, true);
+	    				
 	    				let jsonData = JSON.parse(item.data);
 		                var dataObj = {
 		                	name : item.name,

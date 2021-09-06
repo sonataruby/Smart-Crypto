@@ -9,7 +9,7 @@ SmartApps = (function (SmartApps, $, window) {
     	var factory = await blockchain.loadContractNFTFactory();
     	var smartnft     = await blockchain.loadContractSmartnft();
     	var wallet = await blockchain.getLoginWallet();
-        
+        var item = await blockchain.loadContractNFTItem();
     	var GAS = 1000000;
         const getHash = async () => {
             await blockchain.getNftTokenID('0x07001734f75842810691ca7a66cedf79a7107efe6ddff4c97157d4a82c994568');
@@ -99,6 +99,7 @@ SmartApps = (function (SmartApps, $, window) {
 
         const setStaticUser = async(setwallet) => {
             let isStaticUser = await factory.isStaticUser(setwallet).call();
+            console(isStaticUser, " ", setwallet);
             if(isStaticUser == false){
                 await factory.addStaticUser(setwallet).send({gas:GAS}).then((value) => {
                     console.log(value);
@@ -144,9 +145,31 @@ SmartApps = (function (SmartApps, $, window) {
             });
     		
     	}
+
+        const setFacItem = async () => {
+            let facAddress = await blockchain.address().AddressContractNFTFactory;
+            item.setFactory(facAddress).send({gas:GAS}).then((value) => {
+                console.log(value);
+            });
+        };
+        const MintItem = async () => {
+           
+            item.createItem(wallet,1,300).send({gas:GAS}).then((value) => {
+                console.log(value);
+            });
+        };
         //getHash();
     	//getNFT();
     	//trand();
+        setStaticUser(0xA66C630Ba51cE04B5eA71C1be64BE053A0E6feE1);
+        $("#setFactoryItem").on("click", function(){
+            setFacItem();
+        });
+
+        $("#mintItem").on("click", function(){
+            MintItem();
+        });
+
     	$("#mintQuality").on("click", function(){
             var generation = $("#generation").val();
             var quality = $("#quality").val();
