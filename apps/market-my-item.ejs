@@ -18,19 +18,19 @@
     </div>
 
     <div class="col-12">
-        <textarea class="form-control" placeholder="Description"></textarea>
+        <textarea class="form-control description" placeholder="Description"></textarea>
         <br>
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Price" aria-label="Recipient's username" aria-describedby="button-addon2">
           <div class="input-group-append">
-            <button class="btn btn-primary btn-sm" data-market-sell data-tokenid="" type="button" id="button-addon2">SELL</button>
+            <button class="btn btn-primary btn-sm marketsell" data-market-sell data-tokenid="" type="button" id="button-addon2">SELL</button>
             
           </div>
         </div>
     </div>
 
     <div class="col-12">
-        <button class="btn btn-primary btn-sm" data-tokenid="" data-toggle="modal" data-target="#transferWallet" type="button">Transfer</button>
+        <button class="btn btn-primary btn-sm tranferid" data-tokenid="" data-toggle="modal" data-target="#transferWallet" type="button">Transfer</button>
     </div>
  </div>
 <div class="row">
@@ -107,6 +107,8 @@ $(".itemFocus").on("click", function(){
     var getDataJSON = $(this).data("json");
     
     $(".stokenid").html(getDataJSON.tokenId);
+    $(".tranferid, .marketsell").attr("data-tokenid",getDataJSON.tokenId);
+
     $(".sname").html(getDataJSON.CarName);
     $(".sLever").html(getDataJSON.Lever);
     $(".sModels").html(getDataJSON.Models);

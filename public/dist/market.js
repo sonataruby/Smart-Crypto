@@ -67,9 +67,9 @@ SmartApps = (function (SmartApps, $, window) {
         });
     }
     
-    SmartApps.Market.sell =  async (tokenID, price, name, description) => {
+    SmartApps.Market.sell =  async (tokenID, price, description) => {
         let depositAmount = blockchain.toWei(price.toString(),"ether");
-        await contractMarket.sell(tokenID, depositAmount, ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS*2}).then(async (value)=>{
+        await contractMarket.sell(tokenID, depositAmount, ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:500000}).then(async (value)=>{
             if(value.transactionHash){
 
                 let id = await blockchain.getNftTokenID(value.transactionHash);
@@ -78,7 +78,6 @@ SmartApps = (function (SmartApps, $, window) {
                     sell_id : id,
                     price : price,
                     hash : value.transactionHash,
-                    name : name,
                     description : description,
                     money_contract : ContractAddress.AddressContractSmartToken,
                     nft_contract : ContractAddress.AddressContractSmartNFT
@@ -236,7 +235,7 @@ SmartApps = (function (SmartApps, $, window) {
                 $("[data-market-sell]").on("click", function(){
                     var tokenID = $(this).data("tokenid");
                     var price = $(this).parent().parent().find("input").val();
-                    var name = $(this).parent().parent().parent().find("input.name").val();
+                    
                     var description = $(this).parent().parent().parent().find("textarea.description").val();
                     var error = false;
                     if(tokenID == 0){
@@ -247,7 +246,7 @@ SmartApps = (function (SmartApps, $, window) {
                         blockchain.notify("Error Price, Plz Try again");
                         error = true;
                     }
-                    if(error == false) SmartApps.Market.sell(tokenID, price, name, description);
+                    if(error == false) SmartApps.Market.sell(tokenID, price, description);
                 });
 
                 $("[data-nft-transfer]").on("click", function(){
