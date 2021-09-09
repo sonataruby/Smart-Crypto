@@ -51,6 +51,15 @@ let loadSmartNFT =  async function() {
     let contract = await loadContract(farmAddress.AddressContractSmartNFT, farmArtifact);
     return contract.methods;
 };
+
+let loadNFTItem =  async function() {
+    var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/nftitem.json', 'utf8'));
+    var farmAddress = await loadAddress();
+    
+    let contract = await loadContract(farmAddress.AddressContractNFTItem, farmArtifact);
+    return contract.methods;
+};
+
 let loadMarketNFT =  async function() {
     var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/nftmarket.json', 'utf8'));
     var farmAddress = await loadAddress();
@@ -69,4 +78,6 @@ module.exports.web3 = web3;
 module.exports.loadAddress = loadAddress;
 module.exports.loadSmartNFT = loadSmartNFT;
 module.exports.loadMarketNFT = loadMarketNFT;
+module.exports.loadNFTItem = loadNFTItem;
+
 module.exports.getHash = getHash;

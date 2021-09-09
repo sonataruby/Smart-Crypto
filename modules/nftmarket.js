@@ -11,6 +11,8 @@ module.exports = function(prefix , app) {
 		
 		const getMyItems = async (wallet) => {
 			let contract = await blockchain.loadSmartNFT();
+			
+			
 	 		let address = await blockchain.loadAddress();
 	 		let total = await contract.totalSupply().call();
 	 		let balance = await contract.balanceOf(wallet).call();
@@ -18,20 +20,13 @@ module.exports = function(prefix , app) {
 	 		var obj = [];
     		for(var i=1; i<=total; i++) {
     			const owner = await contract.ownerOf(i).call();
-    			/*
-		        await contract.tokenOfOwnerByIndex(wallet, i).call().then(async (tokenID) => {
-                	if(tokenID > 0){
-                		await contract.paramsOf(i).call().then((value) => {
-		                	console.log("ID :",tokenID,"Option : ",value)
-		                });
-                	}
-                });
-                */
                 if(owner == wallet){
                 	obj.push(i);
                 }
 		    }
 
+		    
+		    
 		    var object = [];
 		    for(var i=0; i<obj.length; i++) {
 		    	let index = parseInt(obj[i])
@@ -67,12 +62,42 @@ module.exports = function(prefix , app) {
 					readObject.options.Nitro = value.Nitro;
     				
     				
+    				
                 	object.push(readObject);
                 });
 		    }
 
 		    console.log(object[0]);
 		    return object;
+    		
+		}
+
+		const getMyExp = async (wallet) => {
+			
+			let contractItem = await blockchain.loadNFTItem();
+			
+	 		let address = await blockchain.loadAddress();
+	 		
+
+		    let totalExp = await contractItem.totalSupply().call();
+		    var objItem = [];
+    		for(var i=1; i<=totalExp; i++) {
+    			const owner = await contractItem.ownerOf(i).call();
+                if(owner == wallet){
+                	objItem.push(i);
+                }
+		    }
+
+		    var objectExp = [];
+		    for(var i=0; i<objItem.length; i++) {
+		    	let index = parseInt(objItem[i])
+		    	await contractItem.paramsOf(index).call().then(async (value) => {
+		    		objectExp.push({tokenId : index, image:"https://cryptocar.cc/nfts/exp/"+value.id+".gif", exp : value.exp});
+		    	});
+		    }
+		    
+		   
+		    return objectExp;
     		
 		}
 
@@ -334,9 +359,11 @@ module.exports = function(prefix , app) {
 			var data = [];
 			if(wallet.length > 40){
 				data = await getMyItems(wallet);
+				expitem = await getMyExp(wallet);
 			}
 			
 			dataMain.items = data;
+			dataMain.expitem = expitem;
 			res.render(dataMain.public.market == true ? "market-my-item" : "coming",dataMain);
 		});
 

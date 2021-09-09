@@ -4,6 +4,7 @@
     </div>
     <div class="col-6">
         <ul class="list-group list-group-flush">
+          <li class="list-group-item">Token ID : #<span class="stokenid"></span></li>
           <li class="list-group-item">Name : <span class="sname"></span></li>
           <li class="list-group-item">Lever : <span class="sLever"></span></li>
           <li class="list-group-item">Models <span class="sModels"></span></li>
@@ -41,7 +42,7 @@
         
           <div class="col-4 mb-4">
             <div class="border p-3">
-              <img src="<%=data.image%>" class="itemFocus" data-tokenid="<%=data.id%>" style="width:100%" data-json="<%= JSON.stringify(data.options)%>"">
+              <img src="<%=data.image%>" class="itemFocus" data-tokenid="<%=data.id%>" style="width:100%" data-json="<%= JSON.stringify(data.options)%>">
             </div>
           </div>
           
@@ -70,11 +71,11 @@
     <div class="row">
         <div class="col-4">
           Item EXP 1
-          <div class="border" style="height:60px;"></div>
+          <div class="border" style="height:60px;" id="exptoken1"></div>
         </div>
         <div class="col-4">
           Item EXP 2
-          <div class="border" style="height:60px;">
+          <div class="border" style="height:60px;" id="exptoken2">
 
           </div>
         </div>
@@ -83,13 +84,29 @@
   </div>
   <div class="col-4">
     <h5>Your Item EXP</h5>
-    <div class="border"></div>
+    <div style="height:300px;">
+    <div class="row" id="explibs">
+        <% expitem.forEach(function(data, index){ %>
+        
+          <div class="col-4 mb-4">
+            <div class="border p-3">
+              <img src="<%=data.image%>" class="ExpFocus" data-tokenid="<%=data.tokenId%>" style="width:100%">
+              <span><%=data.exp%> exp</span>
+            </div>
+          </div>
+          
+       
+      <%});%>
+    </div>
+    
   </div>
 </div>
  
 <script>
 $(".itemFocus").on("click", function(){
     var getDataJSON = $(this).data("json");
+    
+    $(".stokenid").html(getDataJSON.id);
     $(".sname").html(getDataJSON.CarName);
     $(".sLever").html(getDataJSON.Lever);
     $(".sModels").html(getDataJSON.Models);
@@ -110,20 +127,37 @@ $('#transferWallet').on('show.bs.modal', function (event) {
 })
 
 $(document).ready(function() {
-       $('#carslibs .itemFocus').draggable({
+    $('#carslibs .itemFocus').draggable({
         connectToSortable: "#carslibs2",
         helper: 'clone',
         revert: "invalid"
     });
       
-      $('#carslibs2').droppable({
+    $('#carslibs2').droppable({
           drop: function(event, ui) {
               $(this).attr("data-tokenid",$(ui.helper).attr("data-tokenid"));
               $(this).html('<img src="'+$(ui.helper).attr("src")+'">');
           },
           activeClass: "dropActive",
           hoverClass: "dropHover"
-      });
+    });
+
+    $('#explibs .ExpFocus').draggable({
+        connectToSortable: "#exptoken1, #exptoken2",
+        helper: 'clone',
+        revert: "invalid"
+    });
+
+
+    $('#exptoken1, #exptoken2').droppable({
+          drop: function(event, ui) {
+              $(this).attr("data-tokenid",$(ui.helper).attr("data-tokenid"));
+              $(this).html('<img src="'+$(ui.helper).attr("src")+'">');
+          },
+          activeClass: "dropActive",
+          hoverClass: "dropHover"
+    });
+
   });
 </script>
 
