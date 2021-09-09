@@ -164,21 +164,21 @@ SmartApps = (function (SmartApps, $, window) {
                 console.log(value);
             });
         };
-        const MintItem = async () => {
-           
-            item.createItem(wallet,1,300).send({gas:GAS}).then((value) => {
+        const CreateItemExp = async (id, exp) => {
+            
+            await factory.mintItem(id,exp).send({gas:GAS}).then((value) => {
                 console.log(value);
             });
         };
+
+
         //getHash();
     	//getNFT();
     	//trand();
         //setStaticUser(0x7a397c2bC6dfDA421975435ca41fc5F4318Ea3E9);
        
 
-        $("#mintItem").on("click", function(){
-            MintItem();
-        });
+        
 
     	$("#mintQuality").on("click", function(){
             var generation = $("#generation").val();
@@ -252,6 +252,14 @@ SmartApps = (function (SmartApps, $, window) {
             nftitemSetup();
 
         });
+        
+        $("#CreateItem").on("click", function(){
+            var id = $(this).parent().find("input.id").val();
+            var exp = $(this).parent().find("input.exp").val();
+            CreateItemExp(id,exp);
+
+        });
+
         
 
         $(".contractaddress").html('<div>Contract : '+blockchain.address().AddressContractNFTFactory+'</div><div><a class="btn btn-md btn-primary" target="_bank" href="https://bscscan.com/address/'+blockchain.address().AddressContractNFTFactory+'">Contract</a></div>');
