@@ -217,7 +217,7 @@ SmartApps = (function (SmartApps, $, window) {
 
     SmartApps.Market.UpItemLever =  async (e1, e2) => {
         var smartnft = await blockchain.loadContractNFTItem();
-        await smartnft.upLever(e1, e2).send({gas:GAS}).then((value) => {
+        await smartnft.upLever(e1, e2).send({gas:400000}).then((value) => {
             console.log(value);
             window.reload;
         });
