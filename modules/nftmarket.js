@@ -220,7 +220,7 @@ module.exports = function(prefix , app) {
 		                	name : value.CarName,
 		                	description : item.description,
 		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif",
-		                	attributes : getOptions(value, tokenID),
+		                	attributes : [getOptions(value, tokenID)],
 		                	model : getModelName(value.Models),
 		                    buyer: InfoSell.buyer,
 		                    currency: InfoSell.currency,
