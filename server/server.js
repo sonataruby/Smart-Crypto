@@ -152,7 +152,9 @@ app.post("/farm/create", async (req, res) => {
 
 app.get("/nft", async (req, res) => {
     const dataMain = readJSONFile('main.json');
+    let jsonToken = require(path.resolve(__dirname, "../apps/abi/address.json"));
  //dataMain.items = await Farm.findAll();
+    dataMain.address = jsonToken;
     res.render("nft",dataMain);
 });
 app.get("/nftmarket", async (req, res) => {

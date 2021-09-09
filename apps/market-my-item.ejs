@@ -1,43 +1,107 @@
  <div class="row">
-    <% items.forEach(function(data, index){ %>
-        <div class="col-md-4 mb-3 col-12" id="plance">
-            <div class="shadown border round">
-            	<img src="<%=data.image%>" style="width:100%">
-            	<hr>
-            	<div class="p-4">
-            		TokenID : #<%=data.id%> <br>
-            		<% data.attributes.forEach(function(dataAttributes, index2){ %>
-	            		<%=dataAttributes.trait_type%> : <%- (dataAttributes.trait_type == "Model" ? data.model : dataAttributes.value)%><br>
-	            	<%});%>
-            	</div>
-            	<hr>
-            	<div class="p-4">
-            		<b>Name</b>
-	            	<input type="text" class="form-control name" placeholder="Name" value="<%=data.name%>">
-	            	<b>Description</b>
-	            	<textarea type="text" class="form-control description" placeholder="Description"><%=data.description%></textarea>
-            	</div>
-            	<hr>
-            	
-            	<div class="input-group mb-3 p-4">
-      				  <input type="text" class="form-control" placeholder="Price" aria-label="Recipient's username" aria-describedby="button-addon2">
-      				  <div class="input-group-append">
-      				    <button class="btn btn-primary btn-sm" data-market-sell data-tokenid="<%=data.id%>" type="button" id="button-addon2">SELL</button>
-      				    
-      				  </div>
-      				</div>
+    <div class="col-6">
+        <img src="" id="fImage">
+    </div>
+    <div class="col-6">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Name : <span class="sname"></span></li>
+          <li class="list-group-item">Lever : <span class="sLever"></span></li>
+          <li class="list-group-item">Models <span class="sModels"></span></li>
+          <li class="list-group-item">Power <span class="sPower"></span></li>
+          <li class="list-group-item">Speed <span class="sSpeed"></span></li>
+          <li class="list-group-item">Acceleraction <span class="sAcceleraction"></span></li>
+          <li class="list-group-item">Handing <span class="sHanding"></span></li>
+          <li class="list-group-item">Nitro <span class="sNitro"></span></li>
+          <li class="list-group-item">Exp <span class="sExp"></span></li>
+        </ul>
+    </div>
 
-      				<hr>
-              <div class="input-group mb-3 p-4">
-      				  <button class="btn btn-primary btn-sm" data-tokenid="<%=data.id%>" data-toggle="modal" data-target="#transferWallet" type="button">Transfer</button>
-              </div>
-            </div>
+    <div class="col-12">
+        <textarea class="form-control" placeholder="Description"></textarea>
+        <br>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Price" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary btn-sm" data-market-sell data-tokenid="" type="button" id="button-addon2">SELL</button>
+            
+          </div>
         </div>
-    <%});%>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-primary btn-sm" data-tokenid="" data-toggle="modal" data-target="#transferWallet" type="button">Transfer</button>
+    </div>
+ </div>
+<div class="row">
+  <div class="col-4">
+    <h5>Your Car</h5>
+    <div style="height:300px;">
+      <div class="row" id="carslibs">
+      <% items.forEach(function(data, index){ %>
+        
+          <div class="col-4 mb-4">
+            <div class="border p-3">
+              <img src="<%=data.image%>" class="itemFocus" data-tokenid="<%=data.id%>" style="width:100%" data-json="<%= JSON.stringify(data.options)%>"">
+            </div>
+          </div>
+          
+       
+      <%});%>
+       </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <h5>Update CAR Lever</h5>
+    <div class="row">
+        <div class="col-4">
+          CAR
+          <div class="border" id="carslibs2" style="height:60px;"></div>
+        </div>
+        <div class="col-4">
+          Item EXP
+          <div class="border" style="height:60px;">
+
+          </div>
+        </div>
+        <div class="col-4"><br><button class="btn btn-info">Up</button></div>
+    </div>
+
+    <h5>Update EXP Lever</h5>
+    <div class="row">
+        <div class="col-4">
+          Item EXP 1
+          <div class="border" style="height:60px;"></div>
+        </div>
+        <div class="col-4">
+          Item EXP 2
+          <div class="border" style="height:60px;">
+
+          </div>
+        </div>
+        <div class="col-4"><br><button class="btn btn-primary">Up</button></div>
+    </div>
+  </div>
+  <div class="col-4">
+    <h5>Your Item EXP</h5>
+    <div class="border"></div>
+  </div>
 </div>
-
-
+ 
 <script>
+$(".itemFocus").on("click", function(){
+    var getDataJSON = $(this).data("json");
+    $(".sname").html(getDataJSON.CarName);
+    $(".sLever").html(getDataJSON.Lever);
+    $(".sModels").html(getDataJSON.Models);
+    $(".sPower").html(getDataJSON.Power);
+    $(".sSpeed").html(getDataJSON.Speed);
+    $(".sAcceleraction").html(getDataJSON.Acceleraction);
+    $(".sHanding").html(getDataJSON.Handing);
+    $(".sNitro").html(getDataJSON.Nitro);
+    $(".sExp").html(getDataJSON.Exp);
+    $("#fImage").attr("src",getDataJSON.Image);
+
+});
 $('#transferWallet').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) 
   var recipient = button.data('tokenid')
@@ -45,7 +109,25 @@ $('#transferWallet').on('show.bs.modal', function (event) {
   modal.find('.modal-footer button.confirm').attr("data-tokenid",recipient)
 })
 
+$(document).ready(function() {
+       $('#carslibs .itemFocus').draggable({
+        connectToSortable: "#carslibs2",
+        helper: 'clone',
+        revert: "invalid"
+    });
+      
+      $('#carslibs2').droppable({
+          drop: function(event, ui) {
+              $(this).attr("data-tokenid",$(ui.helper).attr("data-tokenid"));
+              $(this).html('<img src="'+$(ui.helper).attr("src")+'">');
+          },
+          activeClass: "dropActive",
+          hoverClass: "dropHover"
+      });
+  });
 </script>
+
+
 <div class="modal fade" id="transferWallet" tabindex="-1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">

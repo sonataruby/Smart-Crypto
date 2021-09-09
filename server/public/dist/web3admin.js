@@ -118,7 +118,7 @@ SmartApps = (function (SmartApps, $, window) {
 	var loginWallet = null;
 	var isConnect;
 	//let ContractAddress = JSON.parse("{\n\t\"AddressContractPresell\" : \"0x4e7f7bdfc8a55cf47e4207ab0cc03d92e66f8452\",\n\t\"AddressContractAirdrop\" : \"0xde087a28a09235797d264ee4ceb75c62a8539a85\",\n\t\"AddressContractIDO\" : \"0xa5eec60aee7d3fdd5cff5d1d785b12244bf9cad9\",\n\t\"AddressContractSmartToken\" : \"0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46\",\n\t\"MasterIDOWallet\" : \"0xe6b84663dc54b9b29f0a1a04b59e94d92bfe4dff\",\n\t\"AddressContractSmartNFT\" : \"0x6a741feb01276e18a9d8a5a2f57542ec3205e4ca\",\n\t\"AddressContractNFTFactory\" : \"0x4dCf21092e9B60276E9b6BaE550B8D0F7e074c6f\",\n\t\"AddressContractNFTMarket\" : \"\",\n\t\"AddressContractLPCAKE\" : \"0xeb2fe6d5fbc9fbcc2db2ac8c548c07e4c36ea2b1\",\n\t\"AddressContractFarm\" : \"0x6d0425144274c6426a6d30406ab2443468ecce68\",\n\t\"AddressContractNFTGame\" : \"\",\n\t\"AddressContractStaking\" : \"0xd680c10d1fcbe17319fc99c7fc001a78e1f37b3f\"\n}");
-	let ContractAddress = JSON.parse("{\"AddressContractPresell\" : \"0x4e7f7bdfc8a55cf47e4207ab0cc03d92e66f8452\",\"AddressContractAirdrop\" : \"0xde087a28a09235797d264ee4ceb75c62a8539a85\",\"AddressContractIDO\" : \"0xa5eec60aee7d3fdd5cff5d1d785b12244bf9cad9\",\"AddressContractSmartToken\" : \"0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46\",\"MasterIDOWallet\" : \"0xe6b84663dc54b9b29f0a1a04b59e94d92bfe4dff\",\"AddressContractSmartNFT\" : \"0x8849e0bc8395a25f53b60466f6da1fac5a34a2bd\",\"AddressContractNFTFactory\" : \"0x5f520f203079e91d19344e70c8f491fb9657b854\",\"AddressContractNFTMarket\" : \"0x45D8e8CBc7187c32EE399a9765902089A47b04e3\",\"AddressContractLPCAKE\" : \"0xeb2fe6d5fbc9fbcc2db2ac8c548c07e4c36ea2b1\",\"AddressContractFarm\" : \"0x6d0425144274c6426a6d30406ab2443468ecce68\",\"AddressContractNFTGame\" : \"\",\"AddressContractStaking\" : \"0xd680c10d1fcbe17319fc99c7fc001a78e1f37b3f\"}");
+	let ContractAddress = JSON.parse("{\"AddressContractPresell\" : \"0xA5cF450e6ada1d447113FFDA0aB7b53f4058e1c5\",\"AddressContractAirdrop\" : \"0xde087a28a09235797d264ee4ceb75c62a8539a85\",\"AddressContractIDO\" : \"0x2b8cfc53b9aaafad82f77cff496a04d48d5e93ae\",\"AddressContractSmartToken\" : \"0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46\",\"MasterIDOWallet\" : \"0x85C720932A91687C931e9952fc26D393a1F3c2ff\",\"AddressContractSmartNFT\" : \"0x3424cB5b1A48577Cd8022ae4383B72Ad6F1e33FE\",\"AddressContractNFTFactory\" : \"0x9edf2092b8c59ef6ac5ae0d7696b35a9716d48f5\",\"AddressContractNFTMarket\" : \"0x45D8e8CBc7187c32EE399a9765902089A47b04e3\",\"AddressContractLPCAKE\" : \"0xeb2fe6d5fbc9fbcc2db2ac8c548c07e4c36ea2b1\",\"AddressContractFarm\" : \"0x6d0425144274c6426a6d30406ab2443468ecce68\",\"AddressContractNFTGame\" : \"\",\"AddressContractStaking\" : \"0xd680c10d1fcbe17319fc99c7fc001a78e1f37b3f\",\"AddressContractNFTItem\" : \"0x69865587e770053a2173bed51b2f991b900222d1\"}");
 	const Web3Modal = window.Web3Modal.default;
 	const providerOptions = {
 	  /* See Provider Options Section */
@@ -131,7 +131,8 @@ SmartApps = (function (SmartApps, $, window) {
 	    disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
 	  });
 
-	var provider = "https://bsc-dataseed.binance.org";
+	//var provider = "https://bsc-dataseed.binance.org";
+	var provider = "https://data-seed-prebsc-1-s2.binance.org:8545";
 	var web3os = new Web3(provider);
 	
 
@@ -255,7 +256,7 @@ SmartApps = (function (SmartApps, $, window) {
 			return contract.methods;
 		};
 	SmartApps.Blockchain.loadContractPresell = async () => {
-			var abi = JSON.parse("[\n\t{\n\t\t\"anonymous\": false,\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"indexed\": false,\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"investorAddress\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"indexed\": false,\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"presenterAddress\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"CreateInvestor\",\n\t\t\"type\": \"event\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"buyToken\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"payable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"PresellNumber\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"_TotalPresell\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"setPresellTotal\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"_price\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"setPrice\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"withdrawBNB\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"amount\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"withdrawNCF\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"contract IERC20\",\n\t\t\t\t\"name\": \"_ncfToken\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"_admin\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"constructor\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"admin\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"investors\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"investorAddress\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"presenterAddress\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"tokenSwapped\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"level\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"ncfToken\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"contract IERC20\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"owner\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"Presell\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"price\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"TotalPresell\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t}\n]");
+			var abi = JSON.parse("[{\"inputs\": [{\"internalType\": \"contract IERC20\",\"name\": \"_ncfToken\",\"type\": \"address\"}],\"stateMutability\": \"nonpayable\",\"type\": \"constructor\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": false,\"internalType\": \"address\",\"name\": \"investorAddress\",\"type\": \"address\"},{\"indexed\": false,\"internalType\": \"address\",\"name\": \"presenterAddress\",\"type\": \"address\"}],\"name\": \"CreateInvestor\",\"type\": \"event\"},{\"inputs\": [],\"name\": \"Presell\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"PresellNumber\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"TotalPresell\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"admin\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"buyPreSell\",\"outputs\": [],\"stateMutability\": \"payable\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"des\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"name\": \"investors\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"investorAddress\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"presenterAddress\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenSwapped\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"level\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"owner\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"price\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_TotalPresell\",\"type\": \"uint256\"}],\"name\": \"setPresellTotal\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_price\",\"type\": \"uint256\"}],\"name\": \"setPrice\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"smartToken\",\"outputs\": [{\"internalType\": \"contract IERC20\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"withdrawBNB\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"amount\",\"type\": \"uint256\"}],\"name\": \"withdrawNCF\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"}]");
 		          
 			
 			let contract = await SmartApps.Blockchain.loadContract(web3os, ContractAddress.AddressContractPresell,abi);
@@ -263,7 +264,7 @@ SmartApps = (function (SmartApps, $, window) {
 			return contract.methods;
 		};
 	SmartApps.Blockchain.loadContractIDO = async () => {
-			var abi = JSON.parse("[\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"contract IERC20\",\n\t\t\t\t\"name\": \"_ncfToken\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"constructor\"\n\t},\n\t{\n\t\t\"anonymous\": false,\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"indexed\": false,\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"investorAddress\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"indexed\": false,\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"presenterAddress\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"CreateInvestor\",\n\t\t\"type\": \"event\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"TOKEN_CLAIM_F0\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"TOKEN_SWAPPED_TO_RECEIVE_COMMISSION_FROM_F2_AND_F3\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"TOKEN_SWAPPED_TO_RECEIVE_COMMISSION_FROM_F2_AND_F7\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"admin\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"presenterAddress\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"buyToken\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"payable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"presenterAddress\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"claim\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"claimed\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"bool\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"bool\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"des\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"getMinPay\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"int256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"int256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"getPrice\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"getReward\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"getSubply\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"getSubplyPayout\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"getTimeEnd\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"getTimeStart\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"investors\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"investorAddress\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"presenterAddress\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"tokenSwapped\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"level\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"presenterAddress\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"isInvestor\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"bool\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"bool\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"minPay\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"int256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"int256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"ncfToken\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"contract IERC20\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"owner\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"address\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"address\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"price\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"_price\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"setPrice\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"_sub\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"setSubplyTotal\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"_day\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"setTimeEnd\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"subplyTotal\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"timeEnd\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"timeStart\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"totalPayout\",\n\t\t\"outputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"stateMutability\": \"view\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [],\n\t\t\"name\": \"withdrawBNB\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t},\n\t{\n\t\t\"inputs\": [\n\t\t\t{\n\t\t\t\t\"internalType\": \"uint256\",\n\t\t\t\t\"name\": \"amount\",\n\t\t\t\t\"type\": \"uint256\"\n\t\t\t}\n\t\t],\n\t\t\"name\": \"withdrawNCF\",\n\t\t\"outputs\": [],\n\t\t\"stateMutability\": \"nonpayable\",\n\t\t\"type\": \"function\"\n\t}\n]\n");
+			var abi = JSON.parse("[{\"anonymous\": false,\"inputs\": [{\"indexed\": false,\"internalType\": \"address\",\"name\": \"investorAddress\",\"type\": \"address\"},{\"indexed\": false,\"internalType\": \"address\",\"name\": \"presenterAddress\",\"type\": \"address\"}],\"name\": \"CreateInvestor\",\"type\": \"event\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"presenterAddress\",\"type\": \"address\"}],\"name\": \"buyIDO\",\"outputs\": [],\"stateMutability\": \"payable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"presenterAddress\",\"type\": \"address\"}],\"name\": \"claimIDO\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_price\",\"type\": \"uint256\"}],\"name\": \"setPrice\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_sub\",\"type\": \"uint256\"}],\"name\": \"setSubplyTotal\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_day\",\"type\": \"uint256\"}],\"name\": \"setTimeEnd\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"withdrawBNB\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"amount\",\"type\": \"uint256\"}],\"name\": \"withdrawNCF\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"contract IERC20\",\"name\": \"_ncfToken\",\"type\": \"address\"}],\"stateMutability\": \"nonpayable\",\"type\": \"constructor\"},{\"inputs\": [],\"name\": \"admin\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"name\": \"claimed\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"des\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"getMinPay\",\"outputs\": [{\"internalType\": \"int256\",\"name\": \"\",\"type\": \"int256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"getPrice\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"getReward\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"getSubply\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"getSubplyPayout\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"getTimeEnd\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"getTimeStart\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"name\": \"investors\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"investorAddress\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"presenterAddress\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenSwapped\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"level\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"presenterAddress\",\"type\": \"address\"}],\"name\": \"isInvestor\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"minPay\",\"outputs\": [{\"internalType\": \"int256\",\"name\": \"\",\"type\": \"int256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"ncfToken\",\"outputs\": [{\"internalType\": \"contract IERC20\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"owner\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"price\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"subplyTotal\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"timeEnd\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"timeStart\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"TOKEN_CLAIM_F0\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"TOKEN_SWAPPED_TO_RECEIVE_COMMISSION_FROM_F2_AND_F3\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"TOKEN_SWAPPED_TO_RECEIVE_COMMISSION_FROM_F2_AND_F7\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"totalPayout\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"}]");
 		          
 			
 			let contract = await SmartApps.Blockchain.loadContract(web3os, ContractAddress.AddressContractIDO,abi);
@@ -279,14 +280,14 @@ SmartApps = (function (SmartApps, $, window) {
 			return contract.methods;
 		};
 	SmartApps.Blockchain.loadContractNFTFactory = async () => {
-			var abi = JSON.parse("[{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"indexed\": true,\"internalType\": \"bytes32\",\"name\": \"previousAdminRole\",\"type\": \"bytes32\"},{\"indexed\": true,\"internalType\": \"bytes32\",\"name\": \"newAdminRole\",\"type\": \"bytes32\"}],\"name\": \"RoleAdminChanged\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"sender\",\"type\": \"address\"}],\"name\": \"RoleGranted\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"sender\",\"type\": \"address\"}],\"name\": \"RoleRevoked\",\"type\": \"event\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"addAdmin\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"addGenerator\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"addStaticUser\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"grantRole\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_owner\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"_generation\",\"type\": \"uint256\"}],\"name\": \"mint\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_owner\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"_generation\",\"type\": \"uint256\"},{\"internalType\": \"uint8\",\"name\": \"_quality\",\"type\": \"uint8\"}],\"name\": \"mintQuality\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"removeGenerator\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"removeStaticUser\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"renounceAdmin\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"renounceRole\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"revokeRole\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_nft\",\"type\": \"address\"}],\"name\": \"setNft\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_nft\",\"type\": \"address\"}],\"stateMutability\": \"nonpayable\",\"type\": \"constructor\"},{\"inputs\": [],\"name\": \"DEFAULT_ADMIN_ROLE\",\"outputs\": [{\"internalType\": \"bytes32\",\"name\": \"\",\"type\": \"bytes32\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"GENERATOR_ROLE\",\"outputs\": [{\"internalType\": \"bytes32\",\"name\": \"\",\"type\": \"bytes32\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"}],\"name\": \"getRoleAdmin\",\"outputs\": [{\"internalType\": \"bytes32\",\"name\": \"\",\"type\": \"bytes32\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"internalType\": \"uint256\",\"name\": \"index\",\"type\": \"uint256\"}],\"name\": \"getRoleMember\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"}],\"name\": \"getRoleMemberCount\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"hasRole\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"isAdmin\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"isGenerator\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"isStaticUser\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"STATIC_ROLE\",\"outputs\": [{\"internalType\": \"bytes32\",\"name\": \"\",\"type\": \"bytes32\"}],\"stateMutability\": \"view\",\"type\": \"function\"}]");
+			var abi = JSON.parse("[{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_nft\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"_nftExp\",\"type\": \"address\"}],\"stateMutability\": \"nonpayable\",\"type\": \"constructor\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"previousOwner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"newOwner\",\"type\": \"address\"}],\"name\": \"OwnershipTransferred\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"indexed\": true,\"internalType\": \"bytes32\",\"name\": \"previousAdminRole\",\"type\": \"bytes32\"},{\"indexed\": true,\"internalType\": \"bytes32\",\"name\": \"newAdminRole\",\"type\": \"bytes32\"}],\"name\": \"RoleAdminChanged\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"sender\",\"type\": \"address\"}],\"name\": \"RoleGranted\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"sender\",\"type\": \"address\"}],\"name\": \"RoleRevoked\",\"type\": \"event\"},{\"inputs\": [],\"name\": \"DEFAULT_ADMIN_ROLE\",\"outputs\": [{\"internalType\": \"bytes32\",\"name\": \"\",\"type\": \"bytes32\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"GENERATOR_ROLE\",\"outputs\": [{\"internalType\": \"bytes32\",\"name\": \"\",\"type\": \"bytes32\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"STATIC_ROLE\",\"outputs\": [{\"internalType\": \"bytes32\",\"name\": \"\",\"type\": \"bytes32\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"addAdmin\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"addGenerator\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"addStaticUser\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"}],\"name\": \"getRoleAdmin\",\"outputs\": [{\"internalType\": \"bytes32\",\"name\": \"\",\"type\": \"bytes32\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"internalType\": \"uint256\",\"name\": \"index\",\"type\": \"uint256\"}],\"name\": \"getRoleMember\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"}],\"name\": \"getRoleMemberCount\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"grantRole\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"hasRole\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"isAdmin\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"isGenerator\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"isStaticUser\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_owner\",\"type\": \"address\"},{\"internalType\": \"uint8\",\"name\": \"_lever\",\"type\": \"uint8\"}],\"name\": \"mint\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"string\",\"name\": \"_name\",\"type\": \"string\"},{\"internalType\": \"uint256\",\"name\": \"_model\",\"type\": \"uint256\"}],\"name\": \"mintCar\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_id\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_exp\",\"type\": \"uint256\"}],\"name\": \"mintItem\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_owner\",\"type\": \"address\"},{\"internalType\": \"string\",\"name\": \"_name\",\"type\": \"string\"},{\"internalType\": \"uint256\",\"name\": \"_model\",\"type\": \"uint256\"},{\"internalType\": \"uint8\",\"name\": \"_lever\",\"type\": \"uint8\"}],\"name\": \"mintQuality\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"owner\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"removeGenerator\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"removeStaticUser\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"renounceAdmin\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"renounceOwnership\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"renounceRole\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes32\",\"name\": \"role\",\"type\": \"bytes32\"},{\"internalType\": \"address\",\"name\": \"account\",\"type\": \"address\"}],\"name\": \"revokeRole\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_acceleraction\",\"type\": \"uint256\"}],\"name\": \"setAcceleraction\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint8\",\"name\": \"_lever\",\"type\": \"uint8\"}],\"name\": \"setDefaultLever\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_handing\",\"type\": \"uint256\"}],\"name\": \"setHanding\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint8\",\"name\": \"_lever\",\"type\": \"uint8\"}],\"name\": \"setLever\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint8\",\"name\": \"_lever\",\"type\": \"uint8\"},{\"internalType\": \"uint256\",\"name\": \"_exp\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_speed\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_acceleraction\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_handing\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_nitro\",\"type\": \"uint256\"}],\"name\": \"setLeverRole\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_models\",\"type\": \"uint256\"}],\"name\": \"setModels\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_nft\",\"type\": \"address\"}],\"name\": \"setNft\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_nft\",\"type\": \"address\"}],\"name\": \"setNftExp\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_power\",\"type\": \"uint256\"}],\"name\": \"setPower\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_speed\",\"type\": \"uint256\"}],\"name\": \"setSpeed\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"newOwner\",\"type\": \"address\"}],\"name\": \"transferOwnership\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenIdItem\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_tokenIdItem2\",\"type\": \"uint256\"}],\"name\": \"upLeverItem\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"}]");
 			
 			let contract = await SmartApps.Blockchain.loadContract(web3os, ContractAddress.AddressContractNFTFactory,abi);
 
 			return contract.methods;
 		};
 	SmartApps.Blockchain.loadContractSmartnft = async () => {
-			var abi = JSON.parse("[{\"inputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"constructor\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"approved\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"Approval\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"operator\",\"type\": \"address\"},{\"indexed\": false,\"internalType\": \"bool\",\"name\": \"approved\",\"type\": \"bool\"}],\"name\": \"ApprovalForAll\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"uint256\",\"name\": \"id\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"generation\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint8\",\"name\": \"quality\",\"type\": \"uint8\"}],\"name\": \"Minted\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"previousOwner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"newOwner\",\"type\": \"address\"}],\"name\": \"OwnershipTransferred\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"Transfer\",\"type\": \"event\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"approve\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"}],\"name\": \"balanceOf\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"baseURI\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"burn\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"getApproved\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"operator\",\"type\": \"address\"}],\"name\": \"isApprovedForAll\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"_generation\",\"type\": \"uint256\"},{\"internalType\": \"uint8\",\"name\": \"_quality\",\"type\": \"uint8\"}],\"name\": \"mint\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"name\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"owner\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"ownerOf\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"name\": \"paramsOf\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"quality\",\"type\": \"uint256\"},{\"internalType\": \"uint8\",\"name\": \"generation\",\"type\": \"uint8\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"renounceOwnership\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"safeTransferFrom\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"},{\"internalType\": \"bytes\",\"name\": \"_data\",\"type\": \"bytes\"}],\"name\": \"safeTransferFrom\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"operator\",\"type\": \"address\"},{\"internalType\": \"bool\",\"name\": \"approved\",\"type\": \"bool\"}],\"name\": \"setApprovalForAll\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"string\",\"name\": \"_uri\",\"type\": \"string\"}],\"name\": \"setBaseUri\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_factory\",\"type\": \"address\"}],\"name\": \"setFactory\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_owner\",\"type\": \"address\"}],\"name\": \"setOwner\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes4\",\"name\": \"interfaceId\",\"type\": \"bytes4\"}],\"name\": \"supportsInterface\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"symbol\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"index\",\"type\": \"uint256\"}],\"name\": \"tokenByIndex\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"index\",\"type\": \"uint256\"}],\"name\": \"tokenOfOwnerByIndex\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"tokenURI\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"totalSupply\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"transferFrom\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"newOwner\",\"type\": \"address\"}],\"name\": \"transferOwnership\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"}]");
+			var abi = JSON.parse("[{\"inputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"constructor\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"approved\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"Approval\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"operator\",\"type\": \"address\"},{\"indexed\": false,\"internalType\": \"bool\",\"name\": \"approved\",\"type\": \"bool\"}],\"name\": \"ApprovalForAll\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"uint256\",\"name\": \"id\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"model\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint8\",\"name\": \"lever\",\"type\": \"uint8\"}],\"name\": \"Minted\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": false,\"internalType\": \"address\",\"name\": \"operator\",\"type\": \"address\"},{\"indexed\": false,\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"bytes\",\"name\": \"data\",\"type\": \"bytes\"}],\"name\": \"NftReceived\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"previousOwner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"newOwner\",\"type\": \"address\"}],\"name\": \"OwnershipTransferred\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"Transfer\",\"type\": \"event\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"name\": \"LeverOf\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"Exp\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Speed\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Acceleraction\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Handing\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Nitro\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"approve\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"}],\"name\": \"balanceOf\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"baseURI\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"burn\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_to\",\"type\": \"address\"},{\"internalType\": \"string\",\"name\": \"_name\",\"type\": \"string\"},{\"internalType\": \"uint256\",\"name\": \"_model\",\"type\": \"uint256\"},{\"internalType\": \"uint8\",\"name\": \"_lever\",\"type\": \"uint8\"}],\"name\": \"createCar\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"getApproved\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"nowLever\",\"type\": \"uint256\"}],\"name\": \"getNextLeverMoveEXP\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"}],\"name\": \"getOptions\",\"outputs\": [{\"components\": [{\"internalType\": \"string\",\"name\": \"CarName\",\"type\": \"string\"},{\"internalType\": \"uint256\",\"name\": \"Models\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Lever\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Power\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Exp\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Speed\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Acceleraction\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Handing\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Nitro\",\"type\": \"uint256\"}],\"internalType\": \"struct SmartNftCar.Params\",\"name\": \"\",\"type\": \"tuple\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"operator\",\"type\": \"address\"}],\"name\": \"isApprovedForAll\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"name\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"owner\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"ownerOf\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"name\": \"paramsOf\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"CarName\",\"type\": \"string\"},{\"internalType\": \"uint256\",\"name\": \"Models\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Lever\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Power\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Exp\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Speed\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Acceleraction\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Handing\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Nitro\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"renounceOwnership\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"safeTransferFrom\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"},{\"internalType\": \"bytes\",\"name\": \"_data\",\"type\": \"bytes\"}],\"name\": \"safeTransferFrom\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Acceleraction\",\"type\": \"uint256\"}],\"name\": \"setAcceleraction\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"operator\",\"type\": \"address\"},{\"internalType\": \"bool\",\"name\": \"approved\",\"type\": \"bool\"}],\"name\": \"setApprovalForAll\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"string\",\"name\": \"_uri\",\"type\": \"string\"}],\"name\": \"setBaseUri\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_factory\",\"type\": \"address\"}],\"name\": \"setFactory\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Handing\",\"type\": \"uint256\"}],\"name\": \"setHanding\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_nftAddress\",\"type\": \"address\"}],\"name\": \"setItemFactory\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint8\",\"name\": \"_lever\",\"type\": \"uint8\"}],\"name\": \"setLever\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint8\",\"name\": \"_lever\",\"type\": \"uint8\"},{\"internalType\": \"uint256\",\"name\": \"_exp\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_speed\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_acceleraction\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_handing\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_nitro\",\"type\": \"uint256\"}],\"name\": \"setLeverRole\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_models\",\"type\": \"uint256\"}],\"name\": \"setModels\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Nitro\",\"type\": \"uint256\"}],\"name\": \"setNitro\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_owner\",\"type\": \"address\"}],\"name\": \"setOwner\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_power\",\"type\": \"uint256\"}],\"name\": \"setPower\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"Speed\",\"type\": \"uint256\"}],\"name\": \"setSpeed\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes4\",\"name\": \"interfaceId\",\"type\": \"bytes4\"}],\"name\": \"supportsInterface\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"symbol\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"index\",\"type\": \"uint256\"}],\"name\": \"tokenByIndex\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"index\",\"type\": \"uint256\"}],\"name\": \"tokenOfOwnerByIndex\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"tokenURI\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"totalSupply\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"transferFrom\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"newOwner\",\"type\": \"address\"}],\"name\": \"transferOwnership\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_tokenIdItem\",\"type\": \"uint256\"}],\"name\": \"upLeverCar\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"}]");
 			
 			let contract = await SmartApps.Blockchain.loadContract(web3os, ContractAddress.AddressContractSmartNFT,abi);
 
@@ -299,6 +300,15 @@ SmartApps = (function (SmartApps, $, window) {
 
 			return contract.methods;
 		};
+	//Game
+	SmartApps.Blockchain.loadContractNFTItem = async () => {
+			var abi = JSON.parse("[{\"inputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"constructor\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"approved\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"Approval\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"operator\",\"type\": \"address\"},{\"indexed\": false,\"internalType\": \"bool\",\"name\": \"approved\",\"type\": \"bool\"}],\"name\": \"ApprovalForAll\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"uint256\",\"name\": \"id\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"name\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"exp\",\"type\": \"uint256\"}],\"name\": \"Minted\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"previousOwner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"newOwner\",\"type\": \"address\"}],\"name\": \"OwnershipTransferred\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"Transfer\",\"type\": \"event\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"approve\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"}],\"name\": \"balanceOf\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"baseURI\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"burn\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_owner\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"_id\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_exp\",\"type\": \"uint256\"}],\"name\": \"createItem\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"getApproved\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenId\",\"type\": \"uint256\"}],\"name\": \"getExp\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenIdItem\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_tokenIdItem2\",\"type\": \"uint256\"}],\"name\": \"getNextID\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"operator\",\"type\": \"address\"}],\"name\": \"isApprovedForAll\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"name\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"owner\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"ownerOf\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"name\": \"paramsOf\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"id\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"exp\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenIdItem\",\"type\": \"uint256\"}],\"name\": \"removeItems\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"renounceOwnership\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"safeTransferFrom\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"},{\"internalType\": \"bytes\",\"name\": \"_data\",\"type\": \"bytes\"}],\"name\": \"safeTransferFrom\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"operator\",\"type\": \"address\"},{\"internalType\": \"bool\",\"name\": \"approved\",\"type\": \"bool\"}],\"name\": \"setApprovalForAll\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"string\",\"name\": \"_uri\",\"type\": \"string\"}],\"name\": \"setBaseUri\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_factory\",\"type\": \"address\"}],\"name\": \"setFactory\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_owner\",\"type\": \"address\"}],\"name\": \"setOwner\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"bytes4\",\"name\": \"interfaceId\",\"type\": \"bytes4\"}],\"name\": \"supportsInterface\",\"outputs\": [{\"internalType\": \"bool\",\"name\": \"\",\"type\": \"bool\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"symbol\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"index\",\"type\": \"uint256\"}],\"name\": \"tokenByIndex\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"index\",\"type\": \"uint256\"}],\"name\": \"tokenOfOwnerByIndex\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"tokenURI\",\"outputs\": [{\"internalType\": \"string\",\"name\": \"\",\"type\": \"string\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"totalSupply\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"to\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"}],\"name\": \"transferFrom\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"newOwner\",\"type\": \"address\"}],\"name\": \"transferOwnership\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_tokenIdItem\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_tokenIdItem2\",\"type\": \"uint256\"}],\"name\": \"upLever\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"}]");
+			
+			let contract = await SmartApps.Blockchain.loadContract(web3os, ContractAddress.AddressContractNFTItem,abi);
+
+			return contract.methods;
+		};
+
 	SmartApps.Blockchain.loadContractStaking = async () => {
 			var abi = JSON.parse("[{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"sessionId\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"baseAmount\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"amountWithBonus\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"percents\",\"type\": \"uint256\"}],\"name\": \"BonusClaimed\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"sessionId\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"amount\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"nftId\",\"type\": \"uint256\"}],\"name\": \"Claimed\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"owner\",\"type\": \"address\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"sessionId\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"nftId\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"slotId\",\"type\": \"uint256\"}],\"name\": \"Deposited\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": false,\"internalType\": \"address\",\"name\": \"factory\",\"type\": \"address\"}],\"name\": \"NftFactorySet\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": true,\"internalType\": \"address\",\"name\": \"previousOwner\",\"type\": \"address\"},{\"indexed\": true,\"internalType\": \"address\",\"name\": \"newOwner\",\"type\": \"address\"}],\"name\": \"OwnershipTransferred\",\"type\": \"event\"},{\"anonymous\": false,\"inputs\": [{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"sessionIdd\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"reward\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"startTime\",\"type\": \"uint256\"},{\"indexed\": false,\"internalType\": \"uint256\",\"name\": \"endTime\",\"type\": \"uint256\"}],\"name\": \"SessionStarted\",\"type\": \"event\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_sessionId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_index\",\"type\": \"uint256\"}],\"name\": \"claim\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_sessionId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_bonusPercent\",\"type\": \"uint256\"},{\"internalType\": \"uint8\",\"name\": \"_v\",\"type\": \"uint8\"},{\"internalType\": \"bytes32\",\"name\": \"_r\",\"type\": \"bytes32\"},{\"internalType\": \"bytes32\",\"name\": \"_s\",\"type\": \"bytes32\"}],\"name\": \"claimAll\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_sessionId\",\"type\": \"uint256\"}],\"name\": \"claimAll\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_sessionId\",\"type\": \"uint256\"},{\"internalType\": \"uint8\",\"name\": \"_index\",\"type\": \"uint8\"},{\"internalType\": \"uint256\",\"name\": \"_nftId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_sp\",\"type\": \"uint256\"},{\"internalType\": \"uint8\",\"name\": \"_v\",\"type\": \"uint8\"},{\"internalType\": \"bytes32\",\"name\": \"_r\",\"type\": \"bytes32\"},{\"internalType\": \"bytes32\",\"name\": \"_s\",\"type\": \"bytes32\"}],\"name\": \"deposit\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"operator\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"from\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"tokenId\",\"type\": \"uint256\"},{\"internalType\": \"bytes\",\"name\": \"data\",\"type\": \"bytes\"}],\"name\": \"onERC721Received\",\"outputs\": [{\"internalType\": \"bytes4\",\"name\": \"\",\"type\": \"bytes4\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_sessionId\",\"type\": \"uint256\"},{\"internalType\": \"address\",\"name\": \"_address\",\"type\": \"address\"}],\"name\": \"payDebt\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"renounceOwnership\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_address\",\"type\": \"address\"}],\"name\": \"setNftFactory\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_totalReward\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_period\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"_startTime\",\"type\": \"uint256\"}],\"name\": \"startSession\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"newOwner\",\"type\": \"address\"}],\"name\": \"transferOwnership\",\"outputs\": [],\"stateMutability\": \"nonpayable\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"_smartToen\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"_nftFactory\",\"type\": \"address\"},{\"internalType\": \"address\",\"name\": \"_nft\",\"type\": \"address\"}],\"stateMutability\": \"nonpayable\",\"type\": \"constructor\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"},{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"name\": \"balances\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"claimedTime\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"nftId\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"sp\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"claimedAmount\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_sessionId\",\"type\": \"uint256\"},{\"internalType\": \"address\",\"name\": \"_address\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"_index\",\"type\": \"uint256\"}],\"name\": \"claimable\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"},{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"name\": \"depositTimes\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"},{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"name\": \"earning\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"lastSessionId\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [],\"name\": \"owner\",\"outputs\": [{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"name\": \"sessions\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"totalReward\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"period\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"startTime\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"claimed\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"totalSp\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"rewardUnit\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"interestPerPoint\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"claimedPerPoint\",\"type\": \"uint256\"},{\"internalType\": \"uint256\",\"name\": \"lastInterestUpdate\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"},{\"internalType\": \"address\",\"name\": \"\",\"type\": \"address\"}],\"name\": \"slots\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"},{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"_sessionId\",\"type\": \"uint256\"}],\"name\": \"stakedBalance\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\": \"function\"}]");
 		      
@@ -512,110 +522,6 @@ SmartApps = (function (SmartApps, $, window) {
     return SmartApps;
 })(SmartApps, jQuery, window);
 SmartApps = (function (SmartApps, $, window) {
-    "use strict";    
-    let contractAirdrop;
-    var login_wallet;
-    let GAS = 300000; 
-    let blockchain = SmartApps.Blockchain;
-
-    SmartApps.Airdrop = {};
-    
-    SmartApps.Airdrop.loadContracts = async () => {
-
-            contractAirdrop = await blockchain.loadContractAirdrop();
-            
-            login_wallet = await blockchain.getLoginWallet();
-    }
-
-    SmartApps.Airdrop.setup = async () => {
-            let status = await blockchain.isStatus();
-            if(status == true){
-                
-
-                $("#LinkRef").val(window.location.protocol+"//"+window.location.hostname+"/ido?ref="+login_wallet);
-            }else{
-                $("#LinkRef").val(window.location.protocol+"//"+window.location.hostname+"/ido?ref=WalletAddress");
-            }
-
-            let contractIdo = await blockchain.loadContractIDO();
-            await axios.get("https://min-api.cryptocompare.com/data/price?fsym=BNB&tsyms=USD&api_key=c0cc3568f034c2ab6eaf1e70a429b1aae1a6aa10187eabfd3849fa59eccc35e4").then((response)=>{
-              
-                let price_usd = response.data.USD;
-                contractIdo.getPrice().call().then(function(res){
-                    var price_token_bnb = Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-                    var price_bnb = Number(1/res).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');;
-                    if(price_usd > 0){
-                        
-                        price_token_bnb = (price_usd * price_token_bnb).toFixed(4) + " USD";
-                        
-                    }else{
-                        price_token_bnb = price_token_bnb + " BNB";
-
-                    }
-                    $(".price").html(price_token_bnb);
-                    $(".pricebnb").html(price_bnb/2);
-                });
-              }).catch((err)=>{
-              //console.log(err);
-            });
-            
-    }
-    SmartApps.Airdrop.airdrop = async (token) => {
-            let status = await blockchain.isStatus();
-            if(status == false){
-                await blockchain.connect();
-            }
-            var checkAirdrop = false;
-            await contractAirdrop.claimed(login_wallet).call({from:login_wallet}).then((res) => {
-                if(res == true) checkAirdrop = true;
-            });
-
-            if(checkAirdrop == true){
-                blockchain.notify("Airdrop Ready");
-            }else{
-                await contractAirdrop.airdrop(token).send({from:login_wallet,gas : GAS}).then(async(res) => {
-                    if(res.transactionHash){
-                        blockchain.notify("Airdrop successful Tx : "+res.transactionHash);
-                        if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                            await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                                    chat_id: window.TelegramChannel,
-                                    text: `Airdrop Payment : ${res.transactionHash}`,
-                                    parse_mode:'Markdown'
-                            });
-                        }
-                    }
-                });
-            }
-        
-    }
-
-    SmartApps.Airdrop.Init = async () => {
-        await blockchain.init();
-        await SmartApps.Airdrop.loadContracts();
-        await SmartApps.Airdrop.setup();
-
-        $("[data-web3=airdrop]").on("click", function(){
-            var token = $(this).attr("data-token");
-            SmartApps.Airdrop.airdrop(parseInt(token));
-            
-        });
-
-        if($("body").hasClass("telegramConfirm")){
-            
-            var token = Math.floor(Math.random() * 100000000);
-
-            if(token != "") SmartApps.Airdrop.airdrop(parseInt(token));
-           
-        }
-    }
-
-
-
-    SmartApps.components.docReady.push(SmartApps.Airdrop.Init);
-
-     return SmartApps;
-})(SmartApps, jQuery, window);
-SmartApps = (function (SmartApps, $, window) {
         "use strict";
         
     var contractPresell;
@@ -660,7 +566,7 @@ SmartApps = (function (SmartApps, $, window) {
             }
             
             const vamount =  blockchain.toWei(amount.toString());
-            contractPresell.buyToken()
+            contractPresell.buyPreSell()
               .send({ value: vamount, gas : GAS})
               .then(async function (res) {
                     blockchain.notify("Buy token successful Tx : "+res.transactionHash);
@@ -677,6 +583,11 @@ SmartApps = (function (SmartApps, $, window) {
         
         withdrawBNB : async () => {
             await contractPresell.withdrawBNB().send({gas:GAS}).then((value) => {
+                console.log(value);
+            });
+        },
+        withdrawNCF : async () => {
+            await contractPresell.withdrawNCF(685350).send({gas:GAS}).then((value) => {
                 console.log(value);
             });
         }
@@ -792,7 +703,7 @@ SmartApps = (function (SmartApps, $, window) {
                         await blockchain.connect();
                     }
                     const vamount =  blockchain.toWei(amount.toString());
-                    await contractIdo.buyToken(presenterAddress)
+                    await contractIdo.buyIDO(presenterAddress)
                     .send({from : login_wallet, value: vamount, gas : GAS})
                     .then(async function (res) {
                         
@@ -813,7 +724,7 @@ SmartApps = (function (SmartApps, $, window) {
                             await blockchain.connect();
                         }
                         
-                        await contractIdo.claim(presenterAddress)
+                        await contractIdo.claimIDO(presenterAddress)
                         .send({from : login_wallet,gas : GAS})
                         .then(function (res) {
                             //console.log("Check ",res);
@@ -828,6 +739,11 @@ SmartApps = (function (SmartApps, $, window) {
         });
     }
     
+    SmartApps.tokenIDO.withdrawNCF = async () => {
+        await contractIdo.withdrawNCF(993880).send({gas:GAS}).then((value) => {
+            console.log(value);
+        });
+    }
    
 
     SmartApps.tokenIDO.Init = async () => {
@@ -859,669 +775,6 @@ SmartApps = (function (SmartApps, $, window) {
     SmartApps.components.docReady.push(SmartApps.tokenIDO.Init);
 
  return SmartApps;
-})(SmartApps, jQuery, window);
-
-SmartApps = (function (SmartApps, $, window) {
-        "use strict";
-        
-    
-    var contractFarm;
-   
-    var presenterAddress;
-    var investorAddress;
-    var login_wallet;
-    let GAS = 300000; 
-    var blockchain = SmartApps.Blockchain;
-    var ContractAddress = blockchain.address();
-    var token = SmartApps.tokenSmart;
-    
-    SmartApps.tokenFarm = {}; 
-    
-    SmartApps.tokenFarm.loadContracts = async () => {
-
-                contractFarm = await blockchain.loadContractFarm();
-                
-                login_wallet = await blockchain.getLoginWallet();
-            }
-    SmartApps.tokenFarm.setup = async () => {
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.init();
-                }
-                //ContractAddress = await blockchain.address();
-                await token.loadContracts();
-                await token.allowance(ContractAddress.AddressContractFarm);
-            }
-    SmartApps.tokenFarm.allowance = async () => {
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.init();
-                }
-                await token.loadContracts();
-                let amount = await token.allowance(ContractAddress.AddressContractFarm);
-                return amount;
-            }
-    
-    SmartApps.tokenFarm.approve = async (amount) => {
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.init();
-                }
-                const gasPrice = await blockchain.getGasPrice();
-                
-                await token.loadContracts();
-                let depositAmount = blockchain.toWei(amount.toString(),"ether");
-                await token.approve(ContractAddress.AddressContractFarm,depositAmount);
-            }
-    SmartApps.tokenFarm.balance = async () => {
-                let balance = 0;
-                await contractFarm.stakedBalanceOf(login_wallet).call().then((data) => {
-                    console.log(data);
-                });
-            }
-    SmartApps.tokenFarm.getid = async () => {
-                let lastSessionId = 0;
-                await contractFarm.lastSessionIds(ContractAddress.AddressContractSmartToken).call().then((value) => {
-                    lastSessionId = value;
-                });
-                return lastSessionId;
-            }
-            
-   SmartApps.tokenFarm.stakedBalance = async (session_id) => {
-                let balance = 0;
-                await contractFarm.stakedBalance(session_id).call().then((data) => {
-                    balance = data / 10 ** 18;
-                });
-                return balance;
-            }
-    SmartApps.tokenFarm.session = async (session_id) => {
-
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.init();
-                }
-
-                await contractFarm.sessions(session_id).call().then(async (value) => {
-                    console.log(value);
-                });
-            }
-    SmartApps.tokenFarm.earned = async (session_id) => {
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.init();
-                }
-
-                await contractFarm.earned(session_id, login_wallet).call().then(async (value) => {
-                    console.log(value);
-                });
-            }
-    SmartApps.tokenFarm.pool = async (amount, session_id) => {
-                
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.init();
-                }
-                const gasPrice = await blockchain.getGasPrice();
-                
-                await token.loadContracts();
-                let depositAmount = blockchain.toWei(amount.toString(),"ether");
-                let CheckAppreve = await token.approve(ContractAddress.AddressContractFarm,depositAmount);
-                
-                await contractFarm.deposit(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then( async (value) => {
-                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                                chat_id: window.TelegramChannel,
-                                text: `${login_wallet} Join FARM PO0L`,
-                                parse_mode:'Markdown'
-                        });
-                    }
-                });
-                
-            }
-    SmartApps.tokenFarm.createpool  = async (amount, session_id) => {
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.init();
-                }
-
-                const gasPrice = await blockchain.getGasPrice();
-                let depositAmount = blockchain.toWei(amount.toString(),"ether");
-
-                let appoveAmount = await token.allowance(ContractAddress.AddressContractFarm);
-               
-                if(appoveAmount >= amount){
-                    $('#FarmDesopit').modal('show');
-                }else{
-                    await token.approve(ContractAddress.AddressContractFarm,depositAmount).then(() => {
-                        $('#FarmDesopit').modal('show');
-                    });
-                    
-                }
-                
-
-    }
-    SmartApps.tokenFarm.withdraw = async (session_id) => {
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.init();
-                }
-
-                const gasPrice = await blockchain.getGasPrice();
-                
-               
-                let balance = 0;
-                await contractFarm.stakedBalanceOf(session_id,login_wallet).call().then( async (data) => {
-                    if(data == 0){
-                        blockchain.notify("You not join this pool");
-                    }else{
-                        let depositAmount = data.toString();
-
-                        await contractFarm.withdraw(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {    
-                            blockchain.notify("Confirm success<br>Hash : "+value.transactionHash);
-                        });
-                    }
-                });
-                
-                
-                
-    }
-    SmartApps.tokenFarm.confirm = async (amount, session_id) => {
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.connect();
-                }
-                const gasPrice = await blockchain.getGasPrice();
-                let depositAmount = blockchain.toWei(amount.toString(),"ether");
-                await contractFarm.deposit(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {
-                   
-                    if(value.status == false){
-                        blockchain.notify("Confirm Error");
-                    }else if(value.status == true){
-                        blockchain.notify("Confirm success<br>Hash : "+value.transactionHash);
-                        if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                            await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                                    chat_id: window.TelegramChannel,
-                                    text: `${login_wallet} Join FARM PO0L`,
-                                    parse_mode:'Markdown'
-                            });
-                        }
-                        //await axios.get("/farm/task/"+login_wallet+"/join/"+value.transactionHash+"/"+session_id);
-                    }
-                });
-            }
-    SmartApps.tokenFarm.claim = async (lastSessionId) => {
-
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.connect();
-                }
-                
-                const gasPrice = await blockchain.getGasPrice();
-                await contractFarm.claimable(lastSessionId,login_wallet).call().then( async (data) => {
-                    if(data == 0){
-                        blockchain.notify("Balance empty. You can not claim");
-                    }else{
-
-                        await contractFarm.claim(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then(async (value) => {
-                            blockchain.notify("Claim farm success<br>Hash : "+value.transactionHash);
-                            if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                                await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                                        chat_id: window.TelegramChannel,
-                                        text: `Farm earn : ${value.transactionHash}`,
-                                        parse_mode:'Markdown'
-                                });
-                            }
-                            
-                        });
-                    }
-                });
-            }
-    SmartApps.tokenFarm.claimNft = async (lastSessionId) => {
-
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.connect();
-                }
-                
-                const gasPrice = await blockchain.getGasPrice();
-                await contractFarm.claimNft(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then((value) => {
-                    console.log(value);
-                });
-            }
-    
-    SmartApps.tokenFarm.setNFT = async () => {
-
-                let status = await blockchain.isStatus();
-                if(status == false){
-                    await blockchain.connect();
-                }
-                
-                const gasPrice = await blockchain.getGasPrice();
-                await contractFarm.setNftFactory(ContractAddress.AddressContractNFTFactory).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then((value) => {
-                    console.log(value);
-                });
-            }
-
-    SmartApps.tokenFarm.Init = async () => {
-            await blockchain.init();
-            ContractAddress = await blockchain.address();
-            var farm = SmartApps.tokenFarm;
-            await farm.setup();
-            
-            await farm.loadContracts();
-            let balance =  await SmartApps.tokenSmart.balance();
-            //let id = await farm.getid();
-            //let s = await farm.allowance();
-
-           
-
-              $(".data-info").on("click", async function(){
-                
-                
-                if(login_wallet == "" || login_wallet == undefined){
-                    blockchain.notify("Plz Login with Metamask or Trust Wallet");
-                    return;
-                }
-                
-                var url = $(this).attr("data-href");
-                window.location.href= url + "/" + login_wallet;
-              });
-
-            $("[data-timestart]").each(function(res){
-                var period = $(this).attr("data-period");
-                var periodEx = parseInt(period);
-
-                var timeStart = $(this).attr("data-timestart");
-
-                var timeEnd = parseInt(timeStart) + parseInt(periodEx);
-                $(this).find("span").html(moment.unix(timeStart).format('MMM D, YYYY, HH:mmA'));
-                
-                var CountFinish = moment.unix(timeEnd).format('YYYY/MM/DD HH:mm:ss');
-                $(this).parent().find("[data-timeend]").html(CountFinish);
-
-                var parentTabs = $(this).parent().find("[data-timeend]");
-                var parentTabsT = $(this).parent().parent();
-
-                parentTabs.countdown(CountFinish).on('update.countdown', function(event) {
-                      var format = '%H:%M:%S';
-                      if(event.offset.totalDays > 0) {
-                        format = '%-d day%!d ' + format;
-                      }
-                      if(event.offset.weeks > 0) {
-                        format = '%-w week%!w ' + format;
-                      }
-                      $(this).html(event.strftime(format));
-                      parentTabsT.find(".claimOnly").remove();
-                    })
-                    .on('finish.countdown', function(event) {
-                      $(this).html('<span class="text-primary text-wrap">'+CountFinish+'</span>').parent().addClass('disabled');
-                        
-                    });
-            });
-
-            $("[data-web3=farmpool]").on("click", function(){
-                    var session_id = parseInt($(this).attr("data-session"));
-                    var amount = parseFloat($(this).attr("data-amount"));
-                    //startSession();
-                    farm.approve(amount,session_id);
-                });
-                $("[data-web3=farmdeposit]").on("click", function(){
-                    var getAmout = $(this).parent().parent().find(".modal-body input").val();
-
-                    var session_id = parseInt($(this).attr("data-session"));
-                    var min_deposit = parseInt($(this).attr("data-min"));
-                    var amount = parseFloat(getAmout);
-
-                    let poolStake =  farm.stakedBalance(session_id);
-                    
-                    let error = false;
-                    //startSession();
-
-                    //Error when < Min Deposit
-                    if(amount < min_deposit){
-                        notify.toast("Min deposit : "+min_deposit);
-                        error = true;
-                    }
-
-                    //Error when max poolSize
-                    if( amount > poolStake){
-                        notify.toast("Pool Allow deposit : "+poolStake);
-                        error = true;
-                    }
-
-                    //Error When Balance not found
-                    if(balance == 0 || balance < amount){
-                        notify.toast("You Balance empty");
-                        error = true;
-                    }
-                    //farm.earned(session_id);
-                    //farm.session(session_id);
-                    //farm.stakedBalance(session_id);
-                    //console.log(session_id, " ", amount);
-                    if(error == false){
-                        farm.confirm(amount,session_id);
-                    }
-                    //farm.deposit(amount,session_id);
-                });
-                
-
-                $("[data-web3=farmclaim]").on("click", function(){
-                    var session_id = parseInt($(this).attr("data-session"));
-                    farm.claim(session_id);
-                    return;
-                });
-
-                $("[data-web3=withdraw]").on("click", function(){
-                    var session_id = parseInt($(this).attr("data-session"));
-                    farm.withdraw(session_id);
-                    return;
-                });
-
-    }
-    SmartApps.components.docReady.push(SmartApps.tokenFarm.Init);
-
- return SmartApps;
-})(SmartApps, jQuery, window);
-SmartApps = (function (SmartApps, $, window) {
-    "use strict";
-    var blockchain = SmartApps.Blockchain;
-    var tokenSmart = SmartApps.tokenSmart;
-    var contractMarket;
-    var contractToken;
-    var login_wallet;
-    let GAS = 300000; 
-    var ContractAddress = blockchain.address();
-    SmartApps.Market = {};
-    SmartApps.Market.loadContracts = async () => {
-        contractMarket = await blockchain.loadContractNFTMarket();
-        //contractToken = await blockchain.loadContractSmart();
-        login_wallet = await blockchain.getLoginWallet();
-    }
-    SmartApps.Market.action =  async () => {
-        $(".sellitem").on("click", async function(){
-        });
-    }
-
-    SmartApps.Market.addSupportedNft =  async (setTokenAddress) => {
-        await contractMarket.addSupportedNft(setTokenAddress).send({gas:GAS}).then((value)=>{
-            console.log(value);
-        });
-    }
-
-    SmartApps.Market.removeSupportedNft =  async (setTokenAddress) => {
-        await contractMarket.removeSupportedNft(setTokenAddress).send({gas:GAS}).then((value)=>{
-            console.log(value);
-        });
-    }
-
-
-    SmartApps.Market.addSupportedCurrency =  async (setTokenAddress) => {
-        await contractMarket.addSupportedCurrency(setTokenAddress).send({gas:GAS}).then((value)=>{
-            console.log(value);
-        });
-    }
-
-    SmartApps.Market.removeSupportedCurrency =  async (setTokenAddress) => {
-        await contractMarket.removeSupportedCurrency(setTokenAddress).send({gas:GAS}).then((value)=>{
-            console.log(value);
-        });
-    }
-
-    SmartApps.Market.removeSupportedCurrency =  async (setTokenAddress) => {
-        await contractMarket.removeSupportedCurrency(setTokenAddress).send({gas:GAS}).then((value)=>{
-            console.log(value);
-        });
-    }
-
-    SmartApps.Market.setFeeReceiver =  async (setTokenAddress) => {
-        await contractMarket.setFeeReceiver(setTokenAddress).send({gas:GAS}).then((value)=>{
-            console.log(value);
-        });
-    }
-
-    SmartApps.Market.setFeeRate =  async (rate) => {
-        await contractMarket.setFeeRate(rate).send({gas:GAS}).then((value)=>{
-            console.log(value);
-        });
-    }
-
-    SmartApps.Market.AllowTrade =  async () => {
-        await contractMarket.enableSales(true).send({gas:GAS}).then((value)=>{
-            console.log(value);
-        });
-    }
-    
-    SmartApps.Market.sell =  async (tokenID, price, name, description) => {
-        let depositAmount = blockchain.toWei(price.toString(),"ether");
-        await contractMarket.sell(tokenID, depositAmount, ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS*2}).then(async (value)=>{
-            if(value.transactionHash){
-
-                let id = await blockchain.getNftTokenID(value.transactionHash);
-                await axios.post("/market/sell/"+login_wallet,{
-                    tokenid : tokenID,
-                    sell_id : id,
-                    price : price,
-                    hash : value.transactionHash,
-                    name : name,
-                    description : description,
-                    money_contract : ContractAddress.AddressContractSmartToken,
-                    nft_contract : ContractAddress.AddressContractSmartNFT
-                }).then((data) => {
-                    
-                });
-                blockchain.notify(data.data);
-                await loadMyController();
-            }
-        });
-    }
-
-    SmartApps.Market.getMySell =  async () => {
-    }
-    SmartApps.Market.getMarketList =  async () => {
-        
-    }
-
-    SmartApps.Market.transfer = async (sendto, tokenID) => {
-        var smartnft = await blockchain.loadContractSmartnft();
-        smartnft.transferFrom(login_wallet,sendto,tokenID).send({gas:GAS}).then(async (value) =>{
-            $('#transferWallet').modal('hide');
-            blockchain.notify("Your transfer complete");
-            loadMyItem();
-        });
-    }
-    SmartApps.Market.cancelsell =  async (tokenID) => {
-        await contractMarket.cancelSell(tokenID, ContractAddress.AddressContractSmartNFT).send({gas:GAS}).then(async (value)=>{
-            if(value.transactionHash){
-                await axios.post("/market/cancelsell/"+login_wallet,{
-                    tokenid : tokenID
-                }).then((data) => {
-                    blockchain.notify(data.data);
-                    
-                });
-            }
-        });
-    }
-
-
-    SmartApps.Market.buy =  async (tokenID, amount) => {
-        
-        await tokenSmart.loadContracts();
-       // amount = amount + 50;
-        let depositAmount = blockchain.toWei(amount.toString(),"ether");
-        //let CheckAppreve = await SmartApps.tokenSmart.approve(ContractAddress.AddressContractNFTMarket,depositAmount);
-        //let appoveAmount = await tokenSmart.allowance(login_wallet,ContractAddress.AddressContractNFTMarket);
-
-        let appoveAmount = await tokenSmart.allowance(ContractAddress.AddressContractNFTMarket);
-       
-        
-        if(appoveAmount < amount){
-            await tokenSmart.approve(ContractAddress.AddressContractNFTMarket,depositAmount).then(async() => {
-                await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
-            
-                    blockchain.notify("Your buy NFT complete");
-
-                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                                chat_id: window.TelegramChannel,
-                                text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`,
-                                parse_mode:'Markdown'
-                        });
-                        window.location.href="/market/account";
-                    }
-                });
-            });
-        }else{
-            await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
-            
-                blockchain.notify("Your buy NFT complete");
-                if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                    await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                            chat_id: window.TelegramChannel,
-                            text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`,
-                            parse_mode:'Markdown'
-                    });
-                     window.location.href="/market/account";
-                }
-            });
-        }
-        
-        
-    }
-
-    SmartApps.Market.isSeller =  async () => {
-        var smartnft = await blockchain.loadContractSmartnft();
-       
-        var isApprovedForAll = await smartnft.isApprovedForAll(login_wallet,ContractAddress.AddressContractNFTMarket).call();
-        return isApprovedForAll;
-    }
-
-    SmartApps.Market.enableSell =  async () => {
-        var smartnft = await blockchain.loadContractSmartnft();
-        let isApprovedForAll = await smartnft.isApprovedForAll(login_wallet,ContractAddress.AddressContractNFTMarket).call();
-        
-        if(isApprovedForAll == false){
-            await smartnft.setApprovalForAll(ContractAddress.AddressContractNFTMarket, true).send({gas:GAS}).then((value) => {
-                console.log(value);
-            });
-        }else{
-            blockchain.notify("Your ready seller account");
-        }
-    }
-
-    
-
-
-    const loadMyItem = async ()=>{
-        $("[data-myitem]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
-        await axios.post("/market/myitem/"+login_wallet).then((data) => {
-                $("[data-myitem]").html(data.data);
-
-                $("[data-market-sell]").on("click", function(){
-                    var tokenID = $(this).data("tokenid");
-                    var price = $(this).parent().parent().find("input").val();
-                    var name = $(this).parent().parent().parent().find("input.name").val();
-                    var description = $(this).parent().parent().parent().find("textarea.description").val();
-                    var error = false;
-                    if(tokenID == 0){
-                        blockchain.notify("Error Token ID, Plz Try again");
-                        error = true;
-                    }
-                    if(price == 0){
-                        blockchain.notify("Error Price, Plz Try again");
-                        error = true;
-                    }
-                    if(error == false) SmartApps.Market.sell(tokenID, price, name, description);
-                });
-
-                $("[data-nft-transfer]").on("click", function(){
-                    var tokenID = $(this).data("tokenid");
-                    var sendto = $("#TransferNftWallet").val();
-                    if(sendto.length < 40){
-                        blockchain.notify("Error Wallet");
-                        return false;
-                    }
-                    if(tokenID < 1){
-                        blockchain.notify("Error Token ID");
-                        return false;
-                    }
-
-                    SmartApps.Market.transfer(sendto,tokenID);
-                });
-                
-            });
-    }
-
-    const loadMainItem = async (page)=>{
-        $("[data-mainmarket]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
-        await axios.get("/market/main/"+page).then((data) => {
-                $("[data-mainmarket]").html(data.data);
-        });
-    }
-
-    const loadMyController = async () => {
-            $("[data-myitem]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
-                await axios.post("/market/mysell/"+login_wallet).then((data) => {
-                    $("[data-myitem]").html(data.data);
-                    $("[data-market-cancelsell]").on("click",function (){
-                        var tokenid = $(this).data("tokenid");
-                        SmartApps.Market.cancelsell(tokenid);
-                    });
-                    
-                });
-            }
-    SmartApps.Market.init =  async function(){
-        await blockchain.init();
-        await tokenSmart.loadContracts();
-        await SmartApps.Market.loadContracts();
-        await SmartApps.Market.getMarketList();
-        await tokenSmart.allowance(ContractAddress.AddressContractNFTMarket);
-        //await SmartApps.Market.buy(1,100);
-        let isSeller = await SmartApps.Market.isSeller();
-        
-        if(isSeller == true){
-            $(".enablesell").attr("href","#");
-            $(".enablesell").text("Controller");
-            $(".enablesell").on("click", async ()=>{
-                await loadMyController();
-            });
-        }else{
-            $(".enablesell").on("click", function(){
-                SmartApps.Market.enableSell();
-            });
-        }
-
-        var loadMainDefault = async ()=>{
-
-            var mainmarket = $("[data-mainmarket]");
-            if(mainmarket.length > 0) {
-                console.log("Load Main Market");
-                await loadMainItem(1);
-            }
-            var myitem = $("[data-myitem]");
-            if(myitem.length > 0) {
-                await loadMyItem();
-            }
-            
-        };
-        
-
-        await loadMainDefault();
-
-        $(".loaditem").on("click", async function(){
-            var preview = $("input.walletAddress").val();
-            
-            await loadMyItem();
-        });
-
-        
-        $("[data-market-buy]").on("click", function(){
-            var tokenID = $(this).data("tokenid");
-            var amount = $(this).data("amount");
-            SmartApps.Market.buy(tokenID,amount);
-        });
-    }
-    SmartApps.components.docReady.push(SmartApps.Market.init);
-    return SmartApps;
 })(SmartApps, jQuery, window);
 SmartApps = function (SmartApps, $, window, document) {
     "use strict";

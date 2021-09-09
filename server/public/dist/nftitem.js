@@ -1,3 +1,4 @@
+
 SmartApps = (function (SmartApps, $, window) {
     "use strict";
     

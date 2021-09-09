@@ -4,6 +4,27 @@
 	<div class="col-6">
 		<div class="card">
 			<div class="card-body">
+			Factory : <%=address.AddressContractNFTFactory%><br>
+			CAR : <%=address.AddressContractSmartNFT%><br>
+			EXP : <%=address.AddressContractNFTItem%><br>
+			</div>
+		</div>
+	</div>
+	<div class="col-6">
+		<div class="card">
+			<div class="card-body">
+				<button class="btn btn-primary" id="setupfatory" data-nft="<%=address.AddressContractSmartNFT%>" data-nft_exp="<%=address.AddressContractNFTItem%>">Settup Factory</button>
+				<button class="btn btn-primary" id="setupcar" data-factory="<%=address.AddressContractNFTFactory%>" data-nft_exp="<%=address.AddressContractNFTItem%>">Settup CAR</button>
+				<button class="btn btn-primary" id="setupexp" data-factory="<%=address.AddressContractNFTFactory%>">Settup EXP</button>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-6">
+		<div class="card">
+			<div class="card-body">
 				<h5>Create Admin</h5>
 				<hr>
 				<div class="input-group mt-3">
@@ -97,8 +118,10 @@
 			<div class="card-body">
 				<h5>Mint</h5>
 				<hr>
-				
+				<div>
+				<input type="text" class="form-control"  placeholder="Name Item" value="CXF 21">
 				<button class="btn btn-primary" id="mint">Mint</button>
+				</div>
 			</div>
 		</div>
 

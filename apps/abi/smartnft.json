@@ -72,17 +72,48 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "generation",
+				"name": "model",
 				"type": "uint256"
 			},
 			{
 				"indexed": false,
 				"internalType": "uint8",
-				"name": "quality",
+				"name": "lever",
 				"type": "uint8"
 			}
 		],
 		"name": "Minted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "operator",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "bytes",
+				"name": "data",
+				"type": "bytes"
+			}
+		],
+		"name": "NftReceived",
 		"type": "event"
 	},
 	{
@@ -128,6 +159,45 @@
 		],
 		"name": "Transfer",
 		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "LeverOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "Exp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Speed",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Acceleraction",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Handing",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Nitro",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -195,6 +265,40 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_model",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_lever",
+				"type": "uint8"
+			}
+		],
+		"name": "createCar",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "tokenId",
 				"type": "uint256"
@@ -206,6 +310,91 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "nowLever",
+				"type": "uint256"
+			}
+		],
+		"name": "getNextLeverMoveEXP",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "getOptions",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "CarName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Models",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Lever",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Power",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Exp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Speed",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Acceleraction",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Handing",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Nitro",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct SmartNftCar.Params",
+				"name": "",
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
@@ -233,35 +422,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_generation",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint8",
-				"name": "_quality",
-				"type": "uint8"
-			}
-		],
-		"name": "mint",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -320,14 +480,49 @@
 		"name": "paramsOf",
 		"outputs": [
 			{
+				"internalType": "string",
+				"name": "CarName",
+				"type": "string"
+			},
+			{
 				"internalType": "uint256",
-				"name": "quality",
+				"name": "Models",
 				"type": "uint256"
 			},
 			{
-				"internalType": "uint8",
-				"name": "generation",
-				"type": "uint8"
+				"internalType": "uint256",
+				"name": "Lever",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Power",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Exp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Speed",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Acceleraction",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Handing",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Nitro",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -394,6 +589,24 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Acceleraction",
+				"type": "uint256"
+			}
+		],
+		"name": "setAcceleraction",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "operator",
 				"type": "address"
@@ -438,12 +651,171 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Handing",
+				"type": "uint256"
+			}
+		],
+		"name": "setHanding",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_nftAddress",
+				"type": "address"
+			}
+		],
+		"name": "setItemFactory",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_lever",
+				"type": "uint8"
+			}
+		],
+		"name": "setLever",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_lever",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_exp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_speed",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_acceleraction",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_handing",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_nitro",
+				"type": "uint256"
+			}
+		],
+		"name": "setLeverRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_models",
+				"type": "uint256"
+			}
+		],
+		"name": "setModels",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Nitro",
+				"type": "uint256"
+			}
+		],
+		"name": "setNitro",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "_owner",
 				"type": "address"
 			}
 		],
 		"name": "setOwner",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_power",
+				"type": "uint256"
+			}
+		],
+		"name": "setPower",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Speed",
+				"type": "uint256"
+			}
+		],
+		"name": "setSpeed",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -588,6 +960,30 @@
 		],
 		"name": "transferOwnership",
 		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_tokenIdItem",
+				"type": "uint256"
+			}
+		],
+		"name": "upLeverCar",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}

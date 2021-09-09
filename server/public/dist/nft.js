@@ -36,26 +36,29 @@ SmartApps = (function (SmartApps, $, window) {
             }
     		
     	}
-        const mint = async () => {
+        const mint = async (name) => {
             let isStaticUser = await factory.isStaticUser(wallet).call();
             
             if(isStaticUser == true){
                 
-                await factory.mint(wallet,0).send({gas:GAS}).then( async (value) => {
+                await factory.mintCar(name,0).send({gas:GAS}).then( async (value) => {
                    
                     let tokenID = await blockchain.getNftTokenID(value.transactionHash);
-                    if(tokenID > 0){
-                        await axios.post("/api/nft/"+value.transactionHash);
-                    }
+                    console.log(tokenID);
 
                 });
             }
             
         }
-        const setFactory = async() => {
+        const nftCarSetup = async() => {
             let facAddress = await blockchain.address().AddressContractNFTFactory;
 
             await smartnft.setFactory(facAddress).send({gas:GAS}).then((value) => {
+                    console.log(value);
+
+                });
+            let itemAddress = await blockchain.address().AddressContractNFTItem;
+            await smartnft.setItemFactory(itemAddress).send({gas:GAS}).then((value) => {
                     console.log(value);
 
                 });
@@ -99,7 +102,7 @@ SmartApps = (function (SmartApps, $, window) {
 
         const setStaticUser = async(setwallet) => {
             let isStaticUser = await factory.isStaticUser(setwallet).call();
-            console(isStaticUser, " ", setwallet);
+            console.log(isStaticUser, " ", setwallet);
             if(isStaticUser == false){
                 await factory.addStaticUser(setwallet).send({gas:GAS}).then((value) => {
                     console.log(value);
@@ -114,6 +117,15 @@ SmartApps = (function (SmartApps, $, window) {
                     console.log(value);
                 });
             }
+        }
+
+        const factorySetCar = async(address, address_exp) => {
+            factory.setNft(address).send({gas:GAS}).then((value) => {
+                console.log(value);
+            });
+            factory.setNftExp(address_exp).send({gas:GAS}).then((value) => {
+                console.log(value);
+            });
         }
         
         const setURL = async (url) => {
@@ -146,7 +158,7 @@ SmartApps = (function (SmartApps, $, window) {
     		
     	}
 
-        const setFacItem = async () => {
+        const nftitemSetup = async () => {
             let facAddress = await blockchain.address().AddressContractNFTFactory;
             item.setFactory(facAddress).send({gas:GAS}).then((value) => {
                 console.log(value);
@@ -161,10 +173,8 @@ SmartApps = (function (SmartApps, $, window) {
         //getHash();
     	//getNFT();
     	//trand();
-        setStaticUser(0xA66C630Ba51cE04B5eA71C1be64BE053A0E6feE1);
-        $("#setFactoryItem").on("click", function(){
-            setFacItem();
-        });
+        //setStaticUser(0x7a397c2bC6dfDA421975435ca41fc5F4318Ea3E9);
+       
 
         $("#mintItem").on("click", function(){
             MintItem();
@@ -176,9 +186,7 @@ SmartApps = (function (SmartApps, $, window) {
     		mintQuality(generation, quality);
     	});
 
-        $("#setFactory").on("click", function(){
-            setFactory();
-        });
+       
 
         $("#setURL").on("click", function(){
             var seturl = $(this).parent().find("input").val();
@@ -187,8 +195,9 @@ SmartApps = (function (SmartApps, $, window) {
         });
         
         $("#mint").on("click", function(){
-            console.log("Mint");
-            mint();
+            var name = $(this).parent().find("input").val();
+            console.log(name);
+            mint(name);
         });
         
         
@@ -225,8 +234,26 @@ SmartApps = (function (SmartApps, $, window) {
             removeAdmin(setwallet);
         });
 
+        $("#setupfatory").on("click", function(){
+            var nft = $(this).data("nft");
+            var nft_exp = $(this).data("nft_exp");
+            factorySetCar(nft, nft_exp);
 
+        });
         
+        $("#setupcar").on("click", function(){
+            var factory = $(this).data("nft");
+            var nft_exp = $(this).data("nft_exp");
+            nftCarSetup();
+
+        });
+        $("#setupexp").on("click", function(){
+            
+            nftitemSetup();
+
+        });
+        
+
         $(".contractaddress").html('<div>Contract : '+blockchain.address().AddressContractNFTFactory+'</div><div><a class="btn btn-md btn-primary" target="_bank" href="https://bscscan.com/address/'+blockchain.address().AddressContractNFTFactory+'">Contract</a></div>');
     }
 
