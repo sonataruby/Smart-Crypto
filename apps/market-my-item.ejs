@@ -56,11 +56,11 @@
     <div class="row">
         <div class="col-4">
           CAR
-          <div class="border" id="carslibs2" style="height:60px;"></div>
+          <div class="border" id="carslibs2" style="min-height:80px;"></div>
         </div>
         <div class="col-4">
           Item EXP
-          <div class="border" style="height:60px;">
+          <div class="border" style="min-height:80px;" id="exptoken3">
 
           </div>
         </div>
@@ -71,11 +71,11 @@
     <div class="row">
         <div class="col-4">
           Item EXP 1
-          <div class="border" style="height:60px;" id="exptoken1"></div>
+          <div class="border" style="min-height:80px;" id="exptoken1"></div>
         </div>
         <div class="col-4">
           Item EXP 2
-          <div class="border" style="height:60px;" id="exptoken2">
+          <div class="border" style="min-height:80px;" id="exptoken2">
 
           </div>
         </div>
@@ -138,22 +138,33 @@ $(document).ready(function() {
               $(this).attr("data-tokenid",$(ui.helper).attr("data-tokenid"));
               $(this).html('<img src="'+$(ui.helper).attr("src")+'">');
           },
+          accept: "#carslibs .itemFocus",
           activeClass: "dropActive",
           hoverClass: "dropHover"
     });
 
     $('#explibs .ExpFocus').draggable({
-        connectToSortable: "#exptoken1, #exptoken2",
+        connectToSortable: "#exptoken1, #exptoken2, #exptoken3",
         helper: 'clone',
         revert: "invalid"
     });
 
+    $('#exptoken3').droppable({
+          drop: function(event, ui) {
+              $(this).attr("data-tokenid",$(ui.helper).attr("data-tokenid"));
+              $(this).html('<img src="'+$(ui.helper).attr("src")+'">');
+          },
+          accept: "#explibs .ExpFocus",
+          activeClass: "dropActive",
+          hoverClass: "dropHover"
+    });
 
     $('#exptoken1, #exptoken2').droppable({
           drop: function(event, ui) {
               $(this).attr("data-tokenid",$(ui.helper).attr("data-tokenid"));
               $(this).html('<img src="'+$(ui.helper).attr("src")+'">');
           },
+          accept: "#explibs .ExpFocus",
           activeClass: "dropActive",
           hoverClass: "dropHover"
     });
