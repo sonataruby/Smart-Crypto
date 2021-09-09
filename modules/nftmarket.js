@@ -46,6 +46,7 @@ module.exports = function(prefix , app) {
     					readObject = JSON.parse(item.data);
     				}
 
+    				readObject.image = "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif";
     				readObject.id = index;
     				readObject.options = {};
     				readObject.options.tokenId = index;
@@ -72,6 +73,22 @@ module.exports = function(prefix , app) {
     		
 		}
 
+		const getOptions = (value)=>{
+			var options = {};
+			options.tokenId = index;
+			options.Image = "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif";
+			options.CarName = value.CarName;
+			options.Description = item.description;
+			options.Models = value.Models;
+			options.Lever = value.Lever;
+			options.Power = value.Power;
+			options.Exp = value.Exp;
+			options.Speed = value.Speed;
+			options.Acceleraction = value.Acceleraction;
+			options.Handing = value.Handing;
+			options.Nitro = value.Nitro;
+			return options;
+		}
 		const getMyExp = async (wallet) => {
 			
 			let contractItem = await blockchain.loadNFTItem();
@@ -145,8 +162,8 @@ module.exports = function(prefix , app) {
 		                var dataObj = {
 		                	name : item.name,
 		                	description : item.description,
-		                	image : jsonData.image,
-		                	attributes : jsonData.attributes,
+		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif",
+		                	attributes : getOptions(value),
 		                	model : getModelName(jsonData.attributes[1].value),
 		                    buyer: InfoSell.buyer,
 		                    currency: InfoSell.currency,
@@ -200,11 +217,11 @@ module.exports = function(prefix , app) {
 	    				
 	    				let jsonData = JSON.parse(item.data);
 		                var dataObj = {
-		                	name : item.name,
+		                	name : value.CarName,
 		                	description : item.description,
-		                	image : jsonData.image,
-		                	attributes : jsonData.attributes,
-		                	model : getModelName(jsonData.attributes[1].value),
+		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif",
+		                	attributes : getOptions(value),
+		                	model : getModelName(value.Models),
 		                    buyer: InfoSell.buyer,
 		                    currency: InfoSell.currency,
 		                    id: InfoSell.id,
