@@ -64,7 +64,7 @@
 
           </div>
         </div>
-        <div class="col-4"><br><button class="btn btn-info">Up</button></div>
+        <div class="col-4"><br><button class="btn btn-info" data-carslever="true">Up</button></div>
     </div>
 
     <h5>Update EXP Lever</h5>
@@ -79,7 +79,7 @@
 
           </div>
         </div>
-        <div class="col-4"><br><button class="btn btn-primary">Up</button></div>
+        <div class="col-4"><br><button class="btn btn-primary" data-upexp="true">Up</button></div>
     </div>
   </div>
   <div class="col-4">
@@ -106,7 +106,7 @@
 $(".itemFocus").on("click", function(){
     var getDataJSON = $(this).data("json");
     
-    $(".stokenid").html(getDataJSON.id);
+    $(".stokenid").html(getDataJSON.tokenId);
     $(".sname").html(getDataJSON.CarName);
     $(".sLever").html(getDataJSON.Lever);
     $(".sModels").html(getDataJSON.Models);

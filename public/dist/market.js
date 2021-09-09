@@ -106,24 +106,7 @@ SmartApps = (function (SmartApps, $, window) {
         });
     }
 
-    SmartApps.Market.mint = async () => {
-        var nftFactory = await blockchain.loadContractNFTFactory();
-        let isStaticUser = await nftFactory.isStaticUser(login_wallet).call();
-        if(isStaticUser == true){
-            nftFactory.mint(login_wallet,1).send({gas:GAS}).then(async (value) =>{
-                blockchain.notify("Your NFT Mint complete");
-                await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                        chat_id: window.TelegramChannel,
-                        text: `CAR NFT Mint complete\nHash : ${value.transactionHash}\nCan open sell on NFT Market`,
-                        parse_mode:'Markdown'
-                });
-                loadMyItem();
-            });
-        }else{
-            blockchain.notify("Error : Your need join S3 Game Play first");
-        }
-        
-    }
+    
     SmartApps.Market.AccessMintNFT = async () => {
         var nftFactory = await blockchain.loadContractNFTFactory();
         let isStaticUser = await nftFactory.isStaticUser(login_wallet).call();
@@ -204,12 +187,44 @@ SmartApps = (function (SmartApps, $, window) {
         if(isApprovedForAll == false){
             await smartnft.setApprovalForAll(ContractAddress.AddressContractNFTMarket, true).send({gas:GAS}).then((value) => {
                 console.log(value);
+                window.reload;
             });
         }else{
             blockchain.notify("Your ready seller account");
         }
     }
 
+
+    SmartApps.Market.UpCarsLever =  async (tokenid, itemid) => {
+        var smartnft = await blockchain.loadContractSmartnft();
+        let isApprovedForAll = await smartnft.isApprovedForAll(login_wallet,ContractAddress.AddressContractNFTItem).call();
+        
+        if(isApprovedForAll == false){
+            await smartnft.setApprovalForAll(ContractAddress.AddressContractNFTItem, true).send({gas:GAS}).then(async (value) => {
+                
+                await smartnft.upLeverCar(tokenid, itemid).send({gas:500000}).then((value) => {
+                    console.log(value);
+                });
+                window.reload;
+            });
+        }else{
+            await smartnft.upLeverCar(tokenid, itemid).send({gas:500000}).then((value) => {
+                console.log(value);
+            });
+            window.reload;
+            
+        }
+    }
+
+    SmartApps.Market.UpItemLever =  async (e1, e2) => {
+        var smartnft = await blockchain.loadContractNFTItem();
+        await smartnft.upLever(e1, e2).send({gas:GAS}).then((value) => {
+            console.log(value);
+            window.reload;
+        });
+    }
+
+    
     
 
 
@@ -249,6 +264,26 @@ SmartApps = (function (SmartApps, $, window) {
 
                     SmartApps.Market.transfer(sendto,tokenID);
                 });
+
+                $("[data-carslever]").on("click", async function(){
+                    var expid1 = $("#exptoken3").data("tokenid");
+                    var tokenid = $("#carslibs2").data("tokenid");
+                    if(expid1 == "" || expid1 == undefined || tokenid == "" || tokenid == undefined){
+                        blockchain.notify("Error Token ID EXP");
+                        return false;
+                    }
+                    SmartApps.Market.UpCarsLever(tokenid,expid2);
+                });
+
+                $("[data-upexp]").on("click", async function(){
+                    var expid1 = $("#exptoken1").data("tokenid");
+                    var expid2 = $("#exptoken2").data("tokenid");
+                    if(expid1 == expid2 || expid1 == "" || expid1 == undefined || expid2 == "" || expid2 == undefined ){
+                        blockchain.notify("Error Token ID EXP");
+                        return false;
+                    }
+                    SmartApps.Market.UpItemLever(expid1,expid2);
+                });
                 
             });
     }
@@ -282,18 +317,12 @@ SmartApps = (function (SmartApps, $, window) {
         let can_mint = await SmartApps.Market.AccessMintNFT();
 
         
-        if(can_mint == true){
-            if($("[data-mint-nft]").length > 0){
-                $("[data-mint-nft]").on("click", async() => {
-                    await SmartApps.Market.mint();
-                });
-            }
-        }else{
-            if($("[data-mint-nft]").length > 0){
-                $("[data-mint-nft]").attr("href","/farm");
-                $("[data-mint-nft]").html("Join S3 Game");
-            }
+        
+        if($("[data-mint-nft]").length > 0){
+            $("[data-mint-nft]").attr("href","/farm");
+            $("[data-mint-nft]").html("Join S3 Game");
         }
+        
 
         if(isSeller == true){
             $(".enablesell").attr("href","#");
