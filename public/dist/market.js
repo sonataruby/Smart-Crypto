@@ -64,6 +64,7 @@ SmartApps = (function (SmartApps, $, window) {
     SmartApps.Market.AllowTrade =  async () => {
         await contractMarket.enableSales(true).send({gas:GAS}).then((value)=>{
             console.log(value);
+            window.location.reload();
         });
     }
     
@@ -86,6 +87,7 @@ SmartApps = (function (SmartApps, $, window) {
                 });
                 blockchain.notify(data.data);
                 await loadMyController();
+                window.location.reload();
             }
         });
     }
@@ -122,6 +124,7 @@ SmartApps = (function (SmartApps, $, window) {
                     blockchain.notify(data.data);
                     
                 });
+                window.location.reload();
             }
         });
     }
@@ -186,7 +189,7 @@ SmartApps = (function (SmartApps, $, window) {
         if(isApprovedForAll == false){
             await smartnft.setApprovalForAll(ContractAddress.AddressContractNFTMarket, true).send({gas:GAS}).then((value) => {
                 console.log(value);
-                window.reload;
+                window.location.reload();
             });
         }else{
             blockchain.notify("Your ready seller account");
@@ -204,13 +207,13 @@ SmartApps = (function (SmartApps, $, window) {
                 await smartnft.upLeverCar(tokenid, itemid).send({gas:500000}).then((value) => {
                     console.log(value);
                 });
-                window.reload;
+                window.location.reload();
             });
         }else{
             await smartnft.upLeverCar(tokenid, itemid).send({gas:500000}).then((value) => {
                 console.log(value);
             });
-            window.reload;
+            window.location.reload();
             
         }
     }
@@ -219,7 +222,7 @@ SmartApps = (function (SmartApps, $, window) {
         var smartnft = await blockchain.loadContractNFTItem();
         await smartnft.upLever(e1, e2).send({gas:400000}).then((value) => {
             console.log(value);
-            window.reload;
+            window.location.reload();
         });
     }
 
