@@ -68,12 +68,12 @@ module.exports = function(prefix , app) {
                 });
 		    }
 
-		    console.log(object[0]);
+		    
 		    return object;
     		
 		}
 
-		const getOptions = (value)=>{
+		const getOptions = (value, index)=>{
 			var options = {};
 			options.tokenId = index;
 			options.Image = "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif";
@@ -163,8 +163,8 @@ module.exports = function(prefix , app) {
 		                	name : item.name,
 		                	description : item.description,
 		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif",
-		                	attributes : getOptions(value),
-		                	model : getModelName(jsonData.attributes[1].value),
+		                	attributes : getOptions(value, tokenID),
+		                	model : getModelName(value.Models),
 		                    buyer: InfoSell.buyer,
 		                    currency: InfoSell.currency,
 		                    id: InfoSell.id,
@@ -220,7 +220,7 @@ module.exports = function(prefix , app) {
 		                	name : value.CarName,
 		                	description : item.description,
 		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif",
-		                	attributes : getOptions(value),
+		                	attributes : getOptions(value, tokenID),
 		                	model : getModelName(value.Models),
 		                    buyer: InfoSell.buyer,
 		                    currency: InfoSell.currency,
