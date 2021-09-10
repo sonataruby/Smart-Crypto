@@ -22,7 +22,7 @@ module.exports = function(prefix , app) {
     			const _owner = await contract.tokenByIndex(i-1).call();
 		    	const owner = await contract.ownerOf(_owner).call();
                 if(owner == wallet){
-                	obj.push(i);
+                	obj.push(_owner);
                 }
 		    }
 
@@ -106,7 +106,7 @@ module.exports = function(prefix , app) {
 		    	const owner = await contractItem.ownerOf(_owner).call();
 		    	
     			if(owner == wallet){
-                	objItem.push(i);
+                	objItem.push(_owner);
                 }
             }
 		    
@@ -146,7 +146,7 @@ module.exports = function(prefix , app) {
 		    	const owner = await contract.ownerOf(_owner).call();
 	            
 	            if(owner == address.AddressContractNFTMarket){
-	                obj.push(i);
+	                obj.push(_owner);
 	            }
 	        }
 
@@ -212,7 +212,7 @@ module.exports = function(prefix , app) {
 		    	const owner = await contract.ownerOf(_owner).call();
 	            
 	            if(owner == address.AddressContractNFTMarket){
-	                obj.push(i);
+	                obj.push(_owner);
 	            }
 	        }
 
