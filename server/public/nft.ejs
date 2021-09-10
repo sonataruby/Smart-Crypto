@@ -75,16 +75,7 @@
 	</div>
 
 	<div class="col-6">
-		<div class="card">
-			<div class="card-body">
-				<div class="input-group mt-3">
-				  <input type="text" class="form-control" placeholder="Contract NFT Factory">
-				  <span class="input-group-text" id="setFactory">Set Factory</span>
-				</div>
-			</div>
-		</div>
-
-			<br>
+		
 		<div class="card">
 			<div class="card-body">
 				<div class="input-group mt-3">
@@ -129,7 +120,7 @@
 
 </div>
 <hr>
-<h4>Item NFT </h4>
+<h4>EXP Item NFT </h4>
 <div class="row">
 	<div class="col-md-6">
 		<div class="card">
@@ -155,3 +146,99 @@
 	</div>
 
 </div>
+<br>
+
+<h4>CAR Customs NFT </h4>
+<div class="card">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-8">
+				
+					<div class="input-group mt-3">
+					  <input type="text" class="form-control" id="inputIDToken" placeholder="Token ID">
+					</div>
+					
+			</div>
+			<div class="col-md-4">
+				
+					<div class="input-group mt-3">
+					  <input type="text" class="form-control" placeholder="Lever : 1-5">
+					  <span class="input-group-text" id="setLever">Set Lever</span>
+					</div>
+					
+			</div>
+
+			<div class="col-md-4">
+				<div class="input-group mt-3">
+					  <input type="text" class="form-control" placeholder="Models : 1-5">
+					  <span class="input-group-text" id="setModels">Set Models</span>
+				</div>
+					
+			</div>
+
+			
+
+			<div class="col-md-4">
+				<div class="input-group mt-3">
+					  <input type="text" class="form-control" placeholder="Speed : 1000-1.000.000.000">
+					  <span class="input-group-text" id="setSpeed">Set Speed</span>
+				</div>
+					
+			</div>
+
+			<div class="col-md-4">
+				<div class="input-group mt-3">
+					  <input type="text" class="form-control" placeholder="Acceleraction : 1000-1.000.000.000">
+					  <span class="input-group-text" id="setAcceleraction">Set Acceleraction</span>
+				</div>
+					
+			</div>
+
+			<div class="col-md-4">
+				<div class="input-group mt-3">
+					  <input type="text" class="form-control" placeholder="Handing : 1000-1.000.000.000">
+					  <span class="input-group-text" id="setHanding">Set Handing</span>
+				</div>
+					
+			</div>
+
+			<div class="col-md-4">
+				<div class="input-group mt-3">
+					  <input type="text" class="form-control" placeholder="Nitro: 1000-1.000.000.000">
+					  <span class="input-group-text" id="setNitro">Set Nitro</span>
+				</div>
+					
+			</div>
+
+		</div>
+	</div>
+</div>
+<br>
+
+<h4>CAR Lever </h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Lever</th>
+      <th scope="col">Exp</th>
+      <th scope="col">Speed</th>
+      <th scope="col">Acceleraction</th>
+      <th scope="col">Handing</th>
+      <th scope="col">Nitro</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for(var i=1; i<=15; i++) {%>
+    <tr id="LeverIndex<%=i%>">
+      <th scope="row"><%=i%></th>
+      <td><input type="text" class="form-control exp"></td>
+      <td><input type="text" class="form-control Speed"></td>
+      <td><input type="text" class="form-control Acceleraction"></td>
+      <td><input type="text" class="form-control Handing"></td>
+      <td><input type="text" class="form-control Nitro"></td>
+      <td><button type="button" class="btn btn-primary actionLever" data-lvid="<%=i%>">Execute</button></td>
+    </tr>
+  <% } %>
+   </tbody>
+</table>

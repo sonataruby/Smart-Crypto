@@ -135,6 +135,53 @@ SmartApps = (function (SmartApps, $, window) {
             });
         }
 
+        const setCarsLever = async (id,exp,Speed,Acceleraction,Handing,Nitro) => {
+            
+            await factory.setLeverRole(id,exp,Speed,Acceleraction,Handing,Nitro).send({gas:GAS}).then((value) => {
+                    alert("Update ok");
+            });
+        }
+
+        const setLever = async (tokenid,v) => {
+            
+            await factory.setLever(tokenid,v).send({gas:GAS}).then((value) => {
+                    alert("Update ok");
+            });
+        }
+        const setModels = async (tokenid,v) => {
+            
+            await factory.setModels(tokenid,v).send({gas:GAS}).then((value) => {
+                    alert("Update ok");
+            });
+        }
+
+        const setPower = async (tokenid,v) => {
+            
+            await factory.setPower(tokenid,v).send({gas:GAS}).then((value) => {
+                    alert("Update ok");
+            });
+        }
+        const setSpeed = async (tokenid,v) => {
+            
+            await factory.setSpeed(tokenid,v).send({gas:GAS}).then((value) => {
+                    alert("Update ok");
+            });
+        }
+
+        const setAcceleraction = async (tokenid,v) => {
+            
+            await factory.setAcceleraction(tokenid,v).send({gas:GAS}).then((value) => {
+                    alert("Update ok");
+            });
+        }
+        
+        const setHanding = async (tokenid,v) => {
+            
+            await factory.setHanding(tokenid,v).send({gas:GAS}).then((value) => {
+                    alert("Update ok");
+            });
+        }
+
         const trand = async(setwallet) => {
             //let smartnft = await blockchain.address().AddressContractNFTFactory;
 
@@ -171,13 +218,28 @@ SmartApps = (function (SmartApps, $, window) {
             });
         };
 
+        const getLeverInfo = async (id) => {
+            
+            for (var i = 1; i <= 15; i++) {
+                await smartnft.LeverOf(i).call().then((value) => {
+                    var indexLayer = $("#LeverIndex"+i);
+                    indexLayer.find(".exp").val(value.Exp);
+                    indexLayer.find(".Speed").val(value.Speed);
+                    indexLayer.find(".Acceleraction").val(value.Acceleraction);
+                    indexLayer.find(".Handing").val(value.Handing);
+                    indexLayer.find(".Nitro").val(value.Nitro);
+                });
+            }
+        }
+        
 
         //getHash();
     	//getNFT();
     	//trand();
         //setStaticUser(0x7a397c2bC6dfDA421975435ca41fc5F4318Ea3E9);
        
-
+        getLeverInfo();
+        
         
 
     	$("#mintQuality").on("click", function(){
@@ -260,7 +322,55 @@ SmartApps = (function (SmartApps, $, window) {
 
         });
 
+        $(".actionLever").on("click", function(){
+            var tr = $(this).parent().parent();
+            var leverid = $(this).data("lvid");
+            var exp = tr.find("input.exp").val();
+            var Speed = tr.find("input.Speed").val();
+            var Acceleraction = tr.find("input.Acceleraction").val();
+            var Handing = tr.find("input.Handing").val();
+            var Nitro = tr.find("input.Nitro").val();
+            if(exp == 0) {
+                alert("exp > 0");
+                return false;
+            }
+            setCarsLever(leverid, exp,Speed,Acceleraction,Handing,Nitro);
+        });
+
+        $("#setLever").on("click", function(){
+            var tokenid = $("#inputIDToken").val();
+            var setvalue = $(this).parent().find("input").val();
+            setLever(tokenid,setvalue);
+        });
         
+        $("#setModels").on("click", function(){
+            var tokenid = $("#inputIDToken").val();
+            var setvalue = $(this).parent().find("input").val();
+            setModels(tokenid,setvalue);
+        });
+
+        $("#setSpeed").on("click", function(){
+            var tokenid = $("#inputIDToken").val();
+            var setvalue = $(this).parent().find("input").val();
+            setSpeed(tokenid,setvalue);
+        });
+
+        $("#setAcceleraction").on("click", function(){
+            var tokenid = $("#inputIDToken").val();
+            var setvalue = $(this).parent().find("input").val();
+            setAcceleraction(tokenid,setvalue);
+        });
+
+        $("#setHanding").on("click", function(){
+            var tokenid = $("#inputIDToken").val();
+            var setvalue = $(this).parent().find("input").val();
+            setHanding(tokenid,setvalue);
+        });
+        $("#setNitro").on("click", function(){
+            var tokenid = $("#inputIDToken").val();
+            var setvalue = $(this).parent().find("input").val();
+            setNitro(tokenid,setvalue);
+        });
 
         $(".contractaddress").html('<div>Contract : '+blockchain.address().AddressContractNFTFactory+'</div><div><a class="btn btn-md btn-primary" target="_bank" href="https://bscscan.com/address/'+blockchain.address().AddressContractNFTFactory+'">Contract</a></div>');
     }
