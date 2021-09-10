@@ -40,8 +40,8 @@ SmartApps = (function (SmartApps, $, window) {
             let isStaticUser = await factory.isStaticUser(wallet).call();
             
             if(isStaticUser == true){
-                
-                await factory.mintCar(name,0).send({gas:GAS}).then( async (value) => {
+                let number = Math.floor(Math.random() * (5 - 1) ) + 1;
+                await factory.mintCar(name,number).send({gas:GAS}).then( async (value) => {
                    
                     let tokenID = await blockchain.getNftTokenID(value.transactionHash);
                     console.log(tokenID);
@@ -316,8 +316,12 @@ SmartApps = (function (SmartApps, $, window) {
         });
         
         $("#CreateItem").on("click", function(){
-            var id = $(this).parent().find("input.id").val();
-            var exp = $(this).parent().find("input.exp").val();
+            var id =  parseInt($(this).parent().find("input.id").val());
+            var exp = parseInt($(this).parent().find("input.exp").val());
+            if(id == 0 || exp == 0 || isNaN(id) || isNaN(exp)){
+                alert(id + " and "+exp+" > 0");
+                return;
+            }
             CreateItemExp(id,exp);
 
         });
