@@ -233,7 +233,7 @@ module.exports = function(prefix , app) {
 		                var dataObj = {
 		                	name : value.CarName,
 		                	description : description,
-		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif",
+		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".png",
 		                	attributes : getOptions(value, tokenID, description),
 		                	model : getModelName(value.Models),
 		                    buyer: InfoSell.buyer,
