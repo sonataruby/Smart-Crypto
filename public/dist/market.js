@@ -198,11 +198,11 @@ SmartApps = (function (SmartApps, $, window) {
 
 
     SmartApps.Market.UpCarsLever =  async (tokenid, itemid) => {
-        var smartnft = await blockchain.loadContractSmartnft();
-        let isApprovedForAll = await smartnft.isApprovedForAll(login_wallet,ContractAddress.AddressContractNFTItem).call();
+        var smartnft = await blockchain.loadContractNFTItem();
+        let isApprovedForAll = await smartnft.isApprovedForAll(login_wallet,ContractAddress.AddressContractSmartNFT).call();
         
         if(isApprovedForAll == false){
-            await smartnft.setApprovalForAll(ContractAddress.AddressContractNFTItem, true).send({gas:GAS}).then(async (value) => {
+            await smartnft.setApprovalForAll(ContractAddress.AddressContractSmartNFT, true).send({gas:GAS}).then(async (value) => {
                 
                 await smartnft.upLeverCar(tokenid, itemid).send({gas:500000}).then((value) => {
                     console.log(value);
