@@ -268,19 +268,19 @@ SmartApps = (function (SmartApps, $, window) {
                 });
 
                 $("[data-carslever]").on("click", async function(){
-                    var expid1 = $("#exptoken3").data("tokenid");
-                    var tokenid = $("#carslibs2").data("tokenid");
-                    if(expid1 == "" || expid1 == undefined || tokenid == "" || tokenid == undefined){
+                    var expid1 = parseInt($("#exptoken3").data("tokenid"));
+                    var tokenid = parseInt($("#carslibs2").data("tokenid"));
+                    if(expid1 == "" || expid1 == undefined || tokenid == "" || tokenid == undefined || isNaN(expid1) || isNaN(tokenid)){
                         blockchain.notify("Error Token ID EXP");
                         return false;
                     }
-                    SmartApps.Market.UpCarsLever(tokenid,expid2);
+                    SmartApps.Market.UpCarsLever(tokenid,expid1);
                 });
 
                 $("[data-upexp]").on("click", async function(){
-                    var expid1 = $("#exptoken1").data("tokenid");
-                    var expid2 = $("#exptoken2").data("tokenid");
-                    if(expid1 == expid2 || expid1 == "" || expid1 == undefined || expid2 == "" || expid2 == undefined ){
+                    var expid1 = parseInt($("#exptoken1").data("tokenid"));
+                    var expid2 = parseInt($("#exptoken2").data("tokenid"));
+                    if(expid1 == expid2 || expid1 == "" || expid1 == undefined || expid2 == "" || expid2 == undefined || isNaN(expid1) || isNaN(expid2)){
                         blockchain.notify("Error Token ID EXP");
                         return false;
                     }

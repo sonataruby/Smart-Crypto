@@ -95,7 +95,7 @@ module.exports = function(prefix , app) {
 			let contractItem = await blockchain.loadNFTItem();
 			
 	 		let address = await blockchain.loadAddress();
-	 		let balance = await contractItem.balanceOf(wallet).call();
+	 		
 
 		    let totalExp = await contractItem.totalSupply().call();
 		    var objItem = [];
@@ -115,7 +115,12 @@ module.exports = function(prefix , app) {
 		    for(var i=0; i<objItem.length; i++) {
 		    	let index = parseInt(objItem[i])
 		    	await contractItem.paramsOf(index).call().then(async (value) => {
-		    		objectExp.push({tokenId : index, image:"https://cryptocar.cc/nfts/exp/"+value.id+".png", exp : value.exp});
+		    		var image = value.id;
+		    		if(value.id == 0 || value.id > 5){
+		    			image = 1;
+		    		}
+		    		if(value.id > 5) image = 5;
+		    		objectExp.push({tokenId : index, image:"https://cryptocar.cc/nfts/exp/"+image+".png", exp : value.exp});
 		    	});
 		    }
 		    
