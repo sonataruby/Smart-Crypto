@@ -5,10 +5,8 @@
             	<img src="<%=data.image%>" style="width:100%">
             	
             	<hr>
-            	<h5><%=data.name%></h5>
-            	<% data.attributes.forEach(function(dataAttributes, index2){ %>
-            	<%=dataAttributes.trait_type%> : <%- (dataAttributes.trait_type == "Model" ? data.model : dataAttributes.value)%><br>
-            	<%});%>
+            	<h5 style="padding-left:15px; padding-right:15px;"><%=data.name%> | #<%=data.tokenId%> </h5>
+            	
             	<div class="p-4">
             		<button class="btn btn-primary btn-sm" data-market-cancelsell data-tokenid="<%=data.tokenId%>" type="button">CLOSE SELL</button>
 				</div>

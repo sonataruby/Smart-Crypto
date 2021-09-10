@@ -153,24 +153,23 @@ module.exports = function(prefix , app) {
 	                //console.log(value);
 	                var InfoSell = await contractMarket.getSales(tokenID,address.AddressContractSmartNFT).call();
 	                if(InfoSell.seller == wallet){
-		                sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+tokenID+"' LIMIT 1";
+		                sql = "SELECT * FROM `nft_smart` WHERE nft_contract='"+InfoSell.nft+"' AND tokenId='"+tokenID+"' LIMIT 1";
 	    				item = await db.dbQuery(sql, true);
-	    				jsonData = {};
-	    				if(item == undefined){
-	    					jsonData = {};
-	    					jsonData.image = "";
-	    					jsonData.attributes = [];
-	    					jsonData.attributes[1].value = 0;
+	    				var description = "";
+
+	    				if(item == undefined || item == "") {
+	    					description = "";
+	    					
 	    				}else{
-	    					jsonData = JSON.parse(item.data);
+	    					 description = item.description;
 	    				}
 	    				
 
 		                var dataObj = {
-		                	name : item.name,
-		                	description : item.description,
-		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif",
-		                	attributes : getOptions(value, tokenID, item.description),
+		                	name : value.CarName,
+		                	description : description,
+		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".png",
+		                	attributes : getOptions(value, tokenID, description),
 		                	model : getModelName(value.Models),
 		                    buyer: InfoSell.buyer,
 		                    currency: InfoSell.currency,
@@ -383,7 +382,7 @@ module.exports = function(prefix , app) {
 				
 				data = await getItemsMySell(wallet);
 			}
-			console.log(wallet);
+			
 			dataMain.items = data;
 			res.render(dataMain.public.market == true ? "market-my-sell" : "coming",dataMain);
 		});
