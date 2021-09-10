@@ -89,12 +89,14 @@ require("./modules/nftmarket")("/market",app);
 
 
 app.get("/game", (req, res) => {
+  app.set('layout', pageLayout())
  const dataMain = fsFile.readJSONFile('main.json');
  
  res.render(dataMain.public.game == true ? "game" : "coming",dataMain);
 });
 
 app.get("/token", (req, res) => {
+  app.set('layout', pageLayout())
  const dataMain = fsFile.readJSONFile('main.json');
  res.render("token",dataMain);
 });
