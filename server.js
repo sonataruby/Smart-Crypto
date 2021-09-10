@@ -137,25 +137,7 @@ app.get("/api/nft/:id", async (req, res) => {
 
     const nft = {
       "id": 0,
-      "attributes": [{
-              "trait_type": "QUALITY",
-              "value": "Special"
-            },
-            {
-              "trait_type": "Generation",
-              "value": 2
-            },
-            {
-              "display_type": "boost_number",
-              "trait_type": "Power",
-              "value": 2000
-            },
-            {
-              "display_type": "boost_number",
-              "trait_type": "map_point",
-              "value": 130
-            }
-          ],
+      "attributes": [],
       "description": "No Description",
       "external_url": "https://cryptocar.cc/api/nft/1",
       "image": "https://cryptocar.cc/nfts/1.gif",
@@ -173,7 +155,10 @@ app.get("/api/nft/:id", async (req, res) => {
     sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+id+"' LIMIT 1";
     item = await db.dbQuery(sql, true);
     
-    if(item == undefined || item.length == 0) item.data = '{"error": "404 page not found", "err_code": 404}';
+    if(item == undefined || item.length == 0) {
+      item = {};
+      item.data = '{"error": "404 page not found", "err_code": 404}';
+    }
 
     res.send(item.data);
     res.end(item.data);
