@@ -115,7 +115,7 @@ module.exports = function(prefix , app) {
 		    for(var i=0; i<objItem.length; i++) {
 		    	let index = parseInt(objItem[i])
 		    	await contractItem.paramsOf(index).call().then(async (value) => {
-		    		objectExp.push({tokenId : index, image:"https://cryptocar.cc/nfts/exp/"+value.id+".gif", exp : value.exp});
+		    		objectExp.push({tokenId : index, image:"https://cryptocar.cc/nfts/exp/"+value.id+".png", exp : value.exp});
 		    	});
 		    }
 		    
