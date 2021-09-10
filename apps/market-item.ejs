@@ -3,22 +3,28 @@
 <% items.forEach(function(data, index){ %>
       <div class="card mb-3 border card-hoder">
        <a href="/market/token/<%=data.nft%>/<%=data.tokenId%>">
+       <div class="card-zoom">
+        <img src="<%= data.image%>" alt="..." class="zoom">
+       </div>
          <div class="row no-gutters">
            <div class="col-md-12">
-             <img src="<%= data.image%>" alt="...">
+             
            </div>
            <div class="col-md-12">
              
-               <h5 class="card-title"><%= data.name%></h5>
-               <% data.attributes.forEach(function(dataAttributes, index2){ %>
-                     <%=dataAttributes.trait_type%> : <%- (dataAttributes.trait_type == "Model" ? data.model : dataAttributes.value)%><br>
-              <%});%>
-               <p class="card-text"><%- String(data.description).replace(/\r|\n/g, '<br/>')%></p>
+               <h5 class="card-title">#<%= data.tokenId%> | <%= data.name%> </h5>
+              
+              <div class="row">
+                    <div class="col-6">Lever: <%=data.attributes.Lever%></div>
+                    <div class="col-6">Power: <%=data.attributes.Power%></div>
+                    <div class="col-12">Acceleraction: <%=data.attributes.Acceleraction%></div>
+                    <div class="col-6">Handing: <%=data.attributes.Handing%></div>
+                    <div class="col-6">Nitro: <%=data.attributes.Nitro%></div>
+              </div>
                <p class="card-text"><small class="text-muted"><%=data.startTime%></small></p>
              
            </div>
-           <div class="col-md-12">
-              <hr>
+           <div class="col-md-12 border-top" style="padding:30px;">
               <div class="d-flex justify-content-between">
               <b><%= data.price%> <%= token.name%></b> <a href="/market/token/<%=data.nft%>/<%=data.tokenId%>"  class="btn btn-sm btn-primary">BUY</a>
               </div>
@@ -28,3 +34,25 @@
        </div>
 <% }); %>
 </div>
+
+<style>
+.card-hoder{
+    padding:0px !important;
+}
+.card-zoom{
+    overflow: hidden;
+}
+.zoom {
+  -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition:    all 0.3s ease-in-out;
+        -o-transition:      all 0.3s ease-in-out;
+        -ms-transition:     all 0.3s ease-in-out;
+        transition:         all 0.3s ease-in-out;
+  transition: all .2s ease-in-out; 
+  margin: 0 auto;
+}
+
+.card-hoder:hover .zoom {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+</style>

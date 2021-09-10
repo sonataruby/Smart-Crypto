@@ -19,7 +19,8 @@ module.exports = function(prefix , app) {
 
 	 		var obj = [];
     		for(var i=1; i<=total; i++) {
-    			const owner = await contract.ownerOf(i).call();
+    			const _owner = await contract.tokenByIndex(i-1).call();
+		    	const owner = await contract.ownerOf(_owner).call();
                 if(owner == wallet){
                 	obj.push(i);
                 }
@@ -73,12 +74,12 @@ module.exports = function(prefix , app) {
     		
 		}
 
-		const getOptions = (value, index)=>{
+		const getOptions = (value, index, description)=>{
 			var options = {};
 			options.tokenId = index;
 			options.Image = "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif";
 			options.CarName = value.CarName;
-			options.Description = item.description;
+			options.Description = description;
 			options.Models = value.Models;
 			options.Lever = value.Lever;
 			options.Power = value.Power;
@@ -94,18 +95,23 @@ module.exports = function(prefix , app) {
 			let contractItem = await blockchain.loadNFTItem();
 			
 	 		let address = await blockchain.loadAddress();
-	 		
+	 		let balance = await contractItem.balanceOf(wallet).call();
 
 		    let totalExp = await contractItem.totalSupply().call();
 		    var objItem = [];
-    		for(var i=1; i<=totalExp; i++) {
-    			const owner = await contractItem.ownerOf(i).call();
-                if(owner == wallet){
+		    var objectExp = [];
+		    
+		    for(var i=1; i<=totalExp; i++) {
+		    	const _owner = await contractItem.tokenByIndex(i-1).call();
+		    	const owner = await contractItem.ownerOf(_owner).call();
+		    	
+    			if(owner == wallet){
                 	objItem.push(i);
                 }
-		    }
+            }
+		    
 
-		    var objectExp = [];
+		    
 		    for(var i=0; i<objItem.length; i++) {
 		    	let index = parseInt(objItem[i])
 		    	await contractItem.paramsOf(index).call().then(async (value) => {
@@ -131,7 +137,8 @@ module.exports = function(prefix , app) {
 
 	        var obj = [];
 	        for(var i=1; i<=total; i++) {
-	            const owner = await contract.ownerOf(i).call();
+	            const _owner = await contract.tokenByIndex(i-1).call();
+		    	const owner = await contract.ownerOf(_owner).call();
 	            
 	            if(owner == address.AddressContractNFTMarket){
 	                obj.push(i);
@@ -163,7 +170,7 @@ module.exports = function(prefix , app) {
 		                	name : item.name,
 		                	description : item.description,
 		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif",
-		                	attributes : getOptions(value, tokenID),
+		                	attributes : getOptions(value, tokenID, item.description),
 		                	model : getModelName(value.Models),
 		                    buyer: InfoSell.buyer,
 		                    currency: InfoSell.currency,
@@ -197,7 +204,8 @@ module.exports = function(prefix , app) {
 
 	        var obj = [];
 	        for(var i=1; i<=total; i++) {
-	            const owner = await contract.ownerOf(i).call();
+	            const _owner = await contract.tokenByIndex(i-1).call();
+		    	const owner = await contract.ownerOf(_owner).call();
 	            
 	            if(owner == address.AddressContractNFTMarket){
 	                obj.push(i);
@@ -212,15 +220,21 @@ module.exports = function(prefix , app) {
 	                //console.log(value);
 	                var InfoSell = await contractMarket.getSales(tokenID,address.AddressContractSmartNFT).call();
 	                
-		                sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+tokenID+"' LIMIT 1";
+		                sql = "SELECT * FROM `nft_smart` WHERE nft_contract='"+address.AddressContractSmartNFT+"' AND tokenId='"+tokenID+"' LIMIT 1";
 	    				item = await db.dbQuery(sql, true);
-	    				
-	    				let jsonData = JSON.parse(item.data);
+	    				var description = "";
+
+	    				if(item == undefined || item == "") {
+	    					description = "";
+	    					
+	    				}else{
+	    					 description = item.description;
+	    				}
 		                var dataObj = {
 		                	name : value.CarName,
-		                	description : item.description,
+		                	description : description,
 		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif",
-		                	attributes : [getOptions(value, tokenID)],
+		                	attributes : getOptions(value, tokenID, description),
 		                	model : getModelName(value.Models),
 		                    buyer: InfoSell.buyer,
 		                    currency: InfoSell.currency,
@@ -239,7 +253,7 @@ module.exports = function(prefix , app) {
 	            });
 	        }
 
-	        
+	       
 	        return object;
     		
 		}
@@ -259,13 +273,20 @@ module.exports = function(prefix , app) {
                 
 	                sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+tokenID+"' LIMIT 1";
     				item = await db.dbQuery(sql, true);
-    				let jsonData = JSON.parse(item.data);
+    				var description = "";
+
+    				if(item == undefined || item == "") {
+    					description = "";
+    					
+    				}else{
+    					 description = item.description;
+    				}
 	                var dataObj = {
-	                	name : item.name,
-	                	description : item.description,
-	                	image : String(jsonData.image).replace(/\.png/g,'.gif'),
-	                	attributes : jsonData.attributes,
-	                	model : getModelName(jsonData.attributes[1].value),
+	                	name : value.CarName,
+	                	description : description,
+	                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif",
+	                	attributes : getOptions(value, tokenID, description),
+	                	model : getModelName(value.Models),
 	                    buyer: InfoSell.buyer,
 	                    currency: InfoSell.currency,
 	                    id: InfoSell.id,
@@ -348,7 +369,7 @@ module.exports = function(prefix , app) {
 		app.get(prefix + "/account", async (req, res) => {
 		  app.set('layout', config.layout.dir + "/pages");
 		  const dataMain = fsFile.readJSONFile('market.json');
-		  dataMain.loadJS = ["market.js"];
+		  dataMain.loadJS = ["jquery-ui.js","market.js"];
 		 res.render(dataMain.public.market == true ? "market-wallet" : "coming",dataMain);
 		});
 
@@ -374,6 +395,7 @@ module.exports = function(prefix , app) {
 
 			const dataMain = fsFile.readJSONFile('market.json');
 			var data = [];
+			var expitem = [];
 			if(wallet.length > 40){
 				data = await getMyItems(wallet);
 				expitem = await getMyExp(wallet);

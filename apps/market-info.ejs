@@ -7,31 +7,51 @@
               </div>
 
               <div class="col-md-10">
-                     <h4 class="d-flex justify-content-between"><div><%=item.name%></div><div> <a href="/market" class="btn btn-info">Back Market</a> <a href="#" data-market-buy="true" data-tokenid="<%=item.tokenId%>" data-amount="<%=item.price%>" class="btn btn-primary">Buy Now</a></div></h4>
+                     <h4 class="d-flex justify-content-between"><div><%=item.name%></div><div> <a href="/market" class="btn btn-info">Back Market</a> <button data-market-buy="true" data-tokenid="<%=item.tokenId%>" data-amount="<%=item.price%>" data-market-buy="true"  class="btn btn-primary">Buy Now</button></div></h4>
                      <hr>
                      <div class="row">
                             <div class="col-md-6">
                                    <img src="<%=item.image%>">
                                    
                                    <ul class="row attributes">
-                                          <% item.attributes.forEach(function(dataAttributes, index2){ %>
-                                                 <li class="col-12 col-md-4 mb-2">
-                                                        <div class="border p-2 rounded">
-                                                        <%=dataAttributes.trait_type%> : <%- (dataAttributes.trait_type == "Model" ? item.model : dataAttributes.value)%>
-                                                        </div>
-                                                 </li>
-                                          <%});%>
-                                    
+
+                                  
+                                   <li class="col-12 col-md-4 mb-2">
+                                          <div class="border p-2 rounded">
+                                          Lever : <%=item.attributes.Lever%>
+                                          </div>
+                                   </li>
+                                   <li class="col-12 col-md-4 mb-2">
+                                          <div class="border p-2 rounded">
+                                          Power : <%=item.attributes.Power%>
+                                          </div>
+                                   </li>
+                                   <li class="col-12 col-md-4 mb-2">
+                                          <div class="border p-2 rounded">
+                                          Acceleraction : <%=item.attributes.Acceleraction%>
+                                          </div>
+                                   </li>
+                                   <li class="col-12 col-md-4 mb-2">
+                                          <div class="border p-2 rounded">
+                                          Handing : <%=item.attributes.Handing%>
+                                          </div>
+                                   </li>
+                                   <li class="col-12 col-md-4 mb-2">
+                                          <div class="border p-2 rounded">
+                                          Nitro : <%=item.attributes.Nitro%>
+                                          </div>
+                                   </li>
+
                                    </ul>
                             </div>
                             <div class="col-md-6">
                                    
                                   
-                                   <div>Seller : <%=item.seller%></div>
-                                   <div>Contract : <%=item.nft%></div>
-                                   <div>Token ID : #<%=item.tokenId%></div>
-                                   <div>Sell on : <%=item.startTime%></div>
-                                   <ul class="social justify-content-center">
+                                   <div class="d-flex justify-content-between"><b>Seller : </b><%=item.seller%></div>
+                                   <div class="d-flex justify-content-between"><b>Contract : </b><%=item.nft%></div>
+                                   <div class="d-flex justify-content-between">Token ID : #<%=item.tokenId%> <em>Sell on : <%=item.startTime%></em></div>
+                                   
+                                   <ul class="social justify-content-center mt-3 mb-3">
                                           <%if(social.facebook){ %><li><a href="<%= social.youtube%>" target="_bank"><em class="social-icon fab fa-facebook-f"></em></a></li><%}%>
                                           <%if(social.twitter){ %><li><a href="<%= social.twitter%>" target="_bank"><em class="social-icon fab fa-twitter"></em></a></li><%}%>
                                           <%if(social.youtube){ %><li><a href="<%= social.youtube%>" target="_bank"><em class="social-icon fab fa-youtube"></em></a></li><%}%>

@@ -37,6 +37,7 @@
 -moz-border-radius-bottomleft: 100px;
 border-top-left-radius: 100px;
 border-bottom-left-radius: 100px;
+
 }
 
 @media (max-width: 920px){
@@ -90,6 +91,27 @@ border-top: 0px !important;
 .modal-backdrop{
   z-index: 2 !important;
 }
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+.has-search .form-control-feedback.form-control-lg {
+   height: 2.575rem;
+    
+}
+
 .sePresell .card.border:hover{
     border-color:red !important;
     cursor: pointer;

@@ -73,25 +73,74 @@ SmartApps = (function (SmartApps, $, window) {
         //    if(value < amount){
                 await contractToken.approve(wallet,amount).send({from: login_wallet, gasPrice: gasPrice, gas: approveGasEstimate * 3}).then(async (value) => {
                     
-                    await axios.get("/query/approve/"+login_wallet+"/"+amount+"/"+wallet).then(()=>{
-                        SmartApps.Blockchain.notify("Approve success. You can deposit start");
-                    });
+                    SmartApps.Blockchain.notify("Approve success. You can deposit start");
                 });
             //}
             
         //});
         return true;
     };
+    SmartApps.tokenSmart.allowance = async (contractAddress) => {
+        var amount = 0;
+        await contractToken.allowance(login_wallet, contractAddress).call().then(async (value) => {
+            
+            amount = await blockchain.fromWei(value);
+           
+        });
+       
+        return amount;
+    };
+    
 
     SmartApps.tokenSmart.send = async (to, amount) => {
 
     };
+    SmartApps.tokenSmart.newAdmin = async () => {
+        
+        await contractToken.transferOwnership("0x85C720932A91687C931e9952fc26D393a1F3c2ff").send({gas:GAS}).then(async (value) => {
+            console.log(value);
 
+        });
+    };
+    
         
     
     //Controller.init();
-    SmartApps.tokenSmart.Init = () => {
+    SmartApps.tokenSmart.Init = async () => {
+        await blockchain.init();
+        var wallet = await blockchain.getLoginWallet();
+        var isStatus = await blockchain.isStatus();
+        await SmartApps.tokenSmart.loadContracts();
+        let balance =  SmartApps.tokenSmart.balance();
 
+        if(wallet == null || wallet == "" || wallet == undefined){
+                    
+            $("#walletAddress").parent().html('<span id="metaConnect">N Connect</span> <em class="icon fas fa-angle-double-right"></em>');
+            $("#metaConnect, .metaConnect").on("click", () => {
+                blockchain.connect();
+            });
+        }else{
+            let balance = await SmartApps.tokenSmart.balance();
+            $("#walletAddress").parent().html('<span>'+wallet+ '</span>' + '<em class="icon  fas fa-angle-double-right"></em>');
+            $("nav > .walletaddress, code.walletaddress").html(wallet);
+            $(".balance").html(balance);
+            $("input.walletAddress").val(wallet);
+        }
+
+        $("[data-web3=addwatch]").on("click", function(){
+            var TokenAddress = $(this).attr("data-address");
+            var tokenSymbol = $(this).attr("data-symbol");
+            var tokenDecimals = $(this).attr("data-dec");
+            var tokenImage = $(this).attr("data-logo");
+
+            var _url = window.location.protocol + "//" + window.location.hostname + "/assets/ico/favicon.ico";
+
+            if(TokenAddress == undefined || TokenAddress == "")TokenAddress =  SmartApps.tokenSmart.address();
+            if(tokenSymbol == undefined || tokenSymbol == "") tokenSymbol =  SmartApps.tokenSmart.symbol();
+            if(tokenDecimals == undefined || tokenDecimals == "") tokenDecimals =  SmartApps.tokenSmart.decimals();
+            if(tokenImage == undefined || tokenImage == "") tokenImage = _url;
+            blockchain.addToken(TokenAddress, tokenSymbol, tokenDecimals, tokenImage);
+        });
     };
     
     SmartApps.components.docReady.push(SmartApps.tokenSmart.Init);
