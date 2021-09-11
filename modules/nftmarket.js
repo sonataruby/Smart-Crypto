@@ -353,7 +353,7 @@ module.exports = function(prefix , app) {
 			const dataMain = fsFile.readJSONFile('market.json');
 			var wallet = req.query.c;
 			var items = [];
-			if(wallet == dataMain.contractAddress.AddressContractSmartNFT || String(wallet).length < 40){
+			if(wallet == dataMain.contractAddress.AddressContractSmartNFT || wallet == "undefined"){
 				items = await getItemsMarkets();
 			}
 			if(wallet == dataMain.contractAddress.AddressContractNFTItem){
