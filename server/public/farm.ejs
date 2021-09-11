@@ -1,5 +1,21 @@
 
-				<button class="btn btn-sm btn-primary" id="settupfactory">Setup Factory NFT</button>
+				
+
+				<div class="row">
+					<div class="col-8">
+						<div class="card">
+							<div class="card-body">
+							FARM : <%=address.AddressContractFarm%><br>
+							Factory : <%=address.AddressContractNFTFactory%>
+							
+							</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<button class="btn btn-sm btn-primary" id="settupfactory">Setup Factory NFT</button>
+					</div>
+				</div>
+				<br>
 				<div class="row">
 					<div class="col-8">
 						<div class="card">
@@ -90,7 +106,7 @@
 						
 
 						<div class="mb-3 row">
-						    <label  class="col-sm-2 col-form-label">Token Total Reward</label>
+						    <label  class="col-sm-2 col-form-label">Total Reward</label>
 						    <div class="col-sm-8">
 						      <input type="text" name="reward" id="reward" class="form-control" value="">
 						    </div>
@@ -103,11 +119,44 @@
 
 						<div class="mb-3 row">
 						    <label  class="col-sm-2 col-form-label">NFT Reward</label>
-						    <div class="col-sm-8">
+						    <div class="col-sm-4">
 						      <input type="text" name="nftreward" id="nftreward" class="form-control" value="">
 						    </div>
 						    <div class="col-sm-2 d-grid gap-2">
 						    	<button class="btn btn-sm btn-primary btn-block"><%= token.name%> NFT</button>
+						    </div>
+						    <div class="col-sm-2">
+						    	<select class="form-select">
+						    		<option value="">No Options</option>
+						    		<option value="1">1h</option>
+						    		<option value="12">12h</option>
+						    		<option value="24">24h</option>
+						    		<option value="48">48h</option>
+						    		<option value="max">Finish Pool</option>
+						    	</select>
+						    </div>
+						    <div class="col-sm-2 d-grid gap-2">
+						    	<button class="btn btn-sm btn-outline-primary btn-block">Hour</button>
+						    </div>
+						</div>
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">Withdraw Lock</label>
+						    <div class="col-sm-4">
+						      <input type="text" name="withdrawlock" id="withdrawlock" class="form-control" value="">
+						    </div>
+						    <div class="col-sm-4">
+						    	<select class="form-select">
+						    		<option value="">No Options</option>
+						    		<option value="1">1h</option>
+						    		<option value="12">12h</option>
+						    		<option value="24">24h</option>
+						    		<option value="48">48h</option>
+						    		<option value="max">Finish Pool</option>
+						    	</select>
+						    </div>
+						    <div class="col-sm-2 d-grid gap-2">
+						    	<button class="btn btn-sm btn-outline-primary btn-block">Hour</button>
 						    </div>
 						</div>
 

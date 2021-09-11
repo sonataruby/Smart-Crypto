@@ -5,8 +5,11 @@ const _ = require("lodash");
 
 module.exports = {
     readJSONFile : (filename) =>{
-    	let jsonData = require(path.resolve(__dirname, "json/"+filename));
+      let jsonData = require(path.resolve(__dirname, "json/"+filename));
       let jsonToken = require(path.resolve(__dirname, "json/main.json"));
+      let jsonAddress = require(path.resolve(__dirname, "apps/abi/address.json"));
+      jsonToken.contractAddress = jsonAddress;
+
       let jsonMage = Object.assign({}, jsonToken, jsonData);
       //console.log(_.mergeWith(jsonToken, jsonData, jsonMage));
     	return _.mergeWith(jsonToken, jsonData, jsonMage);

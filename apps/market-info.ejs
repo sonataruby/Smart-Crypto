@@ -2,11 +2,11 @@
  	<div class="container-market">
        <div class="row">
               
-              <div class="col-md-2 border-right">
+              <div class="col-md-2 col-xs-12">
                      <%- include("components/categories.ejs") %>
               </div>
 
-              <div class="col-md-10">
+              <div class="col-md-10 col-xs-12">
                      <h4 class="d-flex justify-content-between"><div><%=item.name%></div><div> <a href="/market" class="btn btn-info">Back Market</a> <button data-market-buy="true" data-tokenid="<%=item.tokenId%>" data-amount="<%=item.price%>" data-market-buy="true"  class="btn btn-primary">Buy Now</button></div></h4>
                      <hr>
                      <div class="row">

@@ -77,6 +77,47 @@ border-top-right-radius: 0px !important;
 border-top: 0px !important;
 }
 
+.bg-gameplay{
+  background-image:url(https://image.winudf.com/v2/image/Y29tLm5hcG9tb2JpbGV0ZWFtLmNhcndhbGxwYXBlcnNoZF9zY3JlZW5fMF8xNTM5ODA0NjAyXzA4Ng/screen-0.jpg?fakeurl=1&type=.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.s1, .s2, .s3, .s4, .s5, .s6{
+    width:100px;
+    height:100px;
+    position: absolute;
+    left : 350px;
+    border-width: 2px !important;
+    border-color: #FFF !important;
+    background-color: #FFF;
+}
+.s2{
+  top: 200px;
+  left: 150px;
+}
+.s3{
+  top: 100px;
+  left: 240px;
+}
+
+.s4{
+  top: 120px;
+  left: 450px;
+}
+.s5{
+  top: 250px;
+  left:  530px;
+  width:140px;
+    height:140px;
+}
+.s6{
+  top: 100px;
+  left: 50%;
+  width:400px;
+  height:400px;
+}
+
 .btn.walletLimit{
    display: inline-flex !important;
 }

@@ -1,14 +1,15 @@
 {
-	"AddressContractPresell" : "",
-	"AddressContractAirdrop" : "",
-	"AddressContractIDO" : "",
-	"AddressContractSmartToken" : "0xBF746A14261A33FE0c17932409C04586a222099b",
+	"AddressContractPresell" : "0x4e7f7bdfc8a55cf47e4207ab0cc03d92e66f8452",
+	"AddressContractAirdrop" : "0xde087a28a09235797d264ee4ceb75c62a8539a85",
+	"AddressContractIDO" : "0xa5eec60aee7d3fdd5cff5d1d785b12244bf9cad9",
+	"AddressContractSmartToken" : "0xddc1e236c649c1c00e2f201a06abef860eba796a",
 	"MasterIDOWallet" : "",
-	"AddressContractSmartNFT" : "0xe35bfc8d8fa0b9883e790d6280350461dcbfeb8a",
-	"AddressContractFarm" : "",
-	"AddressContractNFTFactory" : "0xda93dbc2324cf6d59f7fd18f45619526968e3e7d",
-	"AddressContractNFTMarket" : "",
-	"AddressContractLPCAKE" : "",
+	"AddressContractSmartNFT" : "0x8849e0bc8395a25f53b60466f6da1fac5a34a2bd",
+	"AddressContractNFTFactory" : "0x76c88691c74f02bd0bd1b58fb4bd147366d5461b",
+	"AddressContractNFTMarket" : "0x45D8e8CBc7187c32EE399a9765902089A47b04e3",
+	"AddressContractLPCAKE" : "0xeb2fe6d5fbc9fbcc2db2ac8c548c07e4c36ea2b1",
+	"AddressContractFarm" : "0x6d0425144274c6426a6d30406ab2443468ecce68",
 	"AddressContractNFTGame" : "",
-	"AddressContractStaking" : "0x018f37daf5d9dfad63071877b507a82d08ef5216"
+	"AddressContractStaking" : "0xd680c10d1fcbe17319fc99c7fc001a78e1f37b3f",
+	"AddressContractNFTItem" : "0xb2cc258cb97e5dcde67a35eed5831f5b963ea37f"
 }

@@ -31,6 +31,8 @@ const metaAuth = new MetaAuth();
 function readJSONFile(filename) {
   let jsonData = require(path.resolve(__dirname, "../json/"+filename));
   let jsonToken = require(path.resolve(__dirname, "../json/main.json"));
+  let jsonAddress = require(path.resolve(__dirname, "../apps/abi/address.json"));
+  jsonToken.address = jsonAddress;
   let jsonMage = Object.assign({}, jsonToken, jsonData);
   //console.log(_.mergeWith(jsonToken, jsonData, jsonMage));
   return _.mergeWith(jsonToken, jsonData, jsonMage);
@@ -100,6 +102,8 @@ app.get("/farm", async (req, res) => {
  const fileJson = fs.readdirSync(path + dir);
  dataMain.fileBG = fileJson;
  dataMain.filedir = "assets"+dir+"/";
+
+
  res.render("farm",dataMain);
 
 });

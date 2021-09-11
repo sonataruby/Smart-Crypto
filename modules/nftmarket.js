@@ -351,7 +351,15 @@ module.exports = function(prefix , app) {
 		app.get(prefix + "/main/:page", async (req, res) => {
 			app.set('layout', config.layout.dir + "/nolayout");
 			const dataMain = fsFile.readJSONFile('market.json');
-			const items = await getItemsMarkets();
+			var wallet = req.query.c;
+			var items = [];
+			if(wallet == dataMain.contractAddress.AddressContractSmartNFT || wallet.length < 40){
+				items = await getItemsMarkets();
+			}
+			if(wallet == dataMain.contractAddress.AddressContractNFTItem){
+				items = await getItemsMarkets(wallet);
+			}
+			
 			dataMain.items = items;
 			res.render(dataMain.public.market == true ? "market-item" : "coming",dataMain);
 		});

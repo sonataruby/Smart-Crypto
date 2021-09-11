@@ -116,5 +116,5 @@ public/assets/js/web3setup.js
 apps/index.ejs
 package-lock.json
 apps/components/*.ejs
-apps/dev/
+dev/
 public/game

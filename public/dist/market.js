@@ -292,8 +292,8 @@ SmartApps = (function (SmartApps, $, window) {
     }
 
     const loadMainItem = async (page)=>{
-        $("[data-mainmarket]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
-        await axios.get("/market/main/"+page).then((data) => {
+        $("[data-mainmarket]").html('<div class="preloader"><span class="spinner spinner-round"><h7 class="text-center">Loadding...</h7></span></div>');
+        await axios.get("/market/main/"+page+"?c="+getURL("c")).then((data) => {
                 $("[data-mainmarket]").html(data.data);
         });
     }
@@ -317,9 +317,9 @@ SmartApps = (function (SmartApps, $, window) {
         await tokenSmart.allowance(ContractAddress.AddressContractNFTMarket);
         //await SmartApps.Market.buy(1,100);
         let isSeller = await SmartApps.Market.isSeller();
-        let can_mint = await SmartApps.Market.AccessMintNFT();
+        //let can_mint = await SmartApps.Market.AccessMintNFT();
 
-        
+       
         
         if($("[data-mint-nft]").length > 0){
             $("[data-mint-nft]").attr("href","/farm");
