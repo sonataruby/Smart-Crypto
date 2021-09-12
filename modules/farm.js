@@ -31,7 +31,8 @@ module.exports = function(prefix , app) {
 			var annualRewardMonth = rewardUnit * 2629743;//1 Month
 			var timeEnd = startTime + period;
 			var loadNFT = await contract.sessionsnft(session_id).call();
-			
+			loadNFT.minDeposit2 = parseFloat(blockchain.web3.utils.fromWei(loadNFT.minDeposit2));
+			loadNFT.minDeposit = parseFloat(blockchain.web3.utils.fromWei(loadNFT.minDeposit));
 			obj.reward_nft = loadNFT;
 
 			obj.name = value.poolName;
