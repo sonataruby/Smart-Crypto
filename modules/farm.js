@@ -20,7 +20,7 @@ module.exports = function(prefix , app) {
 	 		
 	 		var amount = parseFloat(blockchain.web3.utils.fromWei(value.amount == 0 ? value.totalReward : value.amount));
 			var totalReward = parseFloat(blockchain.web3.utils.fromWei(value.totalReward));
-			var mindeposit = parseFloat(blockchain.web3.utils.fromWei(value.minDeposit));
+			var mindeposit = value.minDeposit > 0 ? parseFloat(blockchain.web3.utils.fromWei(value.minDeposit)) : 0;
 			var startTime = parseInt(value.startTime);
 			var period = parseInt(value.period);
 			var rewardUnit = totalReward/period;
