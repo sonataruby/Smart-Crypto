@@ -26,7 +26,7 @@ const metaAuth = new MetaAuth();
 
 const TelegramBot = require('node-telegram-bot-api');
 
-const bot = new TelegramBot(config.telegram.token, {polling: false});
+const bot = new TelegramBot(config.telegram.token, {polling: true});
 
 
 
