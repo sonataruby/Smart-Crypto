@@ -141,17 +141,16 @@ SmartApps = (function (SmartApps, $, window) {
         let appoveAmount = await tokenSmart.allowance(ContractAddress.AddressContractNFTMarket);
        
         
-        if(appoveAmount < amount){
+        if(appoveAmount < depositAmount){
             await tokenSmart.approve(ContractAddress.AddressContractNFTMarket,depositAmount).then(async() => {
                 await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
             
                     blockchain.notify("Your buy NFT complete");
 
                     if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                                chat_id: window.TelegramChannel,
-                                text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`,
-                                parse_mode:'Markdown'
+                        await axios.post('/telegram', {
+                                
+                                text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`
                         });
                         window.location.href="/market/account";
                     }
@@ -162,12 +161,11 @@ SmartApps = (function (SmartApps, $, window) {
             
                 blockchain.notify("Your buy NFT complete");
                 if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                    await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                            chat_id: window.TelegramChannel,
-                            text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`,
-                            parse_mode:'Markdown'
+                    await axios.post('/telegram', {
+                                
+                                text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`
                     });
-                     window.location.href="/market/account";
+                    window.location.href="/market/account";
                 }
             });
         }

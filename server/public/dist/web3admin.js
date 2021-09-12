@@ -581,10 +581,9 @@ SmartApps = (function (SmartApps, $, window) {
                     blockchain.notify("Buy token successful Tx : "+res.transactionHash);
                     let tokenname = await tokenSmart.symbol();
                     if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                                chat_id: window.TelegramChannel,
-                                text: `${login_wallet} Join Pre-Sell Buy ${amount} BNB`,
-                                parse_mode:'Markdown'
+                        await axios.post('/telegram', {
+                                
+                                text: `${login_wallet} Join Pre-Sell Buy ${amount} BNB`
                         });
                     }
               });
@@ -718,10 +717,9 @@ SmartApps = (function (SmartApps, $, window) {
                         
                         blockchain.notify("Buy token successful Tx : "+res.transactionHash);
                         if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                            await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                                    chat_id: window.TelegramChannel,
-                                    text: `IDO Payment : ${res.transactionHash}. Share your link IDO get 10% profit free`,
-                                    parse_mode:'Markdown'
+                            await axios.post('/telegram', {
+                                    
+                                    text: `IDO Payment : ${res.transactionHash}. Share your link IDO get 10% profit free`
                             });
                         }
                     });
