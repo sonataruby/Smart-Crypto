@@ -137,7 +137,7 @@ function create ()
 	const deposit = this.add.image(setButtonControll, 400, 'deposit')
 		.setInteractive()
 		.on('pointerdown', () => {
-			blockchain.createpool(game_1.min_deposit,game_1.id);
+			blockchain.createpool(game_1.id);
 		});
 		setButtonControll2 = setButtonControll + 140;
 		setButtonControll3 = setButtonControll + 280;

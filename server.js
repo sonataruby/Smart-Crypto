@@ -24,6 +24,10 @@ const contract = require('truffle-contract');
 const MetaAuth = require('meta-auth');
 const metaAuth = new MetaAuth();
 
+const TelegramBot = require('node-telegram-bot-api');
+
+const bot = new TelegramBot(config.telegram.token, {polling: false});
+
 
 
 app.set('views', path.join(__dirname, '/apps'))
@@ -66,6 +70,7 @@ require("./modules/ido")("/ido",app);
 require("./modules/farm")("/farm",app);
 require("./modules/airdrop")("/airdrop",app);
 
+require("./modules/farm_v1")("/v1/farm",app);
 
 app.get("/staking", (req, res) => {
   app.set('layout', pageLayout())
@@ -100,6 +105,15 @@ app.get("/token", (req, res) => {
 });
 
 
+app.post("/telegram", (req, res) => {
+  var msg = req.body.text;
+  const dataMain = fsFile.readJSONFile('main.json');
+  bot.sendMessage(config.telegram.TelegramChannel,msg);
+  var data = '{"ok": "200"}';
+  res.header('Content-Type', 'application/json');
+  res.send(data);
+  res.end( data );
+});
 
 
 //Login Meta

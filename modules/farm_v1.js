@@ -15,12 +15,10 @@ module.exports = function(prefix , app) {
 	 	obj.id = parseInt(session_id);
 	 	let TimeNow = Math.floor(new Date().getTime()/1000) + 30;
 	 	await contract.sessions(session_id).call().then(async (value) => {
-	 		
 	 		var LoadDB = await db.dbQuery("SELECT * FROM farm_task WHERE log_id='"+session_id+"'",true);
 	 		
 	 		var amount = parseFloat(blockchain.web3.utils.fromWei(value.amount == 0 ? value.totalReward : value.amount));
 			var totalReward = parseFloat(blockchain.web3.utils.fromWei(value.totalReward));
-			var mindeposit = parseFloat(blockchain.web3.utils.fromWei(value.minDeposit));
 			var startTime = parseInt(value.startTime);
 			var period = parseInt(value.period);
 			var rewardUnit = totalReward/period;
@@ -30,21 +28,18 @@ module.exports = function(prefix , app) {
 			var annualRewardWeek = rewardUnit * 604800;//1 week
 			var annualRewardMonth = rewardUnit * 2629743;//1 Month
 			var timeEnd = startTime + period;
-			var loadNFT = await contract.sessionsnft(session_id).call();
-			
-			obj.reward_nft = loadNFT;
 
-			obj.name = value.poolName;
-			
-			obj.min_deposit = mindeposit;
+			obj.name = "No Name";
+			obj.reward_nft = 0;
+			obj.min_deposit = 100;
 			obj.image = "assets/car/9144.jpg";
 			obj.thumbnail = "assets/car/thumbnail.png";
 			obj.color = "#0f0";
 			obj.color2 = "red";
 			if(LoadDB != "" && LoadDB != undefined){
-				
-				
-				
+				obj.name = LoadDB.pool_name;
+				obj.reward_nft = parseInt(LoadDB.reward_nft);
+				obj.min_deposit = parseInt(LoadDB.min_deposit);
 				obj.thumbnail = LoadDB.thumbnail == "" || LoadDB.thumbnail == undefined ? "assets/car/thumbnail.png" : LoadDB.thumbnail;
 				obj.image = LoadDB.image == "" || LoadDB.image == undefined ? "assets/car/9144.jpg" : LoadDB.image;
 				obj.color = LoadDB.color == "" || LoadDB.color == undefined ? "#0f0" : LoadDB.color;
@@ -75,7 +70,7 @@ module.exports = function(prefix , app) {
 				obj.status = 0;
 			}else if(timeEnd < TimeNow){
 				obj.status = -1;
-				obj.joinPool = '<div class="btn-group btn-sm" role="group"><button type="button" data-web3="farmclaim" data-session="'+session_id+'" class="btn btn-sm btn-secondary">Claim</button><button type="button" data-web3="withdraw" data-session="'+session_id+'" class="btn btn-sm btn-secondary">Withdraw</button></div>';
+				obj.joinPool = '<div class="btn-group btn-sm" role="group" aria-label="Basic example"><button type="button" data-web3="farmclaim" data-session="'+session_id+'" class="btn btn-sm btn-secondary">Claim</button><button type="button" data-web3="withdraw" data-session="'+session_id+'" class="btn btn-sm btn-secondary">Withdraw</button></div>';
 			}
 
 	 	});
@@ -84,14 +79,14 @@ module.exports = function(prefix , app) {
 
 
 	app.get(prefix, async (req, res) => {
-		 app.set('layout', config.layout.dir + "/pages");
+		 app.set('layout', config.layout.dir + "/pages_v1");
 		 const dataMain = fsFile.readJSONFile('main.json');
 
 		 let contract = await blockchain.loadFram();
 		 let address = await blockchain.loadAddress();
 		 let lastSessionId = 0;
 
-		 await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
+		 await contract.lastSessionIds('0x6d0425144274c6426a6d30406ab2443468ecce68').call().then((value) => {
 		 	lastSessionId = value;
 		 });
 		 
@@ -109,7 +104,7 @@ module.exports = function(prefix , app) {
 		 }
 
 		 dataMain.items = object;
-		 dataMain.loadJS = ["farm.js"];
+		 dataMain.loadJS = ["farm_v1.js"];
 		 res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
 	});
 

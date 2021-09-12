@@ -82,6 +82,7 @@ border-top: 0px !important;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  margin-top: -30px;
 }
 .s1, .s2, .s3, .s4, .s5, .s6{
     width:100px;
