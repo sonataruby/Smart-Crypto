@@ -36,13 +36,15 @@ let loadAddress = async function(){
      var farmAddressJSON = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/address.json', 'utf8'));
      return farmAddressJSON;
 } 
-let loadFram =  async function() {
+let loadFram =  async function(address) {
     var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/farm.json', 'utf8'));
     var farmAddress = await loadAddress();
-    
-    let contract = await loadContract(farmAddress.AddressContractFarm, farmArtifact);
+    var addressLoad = address == undefined || address.length < 40 ? farmAddress.AddressContractFarm : address;
+    let contract = await loadContract(addressLoad, farmArtifact);
     return contract.methods;
 };
+
+
 
 let loadSmartNFT =  async function() {
     var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/smartnft.json', 'utf8'));

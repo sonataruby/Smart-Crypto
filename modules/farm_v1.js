@@ -9,7 +9,7 @@ module.exports = function(prefix , app) {
 	
 
 	const loadInfoPool = async (session_id) => {
-		let contract = await blockchain.loadFram();
+		let contract = await blockchain.loadFram('0x6d0425144274c6426a6d30406ab2443468ecce68');
 	 	let address = await blockchain.loadAddress();
 	 	var obj = {};
 	 	obj.id = parseInt(session_id);
