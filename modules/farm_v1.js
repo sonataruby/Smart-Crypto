@@ -14,6 +14,7 @@ module.exports = function(prefix , app) {
 	 	var obj = {};
 	 	obj.id = parseInt(session_id);
 	 	let TimeNow = Math.floor(new Date().getTime()/1000) + 30;
+	 	
 	 	await contract.sessions(session_id).call().then(async (value) => {
 	 		var LoadDB = await db.dbQuery("SELECT * FROM farm_task WHERE log_id='"+session_id+"'",true);
 	 		
@@ -82,11 +83,11 @@ module.exports = function(prefix , app) {
 		 app.set('layout', config.layout.dir + "/pages_v1");
 		 const dataMain = fsFile.readJSONFile('main.json');
 
-		 let contract = await blockchain.loadFram();
+		 let contract = await blockchain.loadFram('0x6d0425144274c6426a6d30406ab2443468ecce68');
 		 let address = await blockchain.loadAddress();
-		 let lastSessionId = 0;
+		 let lastSessionId = 14;
 
-		 await contract.lastSessionIds('0x6d0425144274c6426a6d30406ab2443468ecce68').call().then((value) => {
+		 await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
 		 	lastSessionId = value;
 		 });
 		 

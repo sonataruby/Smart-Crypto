@@ -116,29 +116,27 @@ SmartApps = (function (SmartApps, $, window) {
                 });
                 
             }
-    SmartApps.tokenFarm.createpool  = async (session_id) => {
-            //Loadding Deposit game play
+    SmartApps.tokenFarm.createpool  = async (amount, session_id) => {
                 let status = await blockchain.isStatus();
                 if(status == false){
                     await blockchain.init();
                 }
-                //Read Contract Info
-                let readInfo = await contractFarm.sessions(session_id).call();
 
                 const gasPrice = await blockchain.getGasPrice();
-                //let depositAmount = blockchain.toWei(amount.toString(),"ether");
+                let depositAmount = blockchain.toWei(amount.toString(),"ether");
 
                 let appoveAmount = await token.allowance(ContractAddress.AddressContractFarm);
-                
-                if(appoveAmount >= readInfo.minDeposit){
+               
+                if(appoveAmount >= amount){
                     $('#FarmDesopit').modal('show');
                 }else{
-                    await token.approve(ContractAddress.AddressContractFarm,readInfo.minDeposit).then(() => {
+                    await token.approve(ContractAddress.AddressContractFarm,depositAmount).then(() => {
                         $('#FarmDesopit').modal('show');
                     });
                     
                 }
                 
+
     }
     SmartApps.tokenFarm.withdraw = async (session_id) => {
                 let status = await blockchain.isStatus();
@@ -156,7 +154,7 @@ SmartApps = (function (SmartApps, $, window) {
                     }else{
                         let depositAmount = data.toString();
 
-                        await contractFarm.withdrawPool(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {    
+                        await contractFarm.withdraw(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {    
                             blockchain.notify("Confirm success<br>Hash : "+value.transactionHash);
                         });
                     }
@@ -172,17 +170,17 @@ SmartApps = (function (SmartApps, $, window) {
                 }
                 const gasPrice = await blockchain.getGasPrice();
                 let depositAmount = blockchain.toWei(amount.toString(),"ether");
-
-                await contractFarm.depositPool(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {
+                await contractFarm.deposit(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {
                    
                     if(value.status == false){
                         blockchain.notify("Confirm Error");
                     }else if(value.status == true){
                         blockchain.notify("Confirm success<br>Hash : "+value.transactionHash);
                         if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                            
-                            await axios.post('/telegram', {
-                                text: `${login_wallet} Join FARM PO0L`
+                            await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                    chat_id: window.TelegramChannel,
+                                    text: `${login_wallet} Join FARM PO0L`,
+                                    parse_mode:'Markdown'
                             });
                         }
                         //await axios.get("/farm/task/"+login_wallet+"/join/"+value.transactionHash+"/"+session_id);
@@ -202,11 +200,13 @@ SmartApps = (function (SmartApps, $, window) {
                         blockchain.notify("Balance empty. You can not claim");
                     }else{
 
-                        await contractFarm.claimPool(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then(async (value) => {
+                        await contractFarm.claim(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then(async (value) => {
                             blockchain.notify("Claim farm success<br>Hash : "+value.transactionHash);
                             if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                                await axios.post('/telegram', {
-                                    text: `Farm earn : ${value.transactionHash}`
+                                await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
+                                        chat_id: window.TelegramChannel,
+                                        text: `Farm earn : ${value.transactionHash}`,
+                                        parse_mode:'Markdown'
                                 });
                             }
                             
@@ -222,7 +222,7 @@ SmartApps = (function (SmartApps, $, window) {
                 }
                 
                 const gasPrice = await blockchain.getGasPrice();
-                await contractFarm.claimNftPool(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then((value) => {
+                await contractFarm.claimNft(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then((value) => {
                     console.log(value);
                 });
             }
@@ -297,13 +297,12 @@ SmartApps = (function (SmartApps, $, window) {
                     });
             });
 
-                $("[data-web3=farmpool]").on("click", function(){
+            $("[data-web3=farmpool]").on("click", function(){
                     var session_id = parseInt($(this).attr("data-session"));
                     var amount = parseFloat($(this).attr("data-amount"));
                     //startSession();
                     farm.approve(amount,session_id);
                 });
-
                 $("[data-web3=farmdeposit]").on("click", function(){
                     var getAmout = $(this).parent().parent().find(".modal-body input").val();
 
@@ -361,3 +360,4 @@ SmartApps = (function (SmartApps, $, window) {
 
  return SmartApps;
 })(SmartApps, jQuery, window);
+

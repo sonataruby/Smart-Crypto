@@ -40,6 +40,7 @@ let loadFram =  async function(address) {
     var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/farm.json', 'utf8'));
     var farmAddress = await loadAddress();
     var addressLoad = address == undefined || address.length < 40 ? farmAddress.AddressContractFarm : address;
+    
     let contract = await loadContract(addressLoad, farmArtifact);
     return contract.methods;
 };

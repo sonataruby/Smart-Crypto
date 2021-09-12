@@ -219,7 +219,7 @@
 				<div class="mb-3 row">
 				    <label  class="col-sm-2 col-form-label">Session ID</label>
 				    <div class="col-sm-8">
-				      <input type="text"  placeholder="Session ID" class="form-control" value="">
+				      <input type="text"  placeholder="Session ID" lastSessionIds class="form-control nftSetSessionId" value="">
 				    </div>
 				    <div class="col-sm-2 d-grid gap-2">
 				    	<button class="btn btn-sm btn-info btn-block">Session ID</button>
@@ -241,16 +241,16 @@
 				<div class="mb-3 row">
 				    <label  class="col-sm-2 col-form-label">NFT Reward 1</label>
 				    <div class="col-sm-2">
-				      <input type="text" name="nftreward" id="nftreward" class="form-control" placeholder="Min Deposit" value="">
+				      <input type="text" name="nftreward" id="minDepositNFT1" class="form-control" placeholder="Min Deposit" value="">
 				    </div>
 				    <div class="col-sm-2">
-				      <input type="text" name="nftreward" id="nftrewardmindeposit" placeholder="CAR Lever" class="form-control" value="">
+				      <input type="text" name="nftreward" id="RewardNFT1Lever" placeholder="CAR Lever" class="form-control" value="">
 				    </div>
 				    <div class="col-sm-2 d-grid gap-2">
 				    	<button class="btn btn-sm btn-primary btn-block"><%= token.name%> NFT</button>
 				    </div>
 				    <div class="col-sm-2">
-				    	<select class="form-select">
+				    	<select class="form-select" id="TimeNft1Lock">
 				    		<option value="">No Options</option>
 				    		<option value="1">1h</option>
 				    		<option value="12">12h</option>
@@ -268,16 +268,16 @@
 				<div class="mb-3 row">
 				    <label  class="col-sm-2 col-form-label">NFT Reward 2</label>
 				    <div class="col-sm-2">
-				      <input type="text" name="nftreward" id="nftreward2" placeholder="Min Deposit" class="form-control" value="">
+				      <input type="text" name="nftreward" id="minDepositNFT2" placeholder="Min Deposit" class="form-control" value="">
 				    </div>
 				    <div class="col-sm-2">
-				      <input type="text" name="nftreward" id="nftrewardmindeposit2" placeholder="CAR Lever" class="form-control" value="">
+				      <input type="text" name="nftreward" id="RewardNFT2Lever" placeholder="CAR Lever" class="form-control" value="">
 				    </div>
 				    <div class="col-sm-2 d-grid gap-2">
 				    	<button class="btn btn-sm btn-primary btn-block"><%= token.name%> NFT</button>
 				    </div>
 				    <div class="col-sm-2">
-				    	<select class="form-select">
+				    	<select class="form-select" id="TimeNft2Lock">
 				    		<option value="">No Options</option>
 				    		<option value="1">1h</option>
 				    		<option value="12">12h</option>
@@ -290,7 +290,10 @@
 				    	<button class="btn btn-sm btn-outline-primary btn-block">Hour</button>
 				    </div>
 				</div>
+				<hr>
+				<button id="setNftDatabase"  class="btn btn-primary" value="">Update NFT</button>
 			</div>
+
 		</div>
 		<br>
 
@@ -301,10 +304,10 @@
 				<div class="mb-3 row">
 				    <label  class="col-sm-2 col-form-label">Set Name Pool</label>
 				    <div class="col-sm-2">
-				      <input type="text" placeholder="Session ID" class="form-control" value="">
+				      <input type="text" placeholder="Session ID" id="setPollNameID" class="form-control" value="">
 				    </div>
 				    <div class="col-sm-6">
-				      <input type="text" placeholder=Name Pool (Max 50 chatter)" class="form-control" value="">
+				      <input type="text" placeholder=Name Pool (Max 50 chatter)" class="form-control" id="InputPoolName" value="">
 				    </div>
 				    <div class="col-sm-2">
 				      <button id="setNamePool"  class="btn btn-primary" value="">Update</button>
@@ -320,7 +323,7 @@
 				<div class="mb-3 row">
 				    <label  class="col-sm-2 col-form-label">Set Mutile Pool</label>
 				    <div class="col-sm-8">
-				      <input type="text" placeholder="Contract Address" class="form-control" value="">
+				      <input type="text" placeholder="Contract Address" id="ContractAddresssMutiPool" class="form-control" value="">
 				    </div>
 				    <div class="col-sm-2">
 				      <button id="setMutilePool"  class="btn btn-primary" value="">Send Query</button>
@@ -336,10 +339,10 @@
 				<div class="mb-3 row">
 				    <label  class="col-sm-2 col-form-label">Set Mindeposit</label>
 				    <div class="col-sm-2">
-				      <input type="text" placeholder="Session ID" class="form-control" value="">
+				      <input type="text" placeholder="Session ID" id="setMinDepositSessionID" class="form-control" value="">
 				    </div>
 				    <div class="col-sm-6">
-				      <input type="text" placeholder="Number Token Deposit" class="form-control" value="">
+				      <input type="text" placeholder="Number Token Deposit" id="setMinDepositValue" class="form-control" value="">
 				    </div>
 				    <div class="col-sm-2">
 				      <button id="setMinDeposit"  class="btn btn-primary" value="">Update</button>
