@@ -2211,7 +2211,7 @@ SmartApps = (function (SmartApps, $, window) {
        //await contractToken.allowance(wallet,login_wallet).call().then(async (value) => {
             
         //    if(value < amount){
-                await contractToken.approve(wallet,depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: approveGasEstimate * 3}).then(async (value) => {
+                await contractToken.approve(wallet,amount).send({from: login_wallet, gasPrice: gasPrice, gas: approveGasEstimate * 3}).then(async (value) => {
                     
                     SmartApps.Blockchain.notify("Approve success. You can deposit start");
                 });
