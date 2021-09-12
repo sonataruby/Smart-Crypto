@@ -36,14 +36,23 @@ let loadAddress = async function(){
      var farmAddressJSON = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/address.json', 'utf8'));
      return farmAddressJSON;
 } 
-let loadFram =  async function(address) {
-    var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/farm.json', 'utf8'));
+let loadFram =  async function() {
     var farmAddress = await loadAddress();
-    var addressLoad = address == undefined || address.length < 40 ? farmAddress.AddressContractFarm : address;
+   
+    var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/farm.json', 'utf8'));
     
-    let contract = await loadContract(addressLoad, farmArtifact);
+    let contract = await loadContract(farmAddress.AddressContractFarm, farmArtifact);
     return contract.methods;
 };
+let loadFramOld =  async function() {
+    var farmAddress = await loadAddress();
+    
+    var farmArtifact = JSON.parse(fs.readFileSync(__dirname + '/../apps/abi/farm.back.json', 'utf8'));
+    
+    let contract = await loadContract('0x6d0425144274c6426a6d30406ab2443468ecce68', farmArtifact);
+    return contract.methods;
+};
+
 
 
 
@@ -77,6 +86,8 @@ let getHash =  async function() {
 module.exports.addAccount = addAccount;
 module.exports.loadContract = loadContract;
 module.exports.loadFram = loadFram;
+module.exports.loadFramOld = loadFramOld;
+
 module.exports.web3 = web3;
 module.exports.loadAddress = loadAddress;
 module.exports.loadSmartNFT = loadSmartNFT;

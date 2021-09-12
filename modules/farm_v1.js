@@ -9,7 +9,7 @@ module.exports = function(prefix , app) {
 	
 
 	const loadInfoPool = async (session_id) => {
-		let contract = await blockchain.loadFram('0x6d0425144274c6426a6d30406ab2443468ecce68');
+		let contract = await blockchain.loadFramOld();
 	 	let address = await blockchain.loadAddress();
 	 	var obj = {};
 	 	obj.id = parseInt(session_id);
@@ -64,7 +64,7 @@ module.exports = function(prefix , app) {
 			
 			
 			if(startTime < TimeNow && timeEnd > TimeNow){
-				obj.joinPool = '<button class="btn btn-sm btn-info data-info" data-href="/farm/info/'+session_id+'">Join Pool</button>';
+				obj.joinPool = '<div class="btn-group btn-sm" role="group" aria-label="Basic example"><button type="button" data-web3="farmclaim" data-session="'+session_id+'" class="btn btn-sm btn-secondary">Claim</button><button type="button" data-web3="withdraw" data-session="'+session_id+'" class="btn btn-sm btn-secondary">Withdraw</button></div>';
 				obj.status = 1;
 			}else if(startTime > TimeNow && timeEnd > TimeNow){
 				obj.joinPool = '<b>Wait Time Start<b>';
@@ -83,9 +83,9 @@ module.exports = function(prefix , app) {
 		 app.set('layout', config.layout.dir + "/pages_v1");
 		 const dataMain = fsFile.readJSONFile('main.json');
 
-		 let contract = await blockchain.loadFram('0x6d0425144274c6426a6d30406ab2443468ecce68');
+		 let contract = await blockchain.loadFramOld();
 		 let address = await blockchain.loadAddress();
-		 let lastSessionId = 14;
+		 let lastSessionId = 0;
 
 		 await contract.lastSessionIds(address.AddressContractSmartToken).call().then((value) => {
 		 	lastSessionId = value;
@@ -99,14 +99,13 @@ module.exports = function(prefix , app) {
 		 	}
 		 }else{
 		 	for (var i = lastSessionId; i > 0; i--) {
-		 		var data = await loadInfoPool(i);
-		 		object.push(data);
+		 		
 		 	}
 		 }
 
 		 dataMain.items = object;
 		 dataMain.loadJS = ["farm_v1.js"];
-		 res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
+		 res.render(dataMain.public.farm == true ? "farm_v1" : "coming",dataMain);
 	});
 
 	app.get(prefix + "/info/:session_id/:wallet", async (req, res) => {
