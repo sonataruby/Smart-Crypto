@@ -214,6 +214,25 @@
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "ContractMutilePool",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "SmartToken",
 		"outputs": [
@@ -283,14 +302,8 @@
 				"type": "uint256"
 			}
 		],
-		"name": "claim",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
+		"name": "claimNftPool",
+		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -302,8 +315,14 @@
 				"type": "uint256"
 			}
 		],
-		"name": "claimNft",
-		"outputs": [],
+		"name": "claimPool",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -344,7 +363,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "deposit",
+		"name": "depositPool",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -387,6 +406,30 @@
 			}
 		],
 		"name": "earned",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_sessionId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "getApr",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -486,11 +529,6 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "generation",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
 				"name": "claimed",
 				"type": "uint256"
 			},
@@ -518,9 +556,109 @@
 				"internalType": "uint256",
 				"name": "lastInterestUpdate",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "lockTimeWithdraw",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "minDeposit",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "poolName",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "sessionsnft",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "allowNft",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "minDeposit",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "minTimeRewardNFT",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "generation",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "minDeposit2",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "minTimeRewardNFT2",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "generation2",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_sessionId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_minDeposit",
+				"type": "uint256"
+			}
+		],
+		"name": "setMindeposit",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_lpToken",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "onoff",
+				"type": "uint256"
+			}
+		],
+		"name": "setMutilePool",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -532,6 +670,72 @@
 			}
 		],
 		"name": "setNftFactory",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_sessionId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "_allowNft",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_minDeposit",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_generation",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_minTimeRewardNFT",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_minDeposit2",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_generation2",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_minTimeRewardNFT2",
+				"type": "uint256"
+			}
+		],
+		"name": "setNftOptions",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_sessionId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "setPoolName",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -603,7 +807,27 @@
 			},
 			{
 				"internalType": "uint256",
+				"name": "_lockTimeWithdraw",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_minDeposit",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "_allowNft",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint8",
 				"name": "_generation",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_minTimeRewardNFT",
 				"type": "uint256"
 			}
 		],
@@ -626,6 +850,26 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "withdrawBNB",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdrawNCF",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -638,7 +882,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "withdraw",
+		"name": "withdrawPool",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

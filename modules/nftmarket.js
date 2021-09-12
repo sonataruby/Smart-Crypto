@@ -38,31 +38,18 @@ module.exports = function(prefix , app) {
 		    		
 		    		sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+index+"' LIMIT 1";
     				item = await db.dbQuery(sql, true);
-    				
+    				var description = "";
 
-    				if(item == undefined){
-    					item = {};
-    					item.description = "Node Description";
+    				if(item == undefined || item == "") {
+    					description = "";
+    					
     				}else{
-    					readObject = JSON.parse(item.data);
+    					 description = item.description;
     				}
 
     				readObject.image = "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif";
     				readObject.id = index;
-    				readObject.options = {};
-    				readObject.options.tokenId = index;
-    				readObject.options.Image = "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif";
-    				readObject.options.CarName = value.CarName;
-    				readObject.options.Description = item.description;
-					readObject.options.Models = value.Models;
-					readObject.options.Lever = value.Lever;
-					readObject.options.Power = value.Power;
-					readObject.options.Exp = value.Exp;
-					readObject.options.Speed = value.Speed;
-					readObject.options.Acceleraction = value.Acceleraction;
-					readObject.options.Handing = value.Handing;
-					readObject.options.Nitro = value.Nitro;
-    				
+    				readObject.options = getOptions(value, index, description);
     				
     				
                 	object.push(readObject);
