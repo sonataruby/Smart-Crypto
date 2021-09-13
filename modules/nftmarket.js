@@ -101,7 +101,7 @@ module.exports = function(prefix , app) {
 		                dataObj = {
 		                	name : value.exp+" EXP",
 		                	description : description,
-		                	image : "https://cryptocar.cc/nfts/exp/"+value.id+".gif",
+		                	image : "https://cryptocar.cc/nfts/exp/"+(value.id > 0 && value.id <= 5 ? value.id : "1")+".gif",
 		                	
 		                	model : "",
 		                    buyer: InfoSell.buyer,
