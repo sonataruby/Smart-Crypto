@@ -99,7 +99,7 @@ var router = express.Router();
 	                dataObj = {
 	                	name : value.exp+" EXP",
 	                	description : description,
-	                	image : "https://cryptocar.cc/nfts/exp/"+value.id+".gif",
+	                	image : "https://cryptocar.cc/nfts/exp/"+(value.id > 0 && value.id <= 5 ? value.id : "5")+".gif",
 	                	attributes : getOptions(value, tokenID, description),
 	                	model : "",
 	                    buyer: InfoSell.buyer,
