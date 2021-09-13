@@ -20,13 +20,7 @@ const app = express(); // create express app
 const server = http.createServer(app);
 const ejs = require('ejs');
 const session = require('express-session')
-const contract = require('truffle-contract');
-const MetaAuth = require('meta-auth');
-const metaAuth = new MetaAuth();
-
-const TelegramBot = require('node-telegram-bot-api');
-
-const bot = new TelegramBot(config.telegram.token, {polling: true});
+var router = express.Router();
 
 
 
@@ -39,7 +33,7 @@ app.use(EJSLayout);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-
+app.use(router);
 
 const homeLayout = () => {
   return config.layout.dir + "/home";
@@ -71,6 +65,9 @@ require("./modules/farm")("/farm",app);
 require("./modules/airdrop")("/airdrop",app);
 
 require("./modules/farm_v1")("/v1/farm",app);
+
+const account = require("./modules/account").app;
+app.use(account);
 
 app.get("/staking", (req, res) => {
   app.set('layout', pageLayout())
@@ -104,37 +101,6 @@ app.get("/token", (req, res) => {
  res.render("token",dataMain);
 });
 
-
-app.post("/telegram", (req, res) => {
-  var msg = req.body.text;
-  const dataMain = fsFile.readJSONFile('main.json');
-  bot.sendMessage(config.telegram.TelegramChannel,msg);
-  var data = '{"ok": "200"}';
-  res.header('Content-Type', 'application/json');
-  res.send(data);
-  res.end( data );
-});
-
-
-//Login Meta
-app.get('/auth/:MetaAddress', metaAuth, (req, res) => {
-  // Request a message from the server
-  if (req.metaAuth && req.metaAuth.challenge) {
-    res.send(req.metaAuth.challenge[1])
-  }
-});
-
-app.get('/auth/:MetaMessage/:MetaSignature', metaAuth, (req, res) => {
-  if (req.metaAuth && req.metaAuth.recovered) {
-    // Signature matches the cache address/challenge
-    // Authentication is valid, assign JWT, etc.
-    console.log(req.metaAuth.recovered);
-    res.send(req.metaAuth.recovered);
-  } else {
-    // Sig did not match, invalid authentication
-    res.status(400).send();
-  };
-});
 
 /*
 app.get('/api/:file', (req, res) => {

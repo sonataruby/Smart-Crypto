@@ -9,57 +9,7 @@ const moment = require('moment');
 
 module.exports = function(prefix , app) {
 		
-		const getMyItems = async (wallet) => {
-			let contract = await blockchain.loadSmartNFT();
-			
-			
-	 		let address = await blockchain.loadAddress();
-	 		let total = await contract.totalSupply().call();
-	 		let balance = await contract.balanceOf(wallet).call();
-
-	 		var obj = [];
-    		for(var i=1; i<=total; i++) {
-    			const _owner = await contract.tokenByIndex(i-1).call();
-		    	const owner = await contract.ownerOf(_owner).call();
-                if(owner == wallet){
-                	obj.push(_owner);
-                }
-		    }
-
-		    
-		    
-		    var object = [];
-		    for(var i=0; i<obj.length; i++) {
-		    	let index = parseInt(obj[i])
-		    	
-
-		    	await contract.getOptions(index).call().then(async (value) => {
-		    		var readObject = {};
-		    		
-		    		sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+index+"' LIMIT 1";
-    				item = await db.dbQuery(sql, true);
-    				var description = "";
-
-    				if(item == undefined || item == "") {
-    					description = "";
-    					
-    				}else{
-    					 description = item.description;
-    				}
-
-    				readObject.image = "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif";
-    				readObject.id = index;
-    				readObject.options = getOptions(value, index, description);
-    				
-    				
-                	object.push(readObject);
-                });
-		    }
-
-		    
-		    return object;
-    		
-		}
+		
 
 		const getOptions = (value, index, description)=>{
 			var options = {};
@@ -77,74 +27,21 @@ module.exports = function(prefix , app) {
 			options.Nitro = value.Nitro;
 			return options;
 		}
-		const getMyExp = async (wallet) => {
-			
-			let contractItem = await blockchain.loadNFTItem();
-			
-	 		let address = await blockchain.loadAddress();
-	 		
-
-		    let totalExp = await contractItem.totalSupply().call();
-		    var objItem = [];
-		    var objectExp = [];
-		    
-		    for(var i=1; i<=totalExp; i++) {
-		    	const _owner = await contractItem.tokenByIndex(i-1).call();
-		    	const owner = await contractItem.ownerOf(_owner).call();
-		    	
-    			if(owner == wallet){
-                	objItem.push(_owner);
-                }
-            }
-		    
-
-		    
-		    for(var i=0; i<objItem.length; i++) {
-		    	let index = parseInt(objItem[i])
-		    	await contractItem.paramsOf(index).call().then(async (value) => {
-		    		var image = value.id;
-		    		if(value.id == 0 || value.id > 5){
-		    			image = 1;
-		    		}
-		    		if(value.id > 5) image = 5;
-		    		objectExp.push({tokenId : index, image:"https://cryptocar.cc/nfts/exp/"+image+".png", exp : value.exp});
-		    	});
-		    }
-		    
-		   
-		    return objectExp;
-    		
-		}
+		
 
 		const getModelName = (id)=>{
 			var dataJson = ["NORMAL","NORMAL","SPECIAL","RARE","EPIC","LEGENDARY"];
 			return dataJson[id];
 		}
-		const getItemsMySell = async (wallet) => {
+		
 
-			let contract = await blockchain.loadSmartNFT();
-	 		let address = await blockchain.loadAddress();
-	 		let contractMarket = await blockchain.loadMarketNFT();
-	 		let total = await contract.totalSupply().call();
-
-	        var obj = [];
-	        for(var i=1; i<=total; i++) {
-	            const _owner = await contract.tokenByIndex(i-1).call();
-		    	const owner = await contract.ownerOf(_owner).call();
-	            
-	            if(owner == address.AddressContractNFTMarket){
-	                obj.push(_owner);
-	            }
-	        }
-
-	        var object = [];
-	        for(var i=0; i<obj.length; i++) {
-	            let tokenID = parseInt(obj[i])
-	           
-	            await contract.paramsOf(tokenID).call().then(async (value) => {
+		const InfoCarBuild = async (contract, InfoSell) => {
+	    	let tokenID = InfoSell.tokenId;
+	    	var dataObj = {};
+	    	await contract.paramsOf(tokenID).call().then(async (value) => {
 	                //console.log(value);
-	                var InfoSell = await contractMarket.getSales(tokenID,address.AddressContractSmartNFT).call();
-	                if(InfoSell.seller == wallet){
+	               
+	                
 		                sql = "SELECT * FROM `nft_smart` WHERE nft_contract='"+InfoSell.nft+"' AND tokenId='"+tokenID+"' LIMIT 1";
 	    				item = await db.dbQuery(sql, true);
 	    				var description = "";
@@ -157,7 +54,7 @@ module.exports = function(prefix , app) {
 	    				}
 	    				
 
-		                var dataObj = {
+		                dataObj = {
 		                	name : value.CarName,
 		                	description : description,
 		                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".png",
@@ -170,23 +67,127 @@ module.exports = function(prefix , app) {
 		                    nft: InfoSell.nft,
 		                    price: InfoSell.price / 10**18,
 		                    seller: InfoSell.seller,
-		                    startTime: InfoSell.startTime,
+		                    startTime: moment.unix(InfoSell.startTime).format('MMM D, YYYY, HH:mm A'),
 		                    status: InfoSell.status,
 		                    tokenId: InfoSell.tokenId
 		                };
-		                object.push(dataObj);
-		            }
+		                
+		            
 
 	            });
+	    	return dataObj;
+	    }
+
+
+	    const InfoExpBuild = async (contract, InfoSell) => {
+	    	let tokenID = InfoSell.tokenId;
+	    	var dataObj = {};
+	    	await contract.paramsOf(tokenID).call().then(async (value) => {
+	                //console.log(value);
+	               
+	                
+		                sql = "SELECT * FROM `nft_smart` WHERE nft_contract='"+InfoSell.nft+"' AND tokenId='"+tokenID+"' LIMIT 1";
+	    				item = await db.dbQuery(sql, true);
+	    				var description = "";
+
+	    				if(item == undefined || item == "") {
+	    					description = "";
+	    					
+	    				}else{
+	    					 description = item.description;
+	    				}
+	    				
+
+		                dataObj = {
+		                	name : value.exp+" EXP",
+		                	description : description,
+		                	image : "https://cryptocar.cc/nfts/exp/"+value.id+".gif",
+		                	
+		                	model : "",
+		                    buyer: InfoSell.buyer,
+		                    currency: InfoSell.currency,
+		                    id: InfoSell.id,
+		                    length: InfoSell.length,
+		                    nft: InfoSell.nft,
+		                    price: InfoSell.price / 10**18,
+		                    seller: InfoSell.seller,
+		                    startTime: moment.unix(InfoSell.startTime).format('MMM D, YYYY, HH:mm A'),
+		                    status: InfoSell.status,
+		                    tokenId: InfoSell.tokenId
+		                };
+		                
+		            
+
+	            });
+	    	return dataObj;
+	    }
+
+
+		const getItemsMarkets = async (contractAddress) => {
+
+			let contract = await blockchain.loadSmartNFT();
+	 		let address = await blockchain.loadAddress();
+	 		let contractMarket = await blockchain.loadMarketNFT();
+	 		let contractItem = await blockchain.loadNFTItem();
+	 		let total = await contractMarket.getSalesAmount().call();
+
+	 		var object = [];
+	        for(var i=1; i<=total; i++) {
+        	
+	        	await contractMarket.getSales(i,contractAddress).call().then(async (value) => {
+	        		if(value.tokenId > 0 && value.status == 0){
+	        			
+	        			if(contractAddress == address.AddressContractSmartNFT){
+	        				let getInfo = await InfoCarBuild(contract, value);
+	        				object.push(getInfo);
+	        			}
+	        			if(contractAddress == address.AddressContractNFTItem){
+	        				let getInfo = await InfoExpBuild(contractItem, value);
+	        				object.push(getInfo);
+	        			}
+	        			
+	        			
+	        		}
+	        		
+	        	});
 	        }
 
-	        
+	       
+	       
 	        return object;
     		
 		}
 
 
-		const getItemsMarkets = async () => {
+		const getItemsMarketsInfo = async (contractAddress, tokenID) => {
+
+			let contract = await blockchain.loadSmartNFT();
+	 		let address = await blockchain.loadAddress();
+	 		let contractMarket = await blockchain.loadMarketNFT();
+	 		let contractItem = await blockchain.loadNFTItem();
+	 		
+	        var object = {};
+	        await contractMarket.getSales(tokenID,contractAddress).call().then(async (value) => {
+
+	        	if(value.nft == '0x3424cB5b1A48577Cd8022ae4383B72Ad6F1e33FE'){
+					let getInfo = await InfoCarBuild(contract, value);
+					object = getInfo;
+				}else if(value.nft == '0x69865587e770053a2173BeD51b2F991b900222d1'){
+					let getInfo = await InfoExpBuild(contractItem, value);
+					object = getInfo;
+					console.log(value.nft);
+
+				}
+	        });
+	        
+
+	        return object;
+    		
+		}
+
+
+
+		const getItemsMarketsExp = async () => {
 
 			let contract = await blockchain.loadSmartNFT();
 	 		let address = await blockchain.loadAddress();
@@ -249,56 +250,6 @@ module.exports = function(prefix , app) {
     		
 		}
 
-
-		const getItemsMarketsInfo = async (tokenID) => {
-
-			let contract = await blockchain.loadSmartNFT();
-	 		let address = await blockchain.loadAddress();
-	 		let contractMarket = await blockchain.loadMarketNFT();
-	 		
-
-	        var object = {};
-	        await contract.paramsOf(tokenID).call().then(async (value) => {
-                //console.log(value);
-                var InfoSell = await contractMarket.getSales(tokenID,address.AddressContractSmartNFT).call();
-                
-	                sql = "SELECT * FROM `nft_smart` WHERE tokenId='"+tokenID+"' LIMIT 1";
-    				item = await db.dbQuery(sql, true);
-    				var description = "";
-
-    				if(item == undefined || item == "") {
-    					description = "";
-    					
-    				}else{
-    					 description = item.description;
-    				}
-	                var dataObj = {
-	                	name : value.CarName,
-	                	description : description,
-	                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif",
-	                	attributes : getOptions(value, tokenID, description),
-	                	model : getModelName(value.Models),
-	                    buyer: InfoSell.buyer,
-	                    currency: InfoSell.currency,
-	                    id: InfoSell.id,
-	                    length: InfoSell.length,
-	                    nft: InfoSell.nft,
-	                    price: InfoSell.price / 10**18,
-	                    seller: InfoSell.seller,
-	                    startTime: moment.unix(InfoSell.startTime).format('MMM D, YYYY, HH:mm A'),
-	                    status: InfoSell.status,
-	                    tokenId: InfoSell.tokenId
-	                };
-	                object = dataObj;
-	            
-
-            });
-
-	        
-	        return object;
-    		
-		}
-
 		const insert_items = async (tokenID, model, lever) =>{
 			const data = {
 			  "id" : tokenID,
@@ -329,10 +280,10 @@ module.exports = function(prefix , app) {
 		}
 
 		app.get(prefix, (req, res) => {
-		  app.set('layout', config.layout.dir + "/pages");
-		 const dataMain = fsFile.readJSONFile('market.json');
-		 dataMain.loadJS = ["market.js"];
-		 res.render(dataMain.public.market == true ? "market" : "coming",dataMain);
+		  	app.set('layout', config.layout.dir + "/pages");
+		 	const dataMain = fsFile.readJSONFile('market.json');
+		 	dataMain.loadJS = ["market.js"];
+		 	res.render(dataMain.public.market == true ? "market" : "coming",dataMain);
 		});
 
 		app.get(prefix + "/main/:page", async (req, res) => {
@@ -340,15 +291,17 @@ module.exports = function(prefix , app) {
 			const dataMain = fsFile.readJSONFile('market.json');
 			var wallet = req.query.c;
 			var items = [];
+			var itemLayout = "market-item";
 			if(wallet == dataMain.contractAddress.AddressContractSmartNFT || String(wallet).length < 40){
-				items = await getItemsMarkets();
+				items = await getItemsMarkets(dataMain.contractAddress.AddressContractSmartNFT);
 			}
 			if(wallet == dataMain.contractAddress.AddressContractNFTItem){
-				items = await getItemsMarkets(wallet);
+				items = await getItemsMarkets(dataMain.contractAddress.AddressContractNFTItem);
+				itemLayout = "market/"+dataMain.contractAddress.AddressContractNFTItem;
 			}
 			
 			dataMain.items = items;
-			res.render(dataMain.public.market == true ? "market-item" : "coming",dataMain);
+			res.render(itemLayout,dataMain);
 		});
 
 
@@ -359,9 +312,12 @@ module.exports = function(prefix , app) {
 		 	const dataMain = fsFile.readJSONFile('market.json');
 		 	dataMain.loadJS = ["market.js"];
 
-		 	let infoItem = await getItemsMarketsInfo(tokenid);
+		 	let infoItem = await getItemsMarketsInfo(token, tokenid);
 		 	dataMain.item = infoItem;
-		 	res.render(dataMain.public.market == true ? "market-info" : "coming",dataMain);
+		 	
+		 	var itemLayout = "market-info";
+			
+		 	res.render(itemLayout,dataMain);
 
 		});
 

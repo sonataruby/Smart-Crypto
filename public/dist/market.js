@@ -68,9 +68,9 @@ SmartApps = (function (SmartApps, $, window) {
         });
     }
     
-    SmartApps.Market.sell =  async (tokenID, price, description) => {
+    SmartApps.Market.sell =  async (tokenID, price, description, c_address) => {
         let depositAmount = blockchain.toWei(price.toString(),"ether");
-        await contractMarket.sell(tokenID, depositAmount, ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:500000}).then(async (value)=>{
+        await contractMarket.sell(tokenID, depositAmount, c_address, ContractAddress.AddressContractSmartToken).send({gas:500000}).then(async (value)=>{
             if(value.transactionHash){
 
                 let id = await blockchain.getNftTokenID(value.transactionHash);
@@ -81,14 +81,15 @@ SmartApps = (function (SmartApps, $, window) {
                     hash : value.transactionHash,
                     description : description,
                     money_contract : ContractAddress.AddressContractSmartToken,
-                    nft_contract : ContractAddress.AddressContractSmartNFT
+                    nft_contract : c_address
                 }).then((data) => {
-                    
+                    blockchain.notify(data.data);
                 });
-                blockchain.notify(data.data);
-                await loadMyController();
-                window.location.reload();
+                
+                //await loadMyController();
+               
             }
+             window.location.reload();
         });
     }
 
@@ -103,9 +104,19 @@ SmartApps = (function (SmartApps, $, window) {
         smartnft.transferFrom(login_wallet,sendto,tokenID).send({gas:GAS}).then(async (value) =>{
             $('#transferWallet').modal('hide');
             blockchain.notify("Your transfer complete");
-            loadMyItem();
+            window.location.reload();
         });
     }
+
+     SmartApps.Market.transferExp = async (sendto, tokenID) => {
+        var nftExp = await blockchain.loadContractNFTItem();
+        nftExp.transferFrom(login_wallet,sendto,tokenID).send({gas:GAS}).then(async (value) =>{
+            $('#transferWallet').modal('hide');
+            blockchain.notify("Your transfer complete");
+            window.location.reload();
+        });
+    }
+    
 
     
     SmartApps.Market.AccessMintNFT = async () => {
@@ -115,8 +126,8 @@ SmartApps = (function (SmartApps, $, window) {
     };
     
 
-    SmartApps.Market.cancelsell =  async (tokenID) => {
-        await contractMarket.cancelSell(tokenID, ContractAddress.AddressContractSmartNFT).send({gas:GAS}).then(async (value)=>{
+    SmartApps.Market.cancelsell =  async (tokenID,c_address) => {
+        await contractMarket.cancelSell(tokenID, c_address).send({gas:GAS}).then(async (value)=>{
             if(value.transactionHash){
                 await axios.post("/market/cancelsell/"+login_wallet,{
                     tokenid : tokenID
@@ -124,13 +135,14 @@ SmartApps = (function (SmartApps, $, window) {
                     blockchain.notify(data.data);
                     
                 });
-                window.location.reload();
+                
             }
+            window.location.reload();
         });
     }
 
 
-    SmartApps.Market.buy =  async (tokenID, amount) => {
+    SmartApps.Market.buy =  async (tokenID, amount,c_address) => {
         
         await tokenSmart.loadContracts();
        // amount = amount + 50;
@@ -143,7 +155,7 @@ SmartApps = (function (SmartApps, $, window) {
         
         if(appoveAmount < depositAmount){
             await tokenSmart.approve(ContractAddress.AddressContractNFTMarket,depositAmount).then(async() => {
-                await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
+                await contractMarket.buy(tokenID,c_address, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
             
                     blockchain.notify("Your buy NFT complete");
 
@@ -157,7 +169,7 @@ SmartApps = (function (SmartApps, $, window) {
                 });
             });
         }else{
-            await contractMarket.buy(tokenID,ContractAddress.AddressContractSmartNFT, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
+            await contractMarket.buy(tokenID,c_address, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
             
                 blockchain.notify("Your buy NFT complete");
                 if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
@@ -180,7 +192,7 @@ SmartApps = (function (SmartApps, $, window) {
         return isApprovedForAll;
     }
 
-    SmartApps.Market.enableSell =  async () => {
+    SmartApps.Market.enableSellCar =  async () => {
         var smartnft = await blockchain.loadContractSmartnft();
         let isApprovedForAll = await smartnft.isApprovedForAll(login_wallet,ContractAddress.AddressContractNFTMarket).call();
         
@@ -190,9 +202,11 @@ SmartApps = (function (SmartApps, $, window) {
                 window.location.reload();
             });
         }else{
-            blockchain.notify("Your ready seller account");
+            return true;
         }
     }
+
+
 
 
     SmartApps.Market.UpCarsLever =  async (tokenid, itemid) => {
@@ -225,20 +239,54 @@ SmartApps = (function (SmartApps, $, window) {
         });
     }
 
+    SmartApps.Market.isEnableSellExp =  async () => {
+        var nftExp = await blockchain.loadContractNFTItem();
+        let isApprovedForAll = await nftExp.isApprovedForAll(login_wallet,ContractAddress.AddressContractNFTMarket).call();
+        return isApprovedForAll;
+    };
+    SmartApps.Market.enableSellExp =  async () => {
+        var nftExp = await blockchain.loadContractNFTItem();
+        let isApprovedForAll = await nftExp.isApprovedForAll(login_wallet,ContractAddress.AddressContractNFTMarket).call();
+        
+        if(isApprovedForAll == false){
+            await nftExp.setApprovalForAll(ContractAddress.AddressContractNFTMarket, true).send({gas:GAS}).then((value) => {
+                console.log(value);
+                window.location.reload();
+            });
+        }else{
+            return true;
+        }
+    }
     
     
 
 
-    const loadMyItem = async ()=>{
-        $("[data-myitem]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
-        await axios.post("/market/myitem/"+login_wallet).then((data) => {
-                $("[data-myitem]").html(data.data);
 
-                $("[data-market-sell]").on("click", function(){
+    const loadMainItem = async (page)=>{
+        $("[data-mainmarket]").html('<div class="preloader"><span class="spinner spinner-round"><h7 class="text-center">Loadding...</h7></span></div>');
+        await axios.get("/market/main/"+page+"?c="+getURL("c")).then((data) => {
+                $("[data-mainmarket]").html(data.data);
+        });
+    }
+
+    
+
+    const loadMyItemController = async (url)=>{
+        $("div[data-account-item]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
+        await axios.post(url,{wallet : login_wallet}).then((data) => {
+                $("div[data-account-item]").html(data.data);
+
+                $("[data-market-sell]").on("click", async function(){
                     var tokenID = $(this).data("tokenid");
-                    var price = $(this).parent().parent().find("input").val();
-                    
-                    var description = $(this).parent().parent().parent().find("textarea.description").val();
+                    var c_address = $(this).data("contract");
+                    var price = $(this).parent().parent().find("input.price").val();
+                    if(c_address == ContractAddress.AddressContractNFTItem){
+                        await SmartApps.Market.enableSellExp();
+                    }
+                    if(c_address == ContractAddress.AddressContractSmartNFT){
+                        await SmartApps.Market.enableSellCar();
+                    }
+                    var description = $(this).parent().parent().find("textarea.description").val();
                     var error = false;
                     if(tokenID == 0){
                         blockchain.notify("Error Token ID, Plz Try again");
@@ -248,9 +296,9 @@ SmartApps = (function (SmartApps, $, window) {
                         blockchain.notify("Error Price, Plz Try again");
                         error = true;
                     }
-                    if(error == false) SmartApps.Market.sell(tokenID, price, description);
+                    if(error == false) SmartApps.Market.sell(tokenID, price, description, c_address);
                 });
-
+ 
                 $("[data-nft-transfer]").on("click", function(){
                     var tokenID = $(this).data("tokenid");
                     var sendto = $("#TransferNftWallet").val();
@@ -266,9 +314,25 @@ SmartApps = (function (SmartApps, $, window) {
                     SmartApps.Market.transfer(sendto,tokenID);
                 });
 
+
+                $("[data-exp-transfer]").on("click", function(){
+                    var tokenID = $(this).data("tokenid");
+                    var sendto = $("#TransferNftWallet").val();
+                    if(sendto.length < 40){
+                        blockchain.notify("Error Wallet");
+                        return false;
+                    }
+                    if(tokenID < 1){
+                        blockchain.notify("Error Token ID");
+                        return false;
+                    }
+
+                    SmartApps.Market.transferExp(sendto,tokenID);
+                });
+
                 $("[data-carslever]").on("click", async function(){
-                    var expid1 = parseInt($("#exptoken3").data("tokenid"));
-                    var tokenid = parseInt($("#carslibs2").data("tokenid"));
+                    var expid1 = parseInt($("#exptoken3 > img").data("tokenid"));
+                    var tokenid = parseInt($("#carslibs2 > img").data("tokenid"));
                     if(expid1 == "" || expid1 == undefined || tokenid == "" || tokenid == undefined || isNaN(expid1) || isNaN(tokenid)){
                         blockchain.notify("Error Token ID EXP");
                         return false;
@@ -277,36 +341,24 @@ SmartApps = (function (SmartApps, $, window) {
                 });
 
                 $("[data-upexp]").on("click", async function(){
-                    var expid1 = parseInt($("#exptoken1").data("tokenid"));
-                    var expid2 = parseInt($("#exptoken2").data("tokenid"));
+                    var expid1 = parseInt($("#exptoken1 > img").data("tokenid"));
+                    var expid2 = parseInt($("#exptoken2 > img").data("tokenid"));
                     if(expid1 == expid2 || expid1 == "" || expid1 == undefined || expid2 == "" || expid2 == undefined || isNaN(expid1) || isNaN(expid2)){
                         blockchain.notify("Error Token ID EXP");
                         return false;
                     }
                     SmartApps.Market.UpItemLever(expid1,expid2);
                 });
+
+                $("[data-cancelsell]").on("click", async function(){
+                    var tokenID = $(this).data("tokenid");
+                    var c_address = $(this).data("contract");
+                    SmartApps.Market.cancelsell(tokenID,c_address);
+                });
                 
             });
     }
 
-    const loadMainItem = async (page)=>{
-        $("[data-mainmarket]").html('<div class="preloader"><span class="spinner spinner-round"><h7 class="text-center">Loadding...</h7></span></div>');
-        await axios.get("/market/main/"+page+"?c="+getURL("c")).then((data) => {
-                $("[data-mainmarket]").html(data.data);
-        });
-    }
-
-    const loadMyController = async () => {
-            $("[data-myitem]").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
-                await axios.post("/market/mysell/"+login_wallet).then((data) => {
-                    $("[data-myitem]").html(data.data);
-                    $("[data-market-cancelsell]").on("click",function (){
-                        var tokenid = $(this).data("tokenid");
-                        SmartApps.Market.cancelsell(tokenid);
-                    });
-                    
-                });
-            }
     SmartApps.Market.init =  async function(){
         await blockchain.init();
         await tokenSmart.loadContracts();
@@ -318,7 +370,13 @@ SmartApps = (function (SmartApps, $, window) {
         //let can_mint = await SmartApps.Market.AccessMintNFT();
 
        
-        
+        if($("div[data-account-item]").hasAttr("data-auto-load")){
+            var url = $("div[data-account-item]").data('account-item');
+            url = url.replace(/{wallet}/g,login_wallet);
+            console.log(url);
+            await loadMyItemController(url);
+        }
+
         if($("[data-mint-nft]").length > 0){
             $("[data-mint-nft]").attr("href","/farm");
             $("[data-mint-nft]").html("Join S3 Game");
@@ -364,7 +422,8 @@ SmartApps = (function (SmartApps, $, window) {
         $("[data-market-buy]").on("click", function(){
             var tokenID = $(this).data("tokenid");
             var amount = $(this).data("amount");
-            SmartApps.Market.buy(tokenID,amount);
+            var c_address = $(this).data("contract");
+            SmartApps.Market.buy(tokenID,amount,c_address);
         });
     }
     SmartApps.components.docReady.push(SmartApps.Market.init);

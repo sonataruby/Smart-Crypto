@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Token ID</th>
+      <th scope="col" colspan="2">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Contract</th>
+      <th scope="col">Open Day</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% items.forEach(function(data, index){ %>
+    <tr>
+      <th scope="row"><%=data.id%></th>
+      <th scope="col"><%=data.tokenId%></th>
+      <td><img src="<%=data.image%>" style="width:60px;"></td>
+      <td><%=data.name%></td>
+      <td><%=data.price%> <%=token.name%></td>
+      <td><%=data.nft%></td>
+      <td><%=data.startTime%></td>
+      <td class="text-end"><button class="btn btn-sm btn-primary" data-cancelsell data-tokenid="<%=data.tokenId%>" data-contract="<%=data.nft%>">Close Sell</button></td>
+    </tr>
+    <%});%>
+  </tbody>
+</table>

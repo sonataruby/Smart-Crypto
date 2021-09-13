@@ -1,4 +1,108 @@
- <div class="row">
+ 
+
+<div class="row">
+  <div class="col-5">
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="walletCarsMy-tab" data-toggle="tab" href="#walletCarsMy" role="tab" aria-controls="walletCarsMy" aria-selected="true">CAR'S</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="walletItemMy-tab" data-toggle="tab" href="#walletItemMy" role="tab" aria-controls="walletItemMy" aria-selected="false">EXP ITEM</a>
+    </li>
+    
+  </ul>
+  <div class="tab-content border" id="myTabContent" style="height:400px;border-top:0px !important; padding:10px;">
+    <div class="tab-pane fade show active" id="walletCarsMy" role="tabpanel" aria-labelledby="walletCarsMy-tab">
+
+        <div class="row" id="carslibs">
+          <% items.forEach(function(data, index){ %>
+            
+              <div class="col-12 col-sm-4 mb-4">
+                <div class="border p-3">
+                  <img src="<%=data.image%>" class="itemFocus" data-tokenid="<%=data.id%>" style="width:100%" data-json="<%= JSON.stringify(data.options)%>">
+                  <span><%=data.name%></span>
+                </div>
+              </div>
+              
+           
+          <%});%>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="walletItemMy" role="tabpanel" aria-labelledby="walletItemMy-tab">
+
+          <div class="row" id="explibs">
+              <% expitem.forEach(function(data, index){ %>
+              
+                <div class="col-12 col-sm-4 mb-4">
+                  <div class="border p-3">
+                    <img src="<%=data.image%>" class="ExpFocus" data-tokenid="<%=data.tokenId%>" data-exp="<%=data.exp%>" style="width:100%">
+                    <div class="text-center"><%=data.exp%> exp</div>
+                    
+                  </div>
+                </div>
+                
+             
+            <%});%>
+          </div>
+    </div>
+    
+  </div>
+
+  </div>
+  <div class="col-7">
+    <h5>Update CAR Lever</h5>
+    <div class="row">
+        <div class="col-3">
+          CAR
+          <div class="border" id="carslibs2" style="min-height:100px;"></div>
+        </div>
+        <div class="col-3">
+          Item EXP
+          <div class="border" style="min-height:100px;" id="exptoken3">
+
+          </div>
+        </div>
+        <div class="col-1">=</div>
+        <div class="col-5">
+            New CAR
+            <div class="border" style="min-height:100px;">
+              New CAR = CAR 1 + Item EXP
+            </div>
+        </div>
+        <div class="col-12"><br><button class="btn btn-info" data-carslever="true">Up</button></div>
+    </div>
+
+    <br><br>
+
+    <h5>EXP Up Lever</h5>
+    <div class="row">
+        <div class="col-3">
+          Item EXP 1
+          <div class="border" style="min-height:100px;" id="exptoken1"></div>
+        </div>
+        <div class="col-3">
+          Item EXP 2
+          <div class="border" style="min-height:100px;" id="exptoken2">
+
+          </div>
+        </div>
+        <div class="col-1">=</div>
+        <div class="col-5">
+            Item EXP 3 
+            <div class="border" style="min-height:100px;">
+              Total Exp = Item 1 + Item 2
+            </div>
+        </div>
+        <div class="col-12"><br><button class="btn btn-primary" data-upexp="true">Up</button></div>
+    </div>
+  </div>
+  
+</div>
+
+<br>
+
+<div class="row">
     <div class="col-6">
         <div class="border" style="height:320px;">
           <img src="/assets/car/noimage.png" id="fImage">
@@ -38,89 +142,6 @@
 
  <br>
 
-<div class="row">
-  <div class="col-5">
-
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <a class="nav-link active" id="walletCarsMy-tab" data-toggle="tab" href="#walletCarsMy" role="tab" aria-controls="walletCarsMy" aria-selected="true">CAR'S</a>
-    </li>
-    <li class="nav-item" role="presentation">
-      <a class="nav-link" id="walletItemMy-tab" data-toggle="tab" href="#walletItemMy" role="tab" aria-controls="walletItemMy" aria-selected="false">EXP ITEM</a>
-    </li>
-    
-  </ul>
-  <div class="tab-content border" id="myTabContent" style="height:400px;border-top:0px !important; padding:10px;">
-    <div class="tab-pane fade show active" id="walletCarsMy" role="tabpanel" aria-labelledby="walletCarsMy-tab">
-
-        <div class="row" id="carslibs">
-          <% items.forEach(function(data, index){ %>
-            
-              <div class="col-4 mb-4">
-                <div class="border p-3">
-                  <img src="<%=data.image%>" class="itemFocus" data-tokenid="<%=data.id%>" style="width:100%" data-json="<%= JSON.stringify(data.options)%>">
-                  <span><%=data.name%></span>
-                </div>
-              </div>
-              
-           
-          <%});%>
-        </div>
-    </div>
-    <div class="tab-pane fade" id="walletItemMy" role="tabpanel" aria-labelledby="walletItemMy-tab">
-
-          <div class="row" id="explibs">
-              <% expitem.forEach(function(data, index){ %>
-              
-                <div class="col-4 mb-4">
-                  <div class="border p-3">
-                    <img src="<%=data.image%>" class="ExpFocus" data-tokenid="<%=data.tokenId%>" style="width:100%">
-                    <span><%=data.exp%> exp</span>
-                  </div>
-                </div>
-                
-             
-            <%});%>
-          </div>
-    </div>
-    
-  </div>
-
-  </div>
-  <div class="col-7">
-    <h5>Update CAR Lever</h5>
-    <div class="row">
-        <div class="col-4">
-          CAR
-          <div class="border" id="carslibs2" style="min-height:100px;"></div>
-        </div>
-        <div class="col-4">
-          Item EXP
-          <div class="border" style="min-height:100px;" id="exptoken3">
-
-          </div>
-        </div>
-        <div class="col-4"><br><button class="btn btn-info" data-carslever="true">Up</button></div>
-    </div>
-    <br><br>
-    <h5>Update EXP Lever</h5>
-    <div class="row">
-        <div class="col-4">
-          Item EXP 1
-          <div class="border" style="min-height:100px;" id="exptoken1"></div>
-        </div>
-        <div class="col-4">
-          Item EXP 2
-          <div class="border" style="min-height:100px;" id="exptoken2">
-
-          </div>
-        </div>
-        <div class="col-4"><br><button class="btn btn-primary" data-upexp="true">Up</button></div>
-    </div>
-  </div>
-  
-</div>
- 
 <script>
 $(".itemFocus").on("click", function(){
     var getDataJSON = $(this).data("json");
@@ -173,7 +194,7 @@ $(document).ready(function() {
     $('#exptoken3').droppable({
           drop: function(event, ui) {
               $(this).attr("data-tokenid",$(ui.helper).attr("data-tokenid"));
-              $(this).html('<img src="'+$(ui.helper).attr("src")+'">');
+              $(this).html('<img src="'+$(ui.helper).attr("src")+'"><span>'+$(ui.helper).attr("data-exp")+' EXP</span>');
           },
           accept: "#explibs .ExpFocus",
           activeClass: "dropActive",
@@ -183,7 +204,7 @@ $(document).ready(function() {
     $('#exptoken1, #exptoken2').droppable({
           drop: function(event, ui) {
               $(this).attr("data-tokenid",$(ui.helper).attr("data-tokenid"));
-              $(this).html('<img src="'+$(ui.helper).attr("src")+'">');
+              $(this).html('<img src="'+$(ui.helper).attr("src")+'"><span>'+$(ui.helper).attr("data-exp")+' EXP</span>');
           },
           accept: "#explibs .ExpFocus",
           activeClass: "dropActive",

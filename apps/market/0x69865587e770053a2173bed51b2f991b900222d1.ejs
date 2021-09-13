@@ -1,0 +1,57 @@
+
+<div class="card-columns">
+<% items.forEach(function(data, index){ %>
+      <div class="card mb-3 border card-hoder">
+       <a href="/market/token/<%=data.nft%>/<%=data.tokenId%>">
+       <div class="card-zoom">
+        <img src="<%= data.image%>" alt="..." class="zoom">
+       </div>
+         <div class="row no-gutters">
+           <div class="col-md-12">
+             
+           </div>
+           <div class="col-md-12">
+             
+               <h5 class="card-title">#<%= data.tokenId%> | <%= data.name%> </h5>
+              
+              
+               <p class="card-text"><small class="text-muted"><%=data.startTime%></small></p>
+             
+           </div>
+           <div class="col-md-12 border-top">
+              
+              <b><%= data.price%> <%= token.name%></b> 
+              <br>
+              <a href="/market/token/<%=data.nft%>/<%=data.tokenId%>"  class="btn btn-xl btn-primary">BUY</a>
+           </div>
+         </div>
+         </a>
+       </div>
+<% }); %>
+</div>
+
+<style>
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+@media (min-width: 992px) {
+    .card-columns {
+        column-count: 4;
+    }
+}
+
+@media (min-width: 1200px) {
+    .card-columns {
+        column-count: 5;
+    }
+}
+</style>

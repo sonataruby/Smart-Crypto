@@ -1,4 +1,12 @@
-var caddressPresell = "0xa0c468E8Bb3F671a24bCFFAd4BB249FBd6586A40";
-var caddressAirdrop = "0xfd7fdf71064bcb1af7d83812bde20e3f7173fb94";
-var caddressIDO = "0x7b580Ee50D4A717D0EEFF86302Ee32ce2b45efe5";
-
+var caddressPresell = "0x4e7f7bdfc8a55cf47e4207ab0cc03d92e66f8452";
+var caddressAirdrop = "0xde087a28a09235797d264ee4ceb75c62a8539a85";
+var caddressIDO = "0xa5eec60aee7d3fdd5cff5d1d785b12244bf9cad9";
+var SmartTokenAddress = "0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46";
+var MasterIDOWallet = "0xe6b84663dc54b9b29f0a1a04b59e94d92bfe4dff";
+var SmartNFTAddress = "0x6a741feb01276e18a9d8a5a2f57542ec3205e4ca";
+var TokenFarm = "";
+var TokenNFTFactory = "0x4dCf21092e9B60276E9b6BaE550B8D0F7e074c6f";
+var TokenNFTMarket = "";
+var TokenLPCAKE = "";
+var TokenNFTGame = "";
+var TokenStaking = "0xd680c10d1fcbe17319fc99c7fc001a78e1f37b3f";

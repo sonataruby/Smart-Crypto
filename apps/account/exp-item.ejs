@@ -1,0 +1,200 @@
+<h4>EXP Builder</h4>
+<div class="row">
+	<div class="col-12 col-sm-5">
+		<div style="min-height:400px;">
+			<div class="row" id="carslibs">
+	          <% items.forEach(function(data, index){ %>
+	            
+	              <div class="col-6 col-sm-4 mb-4">
+	                <div class="border p-3">
+	                  <img src="<%=data.image%>" class="itemFocus" data-tokenid="<%=data.tokenId%>" style="width:100%" data-json="<%= JSON.stringify(data.options)%>">
+	                  
+	                </div>
+	                <span><%=data.exp%> exp</span><br>
+	                <button class="btn btn-primary btn-sm tranferid" data-tokenid="<%=data.tokenId%>" data-toggle="modal" data-target="#transferWallet" type="button">Transfer</button>
+	                <button class="btn btn-sm btn-primary" data-tokenid="<%=data.tokenId%>" type="button" data-target="#sellItemsCars" data-bs-toggle="modal" data-bs-target="#sellItemsCars">Sell</button>
+	              </div>
+	              
+	           
+	          <%});%>
+	        </div>
+        </div>
+	</div>
+	<div class="col-12 col-sm-7">
+
+		<h5 class="d-flex justify-content-between">Update EXP CAR <button class="btn btn-primary" data-upexp="true">Up Lever EXP</button></h5>
+		<hr>
+	    <div class="row">
+	        <div class="col-3">
+	          EXP 1
+	          <div class="border" id="exptoken1" data-bs-toggle="modal" data-bs-target="#ExpLibsExp1" style="min-height:100px;"></div>
+	        </div>
+	        <div class="col-3">
+	          EXP 2
+	          <div class="border" data-bs-toggle="modal" data-bs-target="#ExpLibsExp2" style="min-height:100px;" id="exptoken2">
+	          		
+	          </div>
+	        </div>
+	        <div class="col-1">=</div>
+	        <div class="col-5">
+	            New CAR
+	            <div class="border" style="min-height:100px;">
+	              New EXP = EXP 1 + EXP 2
+	            </div>
+	        </div>
+	        
+	    </div>
+	    <br>
+	    <div class="alert alert-primary">
+	    	<b>Note : </b> Exp >= 1000 can sell on NFT Markets
+	    </div>
+	    
+	</div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="ExpLibsExp1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelExpLibsExp1">Select Exp Items</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        	<div class="row" id="carslibs">
+	          <% items.forEach(function(data, index){ %>
+	            
+	              <div class="col-6 col-sm-4 mb-4">
+	                <div class="border p-3">
+	                  <img src="<%=data.image%>" class="itemFocusExp" data-tokenid="<%=data.tokenId%>"  style="width:100%">
+	                  
+	                </div>
+	                <span><%=data.exp%> exp</span>
+	                
+	              </div>
+	              
+	           
+	          <%});%>
+	        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ExpLibsExp2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelExpLibsExp2">Select Exp Items</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        	<div class="row" id="carslibs">
+	          <% items.forEach(function(data, index){ %>
+	            
+	              <div class="col-6 col-sm-4 mb-4">
+	                <div class="border p-3">
+	                  <img src="<%=data.image%>" class="itemFocusExp2" data-tokenid="<%=data.tokenId%>"  style="width:100%">
+	                  
+	                </div>
+	                <span><%=data.exp%> exp</span>
+	                
+	              </div>
+	              
+	           
+	          <%});%>
+	        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+$(".itemFocusExp").on("click", function(){
+	var src = $(this).attr("src");
+	var tokenid = $(this).data("tokenid");
+	$("#exptoken1").html('<img src="'+src+'" data-tokenid="'+tokenid+'" class="img-fluid"/>');
+	$("#ExpLibsExp1").modal('hide');
+	//$(".modal-backdrop").remove();
+});
+
+
+$(".itemFocusExp2").on("click", function(){
+	var src = $(this).attr("src");
+	var tokenid = $(this).data("tokenid");
+	$("#exptoken2").html('<img src="'+src+'" data-tokenid="'+tokenid+'" class="img-fluid"/>');
+	$("#ExpLibsExp2").modal('hide');
+	//$(".modal-backdrop").remove();
+});
+
+
+$('#sellItemsCars').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) 
+  var recipient = button.data('tokenid')
+  var modal = $(this);
+  modal.find('.modal-title').html('Sell NFT CAR | #ID : '+recipient);
+  modal.find('.modal-footer button.marketsell').attr("data-tokenid",recipient)
+});
+
+$('#transferWallet').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) 
+  var recipient = button.data('tokenid')
+  var modal = $(this)
+  modal.find('.modal-title').html('NFT Transfer | #ID : '+recipient);
+  modal.find('.modal-footer button.confirmtranfer').attr("data-tokenid",recipient)
+});
+
+</script>
+
+<div class="modal fade" id="transferWallet" tabindex="-1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">NFT Transfer</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+          
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Enter Wallet Transfer</p>
+        <input type="text" id="TransferNftWallet" class="form-control" placeholder="Wallet Transfer" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button"  class="btn btn-primary confirmtranfer" data-tokenid="0" data-exp-transfer="true">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="sellItemsCars" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">NFT Sell Markets</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Price</p>
+        <input type="number"  class="form-control price" placeholder="Price" >
+        <p>Description</p>
+        <textarea class="form-control description"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button"  class="btn btn-primary marketsell" data-market-sell data-tokenid="0" data-contract="<%=contract%>">Send Market</button>
+      </div>
+    </div>
+  </div>
+</div>
