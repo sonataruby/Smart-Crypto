@@ -111,7 +111,6 @@ vps.txt
 *.lock
 main.josn
 public/layout/*.ejs
-apps/abi/
 public/assets/js/web3setup.js
 apps/index.ejs
 package-lock.json
