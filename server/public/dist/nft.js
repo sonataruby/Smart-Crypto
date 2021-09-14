@@ -40,7 +40,7 @@ SmartApps = (function (SmartApps, $, window) {
             let isStaticUser = await factory.isStaticUser(wallet).call();
             
             if(isStaticUser == true){
-                let number = Math.floor(Math.random() * (5 - 1) ) + 1;
+                let number = Math.floor(Math.random() * (15 - 1) ) + 1;
                 await factory.mintCar(name,number).send({gas:GAS}).then( async (value) => {
                    
                     let tokenID = await blockchain.getNftTokenID(value.transactionHash);

@@ -95,6 +95,16 @@
 			
 		});
 
+		$("#removeSupportedCurrency").on("click", function(){
+			var address = $(this).parent().find("input").val();
+			if(address.length > 40){
+				SmartApps.Market.removeSupportedCurrency(address);
+			}else{
+				alert("Error Wallet")
+			}
+			
+		});
+		
 		$("#AllowTrade").on("click", function(){
 			SmartApps.Market.AllowTrade();
 			
