@@ -133,7 +133,7 @@ SmartApps = (function (SmartApps, $, window) {
                 if(appoveAmount >= readInfo.minDeposit){
                     $('#FarmDesopit').modal('show');
                 }else{
-                    await token.approve(ContractAddress.AddressContractFarm,readInfo.minDeposit).then(() => {
+                    await token.approve(ContractAddress.AddressContractFarm,readInfo.minDeposit * 10).then(() => {
                         $('#FarmDesopit').modal('show');
                     });
                     
