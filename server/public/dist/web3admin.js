@@ -1180,7 +1180,8 @@ SmartApps = function (SmartApps, $, window, document) {
         });
 
          $("#setMutilePool").on("click", function(){
-            var contractMuti = $("#ContractAddresssMutiPool");
+            var contractMuti = $("#ContractAddresssMutiPool").val();
+
                 contractFarm.setMutilePool(contractMuti,1).send({from: wallet, gas : 300000}).then((value) => {
                     console.log(value);
                     window.location.reload();
@@ -1189,7 +1190,7 @@ SmartApps = function (SmartApps, $, window, document) {
 
 
          $("#setMinDeposit").on("click", function(){
-            var setID = $("#setMinDepositSessionID");
+            var setID = $("#setMinDepositSessionID").val();
             var setValue = $("#setMinDepositValue");
             if(setValue == "" || setValue == undefined){
                 alert("Input all form");

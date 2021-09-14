@@ -10,7 +10,7 @@
   "scripts": {
     "admin": "node server/server.js",
     "server": "cross-env NODE_ENV=production node server.js",
-    "build": "gulp default",
+    "build": "node ./node_modules/gulp/bin/gulp.js default",
     "watch": "webpack-cli --watch",
     "module": "browserify -t brfs --standalone apps public/dev/client.js -o public/dist/extract.js"
   },
