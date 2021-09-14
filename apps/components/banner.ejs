@@ -54,7 +54,7 @@ var caclcBuyPresell = function(){
     
         var bnbBuy = $("#presellValue").val();
         var bnbPrice = $("#bnbPrice").text();
-        var NumberBuy = Number(bnbBuy / bnbPrice).toFixed(2) * 2;
+        var NumberBuy = Number(bnbBuy / bnbPrice).toFixed(2);
 
         $("#CalcBuyToken").html(NumberBuy + " <%=token.name%>");
     
