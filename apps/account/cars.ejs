@@ -62,7 +62,7 @@
 	                </div>
 	                <span><%=data.name%></span><br>
 	                <button class="btn btn-primary btn-sm tranferid" data-tokenid="<%=data.id%>" data-toggle="modal" data-target="#transferWallet" type="button">Transfer</button>
-	                <button class="btn btn-sm btn-primary" data-tokenid="<%=data.id%>" type="button" data-target="#sellItemsCars" data-bs-toggle="modal" data-bs-target="#sellItemsCars">Sell</button>
+	                <button class="btn btn-sm btn-primary" data-tokenid="<%=data.id%>" type="button" data-target="#sellItemsCars" data-toggle="modal">Sell</button>
 	              </div>
 	              
 	           
@@ -142,7 +142,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Select Exp Items</h5>
+        <h5 class="modal-title" id="exampleModalLabelEXP">Select Exp Items</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -169,11 +169,11 @@
 
 
 
-<div class="modal fade" id="transferWallet" tabindex="-1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="transferWallet"  data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">NFT Transfer</h5>
+        <h5 class="modal-title" id="exampleModalLabelCAR">NFT Transfer</h5>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
           
         </button>
@@ -192,11 +192,11 @@
 
 
 
-<div class="modal fade" id="sellItemsCars" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="sellItemsCars"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">NFT Sell Markets</h5>
+        <h5 class="modal-title" id="exampleModalLabelCARSell">NFT Sell Markets</h5>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
