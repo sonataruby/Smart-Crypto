@@ -55,7 +55,7 @@ var router = express.Router();
 	                dataObj = {
 	                	name : value.CarName,
 	                	description : description,
-	                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".png",
+	                	image : "https://cryptocar.cc/nfts/"+value.Models+"/"+(value.Lever > 0 ? value.Lever : "1")+".png",
 	                	attributes : getOptions(value, tokenID, description),
 	                	model : getModelName(value.Models),
 	                    buyer: InfoSell.buyer,

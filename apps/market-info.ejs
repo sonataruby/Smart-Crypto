@@ -17,12 +17,12 @@
                                    <ul class="row attributes">
 
                                    <% if(item.attributes){ %>
-                                   <li class="col-12 col-md-4 mb-2">
+                                   <li class="col-6 col-md-4 mb-2">
                                           <div class="border p-2 rounded">
                                           Lever : <%=item.attributes.Lever%>
                                           </div>
                                    </li>
-                                   <li class="col-12 col-md-4 mb-2">
+                                   <li class="col-6 col-md-4 mb-2">
                                           <div class="border p-2 rounded">
                                           Power : <%=item.attributes.Power%>
                                           </div>
@@ -32,12 +32,12 @@
                                           Acceleraction : <%=item.attributes.Acceleraction%>
                                           </div>
                                    </li>
-                                   <li class="col-12 col-md-4 mb-2">
+                                   <li class="col-6 col-md-4 mb-2">
                                           <div class="border p-2 rounded">
                                           Handing : <%=item.attributes.Handing%>
                                           </div>
                                    </li>
-                                   <li class="col-12 col-md-4 mb-2">
+                                   <li class="col-6 col-md-4 mb-2">
                                           <div class="border p-2 rounded">
                                           Nitro : <%=item.attributes.Nitro%>
                                           </div>
@@ -49,8 +49,8 @@
                             <div class="col-md-6">
                                    
                                   
-                                   <div class="d-flex justify-content-between"><b>Seller : </b><%=item.seller%></div>
-                                   <div class="d-flex justify-content-between"><b>Contract : </b><%=item.nft%></div>
+                                   <div class="d-flex justify-content-between"><b>Seller : </b><div class="addressLimit"><%=item.seller%></div></div>
+                                   <div class="d-flex justify-content-between"><b>Contract : </b><div class="addressLimit"><%=item.nft%></div></div>
                                    <div class="d-flex justify-content-between">Token ID : #<%=item.tokenId%> <em>Sell on : <%=item.startTime%></em></div>
                                    
                                    <ul class="social justify-content-center mt-3 mb-3">
@@ -64,7 +64,7 @@
 
                                    </ul>
 
-                                   <div style="max-height:350px; min-height:150px;"><%=item.description%></div>
+                                   <div style="max-height:350px;"><%=item.description%></div>
                                    <div class="border p-3 rounded">
                                    <h5 class="d-flex justify-content-between">
                                           <div>

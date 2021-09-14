@@ -130,6 +130,14 @@ border-top: 0px !important;
    -webkit-box-orient: vertical;
    max-width: 100px;
 }
+
+.addressLimit {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
 .modal-backdrop{
   z-index: 2 !important;
 }
