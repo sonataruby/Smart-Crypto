@@ -1,8 +1,8 @@
 {
-	"AddressContractPresell" : "0xA5cF450e6ada1d447113FFDA0aB7b53f4058e1c5",
-	"AddressContractAirdrop" : "0xde087a28a09235797d264ee4ceb75c62a8539a85",
-	"AddressContractIDO" : "0x2b8cfc53b9aaafad82f77cff496a04d48d5e93ae",
-	"AddressContractSmartToken" : "0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46",
+	"AddressContractPresell" : "0x1fbf41844321dd5013f2213223b217072d3f835b",
+	"AddressContractAirdrop" : "0x3066fc8675380b98f17a0807c74d39ce4b1d4051",
+	"AddressContractIDO" : "0x2aa52165253f63555f0d7303a5fa602c1f464878",
+	"AddressContractSmartToken" : "0x375e848baf5a9d2e6ee937396f566c679591cc6d",
 	"MasterIDOWallet" : "0x85C720932A91687C931e9952fc26D393a1F3c2ff",
 	"AddressContractSmartNFT" : "0x3424cB5b1A48577Cd8022ae4383B72Ad6F1e33FE",
 	"AddressContractNFTFactory" : "0x9edf2092b8c59ef6ac5ae0d7696b35a9716d48f5",
