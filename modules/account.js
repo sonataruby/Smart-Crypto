@@ -210,7 +210,7 @@ var router = express.Router();
     					 description = item.description;
     				}
 
-    				readObject.image = "https://cryptocar.cc/nfts/"+value.Models+"/"+value.Lever+".gif";
+    				readObject.image = "https://cryptocar.cc/nfts/"+value.Models+"/"+(value.Lever > 0 ? value.Lever : "1")+".gif";
     				readObject.id = index;
     				readObject.options = getOptions(value, index, description);
     				
