@@ -21,7 +21,7 @@ bot.onText(/\/start\/(.+)/, (msg,match) => {
     })
 });
 */
-const getNumber = getNumber(){
+const getNumber = () => {
     let number = Math.floor(Math.random() * (15 - 1) ) + 1;
     return number;
 }
