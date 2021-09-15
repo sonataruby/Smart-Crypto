@@ -111,7 +111,7 @@ module.exports = function(prefix , app) {
 
 		 dataMain.items = object;
 		 dataMain.loadJS = ["farm.js"];
-		 res.render(dataMain.public.farm == true ? config.loadPage("farm") : "coming",dataMain);
+		 res.render(config.layout.getPage("farm"),dataMain);
 	});
 
 	app.get(prefix + "/info/:session_id/:wallet", async (req, res) => {
@@ -137,7 +137,7 @@ module.exports = function(prefix , app) {
 			dataMainConfig.block.claimable = parseFloat(blockchain.web3.utils.fromWei(claimable)).toFixed(4);
 		}
 		dataMainConfig.loadJS = ["farm.js","game_1.js"];
-		res.render("farm-info",dataMainConfig);
+		res.render(config.layout.getPage("farm-info"),dataMainConfig);
 	});
 
 	app.get(prefix + "/item", async (req, res) => {

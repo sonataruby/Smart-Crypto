@@ -52,6 +52,10 @@ const noLayout = () => {
 
 
 app.get("/", (req, res) => {
+  if(config.redirect != ""){
+    res.redirect(config.redirect);
+  }
+  
  app.set('layout', homeLayout())
  const dataMain = fsFile.readJSONFile('main.json');
  
