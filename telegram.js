@@ -21,7 +21,7 @@ bot.onText(/\/start\/(.+)/, (msg,match) => {
     })
 });
 */
-bot.on("polling_error", console.log);
+
 bot.onText(/\/start/, (msg,match) => {
     
     bot.sendPhoto(msg.chat.id,img_url,{
@@ -51,7 +51,7 @@ const telegramJoin = async () => {
 };
 
 var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
-
+/*
 bot.on('message', (msg) => {
     var send_text = msg.from.text;
    
@@ -62,15 +62,16 @@ bot.on('message', (msg) => {
         {text : "Step 4", callback : telegramJoin},
         {text : "Step 5", callback : telegramJoin}
         ];
-    /*
+    
     task.each(function (key, callback){
         console.log(key);
         if (send_text.toString().indexOf(step1_text) === 0) {
         
         }
     });
-    */
+    
 });
+*/
 
 app.post("/telegram", (req, res) => {
   var msg = req.body.text;
