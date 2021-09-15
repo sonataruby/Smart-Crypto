@@ -93,6 +93,13 @@ bot.on('message', (msg) => {
 });
 */
 
+app.get("/", (req, res) => {
+  var data = '{"ok": "200"}';
+  res.header('Content-Type', 'application/json');
+  res.send(data);
+  res.end( data );
+});
+
 app.post("/telegram", (req, res) => {
   var msg = req.body.text;
   bot.sendMessage(telegram.TelegramChannel,msg);
