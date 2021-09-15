@@ -24,15 +24,17 @@ bot.onText(/\/start\/(.+)/, (msg,match) => {
 
 bot.onText(/\/start/, (msg,match) => {
     
-    bot.sendPhoto(msg.chat.id,img_url,{
-        caption : "Welcome to Smart Crypto Bot\n "}).then(() => {
-        var option = {
+    var option = {
             "reply_markup": {
                 "keyboard": [["Join Start >>","Website"]]
                 }
         };
-        bot.sendMessage(msg.chat.id,"Welcome Start Airdrop",option);
-    })
+    bot.sendPhoto(msg.chat.id,img_url,{
+        caption : "Welcome to Smart Crypto Bot\n ",
+        "reply_markup": {
+                "keyboard": [["Join Start >>","Website"]]
+                }
+        });
 });
 
 const telegramJoin = async () => {
