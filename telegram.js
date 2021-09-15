@@ -33,7 +33,7 @@ bot.onText(/\/start/, (msg,match) => {
                 "keyboard": [["Join Start >>","Website"]]
                 }
         };
-    bot.sendMediaGroup(config.telegram.TelegramChannel,
+    bot.sendMediaGroup(telegram.TelegramChannel,
         [{
             "type": "photo",
               "media": "https://cryptocar.cc/nfts/"+getNumber()+"/0.gif",
@@ -95,7 +95,7 @@ bot.on('message', (msg) => {
 
 app.post("/telegram", (req, res) => {
   var msg = req.body.text;
-  bot.sendMessage(config.telegram.TelegramChannel,msg);
+  bot.sendMessage(telegram.TelegramChannel,msg);
   var data = '{"ok": "200"}';
   res.header('Content-Type', 'application/json');
   res.send(data);
