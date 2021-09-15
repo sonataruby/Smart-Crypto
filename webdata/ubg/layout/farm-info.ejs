@@ -1,0 +1,132 @@
+
+<section class="bg-white mb-4">
+
+    <div class="page-header">
+        <div class="container mb-3" style="padding-top: 40px;
+    padding-bottom: 40px;">
+        	<div style="max-width:60%">
+        	<h4>UBG Token was borned for a mission:</h4>
+	        <p>
+	        UBG Token was borned for a mission: Breaking through all limits of Payment by Crypto Currencies wherever and whenever. We create a new payment method for E- Commercial and Travel, making it faster, transparent, profitable, secure and great in future..</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-3">
+    
+
+        <div class="row">
+        <div class="col-md-8 mb-3 col-12">
+            <div class="card">
+            <div class="card-body">
+            <h3>Your Pool Info</h3>
+            <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                    Min Deposit : <%- block.infoPool.minDeposit / (10**18)%> <%= token.name%>
+                  </li>
+
+                  <li class="list-group-item d-flex justify-content-between">
+                    Deposit : <%= block.deposit%> <%= token.name%>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between">
+                    APR : <%=block.aprweek%> % / Week
+                  </li>
+
+                  <li class="list-group-item d-flex justify-content-between">
+                    Claim : Any Time
+                  </li>
+
+                  <li class="list-group-item d-flex justify-content-between">
+                    Widthdraw Unlock : <%- (block.infoPool.lockTimeWithdraw / 3600)%> hour
+                  </li>
+
+                  <li class="list-group-item d-flex justify-content-between">
+                     <button class="btn btn-primary" onClick="SmartApps.tokenFarm.createpool(<%= block.id%>);">Deposit</button>
+                     <button class="btn btn-primary" onClick="SmartApps.tokenFarm.claim(<%= block.id%>);">Claim</button>
+                     <button class="btn btn-primary" onClick="SmartApps.tokenFarm.withdraw(<%= block.id%>);">Widthdraw</button>
+                     <button class="btn btn-primary" onClick="SmartApps.tokenFarm.claimNft(<%= block.id%>);">Claim NFT</button>
+                  </li>
+
+            </ul>
+            </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 mb-3 col-12" id="plance">
+                <div class="card">
+                    <div class="card-body">
+               
+                <div  class="text-left p-3">
+
+                    <h4><%= block.name%></h4>
+                    <hr>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between" data-timestart="<%= block.startTime%>" data-period="<%= block.period%>"><b><i class="fa fa-calendar" aria-hidden="true"></i>
+Start Time:</b> <span><%= block.startTime%></span></li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-calendar" aria-hidden="true"></i>
+End Time: </b><span data-timeend="<%= block.timeEnd%>"><%= block.timeEnd%></span></li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-check-square" aria-hidden="true"></i>
+Period : </b><%- (block.period / 3600).toFixed(2) %> hour</li>
+                      
+                      
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-check-square" aria-hidden="true"></i> Min Deposit : </b><%- block.min_deposit%> <%= token.name%> </li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-check-square" aria-hidden="true"></i> Total Reward : </b><%- block.totalReward%> <%= token.name%> </li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-check-square" aria-hidden="true"></i> Pool Holder : </b><%- block.amount%> <%= token.name%> </li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-trophy" aria-hidden="true"></i>
+APR : </b><%= block.apr%>% </li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-trophy" aria-hidden="true"></i>
+Reward :</b> <%= Number(block.rewardDay).toFixed(2)%> <%= token.name%> / 1d </li>
+                      <%if(block.reward_nft.allowNft == true && block.reward_nft.minDeposit > 0 ) { %>
+                        
+                        <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-taxi" aria-hidden="true"></i>
+<%= block.reward_nft.minDeposit%> <%=token.name%>: </b>Reward Lever <%= block.reward_nft.generation%></li>
+                        <%if(block.reward_nft.minDeposit2 > 0 ) { %>
+                        <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-taxi" aria-hidden="true"></i>
+<%= block.reward_nft.minDeposit2%> <%=token.name%> : </b>Reward Lever  <%= block.reward_nft.generation2%></li>
+                        <%}%>
+                        <%}%>
+                    </ul>
+                    <hr>
+                    <%- block.joinPool%>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+</section>
+
+
+<div class="modal fade" tabindex="-1" id="FarmDesopit">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirm Deposit</h5>
+            <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h4>Your Balance : <span class="balance"></span> <%= token.name%></h4>
+            <p>Check Your balance <%= token.name%> before confirm.</p>
+            <br>
+            <input type="number" value="<%= block.min_deposit%>" class="form-control">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary btn-sm" data-session="<%= block.id%>" data-web3="farmdeposit" data-min="<%= block.min_deposit%>">Confirm</button>
+          </div>
+        </div>
+      </div>
+</div>
+
+<script src="/assets/js/countdown.js?ver=1930"></script>
+<style>
+#plance:hover .shadown {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-color:var(--red) !important;
+  color:var(--primary);
+  bacground-color:#FFF;
+}
+
+</style>

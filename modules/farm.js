@@ -135,8 +135,9 @@ module.exports = function(prefix , app) {
 			dataMainConfig.block.deposit = blockchain.web3.utils.fromWei(stakedBalanceOf);
 			let claimable = await contract.claimable(session_id,wallet).call();
 			dataMainConfig.block.claimable = parseFloat(blockchain.web3.utils.fromWei(claimable)).toFixed(4);
+			dataMainConfig.block.infoPool = await contract.sessions(session_id).call();
 		}
-		dataMainConfig.loadJS = ["farm.js","game_1.js"];
+		dataMainConfig.loadJS = ["farm.js"];
 		res.render(config.layout.getPage("farm-info"),dataMainConfig);
 	});
 
