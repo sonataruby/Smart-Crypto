@@ -21,7 +21,7 @@ bot.onText(/\/start\/(.+)/, (msg,match) => {
     })
 });
 */
-
+bot.on("polling_error", console.log);
 bot.onText(/\/start/, (msg,match) => {
     
     var option = {
@@ -29,18 +29,25 @@ bot.onText(/\/start/, (msg,match) => {
                 "keyboard": [["Join Start >>","Website"]]
                 }
         };
-    bot.sendMediaGroup(msg.chat.id,{
+    bot.sendMediaGroup(msg.chat.id,
         media : [
-            "https://cryptocar.cc/nfts/0.gif",
-            "https://cryptocar.cc/nfts/1.gif",
-            "https://cryptocar.cc/nfts/2.gif",
-            "https://cryptocar.cc/nfts/3.gif"
-        ],
-        caption : "Welcome to Smart Crypto Bot\n ",
-        "reply_markup": {
-                "keyboard": [["Join Start >>","Website"]]
-                }
-        });
+        {
+            "type": "photo",
+              "media": "https://cryptocar.cc/nfts/0.gif",
+              "caption": "an optional description of the first photo",
+        },
+        {
+            "type": "photo",
+              "media": "https://cryptocar.cc/nfts/1.gif",
+              "caption": "an optional description of the first photo",
+        },
+        {
+            "type": "photo",
+              "media": "https://cryptocar.cc/nfts/2.gif",
+              "caption": "an optional description of the first photo",
+        }
+           
+        ]);
     bot.sendPhoto(msg.chat.id,img_url,{
         caption : "Welcome to Smart Crypto Bot\n ",
         "reply_markup": {
