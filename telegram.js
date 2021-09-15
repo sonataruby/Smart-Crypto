@@ -53,7 +53,8 @@ const telegramJoin = async () => {
 var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
 
 bot.on('message', (msg) => {
-    var send_text = msg.text;
+    var send_text = msg.from.text;
+   
     var task = [
         {text : "Join Start >>", callback : telegramJoin},
         {text : "Step 2", callback : telegramJoin},
