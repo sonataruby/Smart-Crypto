@@ -39,6 +39,12 @@ border-top-left-radius: 100px;
 border-bottom-left-radius: 100px;
 
 }
+.buttonGameLeftBack .fa, .buttonGameRighBack .fa{
+  color: #fff;
+  font-size: 48px;
+  margin-top: 30%;
+  margin-left: 30px;
+}
 
 @media (max-width: 920px){
   .container-game{

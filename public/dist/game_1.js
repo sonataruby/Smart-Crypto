@@ -134,7 +134,7 @@ function create ()
 		setButtonControll = 60;
 	}
 	if(game_1.status == 1){
-	const deposit = this.add.image(setButtonControll, 400, 'deposit')
+	const deposit = this.add.image(setButtonControll, 380, 'deposit')
 		.setInteractive()
 		.on('pointerdown', () => {
 			blockchain.createpool(game_1.id);
@@ -147,18 +147,18 @@ function create ()
 	}
 
 	if(game_1.status == -1 || game_1.status == 1){
-		const ClaimButton = this.add.image(setButtonControll2, 400, 'claim').setInteractive()
+		const ClaimButton = this.add.image(setButtonControll2, 380, 'claim').setInteractive()
 			.on('pointerdown', () => {
 				console.log("Click Claim");
 				blockchain.claim(game_1.id);
 			});
-		const WithdrawButton = this.add.image(setButtonControll3, 400, 'withdraw').setInteractive()
+		const WithdrawButton = this.add.image(setButtonControll, 440, 'withdraw').setInteractive()
 			.on('pointerdown', () => {
 				console.log("Click Withdraw");
 				blockchain.withdraw(game_1.id);
 			});
 
-		const ClaimNFTButton = this.add.image(setButtonControll2+300, 350, 'claimnft').setInteractive()
+		const ClaimNFTButton = this.add.image(setButtonControll2, 440, 'claimnft').setInteractive()
 			.on('pointerdown', () => {
 				console.log("Click Claim NFT");
 				blockchain.claimNft(game_1.id);
