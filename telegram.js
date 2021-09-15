@@ -29,12 +29,13 @@ bot.onText(/\/start/, (msg,match) => {
                 "keyboard": [["Join Start >>","Website"]]
                 }
         };
-    bot.sendMediaGroup(msg.chat.id,[
+    bot.sendMediaGroup(msg.chat.id,{
+        media : [
             "https://cryptocar.cc/nfts/0.gif",
             "https://cryptocar.cc/nfts/1.gif",
             "https://cryptocar.cc/nfts/2.gif",
             "https://cryptocar.cc/nfts/3.gif"
-        ],{
+        ],
         caption : "Welcome to Smart Crypto Bot\n ",
         "reply_markup": {
                 "keyboard": [["Join Start >>","Website"]]
