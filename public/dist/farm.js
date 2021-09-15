@@ -106,11 +106,9 @@ SmartApps = (function (SmartApps, $, window) {
                 let CheckAppreve = await token.approve(ContractAddress.AddressContractFarm,depositAmount);
                 
                 await contractFarm.deposit(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then( async (value) => {
-                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                        await axios.post('https://api.telegram.org/bot1962248837:AAGecDXTz2hnsdauDN--mOafqBYS5o-jQsg/sendMessage', {
-                                chat_id: window.TelegramChannel,
-                                text: `${login_wallet} Join FARM PO0L`,
-                                parse_mode:'Markdown'
+                    if(window.TelegramServer != "" && window.TelegramServer != undefined){
+                                await axios.post(window.TelegramServer, {
+                                text: `${login_wallet} Join FARM PO0L`
                         });
                     }
                 });
@@ -129,15 +127,17 @@ SmartApps = (function (SmartApps, $, window) {
                 //let depositAmount = blockchain.toWei(amount.toString(),"ether");
 
                 let appoveAmount = await token.allowance(ContractAddress.AddressContractFarm);
-                
+                $('#FarmDesopit').modal('show');
+                /*
                 if(appoveAmount >= readInfo.minDeposit){
                     $('#FarmDesopit').modal('show');
                 }else{
-                    await token.approve(ContractAddress.AddressContractFarm,readInfo.minDeposit * 10).then(() => {
+                    await token.approve(ContractAddress.AddressContractFarm,readInfo.minDeposit).then(() => {
                         $('#FarmDesopit').modal('show');
                     });
                     
                 }
+                */
                 
     }
     SmartApps.tokenFarm.withdraw = async (session_id) => {
@@ -168,23 +168,35 @@ SmartApps = (function (SmartApps, $, window) {
     SmartApps.tokenFarm.confirm = async (amount, session_id) => {
                 let status = await blockchain.isStatus();
                 if(status == false){
-                    await blockchain.connect();
+                    await blockchain.init();
                 }
                 const gasPrice = await blockchain.getGasPrice();
-                let depositAmount = blockchain.toWei(amount.toString(),"ether");
 
+                let readInfo = await contractFarm.sessions(session_id).call();
+                let depositAmount = blockchain.toWei(amount.toString(),"ether");
+                let appoveAmount = await token.allowance(ContractAddress.AddressContractFarm);
+
+                if(appoveAmount <= readInfo.minDeposit || appoveAmount <= depositAmount){
+                    await token.approve(ContractAddress.AddressContractFarm,depositAmount).then((value) => {
+                        console.log(value);
+                    });
+                }
                 await contractFarm.depositPool(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then(async (value) => {
                    
                     if(value.status == false){
                         blockchain.notify("Confirm Error");
                     }else if(value.status == true){
                         blockchain.notify("Confirm success<br>Hash : "+value.transactionHash);
-                        if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                            
-                            await axios.post('/telegram', {
+                        if(window.TelegramServer != "" && window.TelegramServer != undefined){
+                                await axios.post(window.TelegramServer, {
                                 text: `${login_wallet} Join FARM PO0L`
                             });
                         }
+                        await axios.post("/farm/join",{
+                            wallet : login_wallet,
+                            transactionHash : value.transactionHash,
+                            session_id : session_id
+                        });
                         //await axios.get("/farm/task/"+login_wallet+"/join/"+value.transactionHash+"/"+session_id);
                     }
                 });
@@ -193,7 +205,7 @@ SmartApps = (function (SmartApps, $, window) {
 
                 let status = await blockchain.isStatus();
                 if(status == false){
-                    await blockchain.connect();
+                    await blockchain.init();
                 }
                 
                 const gasPrice = await blockchain.getGasPrice();
@@ -204,8 +216,8 @@ SmartApps = (function (SmartApps, $, window) {
 
                         await contractFarm.claimPool(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then(async (value) => {
                             blockchain.notify("Claim farm success<br>Hash : "+value.transactionHash);
-                            if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                                await axios.post('/telegram', {
+                            if(window.TelegramServer != "" && window.TelegramServer != undefined){
+                                await axios.post(window.TelegramServer, {
                                     text: `Farm earn : ${value.transactionHash}`
                                 });
                             }
@@ -218,7 +230,7 @@ SmartApps = (function (SmartApps, $, window) {
 
                 let status = await blockchain.isStatus();
                 if(status == false){
-                    await blockchain.connect();
+                    await blockchain.init();
                 }
                 
                 const gasPrice = await blockchain.getGasPrice();
@@ -231,7 +243,7 @@ SmartApps = (function (SmartApps, $, window) {
 
                 let status = await blockchain.isStatus();
                 if(status == false){
-                    await blockchain.connect();
+                    await blockchain.init();
                 }
                 
                 const gasPrice = await blockchain.getGasPrice();
@@ -318,19 +330,19 @@ SmartApps = (function (SmartApps, $, window) {
 
                     //Error when < Min Deposit
                     if(amount < min_deposit){
-                        notify.toast("Min deposit : "+min_deposit);
+                        blockchain.notify("Min deposit : "+min_deposit);
                         error = true;
                     }
 
                     //Error when max poolSize
                     if( amount > poolStake){
-                        notify.toast("Pool Allow deposit : "+poolStake);
+                        blockchain.notify("Pool Allow deposit : "+poolStake);
                         error = true;
                     }
 
                     //Error When Balance not found
                     if(balance == 0 || balance < amount){
-                        notify.toast("You Balance empty");
+                        blockchain.notify("You Balance not enough");
                         error = true;
                     }
                     //farm.earned(session_id);

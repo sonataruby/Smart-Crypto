@@ -580,8 +580,8 @@ SmartApps = (function (SmartApps, $, window) {
               .then(async function (res) {
                     blockchain.notify("Buy token successful Tx : "+res.transactionHash);
                     let tokenname = await tokenSmart.symbol();
-                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                        await axios.post('/telegram', {
+                    if(window.TelegramServer != "" && window.TelegramServer != undefined){
+                                await axios.post(window.TelegramServer, {
                                 
                                 text: `${login_wallet} Join Pre-Sell Buy ${amount} BNB`
                         });
@@ -716,8 +716,8 @@ SmartApps = (function (SmartApps, $, window) {
                     .then(async function (res) {
                         
                         blockchain.notify("Buy token successful Tx : "+res.transactionHash);
-                        if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                            await axios.post('/telegram', {
+                        if(window.TelegramServer != "" && window.TelegramServer != undefined){
+                                await axios.post(window.TelegramServer, {
                                     
                                     text: `IDO Payment : ${res.transactionHash}. Share your link IDO get 10% profit free`
                             });

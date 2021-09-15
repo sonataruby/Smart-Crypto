@@ -158,6 +158,19 @@ module.exports = function(prefix , app) {
 
 	});
 
+
+	/*Save Database User Join*/
+
+	app.get(prefix + "/join", async (req, res) => {
+		var wallet = req.body.wallet;
+		var session_id = req.body.session_id;
+		let sql = "SELECT * FROM farm_users WHERE wallet = '"+wallet+"' ORDER BY id DESC LIMIT 1";
+	  	var dataMain = await db.dbQuery(sql, true);
+	  	if(dataMain == "" || dataMain == undefined){
+	  		sqlInsert = "INSERT INTO `farm_users` (`wallet`, `session_id`) VALUES ('"+wallet+"', '"+session_id+"');"
+	  		db.dbQuery(sqlInsert);
+	  	}
+	});
 	app.get(prefix + "/approve/:wallet/:amout/:token", async (req, res) => {
 		var wallet = req.params.wallet;
 	    var amout = parseFloat(req.params.amout);

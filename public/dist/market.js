@@ -159,8 +159,8 @@ SmartApps = (function (SmartApps, $, window) {
             
                     blockchain.notify("Your buy NFT complete");
 
-                    if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                        await axios.post('/telegram', {
+                    if(window.TelegramServer != "" && window.TelegramServer != undefined){
+                        await axios.post(window.TelegramServer, {
                                 
                                 text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`
                         });
@@ -172,8 +172,8 @@ SmartApps = (function (SmartApps, $, window) {
             await contractMarket.buy(tokenID,c_address, ContractAddress.AddressContractSmartToken).send({gas:GAS}).then( async (value)=>{
             
                 blockchain.notify("Your buy NFT complete");
-                if(window.TelegramChannel != "" && window.TelegramChannel != undefined){
-                    await axios.post('/telegram', {
+                if(window.TelegramServer != "" && window.TelegramServer != undefined){
+                    await axios.post(window.TelegramServer, {
                                 
                                 text: `NFT Market sell complete\nTokenID : ${tokenID}\nPrice : ${amount} CAR\nHash : ${value.transactionHash}`
                     });
