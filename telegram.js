@@ -61,13 +61,14 @@ bot.on('message', (msg) => {
         {text : "Step 4", callback : telegramJoin},
         {text : "Step 5", callback : telegramJoin}
         ];
-
+    /*
     task.each(function (key, callback){
         console.log(key);
         if (send_text.toString().indexOf(step1_text) === 0) {
         
         }
     });
+    */
 });
 
 app.post("/telegram", (req, res) => {
