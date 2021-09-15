@@ -30,21 +30,21 @@ bot.onText(/\/start/, (msg,match) => {
                 }
         };
     bot.sendMediaGroup(msg.chat.id,
-        media : [
+        "media" : [
         {
             "type": "photo",
               "media": "https://cryptocar.cc/nfts/0.gif",
-              "caption": "an optional description of the first photo",
+              "caption": "an optional description of the first photo"
         },
         {
             "type": "photo",
               "media": "https://cryptocar.cc/nfts/1.gif",
-              "caption": "an optional description of the first photo",
+              "caption": "an optional description of the first photo"
         },
         {
             "type": "photo",
               "media": "https://cryptocar.cc/nfts/2.gif",
-              "caption": "an optional description of the first photo",
+              "caption": "an optional description of the first photo"
         }
            
         ]);
