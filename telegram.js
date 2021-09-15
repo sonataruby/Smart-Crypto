@@ -30,24 +30,11 @@ bot.onText(/\/start/, (msg,match) => {
                 }
         };
     bot.sendMediaGroup(msg.chat.id,
-        "media" : [
-        {
+        [{
             "type": "photo",
               "media": "https://cryptocar.cc/nfts/0.gif",
               "caption": "an optional description of the first photo"
-        },
-        {
-            "type": "photo",
-              "media": "https://cryptocar.cc/nfts/1.gif",
-              "caption": "an optional description of the first photo"
-        },
-        {
-            "type": "photo",
-              "media": "https://cryptocar.cc/nfts/2.gif",
-              "caption": "an optional description of the first photo"
-        }
-           
-        ]);
+        }]);
     bot.sendPhoto(msg.chat.id,img_url,{
         caption : "Welcome to Smart Crypto Bot\n ",
         "reply_markup": {
