@@ -111,7 +111,7 @@ module.exports = function(prefix , app) {
 
 		 dataMain.items = object;
 		 dataMain.loadJS = ["farm.js"];
-		 res.render(dataMain.public.farm == true ? "farm" : "coming",dataMain);
+		 res.render(dataMain.public.farm == true ? config.loadPage("farm") : "coming",dataMain);
 	});
 
 	app.get(prefix + "/info/:session_id/:wallet", async (req, res) => {

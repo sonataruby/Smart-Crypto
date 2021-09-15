@@ -1,0 +1,76 @@
+
+<section class="bg-white mb-4">
+
+   
+
+    <div class="page-header">
+        <div class="container mb-3" style="padding-top: 40px;
+    padding-bottom: 40px;">
+        	<div style="max-width:60%">
+        	<h4>UBG Token was borned for a mission:</h4>
+	        <p>
+	        UBG Token was borned for a mission: Breaking through all limits of Payment by Crypto Currencies wherever and whenever. We create a new payment method for E- Commercial and Travel, making it faster, transparent, profitable, secure and great in future..</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-3">
+    
+
+        <div class="row">
+        <% items.forEach(function(data, index){ %>
+            <div class="col-md-4 mb-3 col-12" id="plance">
+                <div class="shadown border round">
+                <img class="image-radius-top" src="<%= data.thumbnail%>" style="width:100%;">
+                <div  class="text-left p-3">
+
+                    <h4><%= data.name%></h4>
+                    <hr>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between" data-timestart="<%= data.startTime%>" data-period="<%= data.period%>"><b><i class="fa fa-calendar" aria-hidden="true"></i>
+Start Time:</b> <span><%= data.startTime%></span></li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-calendar" aria-hidden="true"></i>
+End Time: </b><span data-timeend="<%= data.timeEnd%>"><%= data.timeEnd%></span></li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-check-square" aria-hidden="true"></i>
+Period : </b><%- (data.period / 3600).toFixed(2) %> hour</li>
+                      
+                      
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-check-square" aria-hidden="true"></i> Min Deposit : </b><%- data.min_deposit%> <%= token.name%> </li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-check-square" aria-hidden="true"></i> Total Reward : </b><%- data.totalReward%> <%= token.name%> </li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-check-square" aria-hidden="true"></i> Pool Holder : </b><%- data.amount%> <%= token.name%> </li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-trophy" aria-hidden="true"></i>
+APR : </b><%= data.apr%>% </li>
+                      <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-trophy" aria-hidden="true"></i>
+Reward :</b> <%= Number(data.rewardDay).toFixed(2)%> <%= token.name%> / 1d </li>
+                      <%if(data.reward_nft.allowNft == true && data.reward_nft.minDeposit > 0 ) { %>
+                        
+                        <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-taxi" aria-hidden="true"></i>
+<%= data.reward_nft.minDeposit%> <%=token.name%>: </b>Reward Lever <%= data.reward_nft.generation%></li>
+                        <%if(data.reward_nft.minDeposit2 > 0 ) { %>
+                        <li class="list-group-item d-flex justify-content-between"><b><i class="fa fa-taxi" aria-hidden="true"></i>
+<%= data.reward_nft.minDeposit2%> <%=token.name%> : </b>Reward Lever  <%= data.reward_nft.generation2%></li>
+                        <%}%>
+                        <%}%>
+                    </ul>
+                    <hr>
+                    <%- data.joinPool%>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+        </div>
+    </div>
+
+   
+</section>
+
+<script src="/assets/js/countdown.js?ver=1930"></script>
+<style>
+#plance:hover .shadown {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-color:var(--red) !important;
+  color:var(--primary);
+  bacground-color:#FFF;
+}
+
+</style>
