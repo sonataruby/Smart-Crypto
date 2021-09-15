@@ -32,7 +32,15 @@ bot.onText(/\/start/, (msg,match) => {
     bot.sendMediaGroup(msg.chat.id,
         [{
             "type": "photo",
-              "media": "https://cryptocar.cc/nfts/0.gif",
+              "media": "https://cryptocar.cc/nfts/0/0.gif",
+              "caption": "an optional description of the first photo"
+        },{
+            "type": "photo",
+              "media": "https://cryptocar.cc/nfts/0/1.gif",
+              "caption": "an optional description of the first photo"
+        },{
+            "type": "photo",
+              "media": "https://cryptocar.cc/nfts/2/2.gif",
               "caption": "an optional description of the first photo"
         }]);
     bot.sendPhoto(msg.chat.id,img_url,{
