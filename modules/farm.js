@@ -161,7 +161,7 @@ module.exports = function(prefix , app) {
 
 	/*Save Database User Join*/
 
-	app.get(prefix + "/join", async (req, res) => {
+	app.post(prefix + "/join", async (req, res) => {
 		var wallet = req.body.wallet;
 		var session_id = req.body.session_id;
 		let sql = "SELECT * FROM farm_users WHERE wallet = '"+wallet+"' ORDER BY id DESC LIMIT 1";

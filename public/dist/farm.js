@@ -148,7 +148,12 @@ SmartApps = (function (SmartApps, $, window) {
 
                 const gasPrice = await blockchain.getGasPrice();
                 
-               
+                let readInfo = await contractFarm.sessions(session_id).call();
+                let startNow = Math.floor(new Date().getTime()/1000) + 30;
+                if(readInfo.lockTimeWithdraw > startNow){
+                    blockchain.notify("Time withdraw not allow");
+                    return true;
+                }
                 let balance = 0;
                 await contractFarm.stakedBalanceOf(session_id,login_wallet).call().then( async (data) => {
                     if(data == 0){
@@ -232,7 +237,15 @@ SmartApps = (function (SmartApps, $, window) {
                 if(status == false){
                     await blockchain.init();
                 }
-                
+                let readInfo = await contractFarm.sessionsnft(lastSessionId).call();
+                if(readInfo.allowNft == false){
+                    blockchain.notify("Reward NFT not allow");
+                    return false;
+                }
+                await axios.post("/farm/join",{
+                    wallet : login_wallet,
+                    session_id : lastSessionId
+                });
                 const gasPrice = await blockchain.getGasPrice();
                 await contractFarm.claimNftPool(lastSessionId).send({from: login_wallet, gasPrice: gasPrice, gas:GAS}).then((value) => {
                     console.log(value);
