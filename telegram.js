@@ -62,7 +62,7 @@ bot.on('message', (msg) => {
         {text : "Step 5", callback : telegramJoin}
         ];
 
-    forEach(task, function (key, callback){
+    task.each(function (key, callback){
         console.log(key);
         if (send_text.toString().indexOf(step1_text) === 0) {
         
