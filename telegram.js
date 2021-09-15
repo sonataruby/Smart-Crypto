@@ -31,7 +31,7 @@ bot.onText(/\/start/, (msg,match) => {
                 "keyboard": [["Join Start >>","Website"]]
                 }
         };
-        bot.sendMessage(msg.chat.id,"",option);
+        bot.sendMessage(msg.chat.id,"Welcome Start Airdrop",option);
     })
 });
 
