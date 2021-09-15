@@ -73,6 +73,7 @@
     "meta-auth": "^1.1.2",
     "moment": "^2.29.1",
     "mysql": "^2.18.1",
+    "node-telegram-bot-api": "^0.54.0",
     "nodemon": "^2.0.12",
     "phaser": "^3.55.2",
     "popper.js": "^1.16.1",

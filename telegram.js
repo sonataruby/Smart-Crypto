@@ -21,7 +21,7 @@ bot.onText(/\/start\/(.+)/, (msg,match) => {
     })
 });
 */
-
+bot.on("polling_error", console.log);
 bot.onText(/\/start/, (msg,match) => {
     
     bot.sendPhoto(msg.chat.id,img_url,{
