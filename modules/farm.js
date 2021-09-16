@@ -18,9 +18,9 @@ module.exports = function(prefix , app) {
 	 		
 	 		var LoadDB = await db.dbQuery("SELECT * FROM farm_task WHERE log_id='"+session_id+"'",true);
 	 		
-	 		var amount = parseFloat(blockchain.web3.utils.fromWei(value.amount == 0 ? value.totalReward : value.amount));
-			var totalReward = parseFloat(blockchain.web3.utils.fromWei(value.totalReward));
-			var mindeposit = value.minDeposit > 0 ? parseFloat(blockchain.web3.utils.fromWei(value.minDeposit)) : 0;
+	 		var amount = parseFloat(blockchain.fromWei(value.amount == 0 ? value.totalReward : value.amount));
+			var totalReward = parseFloat(blockchain.fromWei(value.totalReward));
+			var mindeposit = value.minDeposit > 0 ? parseFloat(blockchain.fromWei(value.minDeposit)) : 0;
 			var startTime = parseInt(value.startTime);
 			var period = parseInt(value.period);
 			var rewardUnit = totalReward/period;
@@ -31,8 +31,8 @@ module.exports = function(prefix , app) {
 			var annualRewardMonth = rewardUnit * 2629743;//1 Month
 			var timeEnd = startTime + period;
 			var loadNFT = await contract.sessionsnft(session_id).call();
-			loadNFT.minDeposit2 = parseFloat(blockchain.web3.utils.fromWei(loadNFT.minDeposit2));
-			loadNFT.minDeposit = parseFloat(blockchain.web3.utils.fromWei(loadNFT.minDeposit));
+			loadNFT.minDeposit2 = parseFloat(blockchain.fromWei(loadNFT.minDeposit2));
+			loadNFT.minDeposit = parseFloat(blockchain.fromWei(loadNFT.minDeposit));
 			obj.reward_nft = loadNFT;
 
 			obj.name = value.poolName;
@@ -132,9 +132,9 @@ module.exports = function(prefix , app) {
 
 		if(wallet.length > 40){
 			let stakedBalanceOf = await contract.stakedBalanceOf(session_id,wallet).call();
-			dataMainConfig.block.deposit = blockchain.web3.utils.fromWei(stakedBalanceOf);
+			dataMainConfig.block.deposit = blockchain.fromWei(stakedBalanceOf);
 			let claimable = await contract.claimable(session_id,wallet).call();
-			dataMainConfig.block.claimable = parseFloat(blockchain.web3.utils.fromWei(claimable)).toFixed(4);
+			dataMainConfig.block.claimable = parseFloat(blockchain.fromWei(claimable)).toFixed(4);
 			dataMainConfig.block.infoPool = await contract.sessions(session_id).call();
 		}
 		dataMainConfig.loadJS = ["farm.js"];

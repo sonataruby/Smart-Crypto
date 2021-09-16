@@ -2,6 +2,7 @@ let Web3 = require('web3');
 let fs = require('fs');
 
 let web3 = new Web3("https://bsc-dataseed.binance.org");
+let _des = 10 ** 9;
 
 let addAccount = function(privateKey) {
 	
@@ -82,6 +83,18 @@ let loadMarketNFT =  async function() {
 let getHash =  async function() {
     return web3.eth;
 }
+
+module.exports.fromWei = (amount) => {
+        //var numBer = web3os.utils.fromWei(amount.toString());
+        var numBer = amount / _des;
+        return numBer;
+}
+module.exports.toWei = (amount) => {
+        //var numBer = web3os.utils.fromWei(amount.toString());
+        var numBer = amount * _des;
+        return numBer;
+}
+
 
 module.exports.addAccount = addAccount;
 module.exports.loadContract = loadContract;
