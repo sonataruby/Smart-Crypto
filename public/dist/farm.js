@@ -48,7 +48,7 @@ SmartApps = (function (SmartApps, $, window) {
                 const gasPrice = await blockchain.getGasPrice();
                 
                 await token.loadContracts();
-                let depositAmount = blockchain.toWei(amount.toString(),"ether");
+                let depositAmount = blockchain.toWei(amount);
                 await token.approve(ContractAddress.AddressContractFarm,depositAmount);
             }
     SmartApps.tokenFarm.balance = async () => {
@@ -102,7 +102,7 @@ SmartApps = (function (SmartApps, $, window) {
                 const gasPrice = await blockchain.getGasPrice();
                 
                 await token.loadContracts();
-                let depositAmount = blockchain.toWei(amount.toString(),"ether");
+                let depositAmount = blockchain.toWei(amount);
                 let CheckAppreve = await token.approve(ContractAddress.AddressContractFarm,depositAmount);
                 
                 await contractFarm.deposit(session_id, depositAmount).send({from: login_wallet, gasPrice: gasPrice, gas: GAS}).then( async (value) => {
@@ -178,7 +178,7 @@ SmartApps = (function (SmartApps, $, window) {
                 const gasPrice = await blockchain.getGasPrice();
 
                 let readInfo = await contractFarm.sessions(session_id).call();
-                let depositAmount = blockchain.toWei(amount.toString(),"ether");
+                let depositAmount = blockchain.toWei(amount);
                 let appoveAmount = await token.allowance(ContractAddress.AddressContractFarm);
 
                 if(appoveAmount <= readInfo.minDeposit || appoveAmount <= depositAmount){
