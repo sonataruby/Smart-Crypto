@@ -1199,7 +1199,7 @@ SmartApps = function (SmartApps, $, window, document) {
 
          $("#setMinDeposit").on("click", function(){
             var setID = $("#setMinDepositSessionID").val();
-            var setValue = $("#setMinDepositValue");
+            var setValue = $("#setMinDepositValue").val();
             if(setValue == "" || setValue == undefined){
                 alert("Input all form");
                 return;
@@ -1215,7 +1215,7 @@ SmartApps = function (SmartApps, $, window, document) {
 
          $("#setpayDebt").on("click", function(){
             var setID = $("#setpayDebtSessionID").val();
-            var setValue = $("#setpayDebtAddress");
+            var setValue = $("#setpayDebtAddress").val();
             if(setValue == "" || setValue == undefined){
                 alert("Input all form");
                 return;
