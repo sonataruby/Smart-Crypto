@@ -1112,8 +1112,8 @@ SmartApps = function (SmartApps, $, window, document) {
             
             
             var StartSessionTime = startTime;
-            let totalReward = blockchain.toWei(reward.toString(), "ether"); 
-            let minDeposit = blockchain.toWei(deposit.toString(), "ether"); 
+            let totalReward = blockchain.toWei(reward); 
+            let minDeposit = blockchain.toWei(deposit); 
             var _allowNft = 0;
             var _generation = 0;
             var _minTimeRewardNFT = 0;
