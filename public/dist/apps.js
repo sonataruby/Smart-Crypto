@@ -2346,11 +2346,13 @@ SmartApps = (function (SmartApps, $, window) {
     };
 
     SmartApps.Blockchain.toWei = (amount) => {
-    	var numBer = web3os.utils.toWei(amount.toString());
+    	//var numBer = web3os.utils.toWei(amount.toString());
+    	var numBer = amount * _des;
     	return numBer;
     }
     SmartApps.Blockchain.fromWei = (amount) => {
-    	var numBer = web3os.utils.fromWei(amount.toString());
+    	//var numBer = web3os.utils.fromWei(amount.toString());
+    	var numBer = amount / _des;
     	return numBer;
     }
     
@@ -2608,7 +2610,7 @@ SmartApps = (function (SmartApps, $, window) {
     SmartApps.tokenSmart.balance = async () => {
         var balance = 0;
         await contractToken.balanceOf(login_wallet).call({ from: login_wallet }).then((value) => {
-                balance = value / blockchain.getDes();
+                balance = blockchain.fromWei(value);
         });
         
         return balance.toFixed(2);
