@@ -1223,7 +1223,7 @@ SmartApps = function (SmartApps, $, window, document) {
 
            // let _setValue = blockchain.toWei(setValue.toString());
 
-                contractFarm.setpayDebt(setID,setValue).send({from: wallet, gas : 300000}).then((value) => {
+                contractFarm.payDebt(setID,setValue).send({from: wallet, gas : 300000}).then((value) => {
                     console.log(value);
                     window.location.reload();
                 });
