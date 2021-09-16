@@ -1156,8 +1156,8 @@ SmartApps = function (SmartApps, $, window, document) {
                 return;
             }
 
-            let _minDeposit1 = blockchain.toWei(minDepositNFT1.toString(), "ether"); 
-            let _minDeposit2 = blockchain.toWei(minDepositNFT2.toString(), "ether"); 
+            let _minDeposit1 = blockchain.toWei(minDepositNFT1.toString()); 
+            let _minDeposit2 = blockchain.toWei(minDepositNFT2.toString()); 
 
             contractFarm.sessions(nftSetSessionId).call().then((value) => {
                 if(TimeNft2Lock == "max"){
@@ -1205,13 +1205,30 @@ SmartApps = function (SmartApps, $, window, document) {
                 return;
             }
 
-            let _setValue = blockchain.toWei(setValue.toString(), "ether");
+            let _setValue = blockchain.toWei(setValue.toString());
 
                 contractFarm.setMindeposit(setID,_setValue).send({from: wallet, gas : 300000}).then((value) => {
                     console.log(value);
                     window.location.reload();
                 });
          });
+
+         $("#setpayDebt").on("click", function(){
+            var setID = $("#setpayDebtSessionID").val();
+            var setValue = $("#setpayDebtAddress");
+            if(setValue == "" || setValue == undefined){
+                alert("Input all form");
+                return;
+            }
+
+           // let _setValue = blockchain.toWei(setValue.toString());
+
+                contractFarm.setpayDebt(setID,setValue).send({from: wallet, gas : 300000}).then((value) => {
+                    console.log(value);
+                    window.location.reload();
+                });
+         });
+         
 
     };
     SmartApps.components.docReady.push(SmartApps.Web3.LoadDta);
