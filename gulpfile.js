@@ -191,10 +191,10 @@ gulp.task('web3admin', function() {
             'dev/blockchain_dev.js',
             'dev/token.js',
             //'dev/airdrop.js',
-            'dev/presell.js',
-            'dev/ido.js',
+           // 'dev/presell.js',
+           // 'dev/ido.js',
             //'dev/farm.js',
-            'dev/admin/market.js',
+            //'dev/admin/market.js',
             'dev/admin.js'
         ])
         .pipe(concat('web3admin.js'))
