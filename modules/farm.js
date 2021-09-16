@@ -38,16 +38,16 @@ module.exports = function(prefix , app) {
 			obj.name = value.poolName;
 			
 			obj.min_deposit = mindeposit;
-			obj.image = "assets/car/9144.jpg";
-			obj.thumbnail = "assets/car/thumbnail.png";
+			obj.image = "assets/farm/9144.jpg";
+			obj.thumbnail = "assets/farm/thumbnail.png";
 			obj.color = "#0f0";
 			obj.color2 = "red";
 			if(LoadDB != "" && LoadDB != undefined){
 				
 				
 				
-				obj.thumbnail = LoadDB.thumbnail == "" || LoadDB.thumbnail == undefined ? "assets/car/thumbnail.png" : LoadDB.thumbnail;
-				obj.image = LoadDB.image == "" || LoadDB.image == undefined ? "assets/car/9144.jpg" : LoadDB.image;
+				obj.thumbnail = LoadDB.thumbnail == "" || LoadDB.thumbnail == undefined ? "assets/farm/thumbnail.png" : LoadDB.thumbnail;
+				obj.image = LoadDB.image == "" || LoadDB.image == undefined ? "assets/farm/9144.jpg" : LoadDB.image;
 				obj.color = LoadDB.color == "" || LoadDB.color == undefined ? "#0f0" : LoadDB.color;
 				obj.color2 = LoadDB.color2 == "" || LoadDB.color2 == undefined ? "red" : LoadDB.color2;
 			}
