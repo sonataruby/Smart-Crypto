@@ -37,6 +37,12 @@
                   </li>
 
                   <li class="list-group-item d-flex justify-content-between">
+                    Your reward : <%= block.claimable%> <%= token.name%>
+                  </li>
+
+                  
+
+                  <li class="list-group-item d-flex justify-content-between">
                     Widthdraw Unlock : <%- (block.infoPool.lockTimeWithdraw / 3600)%> hour
                   </li>
 
