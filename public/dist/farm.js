@@ -180,7 +180,7 @@ SmartApps = (function (SmartApps, $, window) {
                 let readInfo = await contractFarm.sessions(session_id).call();
                 let depositAmount = blockchain.toWei(amount);
                 let appoveAmount = await token.allowance(ContractAddress.AddressContractFarm);
-
+                console.log(appoveAmount);
                 if(appoveAmount <= readInfo.minDeposit || appoveAmount <= depositAmount){
                     await token.approve(ContractAddress.AddressContractFarm,depositAmount).then((value) => {
                         console.log(value);

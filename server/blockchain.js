@@ -2,7 +2,9 @@ let Web3 = require('web3');
 let fs = require('fs');
 
 let web3 = new Web3("https://bsc-dataseed.binance.org");
-let _des = 10 ** 9;
+
+//let _des = "ether"; Des = 18
+let _des = "gwei"; //Des = 9
 
 let addAccount = function(privateKey) {
 	
@@ -86,12 +88,14 @@ let getHash =  async function() {
 
 module.exports.fromWei = (amount) => {
         //var numBer = web3os.utils.fromWei(amount.toString());
-        var numBer = amount / _des;
+        var numBer = web3.utils.fromWei(amount.toString(),_des);
+       // var numBer = amount / _des;
         return numBer;
 }
 module.exports.toWei = (amount) => {
         //var numBer = web3os.utils.fromWei(amount.toString());
-        var numBer = amount * _des;
+        var numBer = web3.utils.toWei(amount.toString(),_des);
+        //var numBer = amount * _des;
         return numBer;
 }
 

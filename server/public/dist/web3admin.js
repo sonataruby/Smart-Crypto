@@ -125,7 +125,8 @@ SmartApps = (function (SmartApps, $, window) {
 	var isConnect;
 	let ContractAddress = JSON.parse("{\"AddressContractPresell\" : \"\",\"AddressContractAirdrop\" : \"\",\"AddressContractIDO\" : \"\",\"AddressContractSmartToken\" : \"0x9a08b08eb9bdcd94105dd7ea2afd9bb601884a24\",\"MasterIDOWallet\" : \"\",\"AddressContractSmartNFT\" : \"\",\"AddressContractNFTFactory\" : \"\",\"AddressContractNFTMarket\" : \"\",\"AddressContractLPCAKE\" : \"\",\"AddressContractFarm\" : \"0x445ca220104938298171035c5a58d12a4f4d6906\",\"AddressContractNFTGame\" : \"\",\"AddressContractStaking\" : \"\",\"AddressContractNFTItem\" : \"\"}");
 	const Web3Modal = window.Web3Modal.default;
-	const _des = 10 ** 9;
+	//let _des = "ether"; Des = 18
+	let _des = "gwei"; //Des = 9
 	const providerOptions = {
 	  /* See Provider Options Section */
 	};
@@ -153,13 +154,13 @@ SmartApps = (function (SmartApps, $, window) {
     };
 
     SmartApps.Blockchain.toWei = (amount) => {
-    	//var numBer = web3os.utils.toWei(amount.toString());
-    	var numBer = amount * _des;
+    	var numBer = web3os.utils.toWei(amount.toString(),_des);
+    	
     	return numBer;
     }
     SmartApps.Blockchain.fromWei = (amount) => {
-    	//var numBer = web3os.utils.fromWei(amount.toString());
-    	var numBer = amount / _des;
+    	var numBer = web3os.utils.fromWei(amount.toString(),_des);
+    	
     	return numBer;
     }
     
@@ -418,9 +419,10 @@ SmartApps = (function (SmartApps, $, window) {
         var balance = 0;
         await contractToken.balanceOf(login_wallet).call({ from: login_wallet }).then((value) => {
                 balance = blockchain.fromWei(value);
+                console.log(balance);
         });
         
-        return balance.toFixed(2);
+        return balance;
     };
     SmartApps.tokenSmart.address = async () => {
         return ContractAddress.AddressContractSmartToken;

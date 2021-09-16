@@ -19,7 +19,7 @@ module.exports = function(prefix , app) {
 	 		var LoadDB = await db.dbQuery("SELECT * FROM farm_task WHERE log_id='"+session_id+"'",true);
 	 		
 	 		var amount = parseFloat(blockchain.fromWei(value.amount == 0 ? value.totalReward : value.amount));
-			var totalReward = parseFloat(blockchain.fromWei(value.totalReward));
+			var totalReward = blockchain.fromWei(value.totalReward);
 			var mindeposit = value.minDeposit > 0 ? parseFloat(blockchain.fromWei(value.minDeposit)) : 0;
 			var startTime = parseInt(value.startTime);
 			var period = parseInt(value.period);
